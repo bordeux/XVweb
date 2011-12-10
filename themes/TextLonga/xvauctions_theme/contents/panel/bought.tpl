@@ -25,7 +25,9 @@
 			<div style="text-align:center; color: #474747; font-size: 14px;">{"xca_bought_items"|xvLang}</div>
 		</div>
 		<div>
-		
+		{if $smarty.get.paid}
+			<div class="success">Dziękujemy. Dyspozycja zapłaty została przyjęta</div>
+		{/if}
  {if $smarty.get.sort == "desc"}
 		{$SmartySort='asc'}
 		{$SmartyChar='↑'}
@@ -66,9 +68,9 @@
 				<tbody> 
 				{foreach from=$boughts_list item=auction}
 					<tr>
-						<td class="items-checkbox"><input type="checkbox" name="auction[]" value="{$auction.Auction}" /></td>
+						<td class="items-checkbox"><input type="checkbox" name="auction[]" value="{$auction.ID}" /></td>
 						<td class="items-thumbnail">
-							<a href="{$URLS.Auction}/{$auction.ID}/">
+							<a href="{$URLS.Auction}/{$auction.Auction}/">
 							{if $auction.Thumbnail}
 								<img src="{$URLS.Thumbnails}/{$auction.Thumbnail}" style="width:64; height:48px;" />
 							{else}
@@ -77,10 +79,10 @@
 							</a>
 						</td>
 						<td class="items-title">
-						<a href="{$URLS.Auction}/{$auction.ID}/">{$auction.Title}</a>
+						<a href="{$URLS.Auction}/{$auction.Auction}/">{$auction.Title}</a>
 						</td>
 						<td class="items-cost">
-							<span>{$auction.Auction|number_format:2:'.':' '} {"xca_coin_type"|xvLang}</span>
+							<span>{$auction.Cost|number_format:2:'.':' '} {"xca_coin_type"|xvLang}</span>
 						</td>
 						<td class="items-pieces">
 							{$auction.Pieces}
@@ -92,9 +94,9 @@
 							{$auction.Seller}
 						</td>
 						<td class="items-options">
-							<a href="52352">{"xca_pay"|xvLang}</a> <br />
-							<a href="52352">{"xca_contractor_data"|xvLang}</a> <br />
-							{if $auction.CommentedBuyer == 0}<a href="52352">{"xca_comment_add"|xvLang}</a> <br />{/if}
+							{if $auction.Paid == 0}<a href="{$URLS.AuctionPanel}/payment_pay/{$auction.ID}/">{"xca_pay"|xvLang}</a>{else}✓ Zapłacono{/if} <br />
+							<a href="{$URLS.AuctionPanel}/get_address/{$auction.Seller}/">{"xca_contractor_data"|xvLang}</a> <br />
+							{if $auction.CommentedBuyer == 0}<a href="{$URLS.AuctionPanel}/comment_add/{$auction.ID}/">{"xca_comment_add"|xvLang}</a> {else}✓ Komentarz wystawiony{/if}<br />
 						</td>
 					</tr>
 				{/foreach}

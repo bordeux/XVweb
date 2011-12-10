@@ -177,7 +177,7 @@ if ($result){
 	$bc = new BeautyXML();
 		file_put_contents($RootDir."config/config.xml", ($XVwebEngine->Config("config")));
 	$XVwebEngine->Cache->clear("XMLParse");
-	echo "<div class='success'>Zapisano</div>";
+	echo "<div class='success'>Saved</div>";
 	exit;
 }
 

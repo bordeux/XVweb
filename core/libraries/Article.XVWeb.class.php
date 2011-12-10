@@ -91,7 +91,7 @@ class XVArticle
 		$this->Date['XVweb']->Cache->clear("Article-Include", ($this->Date['XVweb']->ReadArticleIndexOut['URL'] ));
 		$this->Date['XVweb']->Log("EditArticle", array("URL"=>$this->Date['XVweb']->ReadArticleIndexOut['URL']));
 		
-		$this->BokmarkEvent($this->Date['XVweb']->ReadArticleIndexOut['ID'], "article", '/System/Emails/OnArticleEdited/', array(
+		$this->BookmarkEvent($this->Date['XVweb']->ReadArticleIndexOut['ID'], "article", '/System/Emails/OnArticleEdited/', array(
 		"{{link}}"=>$this->Date['XVweb']->ReadArticleIndexOut['URL'],
 		"{{topic}}"=>$this->Date['XVweb']->ReadArticleIndexOut['Topic'],
 		"{{id}}"=>$this->Date['XVweb']->ReadArticleIndexOut['ID'],
@@ -331,7 +331,7 @@ INSERT INTO {Articles} ({Articles:AdressInSQL} , {Articles:Date}, {Articles:Topi
 		"IP"=> $_SERVER['REMOTE_ADDR'],
 		));
 		
-		$this->BokmarkEvent($this->Date['XVweb']->ReadArticleIndexOut['ID'], "article", '/System/Emails/OnArticleEdited/', array(
+		$this->BookmarkEvent($this->Date['XVweb']->ReadArticleIndexOut['ID'], "article", '/System/Emails/OnArticleEdited/', array(
 		"{{link}}"=>$this->Date['XVweb']->ReadArticleIndexOut['URL'],
 		"{{topic}}"=>$this->Date['XVweb']->ReadArticleIndexOut['Topic'],
 		"{{id}}"=>$this->Date['XVweb']->ReadArticleIndexOut['ID'],
@@ -439,7 +439,7 @@ DELETE FROM {Articles} WHERE {Articles:AdressInSQL} = :AdressInSQLExecute ;');
 		}
 		$this->ClearArticleCache($this->Date['XVweb']->ReadArticleIndexOut['ID'], $this->Date['XVweb']->ReadArticleIndexOut['URL'], $this->Date['XVweb']->ReadArticleIndexOut['LocationInSQL']);
 		$this->Date['XVweb']->Log("DeleteArticle", array("ArticleURL"=>$this->Date['XVweb']->ReadArticleIndexOut['URL'], "ArticleID"=>$this->Date['XVweb']->ReadArticleIndexOut['ID']));
-		$this->BokmarkEvent($this->Date['XVweb']->ReadArticleIndexOut['ID'], "article", '/System/Emails/OnArticleDelete/', array(
+		$this->BookmarkEvent($this->Date['XVweb']->ReadArticleIndexOut['ID'], "article", '/System/Emails/OnArticleDelete/', array(
 		"{{link}}"=>$this->Date['XVweb']->ReadArticleIndexOut['URL'],
 		"{{topic}}"=>$this->Date['XVweb']->ReadArticleIndexOut['Topic'],
 		"{{id}}"=>$this->Date['XVweb']->ReadArticleIndexOut['ID'],
@@ -466,7 +466,7 @@ ON DUPLICATE KEY UPDATE {Bookmarks:'.$type.'} = :ValExec ;');
 		));
 
 	}
-	public function BokmarkEvent($ID, $type, $articleURL, $info){
+	public function BookmarkEvent($ID, $type, $articleURL, $info){
 		
 		$info = array_merge((array)$info, array(
 		'{{sitename}}'=>$this->Date['XVweb']->SrvName,
@@ -478,8 +478,8 @@ ON DUPLICATE KEY UPDATE {Bookmarks:'.$type.'} = :ValExec ;');
 		$this->Date['XVweb']->ArticleFooIDinArticleIndex ='';
 		$this->Date['XVweb']->ArticleFooVersion = '';
 		if(!($this->Date['XVweb']->ReadArticle($articleURL, "","BETh"))){
-			$this->Date['XVweb']->LoadException();
-			throw new XVwebException(5); 
+			///$this->Date['XVweb']->LoadException();
+			//throw new XVwebException(5); 
 			return false;
 		}else{
 			$MailContent = $this->Date['XVweb']->ParseArticleContents($this->Date['XVweb']->Date['BETh']['ReadArticleOut']['Contents']);
@@ -555,7 +555,7 @@ ON DUPLICATE KEY UPDATE {Bookmarks:'.$type.'} = :ValExec ;');
 		$this->Date['XVweb']->AntyFlood()->add("comment",60);
 		
 		$this->Date['XVweb']->Log("NewComment", (array("CommentID" =>$this->Date['XVweb']->Date['SaveCommentID'], "ArticleID"=> $this->Date['XVweb']->Date['SaveCommentIDArticle'])));
-		$this->BokmarkEvent($this->Date['XVweb']->ReadArticleIndexOut['ID'], "article", '/System/Emails/OnArticleComment/', array(
+		$this->BookmarkEvent($this->Date['XVweb']->ReadArticleIndexOut['ID'], "article", '/System/Emails/OnArticleComment/', array(
 		"{{link}}"=>substr($this->Date['XVweb']->ReadArticleIndexOut['URL'],1),
 		"{{topic}}"=>$this->Date['XVweb']->ReadArticleIndexOut['Topic'],
 		"{{commentid}}"=>$this->Date['XVweb']->Date['SaveCommentID'],

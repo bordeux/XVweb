@@ -112,7 +112,7 @@ if($class_mode == "soap"){
 							$ch=$c->addChild($k); 
 							$f($f,$ch,$v); 
 						} else { 
-							$c->addChild($k,$v); 
+							$c->addChild($k, ($v === false ? 0 : $v)); 
 						} 
 					}'); 
 			$f($f,$xml,$ar); 

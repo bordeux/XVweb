@@ -2,9 +2,7 @@
 
 var WriteClass = {
 };
-function $GetID(id) {
-	return document.getElementById(id);
-}
+
 var ColorPickerActual = "#000000";
 WriteClass.ColorPicker = function () {
 	
@@ -29,45 +27,6 @@ WriteClass.ColorPicker = function () {
 		});
 	
 };
-function ChangeObiekt(Where, What, Layer) {
-	$GetID(Where).innerHTML = What;
-	CancelWindowLayer(Layer);
-}
-
-function AddTagIE(lft, rgt) {
-	strSelection = document.selection.createRange().text;
-	if (strSelection != "") {
-		document.selection.createRange().text = lft + strSelection + rgt;
-	}
-	
-}
-function AddTag(where, StartTag, EndTag) {
-	if (EndTag == undefined) {
-		EndTag = "";
-	}
-	if (navigator.appName == "Microsoft Internet Explorer") {
-		AddTagIE(StartTag, EndTag);
-		return true;
-	}
-	var txtarea = $GetID(where);
-	var selStart = txtarea.selectionStart;
-	var selEnd = txtarea.selectionEnd;
-	$("#" + where).val((txtarea.value).substring(0, selStart) + 
-		StartTag + (txtarea.value).substring(selStart, selEnd) + EndTag + 
-		(txtarea.value).substring(selEnd, txtarea.value.length));
-}
-
-function ValidateArt() {
-	if ($GetID('UrlArticleID') != null) {
-		if ($GetID('UrlArticleID').value.length < 2) {
-			ErrorAlert("<b>Wadliwy adres artykułu- za krotki!</b>");
-			return false;
-		}
-	}
-	
-	$GetID('ArticleEditForm').submit();
-	return true;
-}
 
 WriteClass.CheckUrl = function () {
 	$.getJSON(URLS.Script + "Write/?UrlCheck=true", {
@@ -109,16 +68,9 @@ $(document).ready(function () {
 				if ($(this).attr('name') == "settings[EnablePHP]" || $(this).attr('name') == "settings[EnableHTML]") 
 					$("[name^='block[Article]'] option[value^='yes']").attr("selected", true);
 				
-				return false;
-			});
-		
-		$('#ArticleEditForm').submit(function () {
-				
-				//onsubbmit
-				
-				
 				return true;
 			});
+		
 		
 	});
 

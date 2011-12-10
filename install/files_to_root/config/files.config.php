@@ -15,13 +15,13 @@ class XV_Files_local{
 //************************* /LOCAL *******************/
 
 //************************* DREAMHOST ****************/
-
+/*
 class XV_Files_dreamhost{
 	var $xvDreamHostConfig = array(
-		"user"=> "USER",
-		"pass" => "PASS",
-		"host" => "demonit.pl",
-		"catalog" => "/bfiles/"
+		"user"=> "yser",
+		"pass" => "***",
+		"host" => "dreamhost",
+		"catalog" => "/"
 	);
 	public function download($file){
 			return "ftp://".$this->xvDreamHostConfig['user'].":".$this->xvDreamHostConfig['pass']."@".$this->xvDreamHostConfig['host'].$this->xvDreamHostConfig['catalog'].$file;

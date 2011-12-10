@@ -1,6 +1,6 @@
 {if $ErrorCode == 0}
 <script type="text/javascript">
-	location.href= rootDir+"System/Register/Success/";
+	location.href= rootDir+"System/Registration/Email_sent/";
 </script>
 {elseif  $ErrorCode==1 }
 <script type="text/javascript"> 

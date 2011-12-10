@@ -7,10 +7,12 @@ class xvDB extends PDO
 	public $dbPrefix = '';
 	public $Tables = array();
 	public $TablesOrgName = array();
-
-	public function setXV(&$XVWeb){
+	public function __construct(&$XVWeb){
 		$this->Data['XVWeb'] = &$XVWeb;
 		$this->dbPrefix = $this->Data['XVWeb']->Config('db')->find('config dbprefix')->text();
+		return parent::__construct('mysql:host='.($this->Data['XVWeb']->Config('db')->find('config host')->text()).';dbname='.(($this->Data['XVWeb']->Config('db')->find('config dbname')->text())), ($this->Data['XVWeb']->Config('db')->find('config user')->text()), ($this->Data['XVWeb']->Config('db')->find('config password')->text()), 
+			array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION)
+		);
 	}
 	public function loadTable($table){
 	if(isset($this->Tables[$table]))

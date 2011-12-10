@@ -80,11 +80,10 @@ $XVwebDir = $RootDir.'core'.DIRECTORY_SEPARATOR;
 
 if(!@include_once(dirname(__FILE__).DIRECTORY_SEPARATOR.'config.php')){
 	if (file_exists(dirname(__FILE__).DIRECTORY_SEPARATOR.'install/index.php')) 
-	include(dirname(__FILE__).DIRECTORY_SEPARATOR.'install/index.php');
+	header('Location: install/');
 	exit();
 }
 
-if(Debug_Enabled === false){
 	function CaughtErrors() { 
 		global $XVwebEngine;
 		$IgnoreErrors = array(8, 2, 2048);
@@ -92,14 +91,18 @@ if(Debug_Enabled === false){
 		$XVwebEngine->Log("SystemError", array("ErrorInfo"=>$e, "_SERVER"=>$_SERVER));
 	}
 	register_shutdown_function('CaughtErrors');
-}
+
 
 require_once(SMARTY_DIR . 'Smarty.class.php');
 include_once('core'.DIRECTORY_SEPARATOR.'XVWeb.class.php');
 
+include_once('core'.DIRECTORY_SEPARATOR.'libraries/plugins.class.php');
+$xv_plugins = new xv_plugins((dirname(__FILE__).DIRECTORY_SEPARATOR.'plugins'.DIRECTORY_SEPARATOR).'xv_plugin/');
+function xvp(){global $xv_plugins; return $xv_plugins;}
+
 
 $XVwebEngine = new XVWeb(dirname(__FILE__).DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR);
-$XVwebEngine->ConnectPDO(BdServer, BdServer_Base, BdServer_User, BdServer_Password);
+xvp()->ConnectPDO($XVwebEngine, BdServer, BdServer_Base, BdServer_User, BdServer_Password);
 $XVwebEngine->DataBasePrefix = BdServer_prefix;
 
 /**Config File**/
@@ -107,8 +110,8 @@ $XVwebEngine->Date['ConfigFile'] = dirname(__FILE__).DIRECTORY_SEPARATOR.'config
 $XVwebEngine->Date['RootDir'] = $RootDir;
 /**Config File**/
 
-$XVwebEngine->PreWork();
-$XVwebEngine->Plugins()->set("DirPlugins", (dirname(__FILE__).DIRECTORY_SEPARATOR.'plugins'.DIRECTORY_SEPARATOR));
+xvp()->PreWork($XVwebEngine);
+xvp()->Plugins($XVwebEngine)->set("DirPlugins", (dirname(__FILE__).DIRECTORY_SEPARATOR.'plugins'.DIRECTORY_SEPARATOR));
 
 
 
@@ -187,7 +190,7 @@ if(!$XVwebEngine->Session->Session('SessionIsset')){
 //CheckBannned
 if(!$XVwebEngine->Session->Session('BanChecked')){
 	//CheckBannned
-	$Banned = $XVwebEngine->InitClass("BanClass")->CheckBanned();
+	$Banned = xvp()->InitClass($XVwebEngine, "BanClass")->CheckBanned();
 	if($Banned){
 		$BanURL = "/System/Banned/";
 		if(substr($PathInfo, 0, strlen($BanURL)) != $BanURL){
@@ -235,14 +238,14 @@ try {
 	$Smarty->compile_dir  = $CompileDir; unset($CompileDir);
 	$Smarty->config_dir   = 'themes'.DIRECTORY_SEPARATOR.$ThemeSelected.DIRECTORY_SEPARATOR.'configs'.DIRECTORY_SEPARATOR;
 	$Smarty->cache_dir    = 'themes'.DIRECTORY_SEPARATOR.$ThemeSelected.DIRECTORY_SEPARATOR.'cache'.DIRECTORY_SEPARATOR;
-	$Smarty->compile_check = Debug_Enabled;
-	$Smarty->debugging = Debug_Enabled;
+	$Smarty->compile_check = false;
+	$Smarty->debugging = false;
 	$JSBinder = array();
 	$CCSLoad = array();
 	$JSLoad = array();
 	$Smarty->assign('MediaBottom', true);
 } catch (Exception $e) { 
-			$XVwebEngine->ErrorClass($e);
+			xvp()->ErrorClass($XVwebEngine, $e);
 } 
 
 //AdminDetect - include admin lang
@@ -265,7 +268,7 @@ $Smarty->assign('Advertisement', ($XVwebEngine->permissions('Adv') ? false : tru
 if($XVwebEngine->Plugins()->Menager()->event("onPreAssing")) eval($XVwebEngine->Plugins()->Menager()->event("onPreAssing"));
 
 $Smarty->assign('MetaTags', $MetaTags); unset($MetaTags);
-$Smarty->assignByRef('Menu',   $XVwebEngine->genMenu());
+$Smarty->assignByRef('Menu',   xvp()->genMenu($XVwebEngine));
 $Smarty->assign('Session', $XVwebEngine->Session->Session());
 $Smarty->assignByRef('language', $Language);
 $Smarty->assign('SiteName',  $XVwebEngine->SrvName);

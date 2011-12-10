@@ -23,8 +23,8 @@ if(!isset($XVwebEngine)){
 if(isset($_GET["activate"])){
 	if($GLOBALS['XVwebEngine']->ActivateUser($_GET['login'], $_GET['temppass'])){
 	if($XVwebEngine->Plugins()->Menager()->event("register.activate")) eval($XVwebEngine->Plugins()->Menager()->event("register.activate")); 
-	header("location: ".$URLS['Script'].'System/ActivateUser/');
-	} else header("location: ".$URLS['Script'].'System/ErrorActivateUser/');
+	header("location: ".$URLS['Script'].'System/Registration/Activate/');
+	} else header("location: ".$URLS['Script'].'System/Registration/Activate_error/');
 	exit;
 
 }

@@ -34,3 +34,27 @@ background: #F6FCB8;
 .xauction-left-nav a.selected {
 background: #C4C4C4;
 }
+
+
+
+.xvauction-description {
+margin: 10px;
+margin-right: 20px;
+}
+.xvauction-description-caption {
+border: 1px solid #a8a8a8;
+-webkit-border-top-right-radius: 30px;
+-moz-border-radius-topright: 30px;
+border-top-right-radius: 30px;
+background: url(../img/bg-description.png);
+color: #000;
+height: 20px;
+padding-left: 10px;
+font-weight:bold;
+font-size: 15px;
+}
+.xvauction-description-content{
+border: 1px solid #a8a8a8;
+border-top: none;
+min-height: 400px;
+}

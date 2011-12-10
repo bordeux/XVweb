@@ -21,7 +21,7 @@ if(!isset($XVwebEngine)){
 if($XVwebEngine->Session->Session('Logged_Logged') == true){
     header("location: ".$URLS['Script']);
 	exit;
-	}
+}
 
 function Login(){
 	extract($GLOBALS);

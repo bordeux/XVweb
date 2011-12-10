@@ -5,29 +5,6 @@
             <url link="Write/">Dodaj tekst</url>
             <url link="Contact/">Kontakt</url>
         </submenu>
-        <submenu title="Edukacja">
-            <url link="Lifehack">Lifehack</url>
-            <url link="Szkola">Szkoła</url>
-        </submenu>
-        <submenu title="Technologia">
-            <url link="Programowanie/">Programowanie</url>
-            <url link="Grafika/">Grafika</url>
-            <url link="Software/">Software</url>
-            <url link="Hadware/">Hadware</url>
-            <url link="Bazy_danych">Bazy danych</url>
-            <url link="OS">Systemy operacyjne</url>
-            <url link="Internet/">Internet</url>
-        </submenu>
-        <submenu title="Rozrywka">
-            <url link="Filmy/">Filmy</url>
-        </submenu>
-        <submenu title="Polecamy">
-            <url link="Bez_kategorii/">Bez kategori</url>
-            <url link="Filmy/Online/Dokumentalne/">Dokumentalne</url>
-        </submenu>
-        <submenu title="Online">
-            <url link="Online">Ludzi Online &lt;span class="OAllUsers"&gt;3&lt;/span&gt;</url>
-        </submenu>
         <submenu title="Administracja" rank="AdminPanel">
             <url link="Administration/">Panel</url>
             <url link="Administration/Menu">Menu</url>

@@ -222,7 +222,9 @@ input, select, textarea{
 		}
 		
 		input:required, textarea:required {
-			background:url(../img/orange.png?noinclude=true) no-repeat right 2px;						
+			background-image:url(../img/orange.png?noinclude=true);
+			background-position: right 2px;
+			background-repeat: no-repeat;
 		}
  
  
@@ -234,7 +236,9 @@ input, select, textarea{
 		}
 		
 		/* The interesting bit */
-		
+	:disabled, input[readonly]{
+		background: #F5F5F5;
+	}
 input[type="submit"], input[type="button"], button{
 	color: #FFF;
 	font-weight: bold;
@@ -593,24 +597,30 @@ font-size : 11px;
 }
 
 .formgen { 
+	form {
+		display:table;
+	}
+	.form-row {
+		display:table-row;
+	}
+	.form-row > *{
+	display:table-cell;
+	}
 	label{
-                width:250px;
-                float:left;
                 font-weight:bold;
 				color: black;
 				font-size: 15px;
-	}
-	label {    
-			span {
+				
+				span {
 					color:red;
 				}
 	}
-		.error {
-					label{
-						:hover {
-							text-decoration:underline;
-							cursor:pointer;
-							}
+	ul {
+	list-style-type: square;
+	}
+		.form-invalid{
+					input {
+						border: 1px solid #C20000;
 					}
 				}
 	input{
@@ -621,7 +631,6 @@ font-size : 11px;
 			color: black;
 		}
 	}
-
 }
 .xv-table{
 		 a:link {

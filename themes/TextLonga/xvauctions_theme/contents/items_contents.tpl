@@ -49,11 +49,13 @@
 				<form action="?" method="get" style="padding-bottom: 20px;">
 				
 				<div class="auction-search-quick-item">
-					<label style="width: 54px;" for="auction_cost-id">{"xca_cost"|xvLang} :</label>
+					<fieldset>
+					<legend><label style="width: 54px;" for="auction_cost-id">{"xca_cost"|xvLang}</label></legend>
 					 {"xca_from"|xvLang} 
 					<input {literal}pattern="((([0-9]){0,10})|(([0-9]){0,10}(\.)([0-9]){2}))"{/literal} id="auction_cost-id" type="text" value="{$smarty.get.auction_cost.from|escape:'html'}" name="auction_cost_from" style="width: 44px;"> 
 					<label for="auction_cost-two-id" style="width: 54px;">{"xca_to"|xvLang} </label>
 					<input {literal}pattern="((([0-9]){0,10})|(([0-9]){0,10}(\.)([0-9]){2}))"{/literal} id="auction_cost-two-id" type="text" value="{$smarty.get.auction_cost.to|escape:'html'}" name="auction_cost_to" style="width: 44px;">  {"xca_coin_type"|xvLang}
+					</fieldset>
 				</div>
 			
 				{foreach from=$quick_search_fields item=field}

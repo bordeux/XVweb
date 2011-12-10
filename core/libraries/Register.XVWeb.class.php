@@ -49,8 +49,8 @@ class Register
 			foreach($Informations as $key=>$value){
 				if($this->Date['XVweb']->DataBase->isset_field("Users", $key)){
 				$SQLQuery['KEYS'][] =  '{Users:'.$key.'}';
-				$SQLQuery['VALUES'][] =  '{{'.$key.'}}';
-				$SQLQuery['EXECUTE']['{{'.$key.'}}'] =  $this->Date['XVweb']->DataBase->quote($value);
+				$SQLQuery['VALUES'][] =  '--'.$key.'--';
+				$SQLQuery['EXECUTE']['--'.$key.'--'] =  $this->Date['XVweb']->DataBase->quote($value);
 				}
 			}
 			
@@ -64,13 +64,13 @@ class Register
 				return false; 
 			}
 			$Informations['ID'] = $this->Date['XVweb']->DataBase->lastInsertId();
-			$SQLQuery['EXECUTE']['{{ID}}'] = $Informations['ID'];
+			$SQLQuery['EXECUTE']['--ID--'] = $Informations['ID'];
 			
-		$SQLQuery['EXECUTE']['{{user}}'] = $Informations['User'];
-		$SQLQuery['EXECUTE']['{{sitename}}'] = $this->Date['XVweb']->SrvName;
-		$SQLQuery['EXECUTE']['{{link}}'] = ($GLOBALS['URLS']['Script'])."Register/?activate&amp;login=".($this->Date['XVweb']->URLRepair($Informations['User']))."&amp;temppass=".$Informations['RegisterCode'];
+		$SQLQuery['EXECUTE']['--user--'] = $Informations['User'];
+		$SQLQuery['EXECUTE']['--sitename--'] = $this->Date['XVweb']->SrvName;
+		$SQLQuery['EXECUTE']['--link--'] = ($GLOBALS['URLS']['Script'])."Register/?activate&amp;login=".($this->Date['XVweb']->URLRepair($Informations['User']))."&amp;temppass=".$Informations['RegisterCode'];
 		if( $Informations['RegisterCode'] != 1)
-		$this->Date['XVweb']->SendMail($Informations['Mail'], '/System/Register/', $SQLQuery['EXECUTE']);
+		$this->Date['XVweb']->SendMail($Informations['Mail'], '/System/Registration/Confirm_email/', $SQLQuery['EXECUTE']);
 		
 		
 		$this->Date['XVweb']->Log("NewUser", $Informations);

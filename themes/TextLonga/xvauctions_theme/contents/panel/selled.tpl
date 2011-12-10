@@ -56,7 +56,9 @@
 						<th class="items-title"><a href='?{addget value="sortby=title&sort=$SmartySort"}'>{$SmartyChar} {"xca_description"|xvLang}</a></th>
 						<th class="items-cost"><a href='?{addget value="sortby=cost&sort=$SmartySort"}'>{$SmartyChar} {"xca_cost"|xvLang}</a></th>
 						<th class="items-pieces"><a href='?{addget value="sortby=pieces&sort=$SmartySort"}'>{$SmartyChar} {"xca_pieces"|xvLang}</a></th>
-						<th class="items-date"><a href='?{addget value="sortby=date&sort=$SmartySort"}'>{$SmartyChar} {"xca_date"|xvLang}</a></th>
+						<th class="items-date"><a href='?{addget value="sortby=date&sort=$SmartySort"}'>{$SmartyChar} {"xca_date"|xvLang}</a></th>			
+						<th class="items-seppere><a href='?{addget value="sortby=user&sort=$SmartySort"}'>{$SmartyChar} {"xca_buyer"|xvLang}</a></th>
+						<th class="items-none"></th>
 
 					</tr>
 				</thead> 
@@ -84,6 +86,14 @@
 						</td>
 						<td class="items-date">
 							{$auction.Date}
+						</td>		
+						<td class="items-seller">
+							{$auction.User}
+						</td>
+						<td class="items-none">
+							{if $auction.Paid == 0}Niezapłacone{else} ✓ Zapłacone <a href="{$URLS.AuctionPanel}/payment_details/{$auction.Paid}/">ID {$auction.Paid}</a>{/if} <br />
+							{if $auction.CommentedBuyer == 0}Nie wystawił komentarza {else} ✓ Wystawił komentarz{/if}<br />
+							{if $auction.CommentedSeller == 0}<a href="{$URLS.AuctionPanel}/comment_add/{$auction.ID}/">{"xca_comment_add"|xvLang}</a> {else} ✓ Komentarz wystawiony{/if}<br />
 						</td>
 					</tr>
 				{/foreach}

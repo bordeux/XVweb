@@ -7,6 +7,9 @@ class api_xvweb {
 	 * Sample hello world
 	 * Usage : hello("world")
 	 * Example : <a href='json/?hello=["world"]'>json/?hello=["world"]</a>
+	 * Example : <a href='xml/?hello=["world"]'>xml/?hello=["world"]</a>
+	 * Example : <a href='serialize/?hello=["world"]'>serialize/?hello=["world"]</a>
+	 * Example : <a href='yaml/?hello=["world"]'>yaml/?hello=["world"]</a>
 	 * 
 	 * @param string $user
 	 * @return string
@@ -27,8 +30,12 @@ class api_xvweb {
 	 * @return boolean
 	 */	
 	function login($username, $key, $type){
-		
-		return array("test", "costam");
+	global $XVwebEngine;
+		if($XVwebEngine->Loggin($username, $key)){
+			return true;
+		}else{
+			return false;
+		}
 	}
 	
 	public function __sleep(){

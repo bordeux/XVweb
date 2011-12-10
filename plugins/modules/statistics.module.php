@@ -96,7 +96,7 @@ xv_appendCSS($URLS['Site'].'plugins/data/statistics/style.css');
 													  $AllPages = $GLOBALS['XVwebEngine']->InitClass('XVStatistics')->get()->Alias+$GLOBALS['XVwebEngine']->InitClass('XVStatistics')->get()->Articles;
 													  echo number_format($AllPages) ?></span>
 													  
-													 <?php echo  round($AllPages/$DaysPage, 3); ?> stron na dzień
+													 <?php echo  round($AllPages/($DaysPage == 0 ? 1 : $DaysPage), 3); ?> stron na dzień
                                                 </li>
                      
                                           </ul>
@@ -157,7 +157,7 @@ xv_appendCSS($URLS['Site'].'plugins/data/statistics/style.css');
                                                       <span class="historical_count"><?php 
 													  echo number_format(($GLOBALS['XVwebEngine']->InitClass('XVStatistics')->get()->AllArticles)) ?></span>
 													  
-													 <?php echo  round(($GLOBALS['XVwebEngine']->InitClass('XVStatistics')->get()->AllArticles)/$DaysPage, 3); ?> stron na dzień
+													 <?php echo  round(($GLOBALS['XVwebEngine']->InitClass('XVStatistics')->get()->AllArticles)/($DaysPage == 0 ? 1 : $DaysPage), 3); ?> stron na dzień
                                                 </li>
                      
                                           </ul>

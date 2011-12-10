@@ -45,7 +45,7 @@
 
 		{/if}
 		{else}
-			location.href= rootDir+"System/Register/Success/";
+			location.href= rootDir+"System/Registration/Email_sent/";
 	{/if}
 {else}
 {*zwykły skin*}

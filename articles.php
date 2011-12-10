@@ -29,7 +29,7 @@ $XVwebEngine->Date['EngineFunctions'] = $XVwebEngine->Plugins()->Menager()->engi
 
 $XVwebEngine->ArticleInclude = true;
 
-if(($XVwebEngine->ReadArticle($PathInfo))){
+if((xvp()->ReadArticle($XVwebEngine ,$PathInfo))){
 
 	if(!empty($XVwebEngine->ReadArticleIndexOut['Options']['AccessFlags'])){
 		foreach($XVwebEngine->ReadArticleIndexOut['Options']['AccessFlags'] as $flag){
@@ -46,7 +46,7 @@ if(($XVwebEngine->ReadArticle($PathInfo))){
 		if($XVwebEngine->Plugins()->Menager()->event("ondocmode")) eval($XVwebEngine->Plugins()->Menager()->event("ondocmode")); 
 		//!Plugin:onDocMode
 		ob_clean();
-		$XVwebEngine->ReadArticleToDOC();
+		xvp()->ReadArticleToDOC($XVwebEngine);
 		exit;
 	}
 
@@ -71,7 +71,7 @@ if(($XVwebEngine->ReadArticle($PathInfo))){
 		}
 		$Result = false;
 		if(!$Failed){
-			$Result = $XVwebEngine->Votes()->set($Type, $_GET['id'], $Vote);
+			$Result = xvp()->set(xvp()->Votes($XVwebEngine), $Type, $_GET['id'], $Vote);
 			if(!$Result)
 			$Failed =  "Error";
 		}
@@ -80,7 +80,7 @@ if(($XVwebEngine->ReadArticle($PathInfo))){
 		try {
 			$Smarty->display('votes_show.tpl');
 		} catch (Exception $e) { 
-			$XVwebEngine->ErrorClass($e);
+			xvp()->ErrorClass($XVwebEngine, $e);
 		} 
 		
 		exit;
@@ -90,7 +90,7 @@ if(($XVwebEngine->ReadArticle($PathInfo))){
 		exit;
 	}
 	if((isset($_GET['Watch']) or isset($_GET['Bookmark'])) && $XVwebEngine->Session->Session('Logged_Logged') && $_GET['SIDCheck'] == ($XVwebEngine->Session->GetSID())){
-		$XVwebEngine->EditArticle()->bokmarks($XVwebEngine->ReadArticleIndexOut['ID'], (isset($_GET['Watch']) ? $_GET['Watch'] : $_GET['Bookmark']), (isset($_GET['Watch']) ? 'Observed' : 'Bookmark'));
+		xvp()->bokmarks(xvp()->EditArticle($XVwebEngine), $XVwebEngine->ReadArticleIndexOut['ID'], (isset($_GET['Watch']) ? $_GET['Watch'] : $_GET['Bookmark']), (isset($_GET['Watch']) ? 'Observed' : 'Bookmark'));
 		if(isset($_GET['Watch']))
 		$XVwebEngine->ReadArticleIndexOut['Observed'] = ($_GET['Watch'] ? 1 : 0); else
 		$XVwebEngine->ReadArticleIndexOut['Bookmark'] = ($_GET['Bookmark'] ? 1 : 0);
@@ -114,7 +114,7 @@ if(($XVwebEngine->ReadArticle($PathInfo))){
 		}
 		include_once(dirname(__FILE__).DIRECTORY_SEPARATOR.'core'.DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'ArticleToPdf.XVWeb.class.php');
 		ob_clean();
-		$XVwebEngine->InitClass('ArticleToPDF')->CreatePDF();
+		xvp()->CreatePDF(xvp()->InitClass($XVwebEngine, 'ArticleToPDF'));
 		exit;
 	}
 	if(isset($_GET['view'])){
@@ -138,16 +138,16 @@ if(($XVwebEngine->ReadArticle($PathInfo))){
 			$Smarty->cache_dir    = 'themes'.DIRECTORY_SEPARATOR.'blank'.DIRECTORY_SEPARATOR.'cache'.DIRECTORY_SEPARATOR;
 
 			$Smarty->assign('Title',  ($XVwebEngine->ReadArticleOut['Topic']));
-			$Smarty->assign('Content',  ($XVwebEngine->ParseArticleContents()));
+			$Smarty->assign('Content',  (xvp()->ParseArticleContents($XVwebEngine)));
 			try {
 				$Smarty->display('blank_blank.tpl');
 			} catch (Exception $e) { 
-				$XVwebEngine->ErrorClass($e);
+				xvp()->ErrorClass($XVwebEngine,$e);
 			} 
 			
 			exit;
 		}
-		echo($XVwebEngine->ParseArticleContents());
+		echo(xvp()->ParseArticleContents($XVwebEngine));
 		exit;
 	}
 	//Disable UI - Options article DisableUI = true or Get vars disableui= true
@@ -155,7 +155,7 @@ if(($XVwebEngine->ReadArticle($PathInfo))){
 		if(!empty($XVwebEngine->ReadArticleIndexOut['Options']['Headers']))
 		header($XVwebEngine->ReadArticleIndexOut['Options']['Headers']); 
 
-		exit($XVwebEngine->ParseArticleContents());
+		exit(xvp()->ParseArticleContents($XVwebEngine));
 	}
 	//End Disable UI
 	if(!ifsetor($XVwebEngine->ReadArticleIndexOut['Options']['DisableInfo'], 0))
@@ -170,10 +170,10 @@ if(($XVwebEngine->ReadArticle($PathInfo))){
 			$RecordsLimit = $XVwebEngine->Config("config")->find('config pagelimit quicksearch')->text();
 			$RecordsLimit = is_numeric($RecordsLimit) ? $RecordsLimit : 6;
 			$SearchClass = &$XVwebEngine->module('SearchClass', 'SearchClass');
-			$SearchClass->set("noContent", true);
-			$SearchClass->set("Group", true);
-			$SearchClass->set("SearchExcept", $XVwebEngine->ReadArticleIndexOut['ID']);
-			$QuickResult = $SearchClass->Search($XVwebEngine->ReadArticleIndexOut['Topic'], 0, $RecordsLimit);
+			xvp()->set($SearchClass, "noContent", true);
+			xvp()->set($SearchClass, "Group", true);
+			xvp()->set($SearchClass, "SearchExcept", $XVwebEngine->ReadArticleIndexOut['ID']);
+			$QuickResult = xvp()->Search($SearchClass, $XVwebEngine->ReadArticleIndexOut['Topic'], 0, $RecordsLimit);
 			$Smarty->assign('QuickSearch', $XVwebEngine->Cache->put("QuickSearch", $XVwebEngine->ReadArticleIndexOut['ID'], $QuickResult));
 			unset($QuickResult);
 		}
@@ -212,9 +212,9 @@ if(($XVwebEngine->ReadArticle($PathInfo))){
 	//Divisions
 	if(!ifsetor($XVwebEngine->ReadArticleIndexOut['Options']['DisableDivisions'], false)){
 	
-		$Divisions = $XVwebEngine->GetDivisions();
+		$Divisions = xvp()->GetDivisions($XVwebEngine);
 		$Smarty->assign('DivisionsCount', count($Divisions));
-		$Divisions = $XVwebEngine->partition($XVwebEngine->SortDivisions($Divisions) , 2);
+		$Divisions = xvp()->partition($XVwebEngine, xvp()->SortDivisions($XVwebEngine, $Divisions) , 2);
 		$Smarty->assign('Divisions', $Divisions); unset($Divisions);
 	}
 	//\Divisions
@@ -222,7 +222,7 @@ if(($XVwebEngine->ReadArticle($PathInfo))){
 
 	if(!(ifsetor($XVwebEngine->ReadArticleIndexOut['Options']['DisableComments'], false) OR $XVwebEngine->Config("config")->find("config disable comment")->text() == "true") &&  xvPerm('ViewComments')){
 		$Smarty->assign('LoadComment', true);
-		$CommentsList = $XVwebEngine->CommentArticle();
+		$CommentsList = xvp()->CommentArticle($XVwebEngine);
 		$Smarty->assign('CommentsCount', count($CommentsList));
 		$Smarty->assign('Comments', $CommentsList);
 	}
@@ -231,7 +231,7 @@ if(($XVwebEngine->ReadArticle($PathInfo))){
 		$Smarty->assign('Advertisement', false);
 	}
 	
-	$Smarty->assign('Content', $XVwebEngine->ParseArticleContents());
+	$Smarty->assign('Content', xvp()->ParseArticleContents($XVwebEngine));
 }else {
 	header("HTTP/1.0 404 Not Found");
 	header("Status: 404 Not Found");
@@ -244,7 +244,7 @@ if(($XVwebEngine->ReadArticle($PathInfo))){
 	$Smarty->assign('SiteTopic', sprintf($Language['NotFoundArticleTopic'], $TitleQuery));
 
 	$Smarty->assign('RightBox', $TitleQuery );
-	$SearchResult = $XVwebEngine->Search($TitleQuery, $ActualPage, $RecordsLimit);
+	$SearchResult = xvp()->Search($XVwebEngine, $TitleQuery, $ActualPage, $RecordsLimit);
 	$Smarty->assignByRef('SearchArray', $SearchResult);
 	if(!empty($SearchResult)){
 		include_once($LocationXVWeb.DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'Pager.php');
@@ -261,7 +261,7 @@ $Smarty->assign('JSBinder', $JSBinder);
 try {
 	$Smarty->display('view_show.tpl');
 } catch (Exception $e) { 
-	$XVwebEngine->ErrorClass($e);
+	xvp()->ErrorClass($XVwebEngine, $e);
 } 
 
 ?>

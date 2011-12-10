@@ -170,10 +170,22 @@
 		<div style="clear:both"></div>
 		</div>
 	</div>
+	{if $auction_details}
 	<div style="clear:both"></div>
-	<div class="xvauction-post">
-		
-	</div>
+		<div class="xvauction-details" >
+		{foreach from=$auction_details item=detail}
+			<div>
+				<div class="xvauction-details-caption">
+					{$detail.caption}
+				</div>
+				<div class="xvauction-details-value">
+					{$detail.val}
+				</div>
+			</div>	
+		{/foreach}
+
+		</div>
+	{/if}
 	<div style="clear:both"></div>
 		<div class="xvauction-description">
 				<div class="xvauction-description-caption">{"xca_description"|xvLang}</div>

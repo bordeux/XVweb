@@ -100,6 +100,12 @@ class Plugins
 	public function &event($name){
 		return $this->Date['Serialize']['ToEval'][strtolower($name)];
 	}
+	public function trigger($name){
+		if($XVwebEngine->Plugins()->Menager()->event($name)) {
+			extract($_GLOBALS);
+			eval($XVwebEngine->Plugins()->Menager()->event($name));
+		}
+	}
 	public function &prefix($val){
 		return $this->Date['Serialize']['Prefix'][strtolower($val)];
 	}

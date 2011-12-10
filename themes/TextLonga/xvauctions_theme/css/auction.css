@@ -213,3 +213,27 @@ border: 1px solid #F0F0F0;
 	border-bottom-right-radius: 5px;
 	margin-bottom: 10px;
 }
+.xvauction-details {
+margin:10px;
+}
+.xvauction-details > div{
+width: 50%;
+float:left;
+line-height: 25px;
+background: #F8F7F3;
+margin-top: 1px;
+}
+.xvauction-details .xvauction-details-value{
+	width: 65%;
+	height: 25px;
+	padding-left: 10px;
+	float:left;
+
+}
+.xvauction-details .xvauction-details-caption{
+float:left;
+width: 30%;
+font-weight:bold;
+height: 25px;
+padding-left: 10px;
+}

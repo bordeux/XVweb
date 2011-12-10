@@ -6,7 +6,6 @@
 	</div>
 {/if}
 	<div class="xvauction-main" >
-		
 
 			<div class="buy-items">
 			{if $buy_done}
@@ -15,8 +14,7 @@
 					<h2 style="color: #60A536; font-size: 16px; font-weight:bold;">Gratulujemy złożenia oferty dla <a href="{$URLS.Auction}/{$auction_info.ID}/">{$auction_info.Title|escape:"htmlall"}</a></h2>
 					{if $buy_type == "buy_now"}
 					<span>Możesz teraz przejść do płatności za przedmiot</span>
-						<form method="get" action="{$URLS.AuctionPanel}/Pay/" style="text-align:center;"> 
-							<input type="hidden" name="auction_id" value="{$auction_info.ID}" />
+						<form method="get" action="{$URLS.AuctionPanel}/payment_pay/{$bought_id}/" style="text-align:center;"> 
 							<input style="line-height: 30px; height: 32px; " type="submit" value="Zapłać za przedmiot" />
 						</form>
 						{else}

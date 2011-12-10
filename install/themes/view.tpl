@@ -4,9 +4,9 @@
 <title>{$language.Step} {$Step} </title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <style type="text/css">
-@import url(install/themes/style.css);
+@import url(themes/style.css);
 </style>
-<script type="text/javascript" src="install/themes/js/jquery.js" charset="UTF-8"> </script>  
+<script type="text/javascript" src="themes/js/jquery.js" charset="UTF-8"> </script>  
 </head>
 <body>
 
@@ -39,7 +39,7 @@
 {if $Step ==2}
 <form method="post" action="?Step={$Step+1}">
 <h1>{$language.Step} {$Step} - {$language.License} </h1> 
-<iframe src="install/license.txt" scrolling="yes" name="License" style="width:100%; height:600px;"></iframe>
+<iframe src="license.txt" scrolling="yes" name="License" style="width:100%; height:600px;"></iframe>
 <input type="checkbox" name="LicenseAcept" id="LicenseAceptID" value="Acept" /> <label for="LicenseAceptID">{$language.AceptLicenseMSG}</label>
 <div class="ButtonArea">
 <input type="button" value="&lt;&lt; {$language.Step} {$Step-1}" onclick="location.href='?Step={$Step-1}';" class="StepButton"/> <input type="submit" value="{$language.Step} {$Step+1} &gt;&gt;" class="StepButton" /> 
@@ -58,9 +58,9 @@
 		<div class="table-cell">{$CheckItemGrup.Name}</div>
 		<div class="table-cell">
 		{if $CheckItemGrup.Result}
-		<img src="install/themes/img/passed.gif" alt="{$language.Passed}" class="ImgResult{$CheckItemGrup.Result}" />
+		<img src="themes/img/passed.gif" alt="{$language.Passed}" class="ImgResult{$CheckItemGrup.Result}" />
 		{else}
-		<img src="install/themes/img/failed.gif" alt="{$language.Failed}" class="ImgResult{$CheckItemGrup.Result}" />
+		<img src="themes/img/failed.gif" alt="{$language.Failed}" class="ImgResult{$CheckItemGrup.Result}" />
 		{/if}
 		</div>
 	</div>
@@ -132,14 +132,14 @@ $(document).ready(function() {
 <script type="text/javascript">
 $(document).ready(function() {
 	$("#CheckButton").click(function(){
-	$('#CheckResult').html('<img src="install/themes/img/progress" alt="Wait"');
+	$('#CheckResult').html('<img src="themes/img/progress" alt="Wait"');
 			$.post("?Step=4&ValidMYSQl=true", { Server: $('#ServerID').val(), DataBase:$('#DataBaseID').val(), User:$('#UserID').val(), Password:$('#PasswordID').val() },
 				function(data){
 					if(data.Result){
-					$('#CheckResult').html('<img src="install/themes/img/passed.gif" alt="Passed" class="ImgResult1" />');
+					$('#CheckResult').html('<img src="themes/img/passed.gif" alt="Passed" class="ImgResult1" />');
 					$('#NextStep').attr("disabled", false);
 					}else{
-					$('#CheckResult').html('<img src="install/themes/img/failed.gif" alt="Failed" class="ImgResult" /><br/>Code: '+data.Code+'<br/>Message: '+data.Message);
+					$('#CheckResult').html('<img src="themes/img/failed.gif" alt="Failed" class="ImgResult" /><br/>Code: '+data.Code+'<br/>Message: '+data.Message);
 					$('#NextStep').attr("disabled", true);
 					}
 					
@@ -156,7 +156,7 @@ $(document).ready(function() {
 {if $Step == 5}
 <h1>{$language.Step} {$Step} - {$language.MySQlResult} </h1> 
 {if $MySQLResult.Result}
-<div id="FinallResult" class="Passed"><img src="install/themes/img/passed.gif" alt="Passed" class="ImgResult1" /> {$language.Passed}</div>
+<div id="FinallResult" class="Passed"><img src="themes/img/passed.gif" alt="Passed" class="ImgResult1" /> {$language.Passed}</div>
 {else}
 <div id="FinallResult" class="Failed">
 {$language.Failed}<br/>
@@ -218,8 +218,7 @@ $(document).ready(function() {
 $(document).ready(function() {
 $('#CatalogID').val(location.pathname.replace('install/', "").substring(1).replace('index.php', ""));
 
-function randomPassword(length)
-{
+function randomPassword(length){
    chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
    pass = "";
    for(x=0;x<length;x++)
@@ -238,7 +237,7 @@ $('#MD5KeyID').val(randomPassword(32));
 {/literal}
 {/if}
 {if $Step == 7}
-<div id="FinallResult" class="Passed"><img src="install/themes/img/passed.gif" alt="Passed" class="ImgResult1" /> {$language.Finish}</div>
+<div id="FinallResult" class="Passed"><img src="themes/img/passed.gif" alt="Passed" class="ImgResult1" /> {$language.Finish}</div>
 <div class="ButtonArea">
 	<form method="post" action="?Step={$Step+1}">
 	 <input type="submit" value="{$language.Enter}" id="NextStep" class="StepButton" />

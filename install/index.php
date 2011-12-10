@@ -20,8 +20,9 @@ session_name('InstallSession');
 session_id('Install');
 session_start(); 
 
-//chdir('..');
-//DEFINE('SMARTY_DIR', getcwd().DIRECTORY_SEPARATOR.'core'.DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'Smarty'.DIRECTORY_SEPARATOR);
+chdir(dirname(__FILE__).'/../');
+DEFINE('SMARTY_DIR', getcwd().DIRECTORY_SEPARATOR.'core'.DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'smarty3'.DIRECTORY_SEPARATOR);
+
 require_once(SMARTY_DIR . 'Smarty.class.php');
 
 if(isset($_SESSION['Lang'])){

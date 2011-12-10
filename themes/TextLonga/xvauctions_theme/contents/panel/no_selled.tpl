@@ -78,7 +78,7 @@
 							{$auction.End}
 						</td>
 						<td class="items-none">
-							<a href="#toDo">{"xca_add_again"|xvLang}</a>
+							<a href="{$URLS.AuctionsAdd}?step=restore&amp;id={$auction.ID}">{"xca_add_again"|xvLang}</a>
 						</td>
 					</tr>
 				{/foreach}

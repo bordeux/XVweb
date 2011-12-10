@@ -79,6 +79,7 @@ class Form {
         $this->config["validatorClass"]["type"]="str";
         $this->config["sanitize"]["type"]="bool";
         $this->config["submitMessage"]["type"]="str";
+        $this->config["submitClass"]["type"]="str";
         $this->config["showDebug"]["type"]="bool";
         $this->config["linebreaks"]["type"]="str";
         $this->config["divs"]["type"]="bool";
@@ -105,10 +106,11 @@ class Form {
         $this->config["sanitize"]["value"]=true;
         $this->config["errorBox"]["value"]="errorbox";
         $this->config["submitMessage"]["value"]="Form successfully submitted!";
+        $this->config["submitClass"]["value"]="success";
         $this->config["errorPosition"]["value"]="in_before";
         $this->config["errorTitle"]["value"]="(!) Error:";
         $this->config["errorLabel"]["value"]="<span>(!)</span>";
-        $this->config["errorClass"]["value"]="error";
+        $this->config["errorClass"]["value"]="form-invalid";
         $this->config["linebreaks"]["value"]="<br />";
         $this->config["showErrors"]["value"]=true;
         $this->config["showDebug"]["value"]=false;
@@ -193,7 +195,7 @@ class Form {
      */
     protected function onSuccess() {
         if ($this->getConfig("submitMessage")!="") {
-            return "<h2>".$this->getConfig("submitMessage")."</h2>";
+            return "<div class='".$this->getConfig("submitClass")."'>".$this->getConfig("submitMessage")."</div>";
         }
 		return "";
     }
@@ -279,7 +281,7 @@ class Form {
 				</script>";
             }
              if ($id){
-                 $this->form.= "<input type='submit' name='$id' value='$label' ></input>\n";
+                 $this->form.= "<div class='form-row'><input type='submit' name='{$id}' value='{$label}' /></div>\n";
              }
             if ($this->getConfig("errorPosition")=="in_after") {
                 $this->form .= $this->errorBox;
@@ -484,11 +486,11 @@ class Form {
                         $this->form.= $content;
                     }else {
                         if (($this->getConfig("divs"))&&($type!="hidden")&&($grouped<=1)) {
-                            $this->form.= "<div";
+                            $this->form.= "<div class='form-row ";
                             if (isset($this->error[$id])&&($this->error[$id])) {
-                                $this->form .= " class='".$this->getConfig("errorClass")."'";
+                                $this->form .= $this->getConfig("errorClass");
                             }
-                            $this->form .=">";
+                            $this->form .="'>";
                         }
                         if (($label)&&($type!="hidden")) {
                             $this->form.= "<label for='".$id."'";
@@ -762,7 +764,9 @@ class Form {
             foreach ($this->error as $error) {
                 $this->errorBox .= "<li><label for='".$error["link"]."'>".$error["msg"]."</label></li>\n";
             }
-            $this->errorBox .= "</ul></div>\n";
+            $this->errorBox .= "</ul>
+			
+			<div style='clear:both'></div></div>\n";
         }
     }
     /**

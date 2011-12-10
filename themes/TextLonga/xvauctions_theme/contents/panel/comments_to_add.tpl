@@ -77,7 +77,7 @@
 							{$auction.Contractor}
 						</td>
 						<td class="items-none">
-							<a href="{$URLS.AuctionPanel}/comment_add/{$auction.Auction}/">{"xca_comment_add"|xvLang}</a>
+							<a href="{$URLS.AuctionPanel}/comment_add/{$auction.ID}/">{"xca_comment_add"|xvLang}</a>
 						</td>
 	
 					</tr>

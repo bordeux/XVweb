@@ -3,12 +3,6 @@
     </plugin>
     <plugin file="digg.xml">
     </plugin>
-    <plugin file="doctohtml.xml">
-    </plugin>
-    <plugin file="dropbox.xml">
-    </plugin>
-    <plugin file="googleid.xml">
-    </plugin>
     <plugin file="markdown.xml">
     </plugin>
     <plugin file="megavideo.xml">
@@ -26,6 +20,4 @@
     <plugin file="video.xml"/>
     <plugin file="gmap.xml"/>
     <plugin file="facebook.xml"/>
-    <plugin file="xdebug.xml"/>
-    <plugin file="xvauctions.xml"/>
 </enabled>

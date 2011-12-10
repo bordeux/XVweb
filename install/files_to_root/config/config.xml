@@ -2,7 +2,7 @@
 <config>
   <sitename xv-lang="SiteName">Bordeux.NET</sitename>
   <lang xv-lang="Language" xv-values-from-function="xv_langs">pl</lang>
-  <catalog xv-lang="Catalog" xv-required="false">xvweb/</catalog>
+  <catalog xv-lang="Catalog" xv-required="false">Xvweb.git/</catalog>
   <theme xv-lang="Theme" xv-values-from-function="xv_themes">TextLonga</theme>
   <backupemail xv-lang="BackupEmail" xv-validator="regExpValidator" xv-validator-1-arg="/^[^@]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$/" xv-validator-2-arg="BadEmail">bordeux+sql@fotka.pl</backupemail>
   <indexpage xv-lang="IndexPage">/System/MainPage/</indexpage>
@@ -55,8 +55,8 @@ Zapraszamy &amp;amp;lt;b&amp;amp;gt;później&amp;amp;lt;/b&amp;amp;gt;</message
     <login xv-lang="Register">
       <enable xv-lang="Enabled" xv-values="true,false">true</enable>
     </login>
-    <appid xv-lang="AppID" xv-validator="regExpValidator" xv-validator-1-arg="/^[0-9]{15}$/" xv-validator-2-arg="BadFacebookID">14das04</appid>
-    <secret xv-lang="Secret">0e19c60asfdafa8ee63994</secret>
+    <appid xv-lang="AppID" xv-validator="regExpValidator" xv-validator-1-arg="/^[0-9]{15}$/" xv-validator-2-arg="BadFacebookID">145934665421004</appid>
+    <secret xv-lang="Secret">0e19c602f7dba7336cbcf3218ee63994</secret>
     <fanpage xv-lang="FanPage">
       <enable xv-lang="Enabled" xv-values="true,false">true</enable>
     </fanpage>
@@ -71,8 +71,8 @@ Zapraszamy &amp;amp;lt;b&amp;amp;gt;później&amp;amp;lt;/b&amp;amp;gt;</message
   </google>
   <filescloud xv-lang="FilesCloud">
     <url xv-lang="URL" xv-validator="regExpValidator" xv-validator-1-arg="/^(https?:\/\/+[\w\-]+\.[\w\-]+)/i" xv-validator-2-arg="BadURL">http://files.xvdev.pl/</url>
-    <user xv-lang="User">04asdasd4d07c</user>
-    <password xv-lang="Password">06sda7cd836bc</password>
+    <user xv-lang="User">04569e976674910ab551d7a713a4d07c</user>
+    <password xv-lang="Password">068680e798d713831cf733e37cd836bc</password>
   </filescloud>
   <dropbox xv-lang="Dropbox">
     <mail xv-lang="Mail" xv-validator="regExpValidator" xv-validator-1-arg="/^[^@]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$/" xv-validator-2-arg="BadEmail">backup@bordeux.net</mail>
