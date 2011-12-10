@@ -1,4 +1,3 @@
-
 var ThemeClass = {};
 function addParameterToURL(urlScr, param) {
 	_url = urlScr;
@@ -204,7 +203,7 @@ $(function () {
 				};
 			});
 		var IDCheckbox = 0;
-		$(".xv-checkbox").each(function () {
+		$(".xv-checkbox").each(function () { // kurwa chujstwo jebane nie chce za chuja dzialac!
 				tHandle = this;
 				$(tHandle).attr("id", "xv-checkbox-" + IDCheckbox); // tutaj bugg!
 				IDCheckbox += 1;
@@ -215,7 +214,6 @@ $(function () {
 										"class" : "cb-enable"
 									}).html("<span>" + Language.Yes + "</span>")).append(
 								$("<label>").attr({
-										"for" : $(tHandle).attr("id"),
 										"for" : $(tHandle).attr("id"),
 										"class" : "cb-disable"
 									}).html("<span>" + Language.No + "</span>"));
@@ -230,15 +228,26 @@ $(function () {
 			});
 		
 		$(".cb-enable, .cb-disable").click(function () {
-				$(this).parent().find(".selected").removeClass("selected");
 				ChHantle = $("#" + $(this).attr("for"));
 				
 				if ($(this).is('.cb-enable')) {
-					ChHantle.prop('checked', true);
+					if(ChHantle.is(":checked")){
+						$(this).parent().find(".selected").removeClass("selected");
+						$(this).addClass("selected");
+						return false	
+					}else{
+							$(this).parent().find(".selected").removeClass("selected");
+							$(this).addClass("selected");
+					}
 				} else {
-					ChHantle.prop('checked', false);
+					if(!ChHantle.is(":checked")){
+						return false;
+					}else{
+							$(this).parent().find(".selected").removeClass("selected");
+							$(this).addClass("selected");
+					}
 				}
-				$(this).addClass("selected");
+				
 				return true;
 			});
 		$('.xv-form').live("submit", function () {
