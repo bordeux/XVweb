@@ -1,0 +1,12 @@
+<config>
+    <widgets>
+        <widget name="Recommended" file="recommended.xml">
+            <width>596px</width>
+            <name>Wiadomości z serwisu</name>
+        </widget>
+        <widget name="LastMod" file="lastmod.xml">
+            <width>238px</width>
+            <name>Nowości</name>
+        </widget>
+    </widgets>
+</config>

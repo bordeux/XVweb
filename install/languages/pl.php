@@ -1,0 +1,39 @@
+<?php
+
+$Language['Language'] = 'Polski';
+$Language['Lang'] = 'pl';
+$Language['Welcome'] = 'Witaj';
+$Language['SelectLangMSG'] = 'Proszę wybrać język instalacji';
+$Language['Next'] = 'Dalej';
+$Language['Back'] = 'Wstecz';
+$Language['Step'] = 'Krok';
+$Language['License'] = 'Licencja';
+$Language['AceptLicenseMSG'] = 'Akceptuję licencję GNU GENERAL PUBLIC LICENSE';
+$Language['CscMSG'] = 'Sprawdzanie kompatybilnosci serwera';
+$Language['Passed'] = 'Zdane';
+$Language['Failed'] = 'Niepowodzenie';
+$Language['Configuration'] = 'Konfiguracja';
+$Language['MySQLConfig'] = 'Konfiguracja bazdy MySQL';
+$Language['Server'] = 'Serwer';
+$Language['Password'] = 'Hasło';
+$Language['User'] = 'Użytkownik';
+$Language['DataBase'] = 'Baza danych';
+$Language['Prefix'] = 'Prefix';
+$Language['Check'] = 'Sprawdź';
+$Language['MySQlResult'] = 'Rezultat instalacji MySQL';
+$Language['SQLFile'] = 'pl.sql';
+$Language['Error'] = 'Błąd';
+$Language['Code'] = 'Kod';
+$Language['Message'] = 'Wiadomość';
+$Language['CMSConsts'] = 'Stałe CMS';
+$Language['Catalog'] = 'Katalog';
+$Language['MD5Key'] = 'MD5 losowy klucz';
+$Language['Administrator'] = 'Administrator';
+$Language['Login'] = 'Login';
+$Language['SiteName'] = 'Tytuł strony';
+$Language['Mail'] = 'E-mail';
+$Language['LanguageWord'] = 'Język';
+$Language['Finish'] = 'Koniec';
+$Language['Generate'] = 'Generuj';
+$Language['Enter'] = 'Wejdź';
+?>

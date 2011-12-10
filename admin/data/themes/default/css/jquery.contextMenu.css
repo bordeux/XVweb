@@ -1,0 +1,57 @@
+
+/* Gloss Theme */
+/* =========== */
+.context-menu-theme-gloss {
+	background:#f4f4f4;
+	border:1px solid #f4f4f4;
+	padding:1px;
+	padding-right:0;
+}
+.context-menu-theme-gloss .context-menu-item {
+	text-align:left;
+	cursor:pointer;
+	color:black;
+	font-family:Helvetica,DejaVu Sans,Arial;
+	font-size:12px;
+	line-height:20px;
+	height:27px;
+	border:1px solid transparent;
+}
+.context-menu-theme-gloss .context-menu-separator {
+	margin:0px 0px 0px 32px;
+	font-size:0px;
+	border-top:1px solid #C5C5C5;
+	border-bottom:1px solid #F5F5F5;
+}
+.context-menu-theme-gloss .context-menu-item-hover {
+	background:transparent url(../img/cmenu-gloss-menu-item-hover.gif) repeat-x left center;
+	color:#fff;
+	border-color:#000;
+  	border-radius: 3px;
+  	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+}
+.context-menu-theme-gloss .context-menu-item .context-menu-item-inner {
+	padding:4px 16px 4px 35px;
+	margin-left:0px;
+	background-color:none;
+	background-repeat:no-repeat;
+	background-position:3px center;
+	background-image:none;
+}
+.context-menu-theme-gloss .context-menu-item-hover .context-menu-item-inner {
+}
+.context-menu-theme-gloss .context-menu-item-disabled {
+	color:#A7A7A7;
+}
+
+.context-menu-theme-gloss-cyan .context-menu-item-hover {
+	background-image:url(../img/cmenu-gloss-cyan-menu-item-hover.gif);
+	border-color:#00c;
+}
+
+.context-menu-theme-gloss-semitransparent .context-menu-item-hover {
+	background-image:url(../img/cmenu-item-gloss-semitransparent-menu-item-hover.png);
+	border-color:#00c;
+	background-color:#30f;
+}

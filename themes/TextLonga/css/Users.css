@@ -1,0 +1,53 @@
+#UserInfo {
+}
+#AdvPion{
+	float:right;
+}
+.male {
+	background: url(../img/male_icon.gif) no-repeat right;
+}
+.female {
+	background: url(../img/female_icon.gif) no-repeat right;
+}
+#UserTable{
+	margin-left:10px;
+}
+div#UserTableEdit{
+	
+}
+div#UserTableEdit input , div#UserTableEdit textarea, div#UserTableEdit select  { 
+	width:100%;
+}
+#UserTable tr:hover{
+	background: #FFB;
+}
+textarea {
+	height:200px;
+	width:100%;
+}
+
+div.success{
+	background: #56ff56 url(../img/isuccess.png) center no-repeat;
+	background-position: 15px 50%;
+	text-align: left;
+	padding: 5px 20px 5px 45px;
+	border-top: 2px solid #008c00;
+	border-bottom: 2px solid #008c00;
+	margin-bottom:20px;
+	padding-left:140px;
+	font-weight:bold;
+}
+div.failed{
+	background: #ff9696 url(../img/cancel.png) center no-repeat;
+	background-position: 15px 50%;
+	text-align: left;
+	padding: 5px 20px 5px 45px;
+	border-top: 2px solid #7f0000;
+	border-bottom: 2px solid #7f0000;
+	margin-bottom:20px;
+	padding-left:140px;
+	font-weight:bold;
+}
+.xv-text-wrapper div#wrapper {
+width:100%;
+}

@@ -1,0 +1,214 @@
+body,html {
+	margin : 0px;
+	padding : 0px;
+}
+body {
+	font-family : Arial, Helvetica, sans-serif;
+	font-size : 11px;
+	color : #000;
+	background : #FFF;
+	max-width:100%;
+}
+
+img {
+	border : 0px;
+}
+form {
+	margin : 0px;
+	padding : 0px;
+}
+
+a {
+	text-decoration : none;
+}
+
+input { 
+background-color : #ebebf0;
+font-family:Arial;
+font-size :11px;
+border:1px solid #2436e3;
+}
+div#Header{
+
+}
+div#Header div#Logo{
+float:left;
+}
+div#Header div#UserPanel{
+float:right;
+padding-right:20px;
+}
+div#Header div#UserPanel div#LogOut{
+position:absolute;
+right:1px;
+top:1px;
+}
+div#Header div#EndHeader{
+clear:both;
+height:2px;
+background:#D6D6D6;
+}
+div#Menu{
+background:#08719E;
+min-height:20px;
+padding-top:5px;
+}
+div#Menu a{
+color : #FFF;
+font-weight:bold;
+text-decoration: none;
+}
+div#Menu a:hover{
+text-decoration: underline;
+background:#827C78;
+border:1px solid #000;
+}
+
+div#Menu ul , div#Menu li{
+list-style: none;
+display: inline;
+}
+div#Menu .SubMenu{
+display:none;
+background:#B81414;
+}
+div#Menu div#SubMenu{
+background:#B81414;
+}
+div#Menu div#SubMenu a:hover{
+background:#1017E8;
+border:1px solid #000;
+}
+div#Content{
+
+}
+div#Content pre{
+white-space:  pre-wrap;
+border:1px solid #000;
+background:#D6FFD7;
+}
+
+div#Content .InfoFile{
+font-weight:bold;
+background:#FBFFD1;
+}
+div#Content div#Title{
+text-align:center;
+background:#7ABBD6;
+font-size:14px;
+font-weight:bold;
+}
+div#Content a{
+text-decoration: none;
+color: #5792cf;
+font-weight:bold;
+}
+div#Content div#MiniMap a{
+color : #4D58FF;
+font-weight:bold;
+}
+div#Content div#ArticleTools{
+background:#D4D4D4;
+}
+div#Content div#ArticleTools ul , div#Content div#ArticleTools li{
+list-style: none;
+display: inline;
+}
+div#Content div#MiniMap a:hover{
+text-decoration: underline;
+border:1px solid #000;
+}
+div#Content div#MiniMap{
+background:#ADADAD;
+}
+div#Content .DivisionsColumn{
+max-width:220px;
+padding-left:10px;
+}
+div#Content .DivisionsColumn  ul{
+	list-style:circle;
+	display: block;
+	page-break-after:always;
+}
+
+div#Content div#fp_comment .CommentTable { 
+	width : 100%;
+}
+div#Content div#fp_comment .CommentTable .CommentUP { 
+	height : 25px;
+	margin-left : -15px;
+	background-color : #EBEBEB;
+	border-left:2px solid #AAA9A9;
+	padding-left:3px;
+}
+div#Content div#fp_comment .CommentTable div.CommentUP  div.CVote{ 
+float:right;
+color:#FF7E00;
+font-weight:bold;
+}
+div#Content div#fp_comment .CommentTable div.CommentUP  div.CInfo{ 
+float:left;
+}
+div#Content div#fp_comment .CommentTable .CommentUP   div.CInfo a img{
+width:16px;
+height:16px;
+float:left;
+margin-right:5px;
+}
+div#Content textarea#EditArtPost{ 
+width:100%;
+height:400px;
+}
+
+.tablediv {
+display:  table;
+}
+.celldiv {
+display:  table-cell;
+padding-left:5px;
+}
+.rowdiv  {
+display:  table-row;
+}
+.table {
+display:  table;
+}
+.table-row  {
+display:  table-row;
+}
+.table-cell {
+display:  table-cell;
+}
+
+div#Footer{
+min-height:20px;
+background:#015173;
+padding-top:10px;
+}
+div#Footer div#NavBottom{
+}
+
+div#Footer div#NavBottomul ul, div#Footer div#NavBottom li{
+
+}
+div#Footer div#NavBottom a{
+color : #FFF;
+font-weight:bold;
+text-decoration: none;
+}
+div#Footer div#NavBottom a:hover{
+text-decoration: underline;
+border:1px solid #000;
+}
+
+div#Footer div#SearchForm{
+margin-top:5px;
+}
+div#Footer div#SearchForm input#SearchField{
+height:10px;
+font-size:9px;
+width:100px;
+}
+div#Footer div#SearchForm input#SearchButton{
+
+}

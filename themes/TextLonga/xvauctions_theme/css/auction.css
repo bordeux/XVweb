@@ -1,0 +1,215 @@
+.xdebug-var-dump{
+background : #C2C2C2;
+}
+.xvauction-main {
+width: 100%;
+margin:auto;
+}
+
+
+.item-buynow {
+color: #E15B00;
+font-size: 13px;
+font-weight: bold;
+padding-left: 43px;
+background : url(../img/buynow.png) no-repeat left center;
+}
+.auction-time-a, .auction-time-b, .auction-time-c, .auction-time-ca{
+color: #ED0000;
+font-size: 15px;
+}
+.auction-time-d, .auction-time-e {
+color : #F56C6C;
+}
+.auction-time-f, .auction-time-g{
+
+}
+.auction-time-h, .auction-time-i , .auction-time-j{
+
+}
+
+/* AUCTION START */
+.xvauction-header {
+height: 50px;
+}
+.xvauction-header-thumbnail {
+width: 64px;
+height:48px;
+position: absolute;
+margin-left: 20px;
+background: #FFF;
+border: 1px solid #bbbbbb;
+}
+.xvauction-header-thumbnail img{
+width: 64px;
+height:48px;
+}
+.xvauction-header-title {
+padding-top: 1px;
+}
+
+.xvauction-header-title  h1{
+background: url(../img/bg-title.png);
+display:block;
+height: 22px;
+padding-top: 3px;
+line-height: 16px;
+font-size:15px;
+font-weight:bold;
+padding-left: 100px;
+margin-left: 10px;
+margin-right: 20px;
+-webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+border-radius: 5px;
+border: 1px solid #a8a8a8;
+}
+.xvauction-header-title  h1 span{
+font-size: 10px;
+font-weight:normal;
+padding-left: 15px;
+color: #818181;
+}
+.xvauction-header-title  h1 span:hover{
+color: #3a3a3a;
+}
+
+.xvauction-info {
+
+height: 200px;
+margin-top: 20px;
+}
+.xvauction-info-left {
+width: 500px;
+float:left;
+margin-left: 10px;
+}
+.xvauction-info-left-caption {
+-webkit-border-top-right-radius: 30px;
+-moz-border-radius-topright: 30px;
+border-top-right-radius: 30px;
+background:#F5671B;
+color: #FFF;
+height: 20px;
+padding-left: 10px;
+font-weight:bold;
+font-size: 15px;
+}
+
+.xvauction-info-left table tr td {
+min-height: 25px;
+width: 245px;
+padding-left: 10px;
+}
+.xvauction-info-left table tr td:first-of-type {
+font-weight: bold;
+background: #F7F7F7;
+}
+
+.xvauction-info-left  table, .xvauction-info-left  th, .xvauction-info-left  td {
+border: 1px solid #E7E7E7;
+}
+
+
+.xvauction-info-period div {
+color: #818181;
+font-size: 9px;
+line-height: 12px;
+padding-left: 15px;
+}
+.xvauction-info-seller div a{
+color: #818181;
+font-size: 9px;
+line-height: 12px;
+padding-left: 15px;
+}
+.xvauction-info-right {
+width: 400px;
+float:right;
+margin-right: 20px;
+}
+.xvauction-info-right-caption {
+-webkit-border-top-left-radius: 30px;
+-moz-border-radius-topleft: 30px;
+border-top-left-radius: 30px;
+background:#5E88C4;
+color: #FFF;
+height: 20px;
+font-size: 15px;
+text-align:center;
+font-weight:bold;
+}
+.xvauction-info-right-content {
+background: #F2F2F2;
+border: 1px solid #D9D9D9;
+border-top: none;
+padding-top: 15px;
+padding-bottom: 15px;
+}
+
+.xvauction-description {
+margin: 10px;
+margin-right: 20px;
+}
+.xvauction-description-caption {
+border: 1px solid #a8a8a8;
+-webkit-border-top-right-radius: 30px;
+-moz-border-radius-topright: 30px;
+border-top-right-radius: 30px;
+background: url(../img/bg-description.png);
+color: #000;
+height: 20px;
+padding-left: 10px;
+font-weight:bold;
+font-size: 15px;
+}
+.xvauction-description-content{
+border: 1px solid #a8a8a8;
+border-top: none;
+min-height: 400px;
+}
+
+.xvauction-offers {
+margin: 10px;
+margin-right: 20px;
+}
+.xvauction-offers-caption {
+border: 1px solid #a8a8a8;
+-webkit-border-top-right-radius: 30px;
+-moz-border-radius-topright: 30px;
+border-top-right-radius: 30px;
+background: url(../img/bg-description.png);
+color: #000;
+height: 20px;
+padding-left: 10px;
+font-weight:bold;
+font-size: 15px;
+}
+.xvauction-offers-content{
+border: 1px solid #a8a8a8;
+border-top: none;
+}
+.xvauction-offers-content thead th {
+height: 20px;
+background: #CCCCCC;
+}
+.xvauction-offers-content th , .xvauction-offers-content td{
+border: 1px solid #F0F0F0;
+}
+
+.category_parents_tree {
+	line-height: 12px;
+	font-size: 9px; 
+	padding-left: 5px; 
+	padding-bottom: 5px;
+	background: #E0E0E0;
+	float:left;
+	padding-right: 10px;
+	-webkit-border-top-right-radius: 5px;
+	-webkit-border-bottom-right-radius: 5px;
+	-moz-border-radius-topright: 5px;
+	-moz-border-radius-bottomright: 5px;
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+	margin-bottom: 10px;
+}

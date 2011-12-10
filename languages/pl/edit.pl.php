@@ -1,0 +1,37 @@
+<?php
+$Language['DisableCache'] = "Wyłaczenie pamięci podręcznej. Wyłączenie spowoduje spowolnienie systemu";
+$Language['DisableUI'] = "Wyłaczenie motywu. Tekst będzie wyświetlony bezpośredni";
+$Language['EnablePHP'] = "Właczenie PHP. Interpretuje kod pomiędzy znaczników &lt;?php i ?&gt;";
+$Language['EnableHTML'] = "Wyłącza blokowanie znaczników HTML";
+$Language['DisableBreakLine'] = "Włacza łamanie lini. Zamienia znak nowej lini na &lt;br /&gt;";
+$Language['IncludeArticle'] = "Włącza dodawanie do treści innego artykyłu. &lt;include/path/to/article/&lt;/include&gt;";
+$Language['DisableGeshi'] = "Wyłącza kolorowanie składni. Np &lt;code lang=&quot;php&quot;&gt;&lt;/code&gt; lub &lt;php&gt;&lt;/php&gt;";
+$Language['DisableFiles'] = "Wyłacza możliwość dodawania plików &lt;file /&gt;";
+$Language['DisableAds'] = "Wyłacza reklamy na stronie";
+$Language['DisableComments'] = "Wyłącza komentowanie artykułu";
+$Language['DisableInfo'] = "Wyłącza informacje o artykule";
+$Language['Content'] = "Zawartość";
+$Language['AccessFlags'] = "Flagi dostępu do zawartości";
+$Language['Headers'] = "Nagłówki";
+$Language['CSS'] = "Styl CSS dla strony";
+$Language['URLPath'] = "Zmiana adresu strony";
+$Language['Alias'] = "Dodaj przekierowanie";
+$Language['DisableDivisions'] = "Wyłącza pokazywanie podkategori w artykule";
+$Language['Amendment'] = "Poprawka";
+$Language['BlockArticle'] = "Zablokuj artykuł przed edytowaniem";
+$Language['BlockSubArticles'] = "Zablokuj podkategorie przed edytowaniem";
+$Language['AcceptArticle'] = "Zakceptuj artykyuł - będzie pojawiał się w subkategoriach oraz w nowo dodanych";
+$Language['AcceptSubArticles'] = "Zakceptuj wszyskie sub-artykuły";
+$Language['MainTopic'] = "Zmiana głównego tytułu - pojawia się w linku do strony";
+$Language['MainViews'] = "Zmiana wartości licznika odsłon";
+$Language['MainDate'] = "Zmiana daty utworzenia strony";
+$Language['Settings'] = "Ustawienia";
+$Language['ToShortDescription'] = "Opis zmian jest za krótki. Min 10 znaków.";
+$Language['LoadFromFile'] = "Ładuj tekst z pliku";
+$Language['Description'] = "Opis";
+$Language['Value'] = "Wartość";
+$Language['DisableQuickSearch'] = "Wyłącz 'Zobacz też'";
+$Language['DisableParser'] = "Wyłącz parser znaczników - czysty HTML";
+$Language['MainURL'] = "Path URL artykułu";
+$Language['MainTags'] = "Tagi artykułu";
+?>

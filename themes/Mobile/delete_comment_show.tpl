@@ -1,0 +1,1 @@
+{assign var='NPath' value=$smarty.get.RedirectPath|substr:1 }{assign var='RedirectTo' value="Location: %s%s"|sprintf:$URLS.Script:$NPath }{$RedirectTo|header}

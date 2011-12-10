@@ -1,0 +1,36 @@
+.xvauction-main {
+width: 100%;
+margin:auto;
+}
+.xvauction-add {
+float:left;
+width: 75%;
+}
+.xauction-add-tabs {
+font-size:10px;
+}
+.xauction-left-nav {
+float:left;
+width: 20%;
+
+background: #DBDBDB;
+margin-right: 10px;
+}
+.xauction-left-nav a{
+font-size:18px;
+font-weight:bold;
+min-height: 35px;
+border-bottom: 2px solid #E8E8E8;
+display:block;
+text-decoration:none;
+color: #61767C;
+padding-left: 10px;
+padding-top: 10px;
+}
+.xauction-left-nav a:hover{
+background: #F6FCB8;
+}
+
+.xauction-left-nav a.selected {
+background: #C4C4C4;
+}

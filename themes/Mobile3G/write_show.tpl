@@ -1,0 +1,10 @@
+{$JSLoad[23]="`$URLS.Theme`js/CodeMirror/js/codemirror.js"}
+{$JSLoad[19]="`$URLS.Theme`js/jqueryui.js"}
+{$JSLoad[20]="`$URLS.Site`admin/data/themes/default/js/h5w/h5w/h5w.min.js"}
+{$JSBinder[23]="write"}
+{$JSBinder[24]="jtextarearesize"}
+{$CCSLoad[22]="`$URLS.Theme`css/write.css"}
+{$CCSLoad[20]="`$URLS.Site`admin/data/themes/default/js/h5w/h5w/h5w.css"}
+{include file="header.tpl" inline}
+{include file="contents/write_edit.tpl" inline}
+{include file="footer.tpl" inline}
