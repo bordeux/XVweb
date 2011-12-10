@@ -1,9 +1,0 @@
-﻿=== Prawa Autorskie ===
-
-	System XVweb jest na licencji GPL. Celem licencji GNU GPL jest przekazanie użytkownikom czterech podstawowych wolności:
-	  * wolność uruchamiania programu w dowolnym celu (wolność 0)
-	  * wolność analizowania, jak program działa i dostosowywania go do swoich potrzeb (wolność 1)
-	  * wolność rozpowszechniania niezmodyfikowanej kopii programu (wolność 2)
-	  * wolność udoskonalania programu i publicznego rozpowszechniania własnych ulepszeń, dzięki czemu może z nich skorzystać cała społeczność (wolność 3).
-
-	Więcej na temat licencji można znaleźć na stronie [http://www.gnu.org/ GNU]
