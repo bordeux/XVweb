@@ -225,7 +225,7 @@ if(isset($_GET['LogOut']) && $_GET['LogOut']=="true"){
 	@setcookie("LogedUser", "", time() - 3600, "/");
 	@setcookie("LogedUserPass", "", time() - 3600, "/");
 	@setcookie("UnLoged", "true", time()+10, "/");
-	header("location: ".$URLS['Script'].'System/UnLoged/');
+	header("location: ".$URLS['Script'].'System//Logout/');
 	exit;
 }
 try {

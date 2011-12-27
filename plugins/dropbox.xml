@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<plugin>
+  <info>
+    <name>Dropbox</name>
+    <version>1.0</version>
+    <author>Krzysztof Bednarczyk</author>
+    <url>http://www.bordeux.net</url>
+    <description>Xdebug for XVweb</description>
+  </info>
+  <load>
+    <event name="oncron">
+      <script language="PHP">
+	  <![CDATA[
+			include($RootDir.'plugins'.DIRECTORY_SEPARATOR.'data'.DIRECTORY_SEPARATOR.'dropbox'.DIRECTORY_SEPARATOR.'dropbox.xvweb.php');
+		 ]]>
+	  </script>
+    </event>
+  </load>
+  <install>
+	<config>
+		<dropbox xv-lang="Dropbox">
+			<mail xv-filter="mail">cosik@cosik.pl</mail>
+			<password xv-type="password">passik</password>
+			<backup xv-lang="DropboxBackUp">
+				<enable xv-values="true,false">true</enable>
+			</backup>
+		</dropbox>
+	</config>
+  </install>
+</plugin>

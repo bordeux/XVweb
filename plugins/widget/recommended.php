@@ -35,7 +35,7 @@ LIMIT 15';
 			$QueryNews = $this->Date['XVweb']->DataBase->prepare($QuerySQL);
 
 		$QueryNews->execute(array(
-		":CategorySelect"=>"/Recommended/",
+		":CategorySelect"=>"/System/Recommended/",
 		));
 		return $QueryNews->fetchAll(PDO::FETCH_ASSOC);
 		

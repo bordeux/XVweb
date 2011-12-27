@@ -202,45 +202,12 @@ function Step7(){
 		}
 	}
 	
-
-	
-	$AdminQuery = "INSERT INTO `".$_SESSION['DataBase']['Prefix']."users` (`id`, `user`, `openid`, `sex`, `name`, `vorname`, `password`, `mail`, `gg`, `icq`, `skype`, `tlen`, `page`, `signature`, `born`, `creation`, `info`, `wherefrom`, `avantr`, `ip`, `admin`, `theme`, `registercode`, `languages`) VALUES
-(1, '".addslashes($_SESSION['Config']['Login'])."', '', '2', 'XVweb', 'Project', '".md5($_SESSION['Config']['MD5Key'].$_SESSION['Config']['LPassword'])."', '".addslashes($_SESSION['Config']['Mail'])."', 0, '', 'xvweb', '', 'http://www.bordeux.net/XVweb', 'Welcome in XVweb!', '".date("d.m.Y")."', '".date("Y-m-d H:i:s")."', 'Bordeux.NET', 'XVweb', '', '127.0.0.1, Bordeux.NET', '11111111111111111111111111111111111111111111111111', NULL, '1', 'XVweb');";
 	$SQLImport = file_get_contents($SQLFile);
 	$SQLImport = $SQLImport;
 	$SQLImport = strtr($SQLImport, array("||Prefix||"=>$_SESSION['DataBase']['Prefix'] ));
 	$MySQLResult = array("Result"=>true);
 		$dbh->exec($SQLImport);
 		$dbh->exec($AdminQuery);
-	
-	$ConfigFile = '<?php
-/***************************************************************************
-****************   Bordeux.NET Project             *************************
-****************   File name :   config.php        *************************
-****************   Start     :   22.05.2007 r.     *************************
-****************   License   :   LGPL              *************************
-****************   Version   :   1.0               *************************
-****************   Authors   :   XVweb team        *************************
-*************************XVweb Team*****************************************
-				Krzyszof Bednarczyk, meybe you
-/////////////////////////////////////////////////////////////////////////////
- Klasa XVweb jest na licencji LGPL v3.0 ( GNU LESSER GENERAL PUBLIC LICENSE)
-****************http://www.gnu.org/licenses/lgpl-3.0.txt********************
-		Pełna dokumentacja znajduje się na stronie domowej projektu: 
-*********************http://www.bordeux.NET/Xvweb***************************
-***************************************************************************/
-error_reporting(E_ALL & ~E_NOTICE & ~E_STRICT);
-DEFINE(\'BdServer\', \''.addslashes($_SESSION['DataBase']['Server']).'\', true);
-DEFINE(\'BdServer_User\', \''.addslashes($_SESSION['DataBase']['User']).'\', true);
-DEFINE(\'BdServer_Password\', \''.addslashes($_SESSION['DataBase']['Password']).'\', true);
-DEFINE(\'BdServer_Base\', \''.addslashes($_SESSION['DataBase']['DataBase']).'\', true);
-DEFINE(\'BdServer_prefix\', \''.addslashes($_SESSION['DataBase']['Prefix']).'\', true);
-DEFINE(\'PHP_PathInfo\', \'PATH_INFO\', true);
-DEFINE(\'Debug_Enabled\', false, true); 
-DEFINE(\'XVweb_DisplayErrors\', true, true); 
-DEFINE(\'MD5Key\', \''.addslashes($_SESSION['Config']['MD5Key']).'\', true); 
-?>';
-	file_put_contents('config.php', $ConfigFile);
 	
 $XMLConfigFile  = 'config'.DIRECTORY_SEPARATOR.'config.xml';
 $doc = new DOMDocument();

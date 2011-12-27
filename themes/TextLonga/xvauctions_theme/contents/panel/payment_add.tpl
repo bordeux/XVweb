@@ -9,7 +9,7 @@
 	<div class="category_parents_tree" >
 		<a href="{$URLS.Auctions}/">{"xca_auctions"|xvLang}</a> 
 			&gt;&gt; <a href="{$URLS.AuctionPanel}">{"xca_auctions_panel"|xvLang}</a> 
-			&gt;&gt; <a href="{$URLS.AuctionPanel}/payment_add/">Doładowanie konta</a> 
+			&gt;&gt; <a href="{$URLS.AuctionPanel}/payment_add/">{$Title}</a> 
 	
 	</div>
 	<div style="clear:both;"></div>
@@ -22,7 +22,7 @@
 
 	<div class="xauction-tabs ui-tabs ui-widget ui-widget-content ui-corner-top">
 		<div class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-top">
-			<div style="text-align:center; color: #474747; font-size: 14px;">Doładowanie konta</div>
+			<div style="text-align:center; color: #474747; font-size: 14px;">{$Title}</div>
 		</div>
 		<div>
 		{if $payments_mode == "select_method"}

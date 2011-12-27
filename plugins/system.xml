@@ -1,0 +1,156 @@
+<plugin>
+	<info>
+		<name>System</name>
+		<version>1.0</version>
+		<author>Krzysztof Bednarczyk</author>
+		<url>http://www.bordeux.net</url>
+		<description>System for XVweb</description>
+	</info>
+	<config>
+		<prefix prefix="users" include="users.php"/>
+		<prefix prefix="search" include="search.php"/>
+		<prefix prefix="write" include="write.php"/>
+		<prefix prefix="register" include="register.php"/>
+		<prefix prefix="openid" include="openid.php"/>
+		<prefix prefix="online" include="online.php"/>
+		<prefix prefix="mainpage" include="index.php"/>
+		<prefix prefix="/" include="index.php"/>
+		<prefix prefix="" include="index.php"/>
+		<prefix prefix="file" include="file.php"/>
+		<prefix prefix="history" include="history.php"/>
+		<prefix prefix="lostpass" include="lostpass.php"/>
+		<prefix prefix="pastcode" include="pastcode.php"/>
+		<prefix prefix="admin" include="admin.php"/>
+		<prefix prefix="administration" include="admin.php"/>
+		<prefix prefix="receiver" include="receiver.php"/>
+		<prefix prefix="cron" include="cron.php"/>
+		<prefix prefix="messages" include="messages.php"/>
+		<prefix prefix="ajax" include="ajax.php"/>
+		<prefix prefix="captcha" include="captcha.php"/>
+		<prefix prefix="login" include="login.php"/>	
+		
+		<vars var="-xv-urls-theme-xv-" php="true">$GLOBALS['URLS']['Theme'];</vars>
+		<vars var="-xv-urls-script-xv-" php="true">$GLOBALS['URLS']['Script'];</vars>
+		<vars var="-xv-urls-script-set-xv-" php="true">substr($GLOBALS['URLS']['Script'], 0,-1);</vars>
+		<vars var="-xv-urls-site-xv-" php="true">$GLOBALS['URLS']['Site'];</vars>
+	</config>
+	<ranks>
+		<rank>
+			<name>ViewArticle</name>
+			<description>User can read articles</description>
+		</rank>
+		<rank>
+			<name>WriteComment</name>
+			<description>User can write comments</description>
+		</rank>
+		<rank>
+			<name>EditArticle</name>
+			<description>User can edit own article</description>
+		</rank>
+		<rank>
+			<name>EditComment</name>
+			<description>User can edit own comment</description>
+		</rank>
+		<rank>
+			<name>CreateAlias</name>
+			<description>User can create alias for article</description>
+		</rank>
+		<rank>
+			<name>DeleteArticle</name>
+			<description>User can delete article (admin)</description>
+		</rank>
+		<rank>
+			<name>EditTags</name>
+			<description>User can edit tags for article</description>
+		</rank>
+		<rank>
+			<name>DeleteVersion</name>
+			<description>User can delete article versions (admin)</description>
+		</rank>
+		<rank>
+			<name>DeleteUser</name>
+			<description>User can delete users (admin)</description>
+		</rank>
+		<rank>
+			<name>BanUser</name>
+			<description>User can bans users (admin)</description>
+		</rank>
+		<rank>
+			<name>EditProfil</name>
+			<description>User can edit profile</description>
+		</rank>
+		<rank>
+			<name>EditOtherProfil</name>
+			<description>User can edit profiles (admin)</description>
+		</rank>
+		<rank>
+			<name>Amendments</name>
+			<description>User can create amendments for articles (admin)</description>
+		</rank>
+		<rank>
+			<name>BlockArticles</name>
+			<description>User can blocking article (admin)</description>
+		</rank>
+		<rank>
+			<name>WriteArticle</name>
+			<description>User can write articles</description>
+		</rank>
+		<rank>
+			<name>DeleteComment</name>
+			<description>User can delete own comment</description>
+		</rank>	
+		<rank>
+			<name>DeleteCommentOther</name>
+			<description>User can delete all comments (admin)</description>
+		</rank>	
+		<rank>
+			<name>AntyFloodImmunitet</name>
+			<description>Immunitet for flood (admin)</description>
+		</rank>
+		<rank>
+			<name>DeleteFile</name>
+			<description>User can delete own file</description>
+		</rank>		
+		<rank>
+			<name>DownloadFile</name>
+			<description>User can download files</description>
+		</rank>			
+		<rank>
+			<name>DeleteOtherFile</name>
+			<description>User can delete files (admin)</description>
+		</rank>	
+		<rank>
+			<name>Voting</name>
+			<description>User can vote </description>
+		</rank>	
+		<rank>
+			<name>ViewComments</name>
+			<description>User can view comments</description>
+		</rank>	
+		<rank>
+			<name>AdminPanel</name>
+			<description>User can enter to adminpanel (ONLY admin)</description>
+		</rank>	
+		<rank>
+			<name>MoveArticle</name>
+			<description>User can move articles (admin)</description>
+		</rank>		
+		<rank>
+			<name>AutoAccept</name>
+			<description>AutoAccept articles (admin or moderator)</description>
+		</rank>	
+		<rank>
+			<name>AcceptArticles</name>
+			<description>User can accept articles (admin or moderator)</description>
+		</rank>	
+		<rank>
+			<name>Adv</name>
+			<description>Display adv for user</description>
+		</rank>	
+		<rank>
+			<name>EditOwnArticle</name>
+			<description>User can edit own article</description>
+		</rank>	
+
+	</ranks>
+</plugin>

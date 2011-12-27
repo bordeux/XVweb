@@ -123,11 +123,11 @@ class MailClass
 	}
 	public function mail_attachment($to,$subject,$message,$headers='Content-type: text/html; charset=utf-8',$files=null ){
 		if(empty($files)){
-			return mail($to,$subject,$message,$headers);
+			return(mail($to, "=?utf-8?B?".base64_encode($subject)."?=" ,$message,$headers));
 		}
 		
 		$sendit = new AttachmentEmail($to, $subject, $message, $files);
-		return $sendit -> mail();
+		return $sendit->mail();
 	}
 
 }

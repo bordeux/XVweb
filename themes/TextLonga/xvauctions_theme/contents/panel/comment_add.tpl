@@ -9,7 +9,7 @@
 	<div class="category_parents_tree" >
 		<a href="{$URLS.Auctions}/">{"xca_auctions"|xvLang}</a> 
 			&gt;&gt; <a href="{$URLS.AuctionPanel}">{"xca_auctions_panel"|xvLang}</a> 
-			&gt;&gt; Dodawanie komentarza
+			&gt;&gt; {$Title}
 	
 	</div>
 	<div style="clear:both;"></div>

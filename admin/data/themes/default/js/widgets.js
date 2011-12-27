@@ -73,7 +73,7 @@ $(function(){
 	};
 	
 	
-	if (typeof UserConfig['administration']['widgets'] !== 'undefined'){
+	if (isset(UserConfig['administration']) && isset(UserConfig['administration']['widgets']) ){
 	
 	$.each(UserConfig['administration']['widgets'], function(key, value) { 
 			  WidgetsClass.create({

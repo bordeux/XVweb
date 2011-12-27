@@ -321,7 +321,7 @@ $(function () {
 				});
 			return true;
 		};
-		if (typeof UserConfig['administration']['background'] === 'undefined')
+		if (!isset(UserConfig['administration']) || !isset(UserConfig['administration']['background']))
 			$("html").css("background-image", 'url(' + URLS['Theme'] + 'backgrounds/dark.png)');
 		else
 			$("html").css("background-image", UserConfig.administration.background);

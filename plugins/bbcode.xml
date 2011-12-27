@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<plugin>
+  <info>
+    <name>BBcode</name>
+    <version>1.0</version>
+    <author>Krzysztof Bednarczyk</author>
+    <url>http://www.bordeux.net</url>
+    <description>BBcode parser for XVweb. For use: &lt;bbcode&gt;[b]bold test[/b] [i]italic[/i]&lt;/bbcode&gt;</description>
+  </info>
+  <config>
+    <parser>
+      <function tag="bbcode">	
+	  <![CDATA[
+	include_once($GLOBALS['$RootDir'].'plugins/data/Bbcode/BbCode.class.php');
+	$bbcode = new BbCode();
+	pq($element)->replaceWith(str_replace(chr(13), '' ,$bbcode->parse(pq($element)->html()))); // nie chcemy wyniku wiec ustawiamy na false
+	]]>
+	</function>
+    </parser>
+  </config>
+</plugin>
