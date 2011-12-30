@@ -15,7 +15,6 @@
 *********************http://www.bordeux.NET/Xvweb***************************
 ***************************************************************************/
 @header('Content-Type: text/html; charset=utf-8');
-
 // Load Counter //
 function microtime_float(){list($usec, $sec) = explode(" ", microtime()); return ((float)$usec + (float)$sec);}
 $XVwebStart = microtime_float();
@@ -70,16 +69,16 @@ class XVTemplate {
 	}
 }
 
-DEFINE('SMARTY_DIR', dirname(__FILE__).DIRECTORY_SEPARATOR.'core'.DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'smarty3'.DIRECTORY_SEPARATOR);
-DEFINE('Cache_dir', dirname(__FILE__).DIRECTORY_SEPARATOR.'tmp'.DIRECTORY_SEPARATOR);
-DEFINE('ROOT_DIR', dirname(__FILE__).DIRECTORY_SEPARATOR);
+DEFINE('SMARTY_DIR', getcwd().DIRECTORY_SEPARATOR.'core'.DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'smarty3'.DIRECTORY_SEPARATOR);
+DEFINE('Cache_dir', getcwd().DIRECTORY_SEPARATOR.'tmp'.DIRECTORY_SEPARATOR);
+DEFINE('ROOT_DIR', getcwd().DIRECTORY_SEPARATOR);
 
 
-$RootDir = dirname(__FILE__).DIRECTORY_SEPARATOR;
+$RootDir = getcwd().DIRECTORY_SEPARATOR;
 $XVwebDir = $RootDir.'core'.DIRECTORY_SEPARATOR;
 
-if(!@include_once(dirname(__FILE__).DIRECTORY_SEPARATOR.'config.php')){
-	if (file_exists(dirname(__FILE__).DIRECTORY_SEPARATOR.'install/index.php')) 
+if(!@include_once(getcwd().DIRECTORY_SEPARATOR.'pages'.DIRECTORY_SEPARATOR.'config.php')){
+	if (file_exists(getcwd().DIRECTORY_SEPARATOR.'install/index.php')) 
 	header('Location: install/');
 	exit();
 }
@@ -97,21 +96,21 @@ require_once(SMARTY_DIR . 'Smarty.class.php');
 include_once('core'.DIRECTORY_SEPARATOR.'XVWeb.class.php');
 
 include_once('core'.DIRECTORY_SEPARATOR.'libraries/plugins.class.php');
-$xv_plugins = new xv_plugins((dirname(__FILE__).DIRECTORY_SEPARATOR.'plugins'.DIRECTORY_SEPARATOR).'xv_plugin/');
+$xv_plugins = new xv_plugins((getcwd().DIRECTORY_SEPARATOR.'plugins'.DIRECTORY_SEPARATOR).'xv_plugin/');
 function xvp(){global $xv_plugins; return $xv_plugins;}
 
 
-$XVwebEngine = new XVWeb(dirname(__FILE__).DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR);
+$XVwebEngine = new XVWeb(getcwd().DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR);
 xvp()->ConnectPDO($XVwebEngine, BdServer, BdServer_Base, BdServer_User, BdServer_Password);
 $XVwebEngine->DataBasePrefix = BdServer_prefix;
 
 /**Config File**/
-$XVwebEngine->Date['ConfigFile'] = dirname(__FILE__).DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'config.xml';
+$XVwebEngine->Date['ConfigFile'] = getcwd().DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'config.xml';
 $XVwebEngine->Date['RootDir'] = $RootDir;
 /**Config File**/
 
 xvp()->PreWork($XVwebEngine);
-xvp()->Plugins($XVwebEngine)->set("DirPlugins", (dirname(__FILE__).DIRECTORY_SEPARATOR.'plugins'.DIRECTORY_SEPARATOR));
+xvp()->Plugins($XVwebEngine)->set("DirPlugins", (getcwd().DIRECTORY_SEPARATOR.'plugins'.DIRECTORY_SEPARATOR));
 
 
 
@@ -137,7 +136,7 @@ if(empty($URLS['JSCatalog']))		$URLS['JSCatalog']		= $URLS['Site'].'themes/';
 if(empty($URLS['Script']))			$URLS['Script']			= $URLS['Site'].($XVwebEngine->Config("config")->find("config rewrite")->text() == "true" ?"":"view.php/");
 if(empty($URLS['Theme']))			$URLS['Theme']			= $URLS['ThemeCatalog'].$ThemeSelected."/";
 if(empty($URLS['Avats']))			$URLS['Avats']			= $URLS['Site'].'files/avants/';
-if(empty($UploadDir))		       	$UploadDir		        = dirname(__FILE__).DIRECTORY_SEPARATOR.'files'.DIRECTORY_SEPARATOR;
+if(empty($UploadDir))		       	$UploadDir		        = getcwd().DIRECTORY_SEPARATOR.'files'.DIRECTORY_SEPARATOR;
 $URLS['PathInfo']	= $XVwebEngine->AddSlashesStartAndEnd($URLS['Path']);
 $URLS['Prefix'] 	= $XVwebEngine->ReadPrefix($URLS['PathInfo']);
 $XVwebEngine->Date['UrlSite'] =		$URLS['Site'];
@@ -207,11 +206,11 @@ function LoadLang($lang){
 	global $Language, $XVwebEngine;
 	
 	$UserLang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
-	if (file_exists(dirname(__FILE__).DIRECTORY_SEPARATOR.'languages'.DIRECTORY_SEPARATOR.$UserLang.DIRECTORY_SEPARATOR.$lang.'.'.$UserLang.'.php')) {
-		@include_once('languages'.DIRECTORY_SEPARATOR.$UserLang.DIRECTORY_SEPARATOR.$lang.'.'.$UserLang.'.php');
+	if (file_exists(getcwd().DIRECTORY_SEPARATOR.'languages'.DIRECTORY_SEPARATOR.$UserLang.DIRECTORY_SEPARATOR.$lang.'.'.$UserLang.'.php')) {
+		@include_once(getcwd().'/languages'.DIRECTORY_SEPARATOR.$UserLang.DIRECTORY_SEPARATOR.$lang.'.'.$UserLang.'.php');
 	} else {
 		$DefaultLang = $XVwebEngine->Config("config")->find("config lang")->text();
-		if(!@include_once(dirname(__FILE__).DIRECTORY_SEPARATOR.'languages'.DIRECTORY_SEPARATOR.$DefaultLang.DIRECTORY_SEPARATOR.$lang.'.'.$DefaultLang.'.php'))
+		if(!@include_once(dirname(getcwd()).DIRECTORY_SEPARATOR.'languages'.DIRECTORY_SEPARATOR.$DefaultLang.DIRECTORY_SEPARATOR.$lang.'.'.$DefaultLang.'.php'))
 		die("XVweb Fatal Error. Don't isset language ".$lang.".".$DefaultLang);
 	}
 	
@@ -230,9 +229,9 @@ if(isset($_GET['LogOut']) && $_GET['LogOut']=="true"){
 }
 try {
 	$Smarty = new Smarty();
-	$Smarty->plugins_dir[] = dirname(__FILE__).DIRECTORY_SEPARATOR.'plugins'.DIRECTORY_SEPARATOR.'smarty'.DIRECTORY_SEPARATOR;
+	$Smarty->plugins_dir[] = (getcwd()).DIRECTORY_SEPARATOR.'plugins'.DIRECTORY_SEPARATOR.'smarty'.DIRECTORY_SEPARATOR;
 	$Smarty->template_dir = 'themes'.DIRECTORY_SEPARATOR.$ThemeSelected.DIRECTORY_SEPARATOR;
-	$CompileDir = dirname(__FILE__).DIRECTORY_SEPARATOR.'tmp'.DIRECTORY_SEPARATOR.$ThemeSelected.DIRECTORY_SEPARATOR;
+	$CompileDir = getcwd().DIRECTORY_SEPARATOR.'tmp'.DIRECTORY_SEPARATOR.$ThemeSelected.DIRECTORY_SEPARATOR;
 	if(!is_dir($CompileDir))
 	mkdir($CompileDir);
 	$Smarty->compile_dir  = $CompileDir; unset($CompileDir);
@@ -294,7 +293,7 @@ if($XVwebEngine->Plugins()->Menager()->event("preload")) eval($XVwebEngine->Plug
 if($Prefix)
 require($Prefix);
 else
-require("articles.php");
+require("pages/articles.php");
 
 //Plugin:onLoad
 if($XVwebEngine->Plugins()->Menager()->event("onload")) eval($XVwebEngine->Plugins()->Menager()->event("onload")); 

@@ -18,5 +18,5 @@ if(!isset($XVwebEngine))
 include_once('view.php');
 
 $PathInfo = $XVwebEngine->Config("config")->find('config indexpage')->text();
-include_once('articles.php');
+include_once('pages/articles.php');
 ?>

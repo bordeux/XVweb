@@ -7,27 +7,27 @@
 		<description>System for XVweb</description>
 	</info>
 	<config>
-		<prefix prefix="users" include="users.php"/>
-		<prefix prefix="search" include="search.php"/>
-		<prefix prefix="write" include="write.php"/>
-		<prefix prefix="register" include="register.php"/>
-		<prefix prefix="openid" include="openid.php"/>
-		<prefix prefix="online" include="online.php"/>
+		<prefix prefix="users" include="pages/users.php"/>
+		<prefix prefix="search" include="pages/search.php"/>
+		<prefix prefix="write" include="pages/write.php"/>
+		<prefix prefix="register" include="pages/register.php"/>
+		<prefix prefix="openid" include="pages/openid.php"/>
+		<prefix prefix="online" include="pages/online.php"/>
 		<prefix prefix="mainpage" include="index.php"/>
 		<prefix prefix="/" include="index.php"/>
 		<prefix prefix="" include="index.php"/>
-		<prefix prefix="file" include="file.php"/>
-		<prefix prefix="history" include="history.php"/>
-		<prefix prefix="lostpass" include="lostpass.php"/>
-		<prefix prefix="pastcode" include="pastcode.php"/>
-		<prefix prefix="admin" include="admin.php"/>
-		<prefix prefix="administration" include="admin.php"/>
-		<prefix prefix="receiver" include="receiver.php"/>
-		<prefix prefix="cron" include="cron.php"/>
-		<prefix prefix="messages" include="messages.php"/>
-		<prefix prefix="ajax" include="ajax.php"/>
-		<prefix prefix="captcha" include="captcha.php"/>
-		<prefix prefix="login" include="login.php"/>	
+		<prefix prefix="file" include="pages/file.php"/>
+		<prefix prefix="history" include="pages/history.php"/>
+		<prefix prefix="lostpass" include="pages/lostpass.php"/>
+		<prefix prefix="pastcode" include="pages/pastcode.php"/>
+		<prefix prefix="admin" include="pages/admin.php"/>
+		<prefix prefix="administration" include="pages/admin.php"/>
+		<prefix prefix="receiver" include="pages/receiver.php"/>
+		<prefix prefix="cron" include="pages/cron.php"/>
+		<prefix prefix="messages" include="pages/messages.php"/>
+		<prefix prefix="ajax" include="pages/ajax.php"/>
+		<prefix prefix="captcha" include="pages/captcha.php"/>
+		<prefix prefix="login" include="pages/login.php"/>	
 		
 		<vars var="-xv-urls-theme-xv-" php="true">$GLOBALS['URLS']['Theme'];</vars>
 		<vars var="-xv-urls-script-xv-" php="true">$GLOBALS['URLS']['Script'];</vars>
