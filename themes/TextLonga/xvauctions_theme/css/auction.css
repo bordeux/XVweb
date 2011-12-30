@@ -225,7 +225,7 @@ margin-top: 1px;
 }
 .xvauction-details .xvauction-details-value{
 	width: 65%;
-	height: 25px;
+	min-height: 25px;
 	padding-left: 10px;
 	float:left;
 
@@ -234,6 +234,6 @@ margin-top: 1px;
 float:left;
 width: 30%;
 font-weight:bold;
-height: 25px;
+min-height: 25px;
 padding-left: 10px;
 }

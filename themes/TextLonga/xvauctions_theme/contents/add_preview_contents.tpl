@@ -6,8 +6,8 @@
 
 		<div class="xvauction-header">
 			<div class="xvauction-header-thumbnail">
-					{if $auction_info.Thumbnail}
-						<img src="{$URLS.Thumbnails}/{$auction_info.Thumbnail}" alt='{$auction_info.Title|escape:"html"}'/>
+					{if $smarty.post.add.thumbnail}
+						<img src="{$URLS.Thumbnails}-tmp/{$smarty.post.add.thumbnail}" alt='{$auction_info.Title|escape:"html"}'/>
 					{else}
 						<img src="{$URLS.Theme}xvauctions_theme/img/no_picture.png" alt='{"xca_no_picture"|xvLang}'  />
 					{/if}
