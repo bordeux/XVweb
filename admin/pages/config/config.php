@@ -14,6 +14,7 @@ Klasa XVweb jest na licencji LGPL v3.0 ( GNU LESSER GENERAL PUBLIC LICENSE)
 		Pełna dokumentacja znajduje się na stronie domowej projektu: 
 *********************http://www.bordeux.NET/Xvweb***************************
 ***************************************************************************/
+$_GET['config'] = str_replace(array("/", "..", "\\"), "", ifsetor($_GET['config'], "config"));
 
 if(isset($_POST['ConfigXML'])){
 	libxml_use_internal_errors(true);
@@ -24,24 +25,14 @@ if(isset($_POST['ConfigXML'])){
 	if(empty($errors) or $error->level < 3){
 		include_once($RootDir.'core'.DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'BeautyXML.class.php');
 		$bc = new BeautyXML();
-		file_put_contents($RootDir."config/config.xml", '<?xml version="1.0" encoding="utf-8"?>'.chr(13).$bc->format($doc->saveXML()));
+		file_put_contents($RootDir."config/".$_GET['config'].".xml", '<?xml version="1.0" encoding="utf-8"?>'.chr(13).$bc->format($doc->saveXML()));
 		$XVwebEngine->Cache->clear("XMLParse");
-		/*header("location: ?".http_build_query(array(
-		"msg"=> $Language['Saved'],
-		"success"=> true,
-		)));*/
 		exit;
 	}
 	$lines = explode("r", $xml);
 	$line = $lines[($error->line)-1];
 
 	$message = $error->message.' at line '.$error->line.':<br />'.htmlentities($line);
-	/*header("location: ?".http_build_query(array(
-	"msg"=> 'Syntax error',
-	"list"=> array($message),
-	"error"=> true,
-	"title"=>  $Language['Error'],
-	)));*/
 	exit();
 }
 
@@ -78,7 +69,7 @@ function xv_themes(){
 }
 require($XVwebDir."libraries".DIRECTORY_SEPARATOR."formgenerator".DIRECTORY_SEPARATOR."formgenerator.php");
 $form=new Form();        
-$form->set("title", "Config Edit");
+$form->set("title", "Config Edit - ".$_GET['config']);
 $form->set("name", "config_form");        
 $form->set("linebreaks", false);       
 $form->set("errorBox", "error");    
@@ -86,7 +77,7 @@ $form->set("class", " xv-form");
 $form->set("attributes", " data-xv-result='.xv-config-form' ");     
 $form->set("errorClass", "error");       
 $form->set("divs", true);    
-$form->set("action", $GLOBALS['URLS']['Script'].'Administration/Get/Config/Save/');
+$form->set("action", $GLOBALS['URLS']['Script'].'Administration/Get/Config/Save/?config='.$_GET['config']);
 $form->set("errorTitle", $Language['Error']);    
 
 $form->set("errorPosition", "before");		
@@ -162,7 +153,7 @@ function generateEditor($pq, $Actual = "config > *" , $Selector = "config"){
 		
 	}
 }
-generateEditor($XVwebEngine->Config("config"));
+generateEditor($XVwebEngine->Config($_GET['config']));
 $form->addItem("<div style='display:none' id='ThemesListing'>".json_encode($Listing['Theme'])."</div>");
 $form->addField("hidden", "config_submit", $Language['Save'], false);
 $FormXHTML = $form->display($Language['Save'], "config_submit", false);
@@ -170,12 +161,12 @@ $FormXHTML = $form->display($Language['Save'], "config_submit", false);
 $result =($form->getData());
 if ($result){
 	foreach ($result as $name =>$item){
-		$XVwebEngine->Config("config")->find(str_replace("-", " > ", $name))->text(trim($item));
+		$XVwebEngine->Config($_GET['config'])->find(str_replace("-", " > ", $name))->text(trim($item));
 	}
 	
 	include_once($RootDir.'core'.DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'BeautyXML.class.php');
 	$bc = new BeautyXML();
-		file_put_contents($RootDir."config/config.xml", ($XVwebEngine->Config("config")));
+		file_put_contents($RootDir."config/".$_GET['config'].".xml", ($XVwebEngine->Config($_GET['config'])));
 	$XVwebEngine->Cache->clear("XMLParse");
 	echo "<div class='success'>Saved</div>";
 	exit;
@@ -192,6 +183,8 @@ class XV_Admin_config_visual{
 	var $id = "config-visual-window";
 	var $Date;
 	public function __construct(&$XVweb){
+	
+		$this->URL = "Config/Visual/?config=".$_GET['config'];
 		global $form, $Language,  $Listing;
 		$this->title =  "Config - Visual editor";
 		$this->icon = $GLOBALS['URLS']['Site'].'admin/data/icons/config.png';	

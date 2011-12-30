@@ -1,0 +1,144 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<title>Docs: Plik źródłowy xvauctions/fields/fields.php</title>
+
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    if ($('.searchresults').length > 0) { searchBox.DOMSearchField().focus(); }
+  });
+</script>
+<link rel="search" href="search-opensearch.php?v=opensearch.xml" type="application/opensearchdescription+xml" title="Docs"/>
+
+</head>
+<body>
+<div id="top"><!-- do not remove this div! -->
+
+
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  
+  <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
+  
+  
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">Docs
+   
+   </div>
+   <div id="projectbrief">ver. 1.0</div>
+  </td>
+  
+  
+  
+ </tr>
+ </tbody>
+</table>
+</div>
+
+<!-- Wygenerowano przez Doxygen 1.7.6.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Szukaj');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Strona&#160;główna</span></a></li>
+      <li><a href="annotated.html"><span>Struktury&#160;Danych</span></a></li>
+      <li class="current"><a href="files.html"><span>Pliki</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+          <div class="left">
+            <form id="FSearchBox" action="search.php" method="get">
+              <img id="MSearchSelect" src="search/mag.png" alt=""/>
+              <input type="text" id="MSearchField" name="query" value="Szukaj" size="20" accesskey="S" 
+                     onfocus="searchBox.OnSearchFieldFocus(true)" 
+                     onblur="searchBox.OnSearchFieldFocus(false)"/>
+            </form>
+          </div><div class="right"></div>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Lista&#160;plików</span></a></li>
+      <li><a href="globals.html"><span>Globalne</span></a></li>
+    </ul>
+  </div>
+</div>
+<div class="header">
+  <div class="headertitle">
+<div class="title">xvauctions/fields/fields.php</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="fields_8php.html">Idź do dokumentacji tego pliku.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php
+<a name="l00002"></a>00002 <span class="comment">/***************************************************************************</span>
+<a name="l00003"></a>00003 <span class="comment">****************   Bordeux.NET Project             *************************</span>
+<a name="l00004"></a>00004 <span class="comment">****************   LICENSE IS HERE                 *************************</span>
+<a name="l00005"></a>00005 <span class="comment">****************   http://xvauctions.bordeux.net/  *************************</span>
+<a name="l00006"></a>00006 <span class="comment">****************   THIS IS NON-FREE aplication!    *************************</span>
+<a name="l00007"></a>00007 <span class="comment">****************   Authors   :  XVweb team         *************************</span>
+<a name="l00008"></a>00008 <span class="comment">****************   All rights reserved             *************************</span>
+<a name="l00009"></a>00009 <span class="comment">***************************************************************************/</span>
+<a name="l00010"></a>00010 
+<a name="l00022"></a><a class="code" href="classxvauction__fields.html">00022</a> <span class="keyword">class </span><a class="code" href="classxvauction__fields.html">xvauction_fields</a> {
+<a name="l00026"></a><a class="code" href="classxvauction__fields.html#adbca55da4197c2078a3b59e0ff027461">00026</a>         var <a class="code" href="classxvauction__fields.html#adbca55da4197c2078a3b59e0ff027461">$Type</a> = <span class="stringliteral">&quot;integer&quot;</span>;
+<a name="l00030"></a><a class="code" href="classxvauction__fields.html#a09839e94e422df9e6071401c60beb712">00030</a>         var <a class="code" href="classxvauction__fields.html#a09839e94e422df9e6071401c60beb712">$XVweb</a> = null;
+<a name="l00035"></a><a class="code" href="classxvauction__fields.html#acc180e3d526c7e84374691c8b07d21b2">00035</a>         <span class="keyword">public</span> <span class="keyword">function</span> <a class="code" href="classxvauction__fields.html#acc180e3d526c7e84374691c8b07d21b2">__construct</a>(&amp;$Xvweb) {
+<a name="l00036"></a>00036                 $this-&gt;XVweb = &amp;$Xvweb;
+<a name="l00037"></a>00037                 $GLOBALS[<span class="stringliteral">&#39;Debug&#39;</span>][<span class="stringliteral">&#39;Classes&#39;</span>][] = array(<span class="stringliteral">&quot;ClassName&quot;</span>=&gt;get_class(), <span class="stringliteral">&quot;File&quot;</span>=&gt;__FILE__, <span class="stringliteral">&quot;Time&quot;</span>=&gt;microtime(<span class="keyword">true</span>), <span class="stringliteral">&quot;MemoryUsage&quot;</span>=&gt;memory_get_usage());
+<a name="l00038"></a>00038         }
+<a name="l00049"></a><a class="code" href="classxvauction__fields.html#ae1559345410441589126591dd2a216e3">00049</a>         <span class="keyword">function</span> <a class="code" href="classxvauction__fields.html#ae1559345410441589126591dd2a216e3">options</a>(){
+<a name="l00050"></a>00050                 $array = array();
+<a name="l00051"></a>00051                 <span class="keywordflow">return</span> ($array);
+<a name="l00052"></a>00052         }
+<a name="l00058"></a><a class="code" href="classxvauction__fields.html#a32b2251c82280d9281fc0b6650743f01">00058</a>         <span class="keyword">function</span> <a class="code" href="classxvauction__fields.html#a32b2251c82280d9281fc0b6650743f01">quick</a>(&amp;$field){
+<a name="l00059"></a>00059                 <span class="keywordflow">return</span> null;
+<a name="l00060"></a>00060         }
+<a name="l00066"></a><a class="code" href="classxvauction__fields.html#a7c42bab044b8032b409f06963d15a496">00066</a>         <span class="keyword">function</span> <a class="code" href="classxvauction__fields.html#a7c42bab044b8032b409f06963d15a496">advanced</a>(&amp;$field){
+<a name="l00067"></a>00067                 <span class="keywordflow">return</span> null;
+<a name="l00068"></a>00068         }
+<a name="l00082"></a><a class="code" href="classxvauction__fields.html#a16e9cb1a2d57af270ff2f5d0578999a2">00082</a>         <span class="keyword">function</span> <a class="code" href="classxvauction__fields.html#a16e9cb1a2d57af270ff2f5d0578999a2">query</a>(&amp;$field){
+<a name="l00083"></a>00083                 <span class="keywordflow">return</span> null;
+<a name="l00084"></a>00084         }
+<a name="l00085"></a>00085         
+<a name="l00106"></a><a class="code" href="classxvauction__fields.html#a0dfe12e5a88ec718c7a6843a3606e05d">00106</a>         <span class="keyword">function</span> <a class="code" href="classxvauction__fields.html#a0dfe12e5a88ec718c7a6843a3606e05d">add_form</a>(&amp;$field, $fail= <span class="keyword">false</span>){
+<a name="l00107"></a>00107                 <span class="keywordflow">return</span> null;
+<a name="l00108"></a>00108         }
+<a name="l00114"></a><a class="code" href="classxvauction__fields.html#a247400f66ac5c3cff69c354e5b6db737">00114</a>         <span class="keyword">public</span> <span class="keyword">function</span> <a class="code" href="classxvauction__fields.html#a247400f66ac5c3cff69c354e5b6db737">valid</a>(&amp;$field){
+<a name="l00115"></a>00115                 <span class="keywordflow">return</span> <span class="keyword">true</span>;
+<a name="l00116"></a>00116         }
+<a name="l00117"></a>00117         
+<a name="l00124"></a><a class="code" href="classxvauction__fields.html#a4fa129b840b7e49d723964cf7b8c0ef4">00124</a>         <span class="keyword">public</span> <span class="keyword">function</span> <a class="code" href="classxvauction__fields.html#a4fa129b840b7e49d723964cf7b8c0ef4">insert</a>($field, <a class="code" href="auction_8php.html#a66748168514cea3cde33e88d9585c9a7">$auction_id</a>){
+<a name="l00125"></a>00125                 <span class="keywordflow">return</span> <span class="keyword">true</span>;
+<a name="l00126"></a>00126         }
+<a name="l00140"></a><a class="code" href="classxvauction__fields.html#a095d7824c15f2712313c6bba5d2c0122">00140</a>         <span class="keyword">public</span> <span class="keyword">function</span> <a class="code" href="classxvauction__fields.html#a095d7824c15f2712313c6bba5d2c0122">remove_filter</a>(&amp;$field){
+<a name="l00141"></a>00141                 <span class="keywordflow">return</span> null;
+<a name="l00142"></a>00142         }
+<a name="l00143"></a>00143         
+<a name="l00156"></a><a class="code" href="classxvauction__fields.html#a19351fb5e0eb24ec5aa4e220ecb23436">00156</a>         <span class="keyword">public</span> <span class="keyword">function</span> <a class="code" href="classxvauction__fields.html#a19351fb5e0eb24ec5aa4e220ecb23436">detail</a>($field, $val){
+<a name="l00157"></a>00157                 <span class="keywordflow">return</span> null;
+<a name="l00158"></a>00158         }
+<a name="l00159"></a>00159 }
+<a name="l00160"></a>00160 
+<a name="l00161"></a>00161 ?&gt;
+</pre></div></div><!-- contents -->
+
+
+<hr class="footer"/><address class="footer"><small>
+Wygenerowano Thu Dec 29 2011 18:43:29 dla Docs programem &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.7.6.1
+</small></address>
+
+</body>
+</html>
