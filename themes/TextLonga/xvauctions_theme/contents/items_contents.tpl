@@ -140,7 +140,7 @@
 							{elseif $auction.Type == "auction"}
 								<span class="item-auction">{$auction.Auction|number_format:2:'.':' '} {"xca_coin_type"|xvLang}</span>
 							{elseif $auction.Type == "dutch"}
-								<span class="item-buynow">{$auction.Auction|number_format:2:'.':' '} {"xca_coin_type"|xvLang}</span> <br />  <span class="item-auction">{$auction.AuctionMin|number_format:2:'.':' '} {"xca_coin_type"|xvLang}</span>
+								<span class="item-buynow item-dutch-cost">{$auction.BuyNow|number_format:2:'.':' '} {"xca_coin_type"|xvLang}</span> <br />  <span class="item-auction">{$auction.AuctionMin|number_format:2:'.':' '} {"xca_coin_type"|xvLang}</span>
 							{else}
 								<span class="item-buynow">{$auction.BuyNow|number_format:2:'.':' '} {"xca_coin_type"|xvLang}</span> <br />  <span class="item-auction">{$auction.Auction} {"xca_coin_type"|xvLang}</span>
 							{/if}

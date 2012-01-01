@@ -150,6 +150,10 @@
 		<rank>
 			<name>EditOwnArticle</name>
 			<description>User can edit own article</description>
+		</rank>		
+		<rank>
+			<name>AddFile</name>
+			<description>User can upload file</description>
 		</rank>	
 
 	</ranks>

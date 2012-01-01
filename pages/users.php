@@ -241,23 +241,20 @@ if(!empty($UserFromUrl)){
 	$Smarty->assign('User', $XVwebEngine->ReadUser);
 	$Smarty->assign('LogedUser', $XVwebEngine->Session->Session('Logged_Logged'));
 	$Smarty->assign('RightBox', $XVwebEngine->ReadUser['Nick']);
-	$Smarty->assign('UserStats', 
-	array(
-		"VisitsPerDay"=>"bug",
-		"CretoionDay"=>floor((time() - strtotime($XVwebEngine->ReadUser['Creation'])) / (60 * 60 * 24)),
-		"ModCount"=>$XVwebEngine->Users()->ModificationCount($XVwebEngine->ReadUser['Nick'])
-	)
-	);
-	$XVwebEngine->FilesClass();
-	$RecordsLimit = (int) ifsetor($XVwebEngine->Config("config")->find('config pagelimit userfiles')->text(), 30);
-	$FileList = $XVwebEngine->Date['FilesClass']->FileList(array("CountRecord"=>true,"Where"=>array("Key"=>"UserFile", "Value"=>$XVwebEngine->ReadUser['Nick']), "ActualPage"=>(is_numeric($_GET['Page']) ? $_GET['Page']:0), "EveryPage"=>$RecordsLimit));
-	$pager = array();
-	if(!empty($FileList[0])){
-		include_once($LocationXVWeb.DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'Pager.php');
-		$pager = pager($RecordsLimit, (int) $FileList[1],  "?".$XVwebEngine->AddGet(array("Page"=>"-npage-id-"), true), (int) $_GET['Page']);
-		$Smarty->assign('Pager',        $pager);
-	}
-	$Smarty->assign('UserFiles', $FileList[0]);
+	include_once($LocationXVWeb.DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'Pager.php');
+	
+	$modifications_list = $XVwebEngine->module("user_info")->get_modifications($XVwebEngine->ReadUser['Nick'], (int) $_GET['mod_pager']);
+	$modifications_count = $XVwebEngine->module("user_info")->get_last_count_records();
+	$Smarty->assign('modifications_list',    $modifications_list);
+	$Smarty->assign('modifications_count',    $modifications_count);
+	$Smarty->assign('modifications_pager',   pager(30, (int) $modifications_count,  "?".$XVwebEngine->AddGet(array("mod_pager"=>"-npage-id-"), true), (int) $_GET['mod_pager']));	
+	
+	$files_list = $XVwebEngine->module("user_info")->get_files($XVwebEngine->ReadUser['Nick'], (int) $_GET['files_pager']);
+	$files_count = $XVwebEngine->module("user_info")->get_last_count_records();
+	$Smarty->assign('files_list',    $files_list);
+	$Smarty->assign('files_count',    $files_count);
+	$Smarty->assign('files_pager',   pager(30, (int) $files_count,  "?".$XVwebEngine->AddGet(array("files_pager"=>"-npage-id-"), true), (int) $_GET['mod_pager']));
+	
 	
 	$Smarty->assign('MiniMap', array(
 			array("Url"=>"/Users/", "Name"=>$Language['Users']),

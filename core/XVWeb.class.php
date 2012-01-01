@@ -880,7 +880,9 @@ class XVWeb extends OperationXVWeb
 		
 	}
 	/************************************************************************************************/
-	public function &module($class, $file){
+	public function &module($class, $file = null){
+	if(is_null($file))
+		$file = $class;
 		if(empty($this->Date['Classes'][$class])){
 			include_once(dirname(__FILE__).DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.$file.'.XVWeb.class.php');
 			$this->Date['Classes'][$class] = new $class($this);

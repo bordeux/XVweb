@@ -48,6 +48,136 @@ div.failed{
 	padding-left:140px;
 	font-weight:bold;
 }
-.xv-text-wrapper div#wrapper {
+.xv-text-wrapper {
 width:100%;
+}
+.xv-user-right{
+margin-top: 15px;
+color: #888;
+float:right;
+width: 300px;
+min-height: 400px;
+padding-left: 10px;
+}
+.xv-user-seperate{ 
+ width: 80%;
+ height:1px;
+ background: #E8E8E8;
+}
+.xv-user-avatar img{
+border: 1px solid #C8C8C8;
+width: 170px;
+height: 140px;
+}
+.xv-user-avatar .xv-user-id{
+position:absolute;
+background: #B00;
+margin-top: -30px;
+font-weight: bold;
+color: #FFF;
+padding-right: 5px;
+padding-left: 3px;
+box-shadow: 3px 3px 10px #FFF;
+-webkit-border-top-right-radius: 10px;
+-moz-border-radius-topright: 10px;
+border-top-right-radius: 10px;
+}
+.xv-user-nick {
+line-height: 28px;
+font-size:24px;
+color : #606060;
+margin-top: 10px;
+
+}
+.xv-user-content {
+padding-left: 30px;
+float: left;
+width: 70%;
+}
+.xv-user-register-date {
+font-size: 11px;
+}
+.xv-user-info-table {
+
+}
+.xv-user-info-table > div{
+
+}
+.xv-user-info-table > div > div{
+float:left;
+}
+
+.xv-user-info-table > div > div:first-of-type {
+width: 70px;
+}
+
+.xv-user-stats-table {
+margin-top: 30px;
+}
+.xv-user-stats-table > div{
+display:block;
+clear:both;
+padding-top: 10px;
+}
+.xv-user-stats-table > div > div{
+float:left;
+}
+.xv-user-stats-table > div > div:first-of-type {
+width: 70px;
+font-size: 26px;
+line-height: 28px;
+}
+.xv-user-files-list a {
+display: block;
+line-height: 16px;
+font-size: 15px;
+background: #DEEDF7;
+padding: 10px;
+padding-left: 25px;
+padding-right: 25px;
+-webkit-border-radius: 10px;
+-moz-border-radius: 10px;
+border-radius: 10px;
+float: left;
+border: 1px solid #AED0EA;
+margin: 5px;
+}
+.xv-user-content .xv-user-seperate {
+	margin-top: 10px;
+	height: 1px; 
+	max-height: 1px; 
+	background-color: #D5E4ED;
+	text-align: center
+}
+.xv-user-content .xv-user-seperate span{
+	background-color: white; 
+	position: relative; 
+	top: -10px;
+	font-size: 12px;
+	font-weight: bold;
+	color: #525252;
+}
+
+
+.xv-user-texts-list > div {
+margin-top: 15px;
+background: #F2F7FA;
+padding: 5px;
+padding-left: 25px;
+padding-right: 25px;
+-webkit-border-radius: 10px;
+-moz-border-radius: 10px;
+border-radius: 10px;
+border: 1px solid #AED0EA;
+}
+
+.xv-user-texts-list > div a {
+font-size: 18px;
+line-height: 18px;
+
+}
+.xv-user-texts-list > div > div {
+font-size: 10px;
+color : #707070;
+float:right;
 }

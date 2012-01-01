@@ -48,7 +48,7 @@ class xv_plugin_email_notification {
 		return $result;
 	}	
 	public function after_xvauctions__create_bought($result, $args){
-			$auction_info = $GLOBALS['XVauctions']->get_auction($args[0], false);
+			$auction_info = $GLOBALS['XVauctions']->get_auction($args[0], false, false);
 		if(empty($auction_info))
 			return $result;
 			

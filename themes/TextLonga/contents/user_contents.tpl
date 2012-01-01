@@ -37,180 +37,114 @@
 				<li class="ui-state-default ui-corner-top ui-state-hover ui-button-text-icon-primary ui-state-hover">
 					<a href="{$URLS.Script}Messages/Write/?To={$User.Nick|escape:'url'}" title="{$language.Write}" style="padding-left:20px;"><span class="ui-icon ui-icon-mail-closed" style="margin-left:-16px;"></span> {$language.Write}...</a>
 				</li>
-		
-			
 		</ul>
-		
-				<div class="xv-title-wrapper" style="text-align:center;">
-				<div class="xv-link-map">
-				{foreach from=$MiniMap item=Value name=minimap}
-					{if $smarty.foreach.minimap.last}
-						{$Value.Name}
-					{else}
-						<a href="{$URLS.Script}{$Value.Url|replace:' ':'_'|urlrepair|substr:1}">{$Value.Name}</a> >>
-					{/if}
-				{/foreach}
-			</div>
-			
-			<h1 class="xv-topic">{$SiteTopic}</h1>
-		</div>
 	</div>
 
 <div class="xv-text-wrapper">
-
 <!-- TEXT -->
-
-	<div id="ProfileText">
-		<div id="UserTable">
-<table  class="TableUser" summary="User Table Profil">
-    <tr class="TableCell" >
-      <td  width="159" height="113" rowspan="5" align="center"> 
-	  <img src="{$AvantsURL}{if $User.Avant}{$User.Nick}{/if}_150.jpg" alt="{$User.Nick}" />
-	  </td>
-
-    </tr>
-	<tr class="TableCell" >
-
-      <td>{$language.Nick}</td>
-      <td>
-	  {if $User.OpenID}<a href="{$User.OpenID}"> <img src="{$UrlTheme}img/icon_openid.gif" /> </a>{/if} <span id="NickUser">{$User.Nick}</span></td>
-    </tr>
-	{if $User.Name}
-    <tr class="TableCell" >
-      <td >{$language.Name}</td>
-      <td>{$User.Name}</td>
-    </tr>
-	{/if}
-  {if $User.VorName}
-    <tr class="TableCell">
-      <td>{$language.VorName}</td>
-      <td>{$User.VorName}</td>
-    </tr>
-	{/if}
-    <tr class="TableCell">
-      <td>{$language.UserID}</td>
-      <td>{$User.ID}</td>
-    </tr>
-	{if $User.WhereFrom}
-    <tr class="TableCell">
-      <td>{$language.WhereFrom}</td>
-      <td colspan="2">{$User.WhereFrom}</td>
-    </tr>
-	{/if}
-   {* <tr class="TableCell">
-      <td>{$language.Mail}</td>
-      <td colspan="2">{mailto address=$User.Mail encode="javascript_charcode"}</td>
-    </tr>*}
-	{if $User.Page}
-	<tr class="TableCell">
-      <td>{$language.Page}</td>
-      <td colspan="2"><a href="{$User.Page}" target="_blank" >{$User.Page}</a></td>
-    </tr>
-	{/if}
-{if $User.GG}
- <tr class="TableCell">
-      <td>{$language.GaduGadu}</td>
-      <td colspan="2"> 
-	  <a href="gg:{$User.GG}" ><img src="http://status.gadu-gadu.pl/users/status.asp?id={$User.GG}&amp;styl=1" title="{$User.GG}" alt="{$User.GG}" /> {$User.GG}</a></td>
-    </tr>
-{/if}
-
-{if $User.Skype}
- <tr class="TableCell">
-      <td>{$language.Skype}</td>
-      <td colspan="2">
-<script type="text/javascript" src="http://download.skype.com/share/skypebuttons/js/skypeCheck.js"></script>
-<a href="skype:{$User.Skype}?chat"><img src="http://mystatus.skype.com/smallclassic/{$User.Skype}" style="border: none;" width="114" height="20" alt="M�j stan" /></a>
-  </td> </tr>
-{/if}
-
-{if $User.Tlen}
- <tr class="TableCell">
-      <td>{$language.Tlen}</td>
-      <td colspan="2"> 
-<a href="http://ludzie.tlen.pl/{$User.Tlen}/" target="_blank"><img src="http://status.tlen.pl/?u={$User.Tlen}&t=3"></a>
-	  </tr>
-{/if}
-
-{if $User.ICQ}
- <tr class="TableCell">
-      <td>{$language.ICQ}</td>
-      <td colspan="2"> 
-<img src="http://status.icq.com/online.gif?icq={$User.ICQ}&img=9">
-	  </tr>
-{/if}
-{if $User.Language}
- <tr class="TableCell">
-      <td>{$language.Languages}</td>
-      <td colspan="2"> 
-{$User.Language}
-	  </tr>
-{/if}
-
-
-
-    <tr class="TableCell">
-      <td  width="449" height="17" colspan="3">{$language.Statistics}</td>
-    </tr>
-	
-	 {* <tr class="TableCell">
-      <td  width="159" height="10">{$language.LastIP}</td>
-      <td   height="10" colspan="2">{$User.IP}</td>
-    </tr> *}
-    <tr class="TableCell">
-      <td>{$language.ModificationCount}</td>
-      <td colspan="2">{$UserStats.ModCount}</td>
-    </tr>
-	{*<tr class="TableCell">
-      <td>{$language.PostCount}</td>
-      <td colspan="2">ToDO</td>
-    </tr> *}
-    <tr class="TableCell">
-      <td  width="159" height="12">{$language.VisitedCount}</td>
-      <td   height="12" colspan="2">{$User.Views}</td>
-    </tr>
-    <tr class="TableCell">
-      <td  width="159" height="23">{$language.RegistrationDate} </td>
-      <td   height="23" colspan="2">{$User.Creation}</td>
-    </tr>
-    <tr class="TableCell">
-      <td>{$language.VisitsPerDay}</td>
-      <td colspan="2">{if $UserStats.CretoionDay == 0}{$User.LoginCount}{else}{math equation="x/y" x=$User.LoginCount y=$UserStats.CretoionDay format="%.2f"}{/if}</td>
-    </tr>  
-	 <tr class="TableCell">
-      <td>{$language.ProfileViews}</td>
-      <td colspan="2">{$User.Views}</td>
-    </tr>
-    <tr class="TableCell">
-      <td>{$language.CreationAsDay}</td>
-      <td colspan="2">{$UserStats.CretoionDay}</td>
-    </tr>
-	{if $UserFiles}
-		<tr class="TableCell">
-      <td> </td>
-      <td colspan="2">{$Pager.0}</td>
-    </tr>
-    <tr class="TableCell">
-      <td><b>{$language.Files}</b></td>
-	  <td><b>{$language.Downloads}</b></td>
-	  <td><b>{$language.CodeToArticle}</b></td>
-    </tr>
-	{foreach from=$UserFiles key=k item=file}
- <tr class="TableCell">
-      <td><a href="{$URLS.Script}File/{$file.ID}/">{$file.FileName}.{$file.Extension}</a></td>
-	  <td>{$file.Downloads}</td>
-	  <td><input type="text" value="&lt;file id=&quot;{$file.ID}&quot;/&gt;" readonly="true" /></td>
-    </tr>
-{/foreach}
-	<tr class="TableCell">
-      <td> </td>
-      <td colspan="2">{$Pager.1}</td>
-    </tr>
-{/if}
-  </table>
+<div class="xv-user-content">
+{if $modifications_list}
+<div class="xv-user-texts">
+	<div class="xv-user-seperate"><span> Modyfikacje </span></div>
+	<div class="xv-user-texts-list">
+	{foreach from=$modifications_list key=k item=modification}
+		<div>
+			<a href="asda" >{$modification.index_title}</a>
+			<div>Data : {$modification.text_date}, wyświetleń: {$modification.index_views}</div>
+		</div>
+	{/foreach}
+	</div>
+	{$modifications_pager[1]}
 </div>
+{/if}
+
+
+{if $files_list}
+<div class="xv-user-files">
+	<div class="xv-user-seperate"><span> {$language.Files} </span></div>
+
+		<div class="xv-user-files-list">
+			{foreach from=$files_list key=k item=file}
+				<a href="{$URLS.Script}File/{$file.ID}/">{$file.FileName}.{$file.Extension}</a>
+			{/foreach}
+		</div>
+		<div style="clear: both;" ></div>
+		{$files_pager[1]}
+</div>
+{/if}
+
+
+
+</div>
+<div class="xv-user-right" xmlns:v="http://rdf.data-vocabulary.org/#" typeof="v:Person">
+	<div class="xv-user-avatar">
+		<img src="{$AvantsURL}{if $User.Avant}{$User.Nick}{/if}_150.jpg" alt="{$User.Nick}" />
+		<div class="xv-user-id">ID : {$User.ID}</div>
+	</div>
+	<div class="xv-user-nick" property="v:nickname">
+		{$User.Nick}
+	</div>	
+	<div class="xv-user-register-date">
+		Dołączył <time title="{$User.Creation}" datetime="{$User.Creation|date_format:'Y-m-d'}T{$User.Creation|date_format:'H:i:s'}TZD" pubdate="">3 mies.</time> temu
 	</div>
 	
+	<div class="xv-user-seperate"></div>
+	
+	<div class="xv-user-info-table">
+		{if $User.Name}<div>
+			<div>{$language.Name}</div>
+			<div>{$User.Name}</div>
+		</div>{/if}
+		{if $User.VorName}<div>
+			<div>{$language.VorName}</div>
+			<div>{$User.VorName}</div>
+		</div>{/if}		
+		{if $User.WhereFrom}<div>
+			<div>{$language.WhereFrom}</div>
+			<div>{$User.WhereFrom}</div>
+		</div>{/if}	
+		{if $User.Page}<div>
+			<div>{$language.Page}</div>
+			<div><a href="{$User.Page}" target="_blank" >{$User.Page}</a></div>
+		</div>{/if}		
+		{if $User.GG}<div>
+			<div>{$language.GaduGadu}</div>
+			<div><a href="gg:{$User.GG}" ><img src="http://status.gadu-gadu.pl/users/status.asp?id={$User.GG}&amp;styl=1" title="{$User.GG}" alt="{$User.GG}" /> {$User.GG}</a></div>
+		</div>{/if}		
+		{if $User.Skype}<div>
+			<div>{$language.Skype}</div>
+			<div><a href="skype:{$User.Skype}?chat"><img src="http://mystatus.skype.com/smallclassic/{$User.Skype}" style="border: none;" width="114" height="20" alt="Mój stan" /></a></div>
+		</div>{/if}		
+		{if $User.Tlen}<div>
+			<div>{$language.Tlen}</div>
+			<div><a href="http://ludzie.tlen.pl/{$User.Tlen}/" target="_blank"><img src="http://status.tlen.pl/?u={$User.Tlen}&t=3"></a></div>
+		</div>{/if}		
+		{if $User.ICQ}<div>
+			<div>{$language.ICQ}</div>
+			<div><img src="http://status.icq.com/online.gif?icq={$User.ICQ}&img=9"></div>
+		</div>{/if}
+	</div>
+		
+		
+	<div class="xv-user-stats-table">
+		<div>
+			<div>{if $UserStats.CreationDay == 0}{$User.LoginCount}{else}{math equation="x/y" x=$User.LoginCount y=$UserStats.CreationDay format="%.2f"}{/if}</div>
+			<div>{$language.VisitsPerDay}</div>
+		</div>	
+		<div>
+			<div>{$User.Views}</div>
+			<div>{$language.ProfileViews}</div>
+		</div>	
+		<div>
+			<div>{$modifications_count}</div>
+			<div>{$language.ModificationCount}</div>
+		</div>		
+		<div>
+			<div>{$files_count}</div>
+			<div>Plików</div>
+		</div>		
+	</div>
+</div>
 <!-- TEXT -->
 <div style="clear:both;"></div>
 </div>

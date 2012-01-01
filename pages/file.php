@@ -159,7 +159,7 @@ if(!empty($IDFile)){
 }
 
 if(isset($_GET['SendFile']) && is_array($_FILES['UploadForm'])){
-		if(!(xvPerm('AddFile'))){ 
+		if(!(xvPerm('AddFile'))){
 			header("location: ".$URLS['Script'].'System/AccessDenied/');
 			exit;
 		}
