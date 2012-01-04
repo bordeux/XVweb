@@ -29,7 +29,7 @@ if(!isset($XVwebEngine)){
 			$this->title = "Zmień tło";
 			$this->icon = $GLOBALS['URLS']['Site'].'admin/data/icons/backgrounds.png';
 			foreach(glob(realpath(ADMIN_ROOT_DIR.'data/themes/'.$GLOBALS['ThemeSelected'].'/backgrounds').DIRECTORY_SEPARATOR."{*.gif,*.jpg,*.png,*.jpeg}", GLOB_BRACE) as $image){
-				$this->content .= '<a class="xv-change-background" href="'.$GLOBALS['URLS']['Site'].'admin/data/themes/'.$GLOBALS['ThemeSelected'].'/backgrounds/'.basename($image).'" data-background="url('.$GLOBALS['URLS']['Site'].'admin/data/themes/'.$GLOBALS['ThemeSelected'].'/backgrounds/'.basename($image).')"><img src="'.$GLOBALS['URLS']['Script'].'Administration/get/Options/Background_view/'.basename($image).'" style="width:256px; height:256px;"></a> ';
+				$this->content .= '<a class="xv-change-background" href="'.$GLOBALS['URLS']['Site'].'admin/data/themes/'.$GLOBALS['ThemeSelected'].'/backgrounds/'.basename($image).'" data-background="url('.$GLOBALS['URLS']['Site'].'admin/data/themes/'.$GLOBALS['ThemeSelected'].'/backgrounds/'.basename($image).')"><img src="'.$GLOBALS['URLS']['Script'].'Administration/get/Options/Background_view/'.basename($image).'?th" style="width:256px; height:256px;"></a> ';
 			}
 			$this->content .= '<script type="text/javascript">
 				$(function(){

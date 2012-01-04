@@ -147,7 +147,8 @@ margin: 5px;
 	height: 1px; 
 	max-height: 1px; 
 	background-color: #D5E4ED;
-	text-align: center
+	text-align: center;
+	width: 100%;
 }
 .xv-user-content .xv-user-seperate span{
 	background-color: white; 

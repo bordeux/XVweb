@@ -49,7 +49,7 @@
 	<div class="xv-user-texts-list">
 	{foreach from=$modifications_list key=k item=modification}
 		<div>
-			<a href="asda" >{$modification.index_title}</a>
+			<a href="{$URLS.Script}{$modification.index_url|replace:' ':'_'|urlrepair|substr:1}" >{$modification.index_title}</a>
 			<div>Data : {$modification.text_date}, wyświetleń: {$modification.index_views}</div>
 		</div>
 	{/foreach}

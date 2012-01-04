@@ -61,7 +61,14 @@ try {
 					$this->id = "error-".uniqid();
 				}
 		}
-
+function get_include_contents($filename) {
+    if (is_file($filename)) {
+        ob_start();
+        include $filename;
+        return ob_get_clean();
+    }
+    return false;
+}
 //*WLASCIWA
 $Command = $XVwebEngine->GetFromURL($PathInfo, 2);
 $Prefix = $XVwebEngine->Plugins()->Menager()->AdminPrefix($XVwebEngine->GetFromURL($PathInfo, 2));

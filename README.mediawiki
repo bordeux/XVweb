@@ -20,4 +20,4 @@ Please use webinstallator:<br />
 1. Download this file <a href="https://raw.github.com/bordeux/XVweb/gh-pages/installer.php">installer.php</a><br />
 2. Upload to your site directory. <br />
 3. Go to http://your-site/installer.php <br />
-4. ?!??!?! PROFIT ?!?!?!? <br />
+4. ?!??!?! PROFIT ?!?!?!?! <br />
