@@ -1,4 +1,4 @@
 <?php
-$admin_menu['media']['submenu'][] = array ("name"=> "xvAuctions", "href"=>'Administration/XVauctions/Categories/');
+$admin_menu['media']['submenu'][] = array ("name"=> "xvAuctions", "href"=>'Administration/XVauctions/');
 
 ?>

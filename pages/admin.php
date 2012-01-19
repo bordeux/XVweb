@@ -23,6 +23,13 @@ if(!$XVwebEngine->permissions('AdminPanel')){ // Brak dostepu
 	header("location: ".$URLS['Script'].'System/AccessDenied/');
 	exit;
 }
+/*
+if(!empty($_SERVER['HTTP_REFERER'])){
+	if(strpos(substr($_SERVER['HTTP_REFERER'], 0, (strlen($_SERVER['HTTP_HOST']) +  10)), $_SERVER['HTTP_HOST']) === false ){
+		exit("Bad refferer!");
+	}
+}
+*/
 @set_time_limit(0);
 $ThemeSelected  = "default";
 DEFINE('ADMIN_ROOT_DIR', ROOT_DIR.'admin'.DIRECTORY_SEPARATOR);

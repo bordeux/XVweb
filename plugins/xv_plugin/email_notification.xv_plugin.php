@@ -112,7 +112,9 @@ class xv_plugin_email_notification {
 	
 	public function after_xvauctions__create_auction($result, $args){
 		$data_email = array();
-		
+		if(isset($args[0][":id"]))
+			return $result;
+			
 		$data_email['--auction_id--'] = $result;
 		$data_email['--auction_link--'] = $result;
 		$data_email['--auction_title--'] = $args[0][":title"];
@@ -126,7 +128,7 @@ class xv_plugin_email_notification {
 	
 	public function after_xvpayments__add_transaction($result, $args){
 		$data_email = array();
-		if($args[1] < 0)
+		if($args[1] <= 0)
 			return $result;
 		$amount = (int) preg_replace('/[^0-9\-]/i', '', $args[1]);
 		$amount = number_format(($amount/100), 2, '.', ' '); ;

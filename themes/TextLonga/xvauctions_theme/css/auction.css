@@ -215,13 +215,18 @@ border: 1px solid #F0F0F0;
 }
 .xvauction-details {
 margin:10px;
+background: #F8F7F3;
 }
-.xvauction-details > div{
+.xvauction-details .xvauction-details-item{
 width: 50%;
 float:left;
 line-height: 25px;
-background: #F8F7F3;
-margin-top: 1px;
+}
+.xvauction-details .xvauction-details-item:nth-child(odd){
+float: right;
+}
+.xvauction-details .xvauction-details-item:nth-child(even){
+background: #FAF9F5;
 }
 .xvauction-details .xvauction-details-value{
 	width: 65%;

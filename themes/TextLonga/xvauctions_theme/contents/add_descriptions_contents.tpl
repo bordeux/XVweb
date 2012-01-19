@@ -5,7 +5,9 @@
 {include file="xvauctions_theme/add_categories_nav.tpl" inline}
 
 		<div class="xvauction-add">
-		
+		{if $smarty.get.try_edit_category}
+			<div class="error">{"xca_you_cant_edit_category"|xvLang}</div>
+		{/if}
 			<form class="xvauction-add-form" action="?step=descriptions" enctype="multipart/form-data" method="post">
 			<input type="hidden" name="xv-sid" value="{$JSVars.SIDUser}" />
 				<div class="xvauction-add-item">

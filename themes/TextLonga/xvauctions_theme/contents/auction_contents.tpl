@@ -174,7 +174,7 @@
 	<div style="clear:both"></div>
 		<div class="xvauction-details" >
 		{foreach from=$auction_details item=detail}
-			<div>
+			<div class="xvauction-details-item">
 				<div class="xvauction-details-caption">
 					{$detail.caption}
 				</div>
@@ -183,7 +183,7 @@
 				</div>
 			</div>	
 		{/foreach}
-
+			<div style="clear:both"></div>
 		</div>
 	{/if}
 	<div style="clear:both"></div>

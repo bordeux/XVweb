@@ -85,7 +85,7 @@ $form->set("errorPosition", "before");
 $form->set("submitMessage", "Zapisano");
 
 $form->set("showAfterSuccess", true);
-$form->JSprotection(uniqid());
+$form->JSprotection($XVwebEngine->Session->GetSID());
 
 function generateEditor($pq, $Actual = "config > *" , $Selector = "config"){
 	global $Language, $form;
@@ -155,7 +155,6 @@ function generateEditor($pq, $Actual = "config > *" , $Selector = "config"){
 }
 generateEditor($XVwebEngine->Config($_GET['config']));
 $form->addItem("<div style='display:none' id='ThemesListing'>".json_encode($Listing['Theme'])."</div>");
-$form->addField("hidden", "config_submit", $Language['Save'], false);
 $FormXHTML = $form->display($Language['Save'], "config_submit", false);
 
 $result =($form->getData());

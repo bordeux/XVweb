@@ -107,3 +107,23 @@ color: #818181;
 .xvauction-header-title  h1 span:hover{
 color: #3a3a3a;
 }
+.xvauction-price-list {
+	float:left; 
+	width: 600px; 
+	padding-left: 30px; 
+	padding-top: 15px;
+}
+.xvauction-price-list thead {
+font-weight: bold;
+}
+.xvauction-price-list tfoot tr {
+border-top: 1px solid #9E9E9E;
+}
+.xvauction-price-list tfoot tr  td:first-of-type{
+text-align: right; 
+padding-right: 20px; 
+font-weight: bold;
+}
+.xvauction-price-list tbody tr  td:first-of-type{
+width: 300px;
+}

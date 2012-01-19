@@ -99,7 +99,7 @@
 							{$auction.Views}
 						</td>
 						<td class="items-timeout">
-							<a href="{$URLS.AuctionPanel}">Edytuj aukcje</a>
+							<a href="{$URLS.AuctionsAdd}?step=edit&amp;id={$auction.ID}">Edytuj aukcje</a>
 							<a href="{$URLS.AuctionPanel}/finish/{$auction.ID}/">Zakończ</a>
 						</td>
 					</tr>

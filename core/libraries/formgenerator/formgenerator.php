@@ -281,7 +281,8 @@ class Form {
 				</script>";
             }
              if ($id){
-                 $this->form.= "<div class='form-row'><input type='submit' name='{$id}' value='{$label}' /></div>\n";
+                 $this->form.= "<div class='form-row'><input type='hidden' name='{$id}' value='{$label}' />
+				 <input type='submit' value='{$label}'/></div>\n";
              }
             if ($this->getConfig("errorPosition")=="in_after") {
                 $this->form .= $this->errorBox;
