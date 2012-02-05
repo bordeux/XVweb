@@ -37,7 +37,7 @@ DELETE FROM {Articles} WHERE {Articles:ID} = :IDVerExecute ;');
 	public function DLVwithID($IDarticle, $Version){
 		if(!$this->Date['XVweb']->permissions('DeleteVersion'))
 				return false;
-			$VersionCount = $this->Date['XVweb']->DataBase->prepare('SELECT count(*) AS `Count`, {Articles:AdressInSQL} AS `AdressInSQL` FROM {Articles} S WHERE {Articles:AdressInSQL} = (SELECT {ListArticles:AdressInSQL} FROM {ListArticles} WHERE {ListArticles:ID} = :IDAIExecute  LIMIT 1) LIMIT 1;');
+			$VersionCount = $this->Date['XVweb']->DataBase->prepare('SELECT count(*) AS `Count`, {Articles:AdressInSQL} AS `AdressInSQL` FROM {Articles} S WHERE {Articles:AdressInSQL} = (SELECT {Text_Index:AdressInSQL} FROM {Text_Index} WHERE {Text_Index:ID} = :IDAIExecute  LIMIT 1) LIMIT 1;');
 			$VersionCount->execute(array(
 			":IDAIExecute" => $IDarticle
 			));

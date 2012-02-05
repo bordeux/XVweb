@@ -11,9 +11,9 @@ class XV_Ajax_gmap_category_list {
 			return ($GetArticles->fetchAll(PDO::FETCH_ASSOC));
 	}
 	public function run(){
-	$ListArticles = $this->getList();
+	$Text_Index = $this->getList();
 	header ("content-type: text/javascript; charset: UTF-8");   
-	echo json_encode($ListArticles);
+	echo json_encode($Text_Index);
 	exit;
 	}
 }

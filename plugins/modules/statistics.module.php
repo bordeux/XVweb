@@ -11,9 +11,9 @@ class XVStatistics
 	}
 	public function prepare(){
 	$StatsQuery  = 'SELECT 
-	(SElECT SUM(`views`) FROM {ListArticles} WHERE 1) as `ArticlesViews`,
-	(SElECT COUNT(1) FROM {ListArticles} WHERE {ListArticles:Alias} = "no") as `Articles`,
-	(SElECT COUNT(1) FROM {ListArticles} WHERE {ListArticles:Alias} = "yes") as `Alias`,
+	(SElECT SUM(`views`) FROM {Text_Index} WHERE 1) as `ArticlesViews`,
+	(SElECT COUNT(1) FROM {Text_Index} WHERE {Text_Index:Alias} = "no") as `Articles`,
+	(SElECT COUNT(1) FROM {Text_Index} WHERE {Text_Index:Alias} = "yes") as `Alias`,
 	(SElECT {Articles:Date}  FROM {Articles} ORDER BY  {Articles:Date} ASC  LIMIT 1) as `FirstArticleDate`,
 	(SElECT COUNT(1) FROM {Articles} WHERE  1) as `AllArticles`,
 	(SElECT COUNT(1) FROM {Bans} WHERE  1) as `Bans`,
@@ -42,7 +42,7 @@ class XVStatistics
 		for($i = 1; $LastDays >= $i; $i++ ){
 			$Statistics[date('Y-m-d', strtotime('-'.$i.' day'))] = 0;
 		}
-		$Result = $this->Date['XVweb']->DataBase->pquery("SELECT COUNT(1) AS `Count`, DATE_FORMAT({ListArticles:Date}, '%Y-%m-%d') AS `Date` FROM {ListArticles} WHERE  {ListArticles:Date} > NOW() - INTERVAL ".$LastDays." DAY GROUP BY DATE_FORMAT({ListArticles:Date},'%Y-%m-%d')  ORDER BY {ListArticles:Date} ASC LIMIT ".$LastDays)->fetchAll();
+		$Result = $this->Date['XVweb']->DataBase->pquery("SELECT COUNT(1) AS `Count`, DATE_FORMAT({Text_Index:Date}, '%Y-%m-%d') AS `Date` FROM {Text_Index} WHERE  {Text_Index:Date} > NOW() - INTERVAL ".$LastDays." DAY GROUP BY DATE_FORMAT({Text_Index:Date},'%Y-%m-%d')  ORDER BY {Text_Index:Date} ASC LIMIT ".$LastDays)->fetchAll();
 		foreach($Result as $date)
 			$Statistics[$date['Date']] = $date['Count'];
 			

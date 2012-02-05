@@ -166,7 +166,7 @@ class XVWeb extends OperationXVWeb
 			}
 			if($this->Cache->exist("GetDivisions",$URLArticle))
 			return  $this->Cache->get();	
-			$GetDivisions = $this->DataBase->prepare('SELECT {ListArticles:*} FROM {ListArticles} WHERE {ListArticles:Category} = :ExCategory AND {ListArticles:Accepted} = "yes" ORDER BY {ListArticles:Topic} ASC');
+			$GetDivisions = $this->DataBase->prepare('SELECT {Text_Index:*} FROM {Text_Index} WHERE {Text_Index:Category} = :ExCategory AND {Text_Index:Accepted} = "yes" ORDER BY {Text_Index:Topic} ASC');
 			$GetDivisions->execute(array(':ExCategory' => ($URLArticle)));
 			return $this->Cache->put("GetDivisions", $URLArticle, $GetDivisions->fetchAll(PDO::FETCH_ASSOC));
 	}
@@ -193,19 +193,19 @@ class XVWeb extends OperationXVWeb
                         $ExecArgs = array();
                         $ExecArgs[':TypeVote'] = 'article';
 
-                        $Select .= '{ListArticles:*:prepend:IA.} , ((SELECT CONCAT(COALESCE( SUM({Votes:Vote}), 0),"|", COUNT(*)) FROM {Votes} WHERE {Votes:Type} = :TypeVote AND  {Votes:SID} =  IA.{ListArticles:ID} )) AS `Votes` ';
+                        $Select .= '{Text_Index:*:prepend:IA.} , ((SELECT CONCAT(COALESCE( SUM({Votes:Vote}), 0),"|", COUNT(*)) FROM {Votes} WHERE {Votes:Type} = :TypeVote AND  {Votes:SID} =  IA.{Text_Index:ID} )) AS `Votes` ';
 
                         if($this->Session->Session('Logged_Logged') == true){
-                                $Select .= ', ((SELECT CONCAT(COALESCE({Bookmarks:Observed} , 0),"|", COALESCE({Bookmarks:Bookmark}, 0)) FROM {Bookmarks} WHERE {Bookmarks:Type} = :TypeVote AND  {Bookmarks:IDS} =  IA.{ListArticles:ID}  AND {Bookmarks:User} = :UserExec)) AS `Bookmarks` ';
+                                $Select .= ', ((SELECT CONCAT(COALESCE({Bookmarks:Observed} , 0),"|", COALESCE({Bookmarks:Bookmark}, 0)) FROM {Bookmarks} WHERE {Bookmarks:Type} = :TypeVote AND  {Bookmarks:IDS} =  IA.{Text_Index:ID}  AND {Bookmarks:User} = :UserExec)) AS `Bookmarks` ';
                                 $ExecArgs[':UserExec'] = $this->Session->Session('Logged_User');
                         }
 
                         if(!empty($this->ArticleFooIDinArticleIndex)){
-                                $ReadIndexArticleSQL = $this->DataBase->prepare('SELECT SQL_CACHE '.$Select.' FROM {ListArticles} AS `IA` WHERE {ListArticles:ID} = :IDExec LIMIT 1');
+                                $ReadIndexArticleSQL = $this->DataBase->prepare('SELECT SQL_CACHE '.$Select.' FROM {Text_Index} AS `IA` WHERE {Text_Index:ID} = :IDExec LIMIT 1');
                                 $ExecArgs[':IDExec'] = ($this->ArticleFooIDinArticleIndex);
                                 $ReadIndexArticleSQL->execute($ExecArgs);
                         }else{
-                                $ReadIndexArticleSQL = $this->DataBase->prepare('SELECT '.$Select.' FROM {ListArticles} AS `IA`  WHERE IA.{ListArticles:URL} = :AdresExec LIMIT 1');
+                                $ReadIndexArticleSQL = $this->DataBase->prepare('SELECT '.$Select.' FROM {Text_Index} AS `IA`  WHERE IA.{Text_Index:URL} = :AdresExec LIMIT 1');
                                 $ExecArgs[':AdresExec'] = ($this->ArticleFooLocation);
                                 $ReadIndexArticleSQL->execute($ExecArgs);
                         }
@@ -226,7 +226,7 @@ class XVWeb extends OperationXVWeb
                         unset($Select);
                         unset($ReadIndexArticleRow);
 
-                        $this->DataBase->pquery('UPDATE {ListArticles} SET {ListArticles:Views} = {ListArticles:Views} +1 WHERE {ListArticles:ID} = '.$this->ReadArticleIndexOut['ID']); // Counter
+                        $this->DataBase->pquery('UPDATE {Text_Index} SET {Text_Index:Views} = {Text_Index:Views} +1 WHERE {Text_Index:ID} = '.$this->ReadArticleIndexOut['ID']); // Counter
 
                         if(ifsetor($this->ReadArticleIndexOut['Options']["DisableCache"], false) == true)
                         $this->Cache->disable(); //disable cache - options article
@@ -275,14 +275,14 @@ class XVWeb extends OperationXVWeb
 	var $IssetArticleID;
 	function isset_article($Location=null){
 	if(is_numeric($this->IssetArticleID)){
-				$IssetArticleSQL = $this->DataBase->prepare('SELECT SQL_CACHE {ListArticles:ID} FROM{ListArticles} WHERE {ListArticles:ID} = :IDArticle LIMIT 1');
+				$IssetArticleSQL = $this->DataBase->prepare('SELECT SQL_CACHE {Text_Index:ID} FROM{Text_Index} WHERE {Text_Index:ID} = :IDArticle LIMIT 1');
 				$IssetArticleSQL->execute(array(':IDArticle' => ($this->IssetArticleID))); //tu
 				if(!($IssetArticleSQL->rowCount())){
 					return false;
 				}
 				return true;
 			}
-			$IssetArticleSQL = $this->DataBase->prepare('SELECT SQL_CACHE {ListArticles:ID}  FROM {ListArticles} WHERE {ListArticles:URL} = :UrlIdexArticle LIMIT 1');
+			$IssetArticleSQL = $this->DataBase->prepare('SELECT SQL_CACHE {Text_Index:ID}  FROM {Text_Index} WHERE {Text_Index:URL} = :UrlIdexArticle LIMIT 1');
 			$IssetArticleSQL->execute(array(':UrlIdexArticle' => ($this->AddSlashesStartAndEnd($Location)))); //tu
 			if(!($IssetArticleSQL->rowCount())){
 				return false;
@@ -583,7 +583,7 @@ class XVWeb extends OperationXVWeb
 				if($this->Cache->exist("IDtoURL",($id)))
 				return $this->Cache->get();
 				
-				$IDtoURLSQL = $this->DataBase->prepare('SELECT {ListArticles:URL} AS `URL` FROM {ListArticles} WHERE {ListArticles:ID} = :IDinArticleIndexExecute LIMIT 1');
+				$IDtoURLSQL = $this->DataBase->prepare('SELECT {Text_Index:URL} AS `URL` FROM {Text_Index} WHERE {Text_Index:ID} = :IDinArticleIndexExecute LIMIT 1');
 				$IDtoURLSQL->execute(array(':IDinArticleIndexExecute' => ($id)));
 				$IDtoURLSQL = $IDtoURLSQL->fetch();
 				return $this->Cache->put("IDtoURL",($id), $IDtoURLSQL['URL']);
@@ -597,7 +597,7 @@ class XVWeb extends OperationXVWeb
 				if($this->Cache->exist("URLtoID",($UrlArticle))){
 					return $this->Cache->get();
 				}
-				$URLtoIDSQL = $this->DataBase->prepare('SELECT {ListArticles:ID} AS `ID` FROM {ListArticles} WHERE {ListArticles:URL} = :URLinArticleIndexExecute LIMIT 1');
+				$URLtoIDSQL = $this->DataBase->prepare('SELECT {Text_Index:ID} AS `ID` FROM {Text_Index} WHERE {Text_Index:URL} = :URLinArticleIndexExecute LIMIT 1');
 				$URLtoIDSQL->execute(array(':URLinArticleIndexExecute' => ($UrlArticle)));
 				$URLtoIDSQL = $URLtoIDSQL->fetch();
 				return $this->Cache->put("URLtoID",($UrlArticle), $URLtoIDSQL['ID']);
@@ -665,7 +665,7 @@ class XVWeb extends OperationXVWeb
 	/************************************************************************************************/
 	function GetOnlyContextArticle($URL){
 		$URL = $this->AddSlashesStartAndEnd($URL);
-		$GetOnlyContex = $this->DataBase->prepare('SELECT {Articles:Contents} AS `Contents`  FROM  {ListArticles} ArticleIndex RIGHT JOIN {Articles} Article ON ArticleIndex.{ListArticles:AdressInSQL}=Article.{Articles:AdressInSQL} WHERE ArticleIndex.{ListArticles:URL} = :URLExecute ORDER BY Article.{Articles:Version} DESC LIMIT 1;');
+		$GetOnlyContex = $this->DataBase->prepare('SELECT {Articles:Contents} AS `Contents`  FROM  {Text_Index} ArticleIndex RIGHT JOIN {Articles} Article ON ArticleIndex.{Text_Index:AdressInSQL}=Article.{Articles:AdressInSQL} WHERE ArticleIndex.{Text_Index:URL} = :URLExecute ORDER BY Article.{Articles:Version} DESC LIMIT 1;');
 		$GetOnlyContex->execute(
 		array(
 		':URLExecute' => $URL 

@@ -88,8 +88,8 @@ class XV_Admin_articles{
 		$RLimit = $EveryPage;
 		
 		$ArticleSQL = $XVweb->DataBase->prepare('SELECT SQL_CALC_FOUND_ROWS
-				{ListArticles:*}
-		FROM {ListArticles} ORDER BY '.($XVweb->DataBase->isset_field("ListArticles", $SortBy) ? "{ListArticles:".$SortBy."}" : "{ListArticles:ID}").' '.($Desc == "asc" ? "ASC" : "DESC") .' LIMIT '.$LLimit.', '.$RLimit.';
+				{Text_Index:*}
+		FROM {Text_Index} ORDER BY '.($XVweb->DataBase->isset_field("Text_Index", $SortBy) ? "{Text_Index:".$SortBy."}" : "{Text_Index:ID}").' '.($Desc == "asc" ? "ASC" : "DESC") .' LIMIT '.$LLimit.', '.$RLimit.';
 		');
 		
 		$ArticleSQL->execute();
@@ -179,15 +179,15 @@ class XV_Admin_articles_comments{
 	{Comments}.{Comments:IP} AS `CIP`,
 	{Comments}.{Comments:Comment} AS `CComment`,
 	{Comments}.{Comments:Parsed} AS `CParsed`,
-	{ListArticles}.{ListArticles:ID} AS `LID`,
-	{ListArticles}.{ListArticles:URL} AS `LURL`,
-	{ListArticles}.{ListArticles:Topic} AS `LTopic`
+	{Text_Index}.{Text_Index:ID} AS `LID`,
+	{Text_Index}.{Text_Index:URL} AS `LURL`,
+	{Text_Index}.{Text_Index:Topic} AS `LTopic`
 FROM 
 	{Comments}
 LEFT JOIN 
-	({ListArticles})
+	({Text_Index})
 ON 
-	({Comments}.{Comments:IDArticleInSQL} = {ListArticles}.{ListArticles:AdressInSQL}) 
+	({Comments}.{Comments:IDArticleInSQL} = {Text_Index}.{Text_Index:AdressInSQL}) 
 ORDER BY 
 	{Comments}.'.($XVweb->DataBase->isset_field("Comments", $SortBy) ? "{Comments:".$SortBy."}" : "{Comments:ID}").' '.($Desc == "asc" ? "ASC" : "DESC") .' 
 LIMIT 
@@ -220,14 +220,14 @@ class XV_Admin_articles_ia{
 		$this->id = "ia-".$_GET['id']."-window";
 		$this->icon = $GLOBALS['URLS']['Site'].'admin/data/icons/edittext.png';
 		$this->URL = "Articles/IA/?id=".$_GET['id'];
-		$IAQuery = 	$XVweb->DataBase->prepare('SELECT * FROM {ListArticles} WHERE {ListArticles:ID} = :ID ; ');
+		$IAQuery = 	$XVweb->DataBase->prepare('SELECT * FROM {Text_Index} WHERE {Text_Index:ID} = :ID ; ');
 		$IAQuery->execute(array(":ID"=> $_GET['id']));
 		$IAQuery = $IAQuery->fetch(PDO::FETCH_ASSOC);
 		if(empty($IAQuery)){
 			$this->content = "<div class='error'> Nie znaleziono artykułu</div>";
 			return;
 		}
-		$TableStructure = 	$XVweb->DataBase->prepare('DESCRIBE {ListArticles}');
+		$TableStructure = 	$XVweb->DataBase->prepare('DESCRIBE {Text_Index}');
 		$TableStructure->execute();
 		
 		$TableStructure = $TableStructure->fetchAll(PDO::FETCH_ASSOC);	
@@ -260,7 +260,7 @@ class XV_Admin_articles_ia{
 
 		
 				foreach($TableStructure as $field){
-				$field["FieldDisplay"] = $XVweb->Config('db')->find('tables table#ListArticles field[name="'.$field["Field"].'"]')->attr("id")." (".$field["Field"].")";
+				$field["FieldDisplay"] = $XVweb->Config('db')->find('tables table#Text_Index field[name="'.$field["Field"].'"]')->attr("id")." (".$field["Field"].")";
 						switch ($field["Type"]["type"]) {
 							case "char":
 							case "varchar":

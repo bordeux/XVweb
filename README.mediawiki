@@ -1,7 +1,5 @@
 [[http://bordeux.net/XVweb/|&raquo; XVweb Project Home Page]]
-
 = XVweb =
-
 XVweb – system zarządzania treścią (ang. CMS), umożliwiający użytkownikowi łatwe publikowanie, zarządzanie i organizowanie zawartości strony. Cechami wyróżniającymi XVweb jest łatwa możliwść modyfikacji stron. System automatycznie tworzy kanały informacyjne RSS zarówno dla całej strony, jak i dla kategorii zamieszczanych na niej artykułów. Umożliwia także proste ustalanie aliasów sprawiając, że adresy stron są łatwiejsze do zapamiętania przez odwiedzających. Wyposażony jest również w system tzw. „skórek” z wykorzystaniem Smarty, ułatwiający zmianę wyglądu strony. XVweb jest oprogramowaniem o otwartym kodzie źródłowym, udostępnianym na zasadach licencji LGPL. Można go wzbogacać o nowe funkcje za pomocą tzw. modułów. Cały system jest złożony z modułów. Niektóre z nich są dostępne od razu po instalacji, a inne trzeba dodatkowo pobrać. System wykorzystuje język PHP, współpracuje z bazami danych MySQL i PostgreSQL oraz serwerami Apache, Ngnix oraz IIS.
 
 

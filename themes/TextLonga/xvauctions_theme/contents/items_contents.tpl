@@ -5,6 +5,7 @@
 		{$smarty.capture.ADVHeight}
 	</div>
 {/if}
+	{$xva_config.html_message}
 	<div class="xvauction-main" >
 	<div class="category_parents_tree" >
 		<a href="{$URLS.Auctions}/">{"xca_auctions"|xvLang}</a> 
@@ -84,9 +85,11 @@
 			<li class="ui-state-default ui-corner-top ui-state-hover ui-button-text-icon-primary {if $smarty.get.auction_type == 'dutch'}ui-state-active{/if}">
 				<a  href="?{addget value="auction_type=dutch"}" title="{"xca_only_dutch_auctions"|xvLang}" style="padding-left:20px;"> <span class="ui-icon ui-icon-script" style="margin-left:-16px;"></span>{"xca_only_dutch_auctions"|xvLang}</a>
 			</li>
+			{if "AdminPanel"|perm}
 			<li class="ui-state-default ui-corner-top ui-state-hover" style="float:right;">
 				<a href="{$URLS.Script}Administration/XVauctions/Categories/?cat={$auctions_category|escape:'url'}" style="padding:0px" target="_blank"><span class="ui-button  ui-icon ui-icon-wrench " title="Edytuj kategorie"></span></a>
 			</li>
+			{/if}
 
 		</ul>
 		<div>

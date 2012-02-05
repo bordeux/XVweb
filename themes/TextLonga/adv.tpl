@@ -9,11 +9,6 @@
 		//-->
 	</script>
 	<div id="RTop">
-	<div style="float:left; margin-top:-30px;">
-		{*<a href="http://sexkop.tk" title="Darmowe filmy Porno" target="_blank">
-			<img src="http://bordeux.net/File/4523/filmy.png" alt="Darmowe filmy porno - sexdemotywatory" />
-		</a>*}
-	</div>
 	<script type="text/javascript"
 	src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 	</script>

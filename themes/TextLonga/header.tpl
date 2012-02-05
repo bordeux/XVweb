@@ -16,7 +16,7 @@
 	<meta http-equiv="X-UA-Compatible" content="chrome=1">
 	<link rel="shortcut icon" href="{$Url}favicon.ico" type="image/x-icon" />
     <link rel="alternate" type="application/rss+xml" title="RSS" href="{$URLS.Script}RSS/{if $ReadArticleIndexOut.URL}?rss={$ReadArticleIndexOut.URL|escape:'url'}{/if}" />
-	{if $Advertisement}{include  file='adv.tpl'}{/if}
+	{if !"Adv"|xvPerm}{include  file='adv.tpl'}{/if}
 <style type="text/css" media="all">
 /*<![CDATA[*/
 @import url('{$UrlTheme}css/custom-theme/jquery-ui-1.8.7.custom.css{if $isie}?ie=true{/if}');

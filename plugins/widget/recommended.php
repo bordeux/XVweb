@@ -12,22 +12,22 @@ class RecommendedWidget
 	public function &Recommended(){
 	$QuerySQL = '
 SELECT
-	`IA`.{ListArticles:URL} AS `URL`,
-	`IA`.{ListArticles:Date} AS `Date`,
-	`IA`.{ListArticles:Tag} AS `Tags`,
+	`IA`.{Text_Index:URL} AS `URL`,
+	`IA`.{Text_Index:Date} AS `Date`,
+	`IA`.{Text_Index:Tag} AS `Tags`,
 	`AA`.{Articles:Topic} AS `Topic`, 
 	`AA`.{Articles:Contents}  AS `Contents`, 
-	`IA`.{ListArticles:Options}  AS `Options`, 
+	`IA`.{Text_Index:Options}  AS `Options`, 
 	`AA`.{Articles:Author} AS `Author`
 FROM 
-		{ListArticles} AS `IA` INNER JOIN
-        {Articles} AS `AA` ON (`IA`.{ListArticles:AdressInSQL} = `AA`.{Articles:AdressInSQL} )
+		{Text_Index} AS `IA` INNER JOIN
+        {Articles} AS `AA` ON (`IA`.{Text_Index:AdressInSQL} = `AA`.{Articles:AdressInSQL} )
 		
 WHERE
-        `IA`.{ListArticles:Accepted} = "yes" AND
-        `IA`.{ListArticles:Category} = :CategorySelect  AND
-        `AA`.{Articles:Version} = `IA`.{ListArticles:ActualVersion}
-ORDER BY `IA`.{ListArticles:Date}
+        `IA`.{Text_Index:Accepted} = "yes" AND
+        `IA`.{Text_Index:Category} = :CategorySelect  AND
+        `AA`.{Articles:Version} = `IA`.{Text_Index:ActualVersion}
+ORDER BY `IA`.{Text_Index:Date}
 DESC
 LIMIT 15';
 

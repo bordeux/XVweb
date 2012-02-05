@@ -81,11 +81,11 @@ class XVArticle
 		':NewVersionArticleExecute' => ($NextVersion)
 		)
 		);
-		$this->Date['XVweb']->DataBase->pquery('UPDATE {ListArticles}
+		$this->Date['XVweb']->DataBase->pquery('UPDATE {Text_Index}
 	SET 
-	{ListArticles:ActualVersion}  = '.($NextVersion).'
+	{Text_Index:ActualVersion}  = '.($NextVersion).'
 	WHERE 
-	{ListArticles:AdressInSQL}  = '.$this->Date['XVweb']->DataBase->quote($this->Date['XVweb']->ReadArticleOut['AdressInSQL']).';');
+	{Text_Index:AdressInSQL}  = '.$this->Date['XVweb']->DataBase->quote($this->Date['XVweb']->ReadArticleOut['AdressInSQL']).';');
 		
 		$this->Date['XVweb']->Cache->clear("Article", ($this->Date['XVweb']->ReadArticleIndexOut['URL']));
 		$this->Date['XVweb']->Cache->clear("Article-Include", ($this->Date['XVweb']->ReadArticleIndexOut['URL'] ));
@@ -116,16 +116,16 @@ class XVArticle
 		);
 		
 		$this->Date['XVweb']->DataBase->prepare('
-UPDATE {ListArticles} SET {ListArticles:URL} = CONCAT(:PathTo, SUBSTRING({ListArticles:URL} , (length(:PathFrom)+1))) WHERE {ListArticles:URL} LIKE CONCAT(:PathFrom, \'%\');
+UPDATE {Text_Index} SET {Text_Index:URL} = CONCAT(:PathTo, SUBSTRING({Text_Index:URL} , (length(:PathFrom)+1))) WHERE {Text_Index:URL} LIKE CONCAT(:PathFrom, \'%\');
 ')->execute($DataSet);
 
-		$this->Date['XVweb']->DataBase->prepare('UPDATE {ListArticles} 
+		$this->Date['XVweb']->DataBase->prepare('UPDATE {Text_Index} 
 			SET
-			{ListArticles:Category} = CONCAT(:PathTo, SUBSTRING({ListArticles:Category} , LENGTH(:PathFrom)+1)) WHERE {ListArticles:Category} LIKE CONCAT(:PathFrom, \'%\');')->execute($DataSet);
+			{Text_Index:Category} = CONCAT(:PathTo, SUBSTRING({Text_Index:Category} , LENGTH(:PathFrom)+1)) WHERE {Text_Index:Category} LIKE CONCAT(:PathFrom, \'%\');')->execute($DataSet);
 
-		$this->Date['XVweb']->DataBase->prepare('UPDATE {ListArticles} 
+		$this->Date['XVweb']->DataBase->prepare('UPDATE {Text_Index} 
 			SET
-			{ListArticles:Category} = :Category WHERE {ListArticles:URL} = :URLarticle LIMIT 1;')->execute(
+			{Text_Index:Category} = :Category WHERE {Text_Index:URL} = :URLarticle LIMIT 1;')->execute(
 		array(
 		":Category" => $Category,
 		":URLarticle"=>$to
@@ -139,15 +139,15 @@ UPDATE {ListArticles} SET {ListArticles:URL} = CONCAT(:PathTo, SUBSTRING({ListAr
 		$ToChange = array();
 		$ToValues = array();
 		foreach($settings as $Key=>$Value){
-			if($this->Date['XVweb']->DataBase->isset_field("ListArticles", $Key)){
-				$ToChange[] = "{ListArticles:".$Key."} = :".$Key.'Exec';
+			if($this->Date['XVweb']->DataBase->isset_field("Text_Index", $Key)){
+				$ToChange[] = "{Text_Index:".$Key."} = :".$Key.'Exec';
 				$ToValues[':'.$Key.'Exec'] = $Value;
 			}
 		}
 		if(empty($ToChange))
 		return true;
 		$ToValues[':IDExecute'] = $ID ;
-		$SettingsSQL = $this->Date['XVweb']->DataBase->prepare('UPDATE {ListArticles} SET '.implode(", ", $ToChange).' WHERE {ListArticles:ID} = :IDExecute');
+		$SettingsSQL = $this->Date['XVweb']->DataBase->prepare('UPDATE {Text_Index} SET '.implode(", ", $ToChange).' WHERE {Text_Index:ID} = :IDExecute');
 		$SettingsReturn = $SettingsSQL->execute($ToValues);
 		$IDtoURLTmp = $this->Date['XVweb']->IDtoURL($ID);
 		$this->ClearArticleCache($ID, $IDtoURLTmp);
@@ -188,7 +188,7 @@ UPDATE {ListArticles} SET {ListArticles:URL} = CONCAT(:PathTo, SUBSTRING({ListAr
 			return false;
 		}
 
-		$CheckIndexArticleSQL = $this->Date['XVweb']->DataBase->prepare('SELECT * FROM {ListArticles} WHERE  {ListArticles:URL} = :AddressInSQLExecute LIMIT 1');
+		$CheckIndexArticleSQL = $this->Date['XVweb']->DataBase->prepare('SELECT * FROM {Text_Index} WHERE  {Text_Index:URL} = :AddressInSQLExecute LIMIT 1');
 		$CheckIndexArticleSQL->execute(
 		array(
 		':AddressInSQLExecute' => ($this->Date['XVweb']->SaveArticle['URL'])
@@ -209,7 +209,7 @@ UPDATE {ListArticles} SET {ListArticles:URL} = CONCAT(:PathTo, SUBSTRING({ListAr
 		
 		$this->Date['XVweb']->SaveArticle['Category'] = str_replace("_", " ", $this->Date['XVweb']->SaveArticle['Category']);
 		if($this->Date['XVweb']->SaveArticle['Category'] !='/'){
-			$CheckMatrixArticle = $this->Date['XVweb']->DataBase->prepare('SELECT * FROM {ListArticles} WHERE {ListArticles:URL} = :MatrixExecute LIMIT 1');
+			$CheckMatrixArticle = $this->Date['XVweb']->DataBase->prepare('SELECT * FROM {Text_Index} WHERE {Text_Index:URL} = :MatrixExecute LIMIT 1');
 			$CheckMatrixArticle->execute(
 			array(
 			':MatrixExecute' => ($this->Date['XVweb']->SaveArticle['Category'])
@@ -229,7 +229,7 @@ UPDATE {ListArticles} SET {ListArticles:URL} = CONCAT(:PathTo, SUBSTRING({ListAr
 
 
 		$UNIQID = uniqid();
-		$SaveArticleSQL = $this->Date['XVweb']->DataBase->prepare('INSERT INTO {ListArticles} ({ListArticles:Date} , {ListArticles:URL}, {ListArticles:Topic}, {ListArticles:Tag} , {ListArticles:Category} , {ListArticles:AdressInSQL} , {ListArticles:Accepted} ) VALUES (NOW(), :AddressURLExecute, :TopicIndexArticleExecute, :TagIndexArticleExecute, :CategoryIndexArticleExecute, :AddressInSQLExecute,   :AcceptArticles); 
+		$SaveArticleSQL = $this->Date['XVweb']->DataBase->prepare('INSERT INTO {Text_Index} ({Text_Index:Date} , {Text_Index:URL}, {Text_Index:Topic}, {Text_Index:Tag} , {Text_Index:Category} , {Text_Index:AdressInSQL} , {Text_Index:Accepted} ) VALUES (NOW(), :AddressURLExecute, :TopicIndexArticleExecute, :TagIndexArticleExecute, :CategoryIndexArticleExecute, :AddressInSQLExecute,   :AcceptArticles); 
 INSERT INTO {Articles} ({Articles:AdressInSQL} , {Articles:Date}, {Articles:Topic}, {Articles:Contents}, {Articles:Author} , {Articles:DescriptionOfChange} , {Articles:Version}) VALUES (:AddressInSQLExecute, NOW(), :TopicArticleExecute, :ContentsArticleExecute, :AuthorArticleExecute, null, 1 )');
 		$SaveArticleSQL->execute(
 		array(
@@ -266,7 +266,7 @@ INSERT INTO {Articles} ({Articles:AdressInSQL} , {Articles:Date}, {Articles:Topi
 			return false;
 		}
 		
-		$AddAlias = $this->Date['XVweb']->DataBase->prepare('INSERT INTO {ListArticles} ({ListArticles:Date}, {ListArticles:URL} , {ListArticles:Topic}, {ListArticles:Tag} , {ListArticles:Category} , {ListArticles:AdressInSQL} ,  {ListArticles:Alias}, {ListArticles:Accepted} ) VALUES ( NOW() , :AddressURLExecute, :TopicIndexArticleExecute, :TagIndexArticleExecute, :CategoryIndexArticleExecute, :AddressInSQLExecute , 1, 1); ');
+		$AddAlias = $this->Date['XVweb']->DataBase->prepare('INSERT INTO {Text_Index} ({Text_Index:Date}, {Text_Index:URL} , {Text_Index:Topic}, {Text_Index:Tag} , {Text_Index:Category} , {Text_Index:AdressInSQL} ,  {Text_Index:Alias}, {Text_Index:Accepted} ) VALUES ( NOW() , :AddressURLExecute, :TopicIndexArticleExecute, :TagIndexArticleExecute, :CategoryIndexArticleExecute, :AddressInSQLExecute , 1, 1); ');
 		$AddAlias->execute(
 		array(
 		":AddressURLExecute"=>$url,
@@ -342,7 +342,7 @@ INSERT INTO {Articles} ({Articles:AdressInSQL} , {Articles:Date}, {Articles:Topi
 	/************************************************************************************************/
 	public function BlockArticle($ID,$value="yes", $Subarticles = false){
 		if($Subarticles){
-			$BlockArticle = $this->Date['XVweb']->DataBase->prepare('UPDATE {ListArticles} SET {ListArticles:Blocked} = :BlockExecute WHERE {ListArticles:URL} LIKE :URLArticle');
+			$BlockArticle = $this->Date['XVweb']->DataBase->prepare('UPDATE {Text_Index} SET {Text_Index:Blocked} = :BlockExecute WHERE {Text_Index:URL} LIKE :URLArticle');
 			$BlockArticleReturn = $BlockArticle->execute(array(
 			':BlockExecute' => $value,
 			':URLArticle' => $this->Date['XVweb']->IDtoURL($ID).'%'
@@ -350,7 +350,7 @@ INSERT INTO {Articles} ({Articles:AdressInSQL} , {Articles:Date}, {Articles:Topi
 			$this->Date['XVweb']->Cache->clear("Article");
 			$this->Date['XVweb']->Cache->clear("ArticleBlocked");
 		}else{
-			$BlockArticle = $this->Date['XVweb']->DataBase->prepare('UPDATE {ListArticles} SET {ListArticles:Blocked} = :BlockExecute WHERE {ListArticles:ID} = :IDExecute');
+			$BlockArticle = $this->Date['XVweb']->DataBase->prepare('UPDATE {Text_Index} SET {Text_Index:Blocked} = :BlockExecute WHERE {Text_Index:ID} = :IDExecute');
 			$BlockArticleReturn = $BlockArticle->execute(array(
 			':BlockExecute' => $value,
 			':IDExecute' => $ID 
@@ -362,7 +362,7 @@ INSERT INTO {Articles} ({Articles:AdressInSQL} , {Articles:Date}, {Articles:Topi
 	}
 	public function AcceptArticle($ID,$value="yes", $Subarticles = false){
 		if($Subarticles){
-			$AcceptArticle = $this->Date['XVweb']->DataBase->prepare('UPDATE {ListArticles} SET {ListArticles:Accepted} = :AcceptedExecute WHERE {ListArticles:URL} LIKE :URLArticle');
+			$AcceptArticle = $this->Date['XVweb']->DataBase->prepare('UPDATE {Text_Index} SET {Text_Index:Accepted} = :AcceptedExecute WHERE {Text_Index:URL} LIKE :URLArticle');
 			$AcceptArticleReturn = $AcceptArticle->execute(array(
 			':AcceptedExecute' => $value,
 			':URLArticle' => $this->Date['XVweb']->IDtoURL($ID).'%'
@@ -370,7 +370,7 @@ INSERT INTO {Articles} ({Articles:AdressInSQL} , {Articles:Date}, {Articles:Topi
 			$this->Date['XVweb']->Cache->clear("Article");
 			$this->Date['XVweb']->Cache->clear("ArticleAccepted");
 		}else{
-			$AcceptArticle = $this->Date['XVweb']->DataBase->prepare('UPDATE {ListArticles} SET {ListArticles:Accepted} = :AcceptedExecute WHERE {ListArticles:ID} = :IDExecute');
+			$AcceptArticle = $this->Date['XVweb']->DataBase->prepare('UPDATE {Text_Index} SET {Text_Index:Accepted} = :AcceptedExecute WHERE {Text_Index:ID} = :IDExecute');
 			$AcceptArticleReturn = $AcceptArticle->execute(array(
 			':AcceptedExecute' => $value,
 			':IDExecute' => $ID 
@@ -407,7 +407,7 @@ INSERT INTO {Articles} ({Articles:AdressInSQL} , {Articles:Date}, {Articles:Topi
 
 		if($this->Date['XVweb']->ReadArticleIndexOut['Alias'] == "yes"){
 			$DeleteArticleSQL = $this->Date['XVweb']->DataBase->prepare('
-DELETE FROM {ListArticles} WHERE {ListArticles:ID} = :IDExec;');
+DELETE FROM {Text_Index} WHERE {Text_Index:ID} = :IDExec;');
 			$DeleteArticleSQL->execute(
 			array(
 			':IDExec' => $this->Date['XVweb']->ReadArticleIndexOut['ID']
@@ -416,7 +416,7 @@ DELETE FROM {ListArticles} WHERE {ListArticles:ID} = :IDExec;');
 			
 		}else{
 			$DeleteArticleSQL = $this->Date['XVweb']->DataBase->prepare('
-DELETE FROM {ListArticles} WHERE {ListArticles:AdressInSQL} = :AdressInSQLExecute ;');
+DELETE FROM {Text_Index} WHERE {Text_Index:AdressInSQL} = :AdressInSQLExecute ;');
 			$DeleteArticleSQL->execute(
 			array(
 			':AdressInSQLExecute' => $this->Date['XVweb']->ReadArticleIndexOut['LocationInSQL']

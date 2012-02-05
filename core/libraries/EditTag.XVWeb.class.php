@@ -21,7 +21,7 @@ class EditArticle
 
 			$Tags =  $this->Date['XVweb']->LightText($Tags);
 
-			$EditTags = $this->Date['XVweb']->DataBase->prepare('UPDATE {ListArticles} SET {ListArticles:Tag} = :TagsExecute WHERE {ListArticles:ID} = :IDExecute');
+			$EditTags = $this->Date['XVweb']->DataBase->prepare('UPDATE {Text_Index} SET {Text_Index:Tag} = :TagsExecute WHERE {Text_Index:ID} = :IDExecute');
 			$EditTagsReturn = $EditTags->execute(
 			array(
 			':TagsExecute' => $Tags,

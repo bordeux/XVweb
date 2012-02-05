@@ -145,7 +145,7 @@
 		</rank>	
 		<rank>
 			<name>Adv</name>
-			<description>Display adv for user</description>
+			<description>Hide adv for user</description>
 		</rank>	
 		<rank>
 			<name>EditOwnArticle</name>

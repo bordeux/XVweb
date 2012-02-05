@@ -74,7 +74,7 @@ DEFINE('Cache_dir', getcwd().DIRECTORY_SEPARATOR.'tmp'.DIRECTORY_SEPARATOR);
 DEFINE('ROOT_DIR', getcwd().DIRECTORY_SEPARATOR);
 
 
-$RootDir = getcwd().DIRECTORY_SEPARATOR;
+$RootDir = dirname(__FILE__).DIRECTORY_SEPARATOR;
 $XVwebDir = $RootDir.'core'.DIRECTORY_SEPARATOR;
 
 if(!@include_once(getcwd().DIRECTORY_SEPARATOR.'pages'.DIRECTORY_SEPARATOR.'config.php')){
@@ -203,14 +203,14 @@ if(!$XVwebEngine->Session->Session('BanChecked')){
 
 /**************************Lang*******************/
 function LoadLang($lang){
-	global $Language, $XVwebEngine;
+	global $Language, $XVwebEngine, $RootDir;
 	
 	$UserLang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
-	if (file_exists(getcwd().DIRECTORY_SEPARATOR.'languages'.DIRECTORY_SEPARATOR.$UserLang.DIRECTORY_SEPARATOR.$lang.'.'.$UserLang.'.php')) {
+	if (!file_exists(getcwd().DIRECTORY_SEPARATOR.'languages'.DIRECTORY_SEPARATOR.$UserLang.DIRECTORY_SEPARATOR.$lang.'.'.$UserLang.'.php')) {
 		@include_once(getcwd().'/languages'.DIRECTORY_SEPARATOR.$UserLang.DIRECTORY_SEPARATOR.$lang.'.'.$UserLang.'.php');
 	} else {
-		$DefaultLang = $XVwebEngine->Config("config")->find("config lang")->text();
-		if(!@include_once(dirname(getcwd()).DIRECTORY_SEPARATOR.'languages'.DIRECTORY_SEPARATOR.$DefaultLang.DIRECTORY_SEPARATOR.$lang.'.'.$DefaultLang.'.php'))
+		$DefaultLang = $XVwebEngine->Config("config")->find("lang")->text();
+		if(!@include_once($RootDir.'languages'.DIRECTORY_SEPARATOR.$DefaultLang.DIRECTORY_SEPARATOR.$lang.'.'.$DefaultLang.'.php'))
 		die("XVweb Fatal Error. Don't isset language ".$lang.".".$DefaultLang);
 	}
 	
@@ -261,9 +261,7 @@ $MetaTags = array(
 );
 
 
-if($XVwebEngine->Config("config")->find("config adv")->length && $XVwebEngine->Config("config")->find("config adv")->text() == "false")
-$Smarty->assign('Advertisement', false); else
-$Smarty->assign('Advertisement', ($XVwebEngine->permissions('Adv') ? false : true));
+
 if($XVwebEngine->Plugins()->Menager()->event("onPreAssing")) eval($XVwebEngine->Plugins()->Menager()->event("onPreAssing"));
 
 $Smarty->assign('MetaTags', $MetaTags); unset($MetaTags);

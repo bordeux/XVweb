@@ -12,19 +12,19 @@ class user_info
 					`a`.{Articles:Date} AS `text_date`,
 					`a`.{Articles:Topic} AS `text_title`,
 					`a`.{Articles:Version} AS `text_ver`,
-					`b`.{ListArticles:URL} AS `index_url`,
-					`b`.{ListArticles:Topic}AS `index_title`,
-					`b`.{ListArticles:Category} AS `index_category`,
-					`b`.{ListArticles:AdressInSQL} AS `index_ids`,
-					`b`.{ListArticles:Views} AS `index_views`
+					`b`.{Text_Index:URL} AS `index_url`,
+					`b`.{Text_Index:Topic}AS `index_title`,
+					`b`.{Text_Index:Category} AS `index_category`,
+					`b`.{Text_Index:AdressInSQL} AS `index_ids`,
+					`b`.{Text_Index:Views} AS `index_views`
 				 FROM 
 					{Articles} AS `a`
-				 INNER JOIN  {ListArticles} AS `b`
-				ON `a`.{Articles:AdressInSQL} =  `b`.{ListArticles:AdressInSQL}
+				 INNER JOIN  {Text_Index} AS `b`
+				ON `a`.{Articles:AdressInSQL} =  `b`.{Text_Index:AdressInSQL}
 				WHERE 
 					`a`.{Articles:Author} = :author
 				AND
-					`b`.{ListArticles:Alias} =  :no
+					`b`.{Text_Index:Alias} =  :no
 				LIMIT '.($page*$limit).' , '.$limit.'
 				');
 		$list_modifications->execute(array(

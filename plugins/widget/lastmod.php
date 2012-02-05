@@ -12,10 +12,10 @@ class LastModWidget
 	public function &LastArticles(){
 			$RecordsLimit = 50;
 	$this->Date['LastArticles'] =  $AddFileSQL = $this->Date['XVweb']->DataBase->pquery('SELECT 
-		{ListArticles:URL} AS `URL`,
-		{ListArticles:Date} AS `Date`,
-		{ListArticles:Topic} AS `Topic`
-	FROM {ListArticles} WHERE {ListArticles:Accepted} = "yes" ORDER BY {ListArticles:Date} DESC LIMIT '.$RecordsLimit.';')->fetchAll(PDO::FETCH_ASSOC);
+		{Text_Index:URL} AS `URL`,
+		{Text_Index:Date} AS `Date`,
+		{Text_Index:Topic} AS `Topic`
+	FROM {Text_Index} WHERE {Text_Index:Accepted} = "yes" ORDER BY {Text_Index:Date} DESC LIMIT '.$RecordsLimit.';')->fetchAll(PDO::FETCH_ASSOC);
 	return $this;
 	}
 	public function gethtml(){

@@ -20,24 +20,24 @@ class NewsPageScript
 		//**********************************************************	
 		$QuerySQL = '
 SELECT SQL_CALC_FOUND_ROWS
-	(SELECT count(*) FROM {Comments} WHERE {Comments:IDArticleInSQL} = `IA`.{ListArticles:AdressInSQL}) AS `CommentsCount`,
-	((SELECT CONCAT(COALESCE( SUM({Votes:Vote}), 0),"|", COUNT(*)) FROM {Votes} WHERE {Votes:Type} = :TypeVote AND  {Votes:SID} =  IA.{ListArticles:ID} )) AS `Votes`,
-	`IA`.{ListArticles:URL} AS `URL`,
-	`IA`.{ListArticles:ID} AS `ID`,
-	`IA`.{ListArticles:Date} AS `Date`,
-	`IA`.{ListArticles:Tag} AS `Tags`,
-	`IA`.{ListArticles:Options} AS `Options`,
+	(SELECT count(*) FROM {Comments} WHERE {Comments:IDArticleInSQL} = `IA`.{Text_Index:AdressInSQL}) AS `CommentsCount`,
+	((SELECT CONCAT(COALESCE( SUM({Votes:Vote}), 0),"|", COUNT(*)) FROM {Votes} WHERE {Votes:Type} = :TypeVote AND  {Votes:SID} =  IA.{Text_Index:ID} )) AS `Votes`,
+	`IA`.{Text_Index:URL} AS `URL`,
+	`IA`.{Text_Index:ID} AS `ID`,
+	`IA`.{Text_Index:Date} AS `Date`,
+	`IA`.{Text_Index:Tag} AS `Tags`,
+	`IA`.{Text_Index:Options} AS `Options`,
 	`AA`.{Articles:Topic} AS `Topic`, 
 	'.(isset($this->Date['Options']['NoContent']) ?'""' : ($this->Date['Options']['CharsLimit'] ? 'SUBSTRING(`AA`.{Articles:Contents} ,1,'.$this->Date['Options']['CharsLimit'].')' : '`AA`.{Articles:Contents}')).' AS `Contents`, 
 	`AA`.{Articles:Author} AS `Author`
 FROM 
-		{ListArticles} AS `IA` INNER JOIN
-		{Articles} AS `AA` ON (`IA`.{ListArticles:AdressInSQL}  = `AA`.{Articles:AdressInSQL})
+		{Text_Index} AS `IA` INNER JOIN
+		{Articles} AS `AA` ON (`IA`.{Text_Index:AdressInSQL}  = `AA`.{Articles:AdressInSQL})
 WHERE
-		`IA`.{ListArticles:Accepted} = "yes" AND
-	'.(!isset($this->Date['Options']['NoneCategory']) ? (' `IA`.{ListArticles:Category} = :CategorySelect  AND') : '').'
-		`AA`.{Articles:Version} = `IA`.{ListArticles:ActualVersion}
-ORDER BY `IA`.{ListArticles:Date} DESC
+		`IA`.{Text_Index:Accepted} = "yes" AND
+	'.(!isset($this->Date['Options']['NoneCategory']) ? (' `IA`.{Text_Index:Category} = :CategorySelect  AND') : '').'
+		`AA`.{Articles:Version} = `IA`.{Text_Index:ActualVersion}
+ORDER BY `IA`.{Text_Index:Date} DESC
 LIMIT '.($this->Date['Options']["ActualPage"]*$this->Date['Options']["EveryPage"]).', '.($this->Date['Options']["EveryPage"]);
 		//**********************************************************
 

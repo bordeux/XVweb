@@ -10,10 +10,10 @@ class SiteMapXML
 	}
 	public function &Prepare(){
 	$this->Date['SiteLinks'] =  $AddFileSQL = $this->Date['XVweb']->DataBase->pquery('SELECT 
-		{ListArticles:URL} AS `URL`,
-		{ListArticles:Date} AS `Date`,
-		{ListArticles:Topic} AS `Topic`
-	'.$Select.' FROM {ListArticles} WHERE {ListArticles:Accepted} = "yes" ORDER BY {ListArticles:Date} DESC ;')->fetchAll(PDO::FETCH_ASSOC);
+		{Text_Index:URL} AS `URL`,
+		{Text_Index:Date} AS `Date`,
+		{Text_Index:Topic} AS `Topic`
+	'.$Select.' FROM {Text_Index} WHERE {Text_Index:Accepted} = "yes" ORDER BY {Text_Index:Date} DESC ;')->fetchAll(PDO::FETCH_ASSOC);
 	return $this;
 	}
 	

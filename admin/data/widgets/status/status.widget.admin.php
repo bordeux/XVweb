@@ -20,6 +20,14 @@
 		<div class="xv-wid-status">
 		<table>
 				<tr>
+					<td>Server Name</td>
+					<td><?php echo $_SERVER['SERVER_NAME']; ?></td>
+				</tr>			
+				<tr>
+					<td>Server IP</td>
+					<td><?php echo $_SERVER['SERVER_ADDR']; ?></td>
+				</tr>		
+				<tr>
 					<td>MySQL Uptime</td>
 					<td><span class="xv-clock" data-timestamp="<?php echo time()- $UptimeSQL; ?>"><?php echo time()- $UptimeSQL; ?></span></td>
 				</tr>

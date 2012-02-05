@@ -18,7 +18,7 @@ class SearchClass
 			return false;
 			$match = '`AA`.{Articles:Topic} ,`AA`.{Articles:Contents} ';
 
-			$OneVersion  = 'AND `AA`.{Articles:Version} = `IA`.{ListArticles:ActualVersion}';
+			$OneVersion  = 'AND `AA`.{Articles:Version} = `IA`.{Text_Index:ActualVersion}';
 			if(!$this->Date['XVweb']->SearchInVersion)
 			$OneVersion  = '';
 			$LLimit = ($ActualPage*$EveryPage);
@@ -29,18 +29,18 @@ class SearchClass
 	`AA`.{Articles:AdressInSQL} as `AdressInSQL`,
 	`AA`.{Articles:Topic} as `Topic`,	
 	MATCH('.$match.') AGAINST( :SearchExecute ) AS `Relevance`,
-	IA.{ListArticles:URL} as `URL`
+	IA.{Text_Index:URL} as `URL`
 FROM 
 	{Articles} AS `AA`
 INNER JOIN 
-	{ListArticles} AS `IA` ON (`AA`.{Articles:AdressInSQL} =  `IA`.{ListArticles:AdressInSQL})
+	{Text_Index} AS `IA` ON (`AA`.{Articles:AdressInSQL} =  `IA`.{Text_Index:AdressInSQL})
 WHERE
 MATCH ('.$match.') AGAINST (:SearchExecute)
 AND 
-	IA.{ListArticles:Accepted} = "yes"
-	'.(is_numeric($this->get("SearchExcept")) ?  'AND IA.{ListArticles:ID} <> "'.$this->get("SearchExcept").'" '  :  "").'
+	IA.{Text_Index:Accepted} = "yes"
+	'.(is_numeric($this->get("SearchExcept")) ?  'AND IA.{Text_Index:ID} <> "'.$this->get("SearchExcept").'" '  :  "").'
 '.$OneVersion.'
-'.($this->get("Group") == true ?  'GROUP BY `IA`.{ListArticles:AdressInSQL} ' : '' ).'
+'.($this->get("Group") == true ?  'GROUP BY `IA`.{Text_Index:AdressInSQL} ' : '' ).'
 ORDER BY `Relevance` DESC
 LIMIT '.$LLimit.' , '.$EveryPage.''
 			);
