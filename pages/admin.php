@@ -81,8 +81,14 @@ $Command = $XVwebEngine->GetFromURL($PathInfo, 2);
 $Prefix = $XVwebEngine->Plugins()->Menager()->AdminPrefix($XVwebEngine->GetFromURL($PathInfo, 2));
 if(strtolower($Command) == "get"){
 	$admin_page = basename(strtolower($XVwebEngine->GetFromURL($PathInfo, 3)));
-	$admin_page_file =  $admin_page .'.php';
-	$admin_page_file =  ADMIN_ROOT_DIR.'pages'.DIRECTORY_SEPARATOR.$admin_page.DIRECTORY_SEPARATOR.$admin_page_file;
+	$admin_page_file_name =  $admin_page .'.php';
+	$admin_page_file =  ADMIN_ROOT_DIR.'pages'.DIRECTORY_SEPARATOR.$admin_page.DIRECTORY_SEPARATOR.$admin_page_file_name;
+
+	foreach (glob('{admin/pages/*/'.$admin_page_file_name.',plugins/*/admin/'.$admin_page_file_name.'}', GLOB_BRACE) as $filename) {
+		$admin_page_file = $filename;
+	}
+	
+	
 
 if (file_exists($admin_page_file)) 
 	require($admin_page_file);
@@ -101,7 +107,7 @@ if (file_exists($admin_page_file))
 }else{
 include_once(ADMIN_ROOT_DIR.'data/menu/menu.php');
 
-foreach (glob(ADMIN_ROOT_DIR.'data/menu/*.menu.php') as $filename) 
+foreach (glob('{admin/data/menu/*.menu.php,plugins/*/admin/menu/*.menu.php}', GLOB_BRACE) as $filename) 
 	include_once($filename);
 	
 $Smarty->assignByRef('admin_menu',   $admin_menu);	

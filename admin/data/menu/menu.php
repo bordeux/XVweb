@@ -23,13 +23,7 @@ $admin_menu['articles'] = array(
 				array ("name"=> "Comments", "href"=>'Administration/Articles/Comments/'),
 			)
 	);
-$admin_menu['users'] = array(
-		"name" => "Users",
-		"submenu" =>
-			array(
-				array ("name"=> "Groups", "href"=>'Administration/Users/Groups/'),
-			)
-	);
+
 $admin_menu['menu'] = array(
 		"name" => "Menu",
 		"submenu" =>
@@ -38,14 +32,7 @@ $admin_menu['menu'] = array(
 				array ("name"=> "Text editor", "href"=>'Administration/Menu/Text/'),
 			)
 	);
-$admin_menu['media'] = array(
-		"name" => "Media",
-		"submenu" =>
-			array(
-				array ("name"=> "Files", "href"=>'Administration/File/'),
-				array ("name"=> "FTP", "href"=>'Administration/Files/'),
-			)
-	);
+
 $admin_menu['options'] = array(
 		"name" => "Options",
 		"submenu" =>

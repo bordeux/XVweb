@@ -151,3 +151,72 @@ background: url(../img/print_icon.png) 0px 0px no-repeat;
 width: 16px;
 height:16px;
 }
+
+.xv-text-content h1{
+	font-size: 2em;
+	color: #444;
+	font-weight: bold;
+}
+.xv-text-content h2{
+	font-size: 1.50em;
+	color: #444;
+	font-weight: bold;
+}
+.xv-text-content h3{
+	font-weight: bold;
+	font-size: 1.17em;
+	color: #444;
+}
+.xv-text-content h4{
+	font-weight: bold;
+	color: #444;
+}
+
+
+.xv-text-content table {
+border:1px solid #939797;
+border-spacing:2px;
+margin:0 0 10px;
+border-collapse: separate;
+}
+
+.xv-text-content table td, .xv-text-content table th {
+vertical-align:middle;
+}
+
+.xv-text-content caption {
+background-color:#666;
+border:1px solid #939797;
+font-weight:700;
+text-align:left;
+color:#fff;
+margin-top:10px;
+padding:6px 0 6px 5px;
+}
+
+.xv-text-content table th {
+background-color:#e1e1e1;
+border-bottom:1px solid #bdbdbd;
+text-align:left;
+font-size:.9em;
+color:#5b5757;
+padding:4px;
+}
+
+.xv-text-content table th a {
+color:#5b5757;
+display:block;
+text-decoration:none;
+}
+
+.xv-text-content table td {
+background-color:#fafafa;
+border-bottom:1px solid #dadfe0;
+padding:5px;
+}
+
+.xv-text-content tfoot td {
+background-color:#f1f1f1;
+border-top:2px solid #ddd;
+text-align:right;
+}

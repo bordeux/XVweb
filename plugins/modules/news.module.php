@@ -83,7 +83,7 @@ LIMIT '.($this->Date['Options']["ActualPage"]*$this->Date['Options']["EveryPage"
 	}
 }
 if(!isset($NPSConfig['NoExecute'])){
-	xv_appendCSS($GLOBALS['URLS']['Theme'].'css/news.css', 24);
+	xv_append_css($GLOBALS['URLS']['Theme'].'css/news.css', 24);
 	$GLOBALS['JSBinder'][26] = 'news';
 	$GLOBALS['XVwebEngine']->InitClass('NewsPageScript')->LastNews($NPSConfig)->gethtml();
 }

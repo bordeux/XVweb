@@ -40,12 +40,19 @@ function xv_appendFooter($text, $num = null){
 		$myVar[] = $text; else $myVar[$num] = $text;
 		$Smarty->assign('footer', $myVar); 
 }
-function xv_appendCSS($file, $num = null){
+function xv_append_css($file, $num = null){
 	global $Smarty;
 		$myVar = (array) $Smarty->getTemplateVars('CCSLoad');
 		if(is_null($num))
 		$myVar[] = $file; else $myVar[$num] = $file;
 		$Smarty->assign('CCSLoad', $myVar); 
+}
+function xv_append_header($string, $num = null){
+	global $Smarty;
+		$myVar = (array) $Smarty->getTemplateVars('xv_append_header');
+		if(is_null($num))
+		$myVar[] = $string; else $myVar[$num] = $string;
+		$Smarty->assign('xv_append_header', $myVar); 
 }
 function xvLang($var, $var2 =null){
 return ifsetor($GLOBALS['Language'][$var],(is_null($var) ? $var : $var2));
@@ -72,6 +79,7 @@ class XVTemplate {
 DEFINE('SMARTY_DIR', getcwd().DIRECTORY_SEPARATOR.'core'.DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'smarty3'.DIRECTORY_SEPARATOR);
 DEFINE('Cache_dir', getcwd().DIRECTORY_SEPARATOR.'tmp'.DIRECTORY_SEPARATOR);
 DEFINE('ROOT_DIR', getcwd().DIRECTORY_SEPARATOR);
+DEFINE('APPS_DIR', getcwd().DIRECTORY_SEPARATOR.'plugins'.DIRECTORY_SEPARATOR);
 
 
 $RootDir = dirname(__FILE__).DIRECTORY_SEPARATOR;

@@ -93,27 +93,27 @@ class XV_Admin_plugins {
 		
 		
 	public function GetPluginStatus(){
-		$AllPlugins = array();	
+		$all_plugins = array();	
 		$EnabledPlugins = array();	
 		$DisabledPlugins = array();	
-			foreach (glob(ROOT_DIR."plugins/*.xml") as $filename) {
+			foreach (glob(ROOT_DIR."plugins/*/*.xml") as $filename) {
 				if(basename($filename) != "system.xml")
-					$AllPlugins[] = basename($filename);
+					$all_plugins[] = substr(basename($filename), 0, -4).'/'basename($filename);
 			}	
 		foreach($this->Data['XVweb']->Config("plugins")->find("plugin") as $valPlugin){
-		$PlgName = pq($valPlugin)->attr("file");
+		$plugin_name = pq($valPlugin)->attr("file");
 		
-		if($PlgName != "system.xml")
-			if(in_array($PlgName, $AllPlugins))
+		if($plugin_name != "system.xml")
+			if(in_array($plugin_name, $all_plugins))
 				$EnabledPlugins[] = pq($valPlugin)->attr("file");
 		}
 		
-		foreach($AllPlugins as $EnPlg){
+		foreach($all_plugins as $EnPlg){
 			if(!in_array($EnPlg, $EnabledPlugins))
 				$DisabledPlugins[] = $EnPlg;
 		
 		}
-		return array("All"=>$AllPlugins, "Enabled"=>$EnabledPlugins, "Disabled" => $DisabledPlugins);
+		return array("All"=>$all_plugins, "Enabled"=>$EnabledPlugins, "Disabled" => $DisabledPlugins);
 	}
 	public function GetInfoPlugin($plug){
 		$PluginsInfo = array();

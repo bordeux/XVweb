@@ -190,7 +190,7 @@ if((xvp()->ReadArticle($XVwebEngine ,$PathInfo))){
 			header ("content-type: text/css; charset: UTF-8"); 
 			exit($CSSStyle);
 		}
-		xv_appendCSS('data:text/css;base64,'.base64_encode($CSSStyle), 23);
+		xv_append_css('data:text/css;base64,'.base64_encode($CSSStyle), 23);
 	}
 	$Smarty->assign('Title', $XVwebEngine->ReadArticleOut['Topic']);
 	$Smarty->assign('SiteTopic', $XVwebEngine->ReadArticleOut['Topic']);

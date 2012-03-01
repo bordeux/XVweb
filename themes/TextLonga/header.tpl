@@ -17,18 +17,18 @@
 	<link rel="shortcut icon" href="{$Url}favicon.ico" type="image/x-icon" />
     <link rel="alternate" type="application/rss+xml" title="RSS" href="{$URLS.Script}RSS/{if $ReadArticleIndexOut.URL}?rss={$ReadArticleIndexOut.URL|escape:'url'}{/if}" />
 	{if !"Adv"|xvPerm}{include  file='adv.tpl'}{/if}
-<style type="text/css" media="all">
-/*<![CDATA[*/
-@import url('{$UrlTheme}css/custom-theme/jquery-ui-1.8.7.custom.css{if $isie}?ie=true{/if}');
-@import url('{$UrlTheme}css/style.css{if $isie}?ie=true{/if}');
-{if $CCSLoad}
-/*{$CCSLoad|@ksort}*/
-{foreach from=$CCSLoad item=CSSLink key=kess}
-@import url('{$CSSLink}{if $isie}?ie=true{/if}');
-{/foreach}
-{/if}
-/*]]>*/
-</style>
+	<style type="text/css" media="all">
+	/*<![CDATA[*/
+	@import url('{$UrlTheme}css/custom-theme/jquery-ui-1.8.7.custom.css{if $isie}?ie=true{/if}');
+	@import url('{$UrlTheme}css/style.css{if $isie}?ie=true{/if}');
+	{if $CCSLoad}
+	/*{$CCSLoad|@ksort}*/
+	{foreach from=$CCSLoad item=CSSLink key=kess}
+	@import url('{$CSSLink}{if $isie}?ie=true{/if}');
+	{/foreach}
+	{/if}
+	/*]]>*/
+	</style>
 	<script type="text/javascript">
 	{foreach from=$JSVars key=k item=vs}
 	var {$k} = '{$vs|escape:'quotes'}';
@@ -57,6 +57,8 @@
 	<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js" charset="UTF-8"> </script> 
 	<script>!window.jQuery && document.write(unescape('%3Cscript src="{$URLS.Site}plugins/libraries/jquery/jquery.js"%3E%3C/script%3E'))</script>	
 	<script type="text/javascript" async="async" defer="defer" src="{$URLS.JSCatalog}js/JSBinder/js.js?Load=js{foreach from=$JSBinder item=JSScriptName}:{$JSScriptName}{/foreach}&amp;NoCompress={foreach from=$JSBinderNC item=JSScriptName}:{$JSScriptName}{/foreach}" charset="UTF-8"></script>
+	{foreach from=$xv_append_header key=k item=vs}{$vs}{/foreach}
+	
   </head>
   <body>{$MetaTag}
  <header>

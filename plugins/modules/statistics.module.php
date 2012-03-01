@@ -53,7 +53,7 @@ class XVStatistics
 	}
 }
  $GLOBALS['XVwebEngine']->InitClass('XVStatistics')->prepare();
-xv_appendCSS($URLS['Site'].'plugins/data/statistics/style.css');
+xv_append_css($URLS['Site'].'plugins/data/statistics/style.css');
 ?>
 <div id="stat_tab_stats" class="tab" style="display: block; ">
       <table border="0" cellspacing="2">

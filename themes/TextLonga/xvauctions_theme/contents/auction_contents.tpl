@@ -190,11 +190,19 @@
 		<div class="xvauction-description">
 				<div class="xvauction-description-caption">{"xca_description"|xvLang}</div>
 				<div class="xvauction-description-content">
-				<!-- AUCTION CONTENT -->
 				
-						{$auction_description}
-				
-				<!-- END AUCTION CONTENT -->
+					<div class="xvauction-description-text">
+						<!-- AUCTION CONTENT -->
+						
+								{$auction_description}
+						
+						<!-- END AUCTION CONTENT -->
+						</div>
+						
+					<div style="clear:both;"></div>
+					<div class="xvauction-description-footer">
+					{foreach from=$auction_footer item=footer_set}{$footer_set}{/foreach}
+					</div>
 					<div style="clear:both;"></div>
 				</div>
 				

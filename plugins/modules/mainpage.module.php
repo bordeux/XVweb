@@ -106,7 +106,7 @@ global $Widgets;
 	//	$SortBy = unserialize($_COOKIE['WidgetSort']);
 		
 
-xv_appendCSS($GLOBALS['URLS']['Theme'].'css/index.css', 5);
+xv_append_css($GLOBALS['URLS']['Theme'].'css/index.css', 5);
 $GLOBALS['JSBinder'][3] = 'jquery-ui-1.8.7.custom.min';
 $GLOBALS['JSBinder'][4] = 'IndexPage';
 

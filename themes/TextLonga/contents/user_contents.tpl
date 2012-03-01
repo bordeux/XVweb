@@ -43,6 +43,10 @@
 <div class="xv-text-wrapper">
 <!-- TEXT -->
 <div class="xv-user-content">
+
+{foreach from=$widgets_html key=k item=widget_html}
+	{$widget_html}
+{/foreach}
 {if $modifications_list}
 <div class="xv-user-texts">
 	<div class="xv-user-seperate"><span> Modyfikacje </span></div>
@@ -126,7 +130,7 @@
 	</div>
 		
 		
-	<div class="xv-user-stats-table">
+	<div class="xv-user-table2">
 		<div>
 			<div>{if $UserStats.CreationDay == 0}{$User.LoginCount}{else}{math equation="x/y" x=$User.LoginCount y=$UserStats.CreationDay format="%.2f"}{/if}</div>
 			<div>{$language.VisitsPerDay}</div>

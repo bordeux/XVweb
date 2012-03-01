@@ -141,7 +141,6 @@ width: 100%;
 .img-indent {margin: 0 16px 0 0; float: left;}
 .extra-wrap {overflow: hidden;}
 
-h2 {font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;}
 /*=============================================================================== text =====*/
 
 
@@ -384,7 +383,7 @@ overflow: hidden;
 
 }
 nav ul li a:hover, nav .active {
-background:url(../img/nav-left.gif) left top no-repeat;
+/*background:url(../img/nav-left.gif) left top no-repeat;*/
 color:#fff;
 }
 nav ul li a:hover span, nav .active span {

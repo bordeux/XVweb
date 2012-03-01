@@ -27,7 +27,7 @@
 				<ul class="xvauction-categories">
 					{foreach from=$auctions_categories item=category key=equiv}
 						{if {$category.isSelected}}
-							<li>{$category.Name} ({$category.AuctionsCount})</li>
+							<li class="xvauction-categories-selected"><span>{$category.Name} ({$category.AuctionsCount})</span></li>
 						{else}
 						{if {$category.isChild} && $SubMode == 0}
 							<ul style="padding-left:30px;">

@@ -1,3 +1,5 @@
+@import url('sidebar.css');
+
 .xdebug-var-dump{
 background : #C2C2C2;
 }
@@ -5,60 +7,45 @@ background : #C2C2C2;
 width: 100%;
 margin:auto;
 }
-.xvauction-sidebar {
-	float:left;
-	width:18%;
-	min-height:600px;
-}
+
 .xvauction-right {
 	float:left; 
 	width: 80%; 
 	min-width: 600px;
 	padding-left: 10px;
 }
-.xvauction-sidebar-item {
-padding: 5px;
-padding-bottom: 3px;
-padding-left: 15px;
-}
-.xvauction-sidebar-item-content {
-background : #EDEDED;
--webkit-border-bottom-right-radius: 5px;
--webkit-border-bottom-left-radius: 5px;
--moz-border-radius-bottomright: 5px;
--moz-border-radius-bottomleft: 5px;
-border-bottom-right-radius: 5px;
-border-bottom-left-radius: 5px;
-}
-.xvauction-sidebar-item-title {
-	background: #1C80AF url(../img/nav-tail.gif) ;
-	font-size:14px;
-	font-weight:bold;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	border-radius: 5px;
-	padding-left: 10px;
-	padding-top:4px;
-	height: 24px;
-	color: #F7F7F7;
-}
+
 .xvauction-links {
 padding-top:10px;
 padding-bottom:10px;
 }
+
+
 .xvauction-links li {
-padding-left: 10px;
+padding-left: 15px;
 min-height: 18px;
 font-size: 10px;
 font-weight:bold;
 }
-.xvauction-links a:visited {
-color : #3B8FED;
+
+.xvauction-links > li + li {
+	border-top: 1px solid #EEE;
 }
-.xvauction-links a {
-text-decoration: none;
-color: #0D58AC;
+.xvauction-links > li:hover {
+background: #F4F4F4;
 }
+.xvauction-links > li > a, .xvauction-links-selected span{
+	padding: 8px 8px 8px 5px;
+	text-decoration: none;
+	color: #333;
+	display:block;
+	height: 100%;
+	background:#FFF;
+}
+.xvauction-links-selected {
+background: #FCB93D;
+}
+
 .xauction-tabs {
 font-size:10px;
 }

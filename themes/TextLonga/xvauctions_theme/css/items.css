@@ -1,3 +1,5 @@
+@import url('sidebar.css');
+
 .xdebug-var-dump{
 background : #C2C2C2;
 }
@@ -5,53 +7,46 @@ background : #C2C2C2;
 width: 100%;
 margin:auto;
 }
-.xvauction-sidebar {
-	float:left;
-	width:18%;
-	min-height:600px;
-}
 .xvauction-right {
 	float:left; 
 	width: 80%; 
 	min-width: 600px;
 	padding-left: 10px;
 }
-.xvauction-sidebar-item {
-padding: 5px;
-padding-bottom: 20px;
-padding-left: 15px;
-}
-.xvauction-sidebar-item-content {
-background : #EDEDED;
-}
-.xvauction-sidebar-item-title {
-	background: #1C80AF url(../img/nav-tail.gif) ;
-	font-size:14px;
-	font-weight:bold;
-	-webkit-border-top-left-radius: 5px;
-	-webkit-border-top-right-radius: 5px;
-	-moz-border-radius-topleft: 5px;
-	-moz-border-radius-topright: 5px;
-	border-top-left-radius: 5px;
-	border-top-right-radius: 5px;
-	padding-left: 10px;
-	padding-top:4px;
-	height: 24px;
-	color: #F7F7F7;
-}
+
 .xvauction-categories {
 padding-top:10px;
 padding-bottom:10px;
 }
 .xvauction-categories li {
-padding-left: 10px;
+padding-left: 15px;
 min-height: 18px;
 font-size: 10px;
 font-weight:bold;
 }
-.xvauction-categories a:visited {
-color : #3B8FED;
+
+.xvauction-categories > li + li {
+	border-top: 1px solid #EEE;
 }
+.xvauction-categories > li:hover {
+background: #F4F4F4;
+}
+.xvauction-categories > li > a, .xvauction-categories-selected span{
+	padding: 8px 8px 8px 5px;
+	text-decoration: none;
+	color: #333;
+	display:block;
+	height: 100%;
+	background:#FFF;
+}
+.xvauction-categories-selected {
+background: #FCB93D;
+}
+
+.xvauction-categories > li > a:visited {
+	text-decoration: none;
+}
+
 .xvauction-categories a {
 text-decoration: none;
 color: #0D58AC;

@@ -48,12 +48,12 @@ chdir(dirname(__FILE__).DIRECTORY_SEPARATOR.'..');
 
 			$CSSCompres = compressCSS($file); // przelanie przez funkcję
 			
-			if(!isset($_GET["ie"])){
+			/*if(!isset($_GET["ie"])){
 				$CSSCompres = preg_replace_callback( // wyrazenie regularne, do wyszukiwania zawartosci pomiedzy url() w css
 				"/url\((.*?)\)/si",
 				'ReplaceImage'
 				, $CSSCompres);
-			}
+			}*/
 			file_put_contents($TMPDir.$IDFile.'.css',$CSSCompres); //zapisanie do cache
 		}
 

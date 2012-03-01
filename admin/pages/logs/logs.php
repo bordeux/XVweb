@@ -74,7 +74,7 @@ if(!isset($XVwebEngine)){
 			
 			<div class="xv-log-search">
 				<a href="#" class="xv-toggle" data-xv-toggle=".xv-log-search-form" action="?'.$XVweb->AddGet(array(), true).'" > Szukaj </a>
-					<form style="display:none" class="xv-log-search-form" method="get" action="">
+					<form style="display:none" class="xv-log-search-form xv-form" method="get" data-xv-result=".content" action="'.$GLOBALS['URLS']['Script'].'Administration/get/Logs/?'.$XVweb->AddGet(array(), true).'">
 						<table>
 						<tbody>';
 				foreach($XVweb->DataBase->get_fields("Logs") as $keyf=>$field){		
@@ -98,7 +98,7 @@ if(!isset($XVwebEngine)){
 						</tr>';
 						}
 						$this->content .= '<tr>
-						<td> <input type="submit" value="Search..." /></td>
+						<td><input type="hidden" value="true" name="search_mode" /> <input type="submit" value="Search..." /></td>
 							</tr>
 							</tbody>
 						</table>
@@ -106,7 +106,8 @@ if(!isset($XVwebEngine)){
 					
 			</div>
 			';
-			
+			if(isset($_GET['search_mode']))
+				exit($this->content);
 			$this->title = $GLOBALS['Language']['Logs'];
 			$this->icon = $GLOBALS['URLS']['Site'].'admin/data/icons/logs.png';
 			

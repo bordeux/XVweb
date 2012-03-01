@@ -141,7 +141,7 @@ VALUES  (NOW() , :UserFileExec, :FileNameExec , :ExtensionExec, :IPExec , :MD5Fi
 						$DeleteFile = $this->Date['XVweb']->DataBase->prepare('UPDATE {Files} SET {Files:Owner} = 1  WHERE {Files:MD5File} = :MD5Exec AND {Files:SHA1File} = :SHA1Exec LIMIT 1 ;');
 						$DeleteFile->execute(array(":MD5Exec"=>$FileInfo['MD5File'], ":SHA1Exec"=>$FileInfo['SHA1File']));
 					if($DeleteFile->rowCount() < 1){
-						$NameClassFile = 'XV_Files_'.$FileInfo['Server'];
+						$NameClassFile = 'xv_files_'.$FileInfo['Server'];
 						$ClassFile = new $NameClassFile;
 						$ClassFile->delete($FileInfo['MD5File'].$FileInfo['SHA1File']);
 					}

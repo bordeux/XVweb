@@ -1,6 +1,6 @@
 {function menu_active title=""}      
 	{if $data == $panel_mode}
-		<li>{$title}</li>
+		<li class="xvauction-links-selected"><span>{$title}</span></li>
 	{else}
 		<li><a href="{$URLS.AuctionPanel}/{$data}/">{$title}</a></li>
 	{/if}
