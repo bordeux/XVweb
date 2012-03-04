@@ -1,0 +1,62 @@
+<plugin>
+	<info>
+		<name>xvAuctions</name>
+		<version>1.0</version>
+		<author>Krzysztof Bednarczyk</author>
+		<url>http://www.bordeux.net</url>
+		<description>Auctions module</description>
+	</info>
+	<load>
+		<event name="onlogin">
+			<script language="PHP">
+			  <![CDATA[
+					include_once(ROOT_DIR.'plugins/xvauctions/libs/class.xvpayments.php');
+					$XVwebEngine->Session->Session('xv_payments_amount', $XVwebEngine->InitClass("xvpayments")->get_user_amount($XVwebEngine->Session->Session('Logged_User')));
+				]]>
+			</script>
+		</event>		
+		<event name="onpreassing">
+			<script language="PHP">
+			  <![CDATA[
+					$Smarty->assign('xv_panel_links', '<a href="'.$URLS['Script'].'auction_panel/">Panel aukcyjny</a> | ');
+				]]>
+			</script>
+		</event>
+	</load>
+	<config>
+		<prefix prefix="auctions" include="plugins/xvauctions/xvauctions.php" />
+		<prefix prefix="show_auction" include="plugins/xvauctions/xvauctions.php" />
+		<prefix prefix="auction_add" include="plugins/xvauctions/xvauctions.php" />
+		<prefix prefix="auction" include="plugins/xvauctions/xvauctions.php" />
+		<prefix prefix="buy" include="plugins/xvauctions/xvauctions.php" />
+		<prefix prefix="auction_panel" include="plugins/xvauctions/xvauctions.php" />
+		<prefix prefix="auction_index" include="plugins/xvauctions/xvauctions.php" />
+	</config>
+	<ranks>
+		<rank>
+			<name>xva_Buy</name>
+			<description>User can buy thinks</description>
+		</rank>
+		<rank>
+			<name>xva_ViewAuction</name>
+			<description>User can view auction</description>
+		</rank>	
+		<rank>
+			<name>xva_ViewAuctionItems</name>
+			<description>User can view auctions items</description>
+		</rank>	
+		<rank>
+			<name>xva_Sell</name>
+			<description>User can sell thinks</description>
+		</rank>
+		<rank>
+			<name>xva_API</name>
+			<description>User have access to api</description>
+		</rank>		
+		<rank>
+			<name>xva_payments</name>
+			<description>User have access to payments</description>
+		</rank>
+
+	</ranks>
+</plugin>

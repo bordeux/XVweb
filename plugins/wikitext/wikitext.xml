@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<plugin>
+  <info>
+    <name>WikiText</name>
+    <version>1.0</version>
+    <author>Krzysztof Bednarczyk</author>
+    <url>http://www.bordeux.net</url>
+    <description>WikiText parser for XVweb. &lt;wikitext&gt; wikitext syntax &lt;/wikitext&gt;</description>
+  </info>
+  <config>
+    <parser>
+      <function tag="wikitext">	
+	  <![CDATA[
+	include_once($GLOBALS['$RootDir'].'plugins/wikitext/wikitexttohtml.php');
+	$input = explode("\n", pq($element)->html());
+	$output =  WikiTextToHTML::convertWikiTextToHTML($input);
+	pq($element)->replaceWith(implode("\n", $output));
+	]]>
+	</function>
+    </parser>
+  </config>
+</plugin>

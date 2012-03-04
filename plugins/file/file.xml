@@ -1,0 +1,15 @@
+<plugin>
+	<info>
+		<name>File</name>
+		<version>1.0</version>
+		<author>Krzysztof Bednarczyk</author>
+		<url>http://www.bordeux.net</url>
+		<description>Auctions module</description>
+	</info>
+	<config>
+
+	</config>
+	<ranks>
+		
+	</ranks>
+</plugin>

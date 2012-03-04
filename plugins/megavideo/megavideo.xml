@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<plugin>
+  <info>
+    <name>MegaVideo</name>
+    <version>1.0</version>
+    <author>Krzysztof Bednarczyk</author>
+    <url>http://www.bordeux.net</url>
+    <description>Digg for XVweb</description>
+  </info>
+  <config>
+    <parser>
+      <function tag="megavideo">	
+	  <![CDATA[
+include_once($RootDir.'plugins/megavideo/megavideo.plugin.xvweb.php');
+	]]>
+	</function>
+    </parser>
+  </config>
+</plugin>

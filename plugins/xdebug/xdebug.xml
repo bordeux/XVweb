@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<plugin>
+  <info>
+    <name>Xdebug</name>
+    <version>1.0</version>
+    <author>Krzysztof Bednarczyk</author>
+    <url>http://www.bordeux.net</url>
+    <description>Xdebug for XVweb</description>
+  </info>
+  <load>
+    <event name="onload">
+      <script language="PHP">
+	  <![CDATA[
+	  if(!function_exists("DebugFoo")){
+			function DebugFoo(){
+			global $Debug;
+			 preg_match("/(\d)+/",ini_get('memory_limit'),$matches);
+				$DebugInfo = array("MemUsage"=>memory_get_usage(), "MemPeakUsage"=>memory_get_peak_usage(), "MemLimit"=>$matches[0],  "IncludedFiles"=>get_included_files(), "GeneratedTime" => 0, "FunctionsCount"=>0,"ZendVer"=>zend_version(), "PHPVer" => phpversion(), "Debug"=>$Debug, "SQL"=> $GLOBALS["XVwebEngine"]->DataBase->query);
+
+					$DebugInfo['GeneratedTime'] = microtime_float() - $GLOBALS['XVwebStart'];
+				if (function_exists('xdebug_get_function_count')) 
+					$DebugInfo['FunctionsCount'] = xdebug_get_function_count();
+					
+				echo '<script type="text/javascript">var DebugConsole = '.json_encode($DebugInfo).';</script>';
+			}
+			register_shutdown_function('DebugFoo');
+		
+	}
+]]>
+	  </script>
+    </event>
+    <event name="preload">
+      <script language="PHP">
+	<![CDATA[
+	xv_appendJS($URLS['Site']."plugins/xdebug/debug.js");
+	]]>	
+	</script>
+    </event>
+  </load>
+</plugin>

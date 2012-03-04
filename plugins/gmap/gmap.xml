@@ -1,0 +1,12 @@
+<plugin>
+	<info>
+		<name>Google Maps Markers</name>
+		<version>1.0</version>
+		<author>Krzysztof Bednarczyk</author>
+		<url>http://www.bordeux.net</url>
+		<description>Google maps for XVweb</description>
+	</info>
+	<config>
+		<prefix prefix="gmap" include="gmap.php"/>
+	</config>
+</plugin>

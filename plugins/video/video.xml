@@ -1,0 +1,19 @@
+<plugin>
+	<info>
+		<name>Video</name>
+		<version>1.0</version>
+		<author>Krzysztof Bednarczyk</author>
+		<url>http://www.bordeux.net</url>
+		<description>Video player and converter</description>
+	</info>
+	<config>
+		<prefix prefix="embed" include="plugins/video/index.php"/>
+		<prefix prefix="video_plugin" include="plugins/video/convert.php"/>
+	</config>
+	<ranks>
+		<rank>
+			<name>vide_can_play</name>
+			<description>User can see video</description>
+		</rank>
+	</ranks>
+</plugin>

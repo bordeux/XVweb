@@ -1,0 +1,22 @@
+<plugin>
+	<info>
+		<name>Users profiles</name>
+		<version>1.0</version>
+		<author>Krzysztof Bednarczyk</author>
+		<url>http://www.bordeux.net</url>
+		<description>Profiles for XVweb</description>
+	</info>
+	<config>
+		<prefix prefix="users" include="plugins/users/users.php"/>
+	</config>
+	<ranks>
+		<rank>
+			<name>EditProfil</name>
+			<description>User can edit profile</description>
+		</rank>
+		<rank>
+			<name>EditOtherProfil</name>
+			<description>User can edit profiles (admin)</description>
+		</rank>	
+	</ranks>
+</plugin>

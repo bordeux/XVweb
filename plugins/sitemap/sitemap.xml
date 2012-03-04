@@ -1,0 +1,12 @@
+<plugin>
+	<info>
+		<name>Sitemap</name>
+		<version>1.0</version>
+		<author>Krzysztof Bednarczyk</author>
+		<url>http://www.bordeux.net</url>
+		<description>Sitemap for XVweb</description>
+	</info>
+	<config>
+		<prefix prefix="sitemap" include="plugins/sitemap/sitemap.php"/>
+	</config>
+</plugin>

@@ -1,0 +1,12 @@
+<plugin>
+	<info>
+		<name>DocToHTML</name>
+		<version>1.0</version>
+		<author>Krzysztof Bednarczyk</author>
+		<url>http://www.bordeux.net</url>
+		<description>System for XVweb</description>
+	</info>
+	<config>
+		<prefix prefix="doctohtml" include="plugins/doctohtml/doctohtml.php"/>
+	</config>
+</plugin>

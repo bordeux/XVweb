@@ -1,0 +1,22 @@
+<plugin>
+	<info>
+		<name>Messages</name>
+		<version>1.0</version>
+		<author>Krzysztof Bednarczyk</author>
+		<url>http://www.bordeux.net</url>
+		<description>The internal messaging system</description>
+	</info>
+	<config>
+			<prefix prefix="messages" include="plugins/messages/messages.php"/>
+	</config>
+	<ranks>
+		<rank>
+			<name>xv_msg_access</name>
+			<description>User can use Message plugin</description>
+		</rank>
+		<rank>
+			<name>xv_msg_send</name>
+			<description>User can send messages</description>
+		</rank>
+	</ranks>
+</plugin>

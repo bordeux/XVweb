@@ -1,0 +1,12 @@
+<plugin>
+	<info>
+		<name>History</name>
+		<version>1.0</version>
+		<author>Krzysztof Bednarczyk</author>
+		<url>http://www.bordeux.net</url>
+		<description>History of article</description>
+	</info>
+	<config>
+			<prefix prefix="history" include="plugins/history/history.php"/>
+	</config>
+</plugin>

@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<plugin>
+  <info>
+    <name>Digg</name>
+    <version>1.0</version>
+    <author>Krzysztof Bednarczyk</author>
+    <url>http://www.bordeux.net</url>
+    <description>Digg module for XVweb. For use: &lt;digg&gt;http://example.com&lt;/digg&gt;</description>
+  </info>
+  <config>
+    <parser>
+      <function tag="digg">	
+	  <![CDATA[
+include_once($RootDir.'plugins/digg/digg.plugin.xvweb.php');
+	]]>
+	</function>
+    </parser>
+  </config>
+</plugin>

@@ -1,0 +1,12 @@
+<plugin>
+	<info>
+		<name>Google Login</name>
+		<version>1.0</version>
+		<author>Krzysztof Bednarczyk</author>
+		<url>http://www.bordeux.net</url>
+		<description>Module to login with Google account.</description>
+	</info>
+	<config>
+		<prefix prefix="googleid" include="plugins/data/google/google_login.php"/>
+	</config>
+</plugin>
