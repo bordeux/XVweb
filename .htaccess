@@ -10,7 +10,7 @@ Options -Indexes
 	php_value magic_quotes_sybase "off"
 </IfModule>
 
-<FilesMatch "^(.*)\.(tpl|sql|tmp)$">
+<FilesMatch "^(.*)\.(tpl|sql|tmp|config)$">
     Order allow,deny
     Deny from all
 </FilesMatch>
@@ -44,7 +44,7 @@ FileETag None
 	
 	RewriteCond %{REQUEST_FILENAME} !-s [NC]
 	RewriteCond %{REQUEST_FILENAME} !-d [NC]
-	RewriteRule ^(.+) view.php/$1 [L,QSA]
+	RewriteRule ^(.+) xv.php/$1 [L,QSA]
 </IfModule>
 
 ErrorDocument 404 /404.php

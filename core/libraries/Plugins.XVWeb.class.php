@@ -1,4 +1,9 @@
 <?php
+
+class xv_plugins_config extends xv_config {
+
+}
+
 class Plugins
 {
 	var $Date=array();
@@ -80,9 +85,9 @@ class Plugins
 		$PluginInit= new DOMDocument();
 		$PluginInit->formatOutput = true;
 		$this->Date['doc']->appendChild($this->Date['doc']->createElement("plugins", ""));
-		
-		foreach($this->Date['XVweb']->Config("plugins")->find("plugin") as $valPlugin){
-			$filename = ROOT_DIR.'plugins'.DIRECTORY_SEPARATOR.pq($valPlugin)->attr("file");
+		$plugins_enabled =  new xv_plugins_config();
+		foreach($plugins_enabled->get_all() as $key=>$plugin_info){
+			$filename = ROOT_DIR.'plugins'.DIRECTORY_SEPARATOR.$plugin_info['name'].DIRECTORY_SEPARATOR.$plugin_info['name'].'.xml';
 				if(file_exists($filename)){
 				$PluginInit->load($filename);
 				$xpath = new DOMXpath($PluginInit);
@@ -92,6 +97,8 @@ class Plugins
 					$element->appendChild($Plug);
 					$this->Date['doc']->getElementsByTagName('plugins')->item(0)->appendChild($element);
 				}
+			}else{
+				unset($plugins_enabled->{$key});
 			}
 			
 		}

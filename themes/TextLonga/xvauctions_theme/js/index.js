@@ -7,8 +7,8 @@ $(function(){
 		$(this).addClass("xvauction-index-selected");
 		var $theme = $('<a href="#ret" class="xvauction-index-item">'+
 				'<div class="xvauction-index-cost">'+
-					'<div class="xvauction-index-cost-bnow"></div>'+
-					'<div class="xvauction-index-cost-auction"></div>'+
+					'<div class="xvauction-index-cost-bnow" title="Kup teraz!"></div>'+
+					'<div class="xvauction-index-cost-auction" title="Aukcja"></div>'+
 				'</div>'+
 				'<div class="xvauction-index-title">title</div>'+
 			'</a>');
@@ -23,11 +23,17 @@ $(function(){
 			$theme_set.css("background-image", 'url('+val.Thumbnail2+')')
 			$theme_set.attr("href", URLS['Script']+"auction/"+val.ID+'/');
 			$theme_set.css("opacity", "0");
-			if(val.Type = "buynow"){
+			if(val.Type == "buynow"){
 				$theme_set.find(".xvauction-index-cost-auction").remove();
 				$theme_set.find(".xvauction-index-cost-bnow").text(val.Cost);
+			}else if(val.Type == "auction"){
+				$theme_set.find(".xvauction-index-cost-bnow").remove();
+				$theme_set.find(".xvauction-index-cost-auction").text(val.Cost);
+			}else if(val.Type == "both"){
+				$theme_set.find(".xvauction-index-cost-bnow").text(val.Cost);
+				$theme_set.find(".xvauction-index-cost-auction").text(val.Cost2);
 			}
-				$theme_set.prependTo(".xvauction-index");
+				$theme_set.appendTo(".xvauction-index");
 				$theme_set.fadeTo('slow', 1);
 			});
 		});

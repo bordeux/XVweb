@@ -8,12 +8,25 @@
 ****************   All rights reserved             *************************
 ***************************************************************************/
 
-class xvpayments_method_dotpay extends xvpayments_method{
+class xva_dotpay_config extends xv_config {
+	public function init_fields(){
+		return array(
+			"enabled" => true,
+			"ips" => "195.150.9.37",
+			"seller_id" => 111111,
+			"pin" => "0000",
+			"provision" => 0.95,
+		);
+	}
+}
+
+class xv_payments_method_dotpay extends xv_payments_method{
 	var $config_file = "dotpay.payments";
 	var $Data;
 
 	public function __construct(&$Xvweb) {
 		$this->Data['XVweb'] = &$Xvweb;
+		$this->config = new xva_dotpay_config();
 		$GLOBALS['Debug']['Classes'][] = array("ClassName"=>get_class(), "File"=>__FILE__, "Time"=>microtime(true), "MemoryUsage"=>memory_get_usage());
 	}
 	
@@ -21,11 +34,10 @@ class xvpayments_method_dotpay extends xvpayments_method{
 
 		if(empty($_POST))
 			exit("empty POST data");
-		$config_ips = $this->Data['XVweb']->Config($this->config_file)->find("ips value")->text()	;
-		$config_seller_id = $this->Data['XVweb']->Config($this->config_file)->find("sellerid value")->text();	
-		$config_secruity_code = $this->Data['XVweb']->Config($this->config_file)->find("secruitycode value")->text();
-		$config_provision = $this->Data['XVweb']->Config($this->config_file)->find("provision value")->text();
-		$config_pin = $this->Data['XVweb']->Config($this->config_file)->find("pin value")->text();
+		$config_ips = $this->config->ips;
+		$config_seller_id = $this->config->seller_id;	
+		$config_provision = $this->config->provision;
+		$config_pin = $this->config->pin;
 		if(trim($config_ips) != "*"){
 			if(strpos($config_ips, $_SERVER['REMOTE_ADDR']) == false){
 				$_POST['error'] = "hack by ".$_SERVER['REMOTE_ADDR'];
@@ -64,9 +76,8 @@ class xvpayments_method_dotpay extends xvpayments_method{
 	}
 	public function form(){
 	
-		$config_seller_id = $this->Data['XVweb']->Config($this->config_file)->find("sellerid value")->text();
-		$config_secruity_code = $this->Data['XVweb']->Config($this->config_file)->find("secruitycode value")->text();
-		$config_provision = $this->Data['XVweb']->Config($this->config_file)->find("provision value")->text();
+		$config_seller_id = $this->config->seller_id;
+		$config_provision = $this->config->provision;
 		
 	$user_info = $this->Data['XVweb']->DataBase->pquery('SELECT {Users:*} FROM {Users} WHERE {Users:ID} = '.$this->Data['XVweb']->Session->Session("Logged_ID").' LIMIT 1')->fetch(PDO::FETCH_ASSOC);
 		if(empty($user_info)){
@@ -103,8 +114,7 @@ class xvpayments_method_dotpay extends xvpayments_method{
 	return $result;
 	}
 	public function button(){
-		$config_enabled =  $this->Data['XVweb']->Config($this->config_file)->find("enabled value")->text();
-		$config_enabled = ($config_enabled == "true" ?  true : false);
+		$config_enabled =  $this->config->enabled;
 		if(!$config_enabled)
 			return null;
 			

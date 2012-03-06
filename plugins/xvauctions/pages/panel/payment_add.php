@@ -24,7 +24,7 @@ if(!xvPerm("xva_payments")){
 	foreach (glob(ROOT_DIR.'plugins/xvauctions/payments/*.payments.class.php') as $filename) {
 		include_once($filename);
 	}
-	$payments_list = xvp()->get_classes_by_prefix($XVwebEngine, "xvpayments_method_");
+	$payments_list = xvp()->get_classes_by_prefix($XVwebEngine, "xv_payments_method_");
 	$payments = array();
 	$payments_buttons = array();
 	foreach($payments_list as $payment_method){
@@ -41,7 +41,7 @@ if(!xvPerm("xva_payments")){
 	if (file_exists(ROOT_DIR.'plugins/xvauctions/payments/'.$selected_payment_method.'.payments.class.php')) {
 		include_once(ROOT_DIR.'plugins/xvauctions/payments/'.$selected_payment_method.'.payments.class.php');
 	}
-	$payments_list = xvp()->get_classes_by_prefix( $XVwebEngine, "xvpayments_method_");
+	$payments_list = xvp()->get_classes_by_prefix( $XVwebEngine, "xv_payments_method_");
 	if(!isset($payments_list[0])){
 		header("location: ".$URLS['AuctionPanel'].'/payment_add/');
 		exit;

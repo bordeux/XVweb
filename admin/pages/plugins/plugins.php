@@ -25,8 +25,8 @@ class XV_Admin_plugins {
 		private $Data;
 		public function __construct(&$XVweb){
 		$this->Data['XVweb'] = &$XVweb;
-		//$this->content = ''.print_r($this->GetPluginStatus(), true);
-		$PluginsStatus = $this->GetPluginStatus();
+		
+		$plugins_status = $this->get_plugins_status();
 		$this->content = "
 		<script type='text/javascript' src='{$GLOBALS['URLS']['Theme']}js/jquery.tzCheckbox/jquery.tzCheckbox.js' charset='UTF-8'> </script> 
 			<style type='text/css' media='all'>
@@ -63,14 +63,14 @@ class XV_Admin_plugins {
 			<table style="width : 100%; text-align: center;">
 				<caption>Enabled</caption> 
 				<tbody>';
-				foreach($PluginsStatus['All'] as $Plg){
-				$PlgInfo = $this->GetInfoPlugin($Plg);
+				foreach($plugins_status['all'] as $plugin){
+				$plugin_info= $this->get_info_plugin($plugin);
 					$this->content .= ' <tr>
-						<td style="width:80%; text-align:left;"><div class="xv-plg-header"> <span class="xv-plg-title" style="font-size:14px; font-weight:bold;">'.$PlgInfo->find("name")->html().'</span> <span style="font-size:9px"> <a href="'.$PlgInfo->find("url")->html().'" target="_blank"> '.$PlgInfo->find("author")->html().' </a></span></div>
-						<div class="xv-plg-description" style="padding-top:10px;">'.$PlgInfo->find("description")->html().'</div>
+						<td style="width:80%; text-align:left;"><div class="xv-plg-header"> <span class="xv-plg-title" style="font-size:14px; font-weight:bold;">'.$plugin_info->find("name")->html().'</span> <span style="font-size:9px"> <a href="'.$plugin_info->find("url")->html().'" target="_blank"> '.$plugin_info->find("author")->html().' </a></span></div>
+						<div class="xv-plg-description" style="padding-top:10px;">'.$plugin_info->find("description")->html().'</div>
 						</td>
-						<td>v. '.$PlgInfo->find("version")->html().'</td>
-						<td><input type="checkbox" '.( in_array($Plg, $PluginsStatus['Enabled'])? "checked='checked'": "").' class="xv-plg-checkbox" name="'.$Plg.'" /> </td>
+						<td>v. '.$plugin_info->find("version")->html().'</td>
+						<td><input type="checkbox" '.( in_array($plugin, $plugins_status['enabled'])? "checked='checked'": "").' class="xv-plg-checkbox" name="'.$plugin.'" /> </td>
 					</tr>';
 				}
 			$this->content .=	'</tbody> 
@@ -90,37 +90,47 @@ class XV_Admin_plugins {
 			$this->icon = $GLOBALS['URLS']['Site'].'admin/data/icons/plugins.png';
 			
 		}
-		
-		
-	public function GetPluginStatus(){
+
+	public function get_plugins_status(){
 		$all_plugins = array();	
-		$EnabledPlugins = array();	
-		$DisabledPlugins = array();	
-			foreach (glob(ROOT_DIR."plugins/*/*.xml") as $filename) {
-				if(basename($filename) != "system.xml")
-					$all_plugins[] = substr(basename($filename), 0, -4).'/'basename($filename);
-			}	
-		foreach($this->Data['XVweb']->Config("plugins")->find("plugin") as $valPlugin){
-		$plugin_name = pq($valPlugin)->attr("file");
-		
-		if($plugin_name != "system.xml")
-			if(in_array($plugin_name, $all_plugins))
-				$EnabledPlugins[] = pq($valPlugin)->attr("file");
-		}
-		
-		foreach($all_plugins as $EnPlg){
-			if(!in_array($EnPlg, $EnabledPlugins))
-				$DisabledPlugins[] = $EnPlg;
-		
-		}
-		return array("All"=>$all_plugins, "Enabled"=>$EnabledPlugins, "Disabled" => $DisabledPlugins);
-	}
-	public function GetInfoPlugin($plug){
-		$PluginsInfo = array();
-			foreach (glob(ROOT_DIR."plugins/".$plug) as $filename) {
-			$PlgInfo = phpQuery::newDocumentFile($filename);
-				return $PlgInfo->find("info:first");
+		$enabled_plugins = array();	
+		$disabled_plugins = array();
+		$plugins_config = new xv_plugins_config();
+		//GLOB_ONLYDIR
+	
+		foreach (glob(ROOT_DIR."plugins/*", GLOB_ONLYDIR) as $dirname) {
+			$plg_name = basename($dirname);
+			if(file_exists($dirname.'/'.$plg_name.'.xml')){
+				$all_plugins[] =  $plg_name;
 			}
+		}
+		
+		foreach($plugins_config->get_all() as $key=>$plugin){
+			$plugin_name = $plugin['name'];
+		
+		if($plugin_name != "system"){
+				if(in_array($plugin_name, $all_plugins)){
+					$enabled_plugins[] = $plugin_name;
+				}
+			}
+		}
+		
+		foreach($all_plugins as $plg_name){
+			if(!in_array($plg_name, $enabled_plugins)){
+				$disabled_plugins[] = $plg_name;
+			}
+		
+		}
+		return array("all"=>$all_plugins, "enabled"=>$enabled_plugins, "disabled" => $disabled_plugins);
+	}
+	
+	public function get_info_plugin($plugin){
+		$file_name = ROOT_DIR."plugins/".$plugin.'/'.$plugin.'.xml';
+		if(!file_exists($file_name)){
+			return null;
+		}
+		$plg_info = phpQuery::newDocumentFile($file_name);
+				return $plg_info->find("info:first");
 	}
 	
 	
@@ -134,6 +144,8 @@ class XV_Admin_plugins {
 				"msg"=> "<div class='failed'>Błąd: Zły SID</div>"
 			)));
 		}
+		$_GET['plugin'] = trim($_GET['plugin']);
+		$plugins_config = new xv_plugins_config();
 		
 		if($_GET['enabled'] == "false"){ //wylaczenie
 			$XVweb->Config("plugins")->find("plugin[file='".trim($_GET['plugin'])."']")->remove();
@@ -143,18 +155,25 @@ class XV_Admin_plugins {
 				);
 		
 		}else{
-			$XVweb->Config("plugins")->find("plugin[file='".trim($_GET['plugin'])."']")->remove();
-			$XVweb->Config("plugins")->find("enabled")->append('<plugin file="'.trim($_GET['plugin']).'" ></plugin>');
-			$Result = array(
-				"result" => true,
-				"msg"=> "<div class='success'>Włączono plugin</div>"
-			);
+				$plugin_info = XV_Admin_plugins::get_info_plugin($_GET['plugin']);
+				if(empty($plugin_info)){
+					$Result = array(
+					"result" => true,
+					"msg"=> "<div class='failed'>Nie można wczytać pluginu</div>"
+					);
+				}else{
+				$plugins_config->{$_GET['plugin']} = array(
+					"name" => $_GET['plugin'],
+					"version"=> $plugin_info->find("version")->html(),
+					"title"=> $plugin_info->find("name")->html(),
+				);
+				$Result = array(
+					"result" => true,
+					"msg"=> "<div class='success'>Włączono plugin</div>"
+				);
+			}
 		}
 		
-			include_once(ROOT_DIR.'core'.DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'BeautyXML.class.php');
-			$bc = new BeautyXML();
-			file_put_contents(ROOT_DIR."config/plugins.xml", '<?xml version="1.0" encoding="utf-8"?>'.chr(13).$bc->format($XVweb->Config("plugins")));
-			
 		$XVweb->Cache->clear();
 		@unlink(ROOT_DIR."config/pluginscompiled.xml");
 		exit(json_encode($Result));

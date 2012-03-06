@@ -8,12 +8,28 @@
 ****************   All rights reserved             *************************
 ***************************************************************************/
 
-class xvpayments_method_skrill extends xvpayments_method{
+class xva_skrill_config extends xv_config {
+	public function init_fields(){
+		return array(
+			"enabled" => true,
+			"email" => "dev@dev.dev",
+			"secret_word" => "0a0a0a0a",
+			"lang" => "EN",
+			"logo" => "",
+			"provision" => 3.05,
+			"currency" => "USD",
+		);
+	}
+}
+
+class xv_payments_method_skrill extends xv_payments_method{
 	var $config_file = "skrill.payments";
 	var $Data;
 
 	public function __construct(&$Xvweb) {
 		$this->Data['XVweb'] = &$Xvweb;
+		$this->config = new xva_skrill_config();
+		
 		$GLOBALS['Debug']['Classes'][] = array("ClassName"=>get_class(), "File"=>__FILE__, "Time"=>microtime(true), "MemoryUsage"=>memory_get_usage());
 	}
 	
@@ -22,8 +38,8 @@ class xvpayments_method_skrill extends xvpayments_method{
 		if(empty($_POST))
 			exit("empty POST data");
 			
-		$config_secretword = $this->Data['XVweb']->Config($this->config_file)->find("secretword value")->text()	;
-		$config_email = $this->Data['XVweb']->Config($this->config_file)->find("email value")->text()	;
+		$config_secretword = $this->config->secret_word;
+		$config_email = $this->config->email;
 
 		$concatFields = $_POST['merchant_id']
 			.$_POST['transaction_id']
@@ -61,12 +77,11 @@ class xvpayments_method_skrill extends xvpayments_method{
 	}
 	public function form(){
 	
-		$config_email = $this->Data['XVweb']->Config($this->config_file)->find("email value")->text();
-		$config_language = $this->Data['XVweb']->Config($this->config_file)->find("language value")->text();
-		$config_provision = $this->Data['XVweb']->Config($this->config_file)->find("provision value")->text();
-		$config_currency = $this->Data['XVweb']->Config($this->config_file)->find("currency value")->text();
-		$config_logo = $this->Data['XVweb']->Config($this->config_file)->find("logo value")->text();
-		$config_testmode = (int) $this->Data['XVweb']->Config($this->config_file)->find("testmode value")->text();
+		$config_email = $this->config->email;
+		$config_language = $this->config->lang;
+		$config_provision = $this->config->provision;
+		$config_currency = $this->config->currency;
+		$config_logo = $this->config->logo;
 		
 	$user_info = $this->Data['XVweb']->DataBase->pquery('SELECT {Users:*} FROM {Users} WHERE {Users:ID} = '.$this->Data['XVweb']->Session->Session("Logged_ID").' LIMIT 1')->fetch(PDO::FETCH_ASSOC);
 		if(empty($user_info)){
@@ -110,7 +125,7 @@ class xvpayments_method_skrill extends xvpayments_method{
 	return $result;
 	}
 	public function button(){
-		$config_enabled = $this->Data['XVweb']->Config($this->config_file)->find("enabled value")->text();
+		$config_enabled = $this->config->enabled;
 		$config_enabled = ($config_enabled == "true" ? true : false);
 		if(!$config_enabled)
 			return null;

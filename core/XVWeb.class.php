@@ -17,6 +17,7 @@ Klasa XVweb jest na licencji LGPL v3.0 ( GNU LESSER GENERAL PUBLIC LICENSE)
 define('DownloadLink', "http://www.bordeux.net/xvweb/getlast/?version=1.0",  true);
 if(!defined('Cache_dir'))
 define('Cache_dir', dirname(__FILE__).DIRECTORY_SEPARATOR.'cache'.DIRECTORY_SEPARATOR);
+include_once(dirname(__FILE__).DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'xv_config'.DIRECTORY_SEPARATOR.'xv_config.class.php');
 include_once(dirname(__FILE__).DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'Session.XVWeb.class.php');
 include_once(dirname(__FILE__).DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'operation.XVWeb.class.php');
 include_once(dirname(__FILE__).DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'db.XVWeb.class.php');

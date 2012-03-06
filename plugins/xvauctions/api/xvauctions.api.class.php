@@ -19,8 +19,9 @@ class xv_api_xvauctions {
 		include_once(ROOT_DIR.'plugins/xvauctions/libs/class.xvauctions.php');
 		$XVauctions = &$XVwebEngine->InitClass("xvauctions");
 		$category_tree = xvp()->get_category_tree($XVauctions, $URL_info['path']);
+		
 		if(empty($category_tree) &&  $auction_category != '/'){
-			return array("error"=>"Category doesnt exist", "code" => 1);
+			$auction_category = "/";
 		}
 		parse_str($URL_info['query'], $_GET);
 		include_once(ROOT_DIR.'plugins/xvauctions/fields/fields.php');
@@ -112,7 +113,8 @@ class xv_api_xvauctions {
 					$item['Cost'] = $auction['BuyNow'];
 					$item['Cost2'] = $auction['AuctionMin'];
 				}else{
-					$item['Cost'] = $auction['BuyNow'];		
+					$item['Cost'] = $auction['BuyNow'];				
+					$item['Cost2'] = $auction['Auction'];				
 				}
 			}
 			$result[] = $item;

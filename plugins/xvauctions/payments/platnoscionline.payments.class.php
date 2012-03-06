@@ -8,18 +8,32 @@
 ****************   All rights reserved             *************************
 ***************************************************************************/
 
-class xvpayments_method_platnoscionline extends xvpayments_method {
+class xva_platnosci_online_config extends xv_config {
+	public function init_fields(){
+		return array(
+			"enabled" => true,
+			"ips" => "195.150.9.37",
+			"seller_id" => 111111,
+			"key" => "aaaaaaaaaaaaaaaaaaaaaaa",
+			"provision" => 0.95,
+		);
+	}
+}
+
+
+class xv_payments_method_platnoscionline extends xv_payments_method {
 	var $config_file = "platnoscionline.payments";
 	var $Data;
 
 	public function __construct(&$Xvweb) {
 		$this->Data['XVweb'] = &$Xvweb;
+		$this->config = new xva_platnosci_online_config();
 		$GLOBALS['Debug']['Classes'][] = array("ClassName"=>get_class(), "File"=>__FILE__, "Time"=>microtime(true), "MemoryUsage"=>memory_get_usage());
 	}
 	public function worker(){
-	$config_sellerid = $this->Data['XVweb']->Config($this->config_file)->find("sellerid value")->text();
-	$config_provision =  $this->Data['XVweb']->Config($this->config_file)->find("provision value")->text();
-	$config_key = $this->Data['XVweb']->Config($this->config_file)->find("key value")->text();
+	$config_sellerid = $this->config->seller_id;
+	$config_provision =  $this->config->provision;
+	$config_key = $this->config->key;
 	$bkey = pack('H*' , $config_key);
 	$control = urlencode($_POST["control"]);
 	$id_transakcji = $_POST["tr_id"];
@@ -59,9 +73,9 @@ class xvpayments_method_platnoscionline extends xvpayments_method {
 	public function form(){
 	include_once(dirname(__FILE__).'/data/paypal.inc.php');
 	
-	$config_sellerid = $this->Data['XVweb']->Config($this->config_file)->find("sellerid value")->text();
-	$config_provision =  $this->Data['XVweb']->Config($this->config_file)->find("provision value")->text();
-	$config_key = $this->Data['XVweb']->Config($this->config_file)->find("key value")->text();
+	$config_sellerid = $this->config->seller_id;
+	$config_provision =  $this->config->provision;
+	$config_key = $this->config->key;
 
 	if(isset($_POST['amount'])){
 		$user_info = $this->Data['XVweb']->DataBase->pquery('SELECT {Users:*} FROM {Users} WHERE {Users:ID} = '.$this->Data['XVweb']->Session->Session("Logged_ID").' LIMIT 1')->fetch(PDO::FETCH_ASSOC);
@@ -111,7 +125,7 @@ class xvpayments_method_platnoscionline extends xvpayments_method {
 	</script>';
 	}
 	public function button(){
-		$config_enabled = $this->Data['XVweb']->Config($this->config_file)->find("enabled value")->text();
+		$config_enabled = $this->config->enabled;
 		$config_enabled = ($config_enabled == "true" ? true : false );
 		if(!$config_enabled)
 			return null;

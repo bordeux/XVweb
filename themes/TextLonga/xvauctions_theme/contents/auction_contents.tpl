@@ -153,7 +153,7 @@
 								<input type="hidden" name="auction" value="{$auction_info.ID}" />
 								<input type="hidden" name="type" value="auction" />
 									<div>{"xca_not_less_than"|xvLang} {$auction_info.Auction|number_format:2:'.':' '} {"xca_coin_type"|xvLang}</div>
-										{literal}<div><input type="text" name="auction_val" pattern="((([0-9]){0,10})|(([0-9]){0,10}(\.)([0-9]){2}))" /></div>{/literal}
+										{literal}<div><input type="text" name="offer" pattern="((([0-9]){0,10})|(([0-9]){0,10}(\.)([0-9]){2}))" /></div>{/literal}
 									<input type="submit" value="{'xca_bid'|xvLang}" />
 								</form>
 								

@@ -1,7 +1,7 @@
 <?php
 /***************************************************************************
 ****************   Bordeux.NET Project             *************************
-****************   File name :   view.php          *************************
+****************   File name :   xv.php            *************************
 ****************   Start     :   22.05.2007 r.     *************************
 ****************   License   :   LGPL              *************************
 ****************   Version   :   1.0               *************************
@@ -75,10 +75,11 @@ class XVTemplate {
 			$Smarty->assign('MetaTags', $myVar); 
 	}
 }
-
+// DEFINED
 DEFINE('SMARTY_DIR', getcwd().DIRECTORY_SEPARATOR.'core'.DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'smarty3'.DIRECTORY_SEPARATOR);
 DEFINE('Cache_dir', getcwd().DIRECTORY_SEPARATOR.'tmp'.DIRECTORY_SEPARATOR);
 DEFINE('ROOT_DIR', getcwd().DIRECTORY_SEPARATOR);
+DEFINE('XV_CONFIG_DIR', getcwd().DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR);
 DEFINE('APPS_DIR', getcwd().DIRECTORY_SEPARATOR.'plugins'.DIRECTORY_SEPARATOR);
 
 
@@ -136,12 +137,15 @@ $URLS['Catalog'] = substr(substr($_SERVER['PHP_SELF'], 0,  stripos($_SERVER['PHP
 	else
 $URLS['Catalog'] = $XVwebEngine->Config("config")->find("config catalog")->text();
 
+if(empty($_SERVER[PHP_PathInfo])){
+	$_SERVER[PHP_PathInfo] = $XVwebEngine->Config("config")->find('config indexpage')->text();
+}
 
 if(empty($URLS['Site'])) 			$URLS['Site']			= 'http'.(isset($_SERVER['HTTPS'])?'s':'').'://'.$_SERVER['HTTP_HOST']."/".$URLS['Catalog'];
 if(empty($URLS['Path']))	        $URLS['Path']	        = $_SERVER[PHP_PathInfo];
 if(empty($URLS['ThemeCatalog']))	$URLS['ThemeCatalog']	= $URLS['Site'].'themes/';
 if(empty($URLS['JSCatalog']))		$URLS['JSCatalog']		= $URLS['Site'].'themes/';
-if(empty($URLS['Script']))			$URLS['Script']			= $URLS['Site'].($XVwebEngine->Config("config")->find("config rewrite")->text() == "true" ?"":"view.php/");
+if(empty($URLS['Script']))			$URLS['Script']			= $URLS['Site'].($XVwebEngine->Config("config")->find("config rewrite")->text() == "true" ?"":"xv.php/");
 if(empty($URLS['Theme']))			$URLS['Theme']			= $URLS['ThemeCatalog'].$ThemeSelected."/";
 if(empty($URLS['Avats']))			$URLS['Avats']			= $URLS['Site'].'files/avants/';
 if(empty($UploadDir))		       	$UploadDir		        = getcwd().DIRECTORY_SEPARATOR.'files'.DIRECTORY_SEPARATOR;
@@ -150,6 +154,7 @@ $URLS['Prefix'] 	= $XVwebEngine->ReadPrefix($URLS['PathInfo']);
 $XVwebEngine->Date['UrlSite'] =		$URLS['Site'];
 $XVwebEngine->Date['URLS'] =		$URLS;
 $URLS['JSCatalog']		= $URLS['JSCatalog'].$ThemeSelected."/";
+
 
 @header('Access-Control-Allow-Origin: '.$URLS['Site']);
 //Plugin:onReady
@@ -295,12 +300,11 @@ $Prefix =$XVwebEngine->Plugins()->Menager()->prefix($URLS['Prefix']);
 //Plugin:preLoad
 if($XVwebEngine->Plugins()->Menager()->event("preload")) eval($XVwebEngine->Plugins()->Menager()->event("preload")); 
 //!Plugin:preLoad
-
-if($Prefix)
-require($Prefix);
-else
-require("pages/articles.php");
-
+if($Prefix){
+	require($Prefix);
+}else{
+	require("pages/articles.php");
+}
 //Plugin:onLoad
 if($XVwebEngine->Plugins()->Menager()->event("onload")) eval($XVwebEngine->Plugins()->Menager()->event("onload")); 
 //!Plugin:onLoad

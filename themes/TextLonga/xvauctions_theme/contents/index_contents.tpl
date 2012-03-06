@@ -35,21 +35,30 @@
 	<div class="xvauction-right">
 		<div class="xvauction-index">
 			<div class="xvauction-index-right">	
-					<a href="http://titek.pl/XVweb.git/auctions/Dla_Dzieci/Odziez/" class="xvauction-index-category">
+			{foreach from=$xva_index_page_categories item=category}
+					<a href="{$category.link}" class="xvauction-index-category">
+						<div>
+							<img src="{$URLS.Site}plugins/xvauctions/index/icons/{$category.icon}" />
+							<h3>{$category.title}</h3>
+							<span>{$category.desc}</span>
+						</div>
+					</a>	
+			{/foreach}
+					<a href="http://titek.pl/XVweb.git/auctions/" class="xvauction-index-category">
 						<div>
 							<img src="{$URLS.Site}plugins/xvauctions/index/icons/new.png" />
 							<h3>Nowe</h3>
 							<span>Lorem ipsum dolor sit amet consect</span>
 						</div>
 					</a>			
-					<a href="http://titek.pl/XVweb.git/auctions/Dla_Dzieci/Odziez/" class="xvauction-index-category xvauction-index-selected">
+					<a href="http://titek.pl/XVweb.git/auctions/" class="xvauction-index-category xvauction-index-selected">
 						<div>
 							<img src="{$URLS.Site}plugins/xvauctions/index/icons/star.png" />
 							<h3>Polecane</h3>
 							<span>Lorem ipsum dolor sit amet consect</span>
 						</div>
 					</a>
-					<a href="http://titek.pl/XVweb.git/auctions/Dla_Dzieci/Odziez/" class="xvauction-index-category">
+					<a href="http://titek.pl/XVweb.git/auctions/?sortby=end&sort=asc" class="xvauction-index-category">
 						<div>
 							<img src="{$URLS.Site}plugins/xvauctions/index/icons/new.png" />
 							<h3>Kończące się</h3>

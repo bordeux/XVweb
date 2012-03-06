@@ -15,8 +15,5 @@
 *********************http://www.bordeux.NET/Xvweb***************************
 ***************************************************************************/
 if(!isset($XVwebEngine))
-include_once('view.php');
-
-$PathInfo = $XVwebEngine->Config("config")->find('config indexpage')->text();
-include_once('pages/articles.php');
+	include_once('xv.php');
 ?>

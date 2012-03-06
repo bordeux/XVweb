@@ -9,17 +9,17 @@
 ***************************************************************************/
 
 /**
- * xvpayments_method
+ * xv_payments_method
  * To jest szablon dla pluginów dotyczących nowych metod płatności. Aby stworzyć nową metodę płatnośći, należy utworzyć nowy plik 
  * w folderze XVweb/xvauctions/payments/ o nazwie NAZWA_MODULU.payments.class.php a w pliku zadeklarować klasę na wzór:
 	 @code
-	 xvpayments_method_NAZWA_MODULU  extends xvpayments_method {
+	 xv_payments_method_NAZWA_MODULU  extends xv_payments_method {
 		var $config_file = "your.config"; //tutaj nazwa twojego pliku konfiguracyjnego z folderu XVweb/config , bez rozszerzenia .xml
 	 }
 	 @endcode
 	 W tej klasie tylko podmieniasz metody, które są ci potrzebne. Więcej o nich poniżej.
  */
-class xvpayments_method {
+class xv_payments_method {
 	/**
 	 * Tutaj nazwa twojego pliku konfiguracyjnego z folderu XVweb/config , bez rozszerzenia .xml
 	 */

@@ -7,13 +7,27 @@
 ****************   Author  : Krzysztof Bednarczyk  *************************
 ****************   All rights reserved             *************************
 ***************************************************************************/
+class xva_przelewy24_config extends xv_config {
+	public function init_fields(){
+		return array(
+			"enabled" => true,
+			"test_mode" => false,
+			"seller_id" => 111111,
+			"payment_key" => "aaaaaaaaaaaaaaaaaaaaaaa",
+			"lang" => "PL",
+			"provision" => 0.95,
+			"currency" => "PLN",
+		);
+	}
+}
 
-class xvpayments_method_przelewy24 extends xvpayments_method{
+class xv_payments_method_przelewy24 extends xv_payments_method{
 	var $config_file = "przelewy24.payments";
 	var $Data;
 
 	public function __construct(&$Xvweb) {
 		$this->Data['XVweb'] = &$Xvweb;
+		$this->config = new xva_przelewy24_config();
 		$GLOBALS['Debug']['Classes'][] = array("ClassName"=>get_class(), "File"=>__FILE__, "Time"=>microtime(true), "MemoryUsage"=>memory_get_usage());
 	}
 	function p24_weryfikuj($p24_id_sprzedawcy, $p24_session_id, $p24_order_id, $p24_kwota=""){
@@ -48,10 +62,9 @@ class xvpayments_method_przelewy24 extends xvpayments_method{
 
 
 	public function worker(){
-			$config_sellerid = $this->Data['XVweb']->Config($this->config_file)->find("sellerid value")->text();
-			$config_testmode = $this->Data['XVweb']->Config($this->config_file)->find("testmode value")->text();
-			$config_testmode ($config_testmode == "true" ? true : false);
-			$config_provision =  $this->Data['XVweb']->Config($this->config_file)->find("provision value")->text();
+			$config_sellerid = $this->config->seller_id;
+			$config_testmode = $this->config->test_mode;
+			$config_provision =  $this->config->provision;
 			$session_id = $_POST["p24_session_id"];
 			$order_id = $_POST["p24_order_id"];
 			$id_sprzedawcy = $config_sellerid;
@@ -79,14 +92,13 @@ class xvpayments_method_przelewy24 extends xvpayments_method{
 	public function form(){
 	include_once(dirname(__FILE__).'/data/paypal.inc.php');
 	
-	$config_sellerid = $this->Data['XVweb']->Config($this->config_file)->find("sellerid value")->text();
-	$config_currency = $this->Data['XVweb']->Config($this->config_file)->find("currency value")->text();
-	$config_testmode = $this->Data['XVweb']->Config($this->config_file)->find("testmode value")->text();
-	$config_testmode = ($config_testmode == "true" ? true : false);
-	$config_provision =  $this->Data['XVweb']->Config($this->config_file)->find("provision value")->text();
-	$config_paymentkey = $this->Data['XVweb']->Config($this->config_file)->find("paymentkey value")->text();
-	$config_lang = $this->Data['XVweb']->Config($this->config_file)->find("lang value")->text();
-	$config_testmode = (int) $this->Data['XVweb']->Config($this->config_file)->find("testmode value")->text();
+	$config_sellerid = $this->config->seller_id;
+	$config_currency = $this->config->currency;
+	$config_testmode = $this->config->test_mode;
+	$config_provision =  $this->config->provision;
+	$config_paymentkey = $this->config->payment_key;
+	$config_lang = $this->config->lang;
+	$config_testmode = (int) $this->config->test_mode;
 	if(isset($_POST['amount'])){
 		$user_info = $this->Data['XVweb']->DataBase->pquery('SELECT {Users:*} FROM {Users} WHERE {Users:ID} = '.$this->Data['XVweb']->Session->Session("Logged_ID").' LIMIT 1')->fetch(PDO::FETCH_ASSOC);
 			if(empty($user_info)){
@@ -140,8 +152,7 @@ class xvpayments_method_przelewy24 extends xvpayments_method{
 	</script>';
 	}
 	public function button(){
-		$config_enabled = $this->Data['XVweb']->Config($this->config_file)->find("enabled value")->text();
-		$config_enabled = ($config_enabled == "true" ?  true : false);
+		$config_enabled = $this->config->enabled;
 		if(!$config_enabled)
 			return null;
 			

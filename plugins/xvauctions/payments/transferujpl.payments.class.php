@@ -7,13 +7,25 @@
 ****************   Author  : Krzysztof Bednarczyk  *************************
 ****************   All rights reserved             *************************
 ***************************************************************************/
+class xva_transferuj_pl_config extends xv_config {
+	public function init_fields(){
+		return array(
+			"enabled" => true,
+			"ips" => "*",
+			"seller_id" => 111111,
+			"secruity_code" => "aaaaaaaaaaaaaaaaaaaaaaa",
+			"provision" => 0.95,
+		);
+	}
+}
 
-class xvpayments_method_transferujpl extends xvpayments_method{
+class xv_payments_method_transferujpl extends xv_payments_method{
 	var $config_file = "transferujpl.payments";
 	var $Data;
 
 	public function __construct(&$Xvweb) {
 		$this->Data['XVweb'] = &$Xvweb;
+		$this->config = new xva_transferuj_pl_config();
 		$GLOBALS['Debug']['Classes'][] = array("ClassName"=>get_class(), "File"=>__FILE__, "Time"=>microtime(true), "MemoryUsage"=>memory_get_usage());
 	}
 	
@@ -21,10 +33,10 @@ class xvpayments_method_transferujpl extends xvpayments_method{
 
 		if(empty($_POST))
 			exit("empty POST data");
-		$config_ips = $this->Data['XVweb']->Config($this->config_file)->find("ips value")->text()	;
-		$config_seller_id = $this->Data['XVweb']->Config($this->config_file)->find("sellerid value")->text();	
-		$config_secruity_code = $this->Data['XVweb']->Config($this->config_file)->find("secruitycode value")->text();
-		$config_provision = $this->Data['XVweb']->Config($this->config_file)->find("provision value")->text();
+		$config_ips = $this->config->ips;
+		$config_seller_id = $this->config->seller_id;	
+		$config_secruity_code = $this->config->secruity_code;
+		$config_provision =$this->config->provision;
 		if(trim($config_ips) != "*"){
 			if(strpos($config_ips, $_SERVER['REMOTE_ADDR']) == false){
 				$_POST['error'] = "hack by ".$_SERVER['REMOTE_ADDR'];
@@ -70,9 +82,9 @@ $_POST['md5sum'];
 	}
 	public function form(){
 	
-		$config_seller_id = $this->Data['XVweb']->Config($this->config_file)->find("sellerid value")->text();
-		$config_secruity_code = $this->Data['XVweb']->Config($this->config_file)->find("secruitycode value")->text();
-		$config_provision = $this->Data['XVweb']->Config($this->config_file)->find("provision value")->text();
+		$config_seller_id = $this->config->seller_id;
+		$config_secruity_code = $this->config->secruity_code;
+		$config_provision = $this->config->provision;
 		
 	$user_info = $this->Data['XVweb']->DataBase->pquery('SELECT {Users:*} FROM {Users} WHERE {Users:ID} = '.$this->Data['XVweb']->Session->Session("Logged_ID").' LIMIT 1')->fetch(PDO::FETCH_ASSOC);
 		if(empty($user_info)){
@@ -113,8 +125,7 @@ $_POST['md5sum'];
 	return $result;
 	}
 	public function button(){
-		$config_enabled = $this->Data['XVweb']->Config($this->config_file)->find("enabled value")->text();
-		$config_enabled = ($config_enabled == "true" ? true : false);
+		$config_enabled = $this->config->enabled;
 		if(!$config_enabled)
 			return null;
 			

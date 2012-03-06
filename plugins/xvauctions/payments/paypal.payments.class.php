@@ -8,12 +8,24 @@
 ****************   All rights reserved             *************************
 ***************************************************************************/
 
-class xvpayments_method_paypal extends xvpayments_method {
+class xva_paypal_config extends xv_config {
+	public function init_fields(){
+		return array(
+			"enabled" => true,
+			"email" => "dev@dev.dev",
+			"test_mode" =>true,
+			"currency" => "USD",
+			"provision" => 3.20,
+		);
+	}
+}
+class xv_payments_method_paypal extends xv_payments_method {
 	var $config_file = "paypal.payments";
 	var $Data;
 
 	public function __construct(&$Xvweb) {
 		$this->Data['XVweb'] = &$Xvweb;
+		$this->config = new xva_paypal_config();
 		$GLOBALS['Debug']['Classes'][] = array("ClassName"=>get_class(), "File"=>__FILE__, "Time"=>microtime(true), "MemoryUsage"=>memory_get_usage());
 	}
 	
@@ -21,11 +33,10 @@ class xvpayments_method_paypal extends xvpayments_method {
 		include_once(dirname(__FILE__).'/data/paypal.inc.php');
 		$paypal=new paypal();
 		$paypal->log=1; 
-		$config_provision = $this->Data['XVweb']->Config($this->config_file)->find("provision value")->text();
-		$config_email = $this->Data['XVweb']->Config($this->config_file)->find("email value")->text();
-		$config_currency = $this->Data['XVweb']->Config($this->config_file)->find("currency value")->text();
-		$config_testmode = $this->Data['XVweb']->Config($this->config_file)->find("testmode value")->text();
-		$config_testmode = ($config_testmode == "true" ? true : false );
+		$config_provision = $this->config->provision;
+		$config_email = $this->config->email;
+		$config_currency = $this->config->currency;
+		$config_testmode = $this->config->test_mode;
 		if($config_testmode)
 			$paypal->test_mode();
 			if($paypal->validate_ipn()){
@@ -62,10 +73,10 @@ class xvpayments_method_paypal extends xvpayments_method {
 	public function form(){
 	include_once(dirname(__FILE__).'/data/paypal.inc.php');
 	
-	$config_email = $this->Data['XVweb']->Config($this->config_file)->find("email value")->text();
-	$config_currency = $this->Data['XVweb']->Config($this->config_file)->find("currency value")->text();
-	$config_testmode = (int) $this->Data['XVweb']->Config($this->config_file)->find("testmode value")->text();
-	$config_provision =  $this->Data['XVweb']->Config($this->config_file)->find("provision value")->text();
+	$config_email = $this->config->email;
+	$config_currency = $this->config->currency;
+	$config_testmode = (int) $this->config->test_mode;
+	$config_provision =  $this->config->provision;
 	if(isset($_POST['amount'])){
 		$user_info = $this->Data['XVweb']->DataBase->pquery('SELECT {Users:*} FROM {Users} WHERE {Users:ID} = '.$this->Data['XVweb']->Session->Session("Logged_ID").' LIMIT 1')->fetch(PDO::FETCH_ASSOC);
 			if(empty($user_info)){
@@ -117,8 +128,7 @@ class xvpayments_method_paypal extends xvpayments_method {
 	</script>';
 	}
 	public function button(){
-		$config_enabled = $this->Data['XVweb']->Config($this->config_file)->find("enabled value")->text();
-		$config_enabled = ($config_enabled == "true" ? true : false);
+		$config_enabled = $this->config->enabled;
 		if(!$config_enabled)
 			return null;
 			
