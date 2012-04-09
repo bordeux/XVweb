@@ -24,12 +24,16 @@ $plugin_name = strtolower($XVwebEngine->GetFromURL($PathInfo, 2));
 $class_name = strtolower($XVwebEngine->GetFromURL($PathInfo, 3));
 $class_mode = strtolower($XVwebEngine->GetFromURL($PathInfo, 4));
 $apis_dir = dirname(__FILE__).'/apis/';
-
+$plugins_config = new xv_plugins_config();
 if(empty($plugin_name) || empty($class_name)){
 	echo "<h3>APIs</h3>";
 	echo "<hr />";
 	echo "<ul>";
-		foreach (glob((ROOT_DIR.'plugins/*/api/*.api.class.php')) as $filename) {
+	$plugins_list = array();
+		foreach($plugins_config->get_all() as $val)
+				$plugins_list[] = $val["name"];
+	
+		foreach (glob((ROOT_DIR.'plugins/{'.implode(",", $plugins_list).'}/api/*.api.class.php'),GLOB_BRACE) as $filename) {
 			$class_name = basename($filename);
 			$plugin_name = basename(realpath(dirname($filename).'/..'));
 			$class_name = str_replace('.api.class.php', '', $class_name);
@@ -42,6 +46,11 @@ $class_name = strtolower(str_replace(array("." , "/", "\\"),'',$class_name));
 $class_file = ROOT_DIR.'plugins/'.$plugin_name.'/api/'.$class_name.'.api.class.php';
 
 if(!file_exists($class_file)){
+	header("location: ".$URLS['Script'].'api/');
+	exit;
+}
+
+if(!isset($plugins_config->{$plugin_name})){
 	header("location: ".$URLS['Script'].'api/');
 	exit;
 }

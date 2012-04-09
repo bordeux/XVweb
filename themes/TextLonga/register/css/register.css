@@ -1,0 +1,36 @@
+.xv-register-content {
+	width: 80%;
+	background: #E1F6FC;
+	margin:auto;
+	border: 1px solid #62D9FC;
+	padding: 40px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+}
+.xv-register-content table {
+font-size: 24px;
+font-weight: solid;
+color: #474747;
+width: 60%;
+margin: auto;
+}
+.xv-register-content table tr td {
+padding: 10px;
+}
+.xv-register-content span {
+font-size: 9px;
+max-width: 240px;
+display:block;
+}
+.xv-register-content input {
+width: 250px;
+height: 24px;
+border: 1px solid #D0DB00;
+-webkit-border-radius: 10px;
+-moz-border-radius: 10px;
+border-radius: 10px;
+}
+.xv-register-content input:focus {
+background : #F7FF5E;
+}

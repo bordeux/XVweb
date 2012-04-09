@@ -474,7 +474,7 @@ footer {
 /*------------------------------------------------------------------------------------------------------------------- forms -----*/
 
 
-.LightBulbTip {
+.LightBulbTip, .xv-info {
 	background:#FEFAE4 url(../img/Lightbulb.png) no-repeat right;
 	border:1px solid #F6E174; 
 	padding:10px;

@@ -1,1 +1,0 @@
-{include file="comment_edit_tool.tpl" inline}

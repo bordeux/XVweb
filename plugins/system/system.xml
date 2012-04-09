@@ -9,7 +9,6 @@
 	<config>
 		<prefix prefix="search" include="pages/search.php"/>
 		<prefix prefix="write" include="pages/write.php"/>
-		<prefix prefix="register" include="pages/register.php"/>
 		<prefix prefix="openid" include="pages/openid.php"/>
 		<prefix prefix="online" include="pages/online.php"/>
 		<prefix prefix="mainpage" include="index.php"/>

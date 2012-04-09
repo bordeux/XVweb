@@ -39,9 +39,7 @@ LoadLang('user');
 	$Smarty->assign('ContextEdit',  $ContextEdit);
 	$Smarty->assign('Title', $GLOBALS['Language']['User'].': '.htmlspecialchars($UserFromUrl,  ENT_QUOTES));
 	$Smarty->assign('SiteTopic', $GLOBALS['Language']['User'].': '.htmlspecialchars($UserFromUrl,  ENT_QUOTES));
-	$Smarty->assign('User', $XVwebEngine->ReadUser);
-	$Smarty->assign('LogedUser', $XVwebEngine->Session->Session('Logged_Logged'));
-	$Smarty->assign('RightBox', $XVwebEngine->ReadUser['Nick']);
+	$Smarty->assign('profile', $XVwebEngine->ReadUser);
 	
 	$Smarty->assign('MiniMap', array(
 			array("Url"=>"/Users/", "Name"=>$Language['Users']),
@@ -56,7 +54,7 @@ LoadLang('user');
 	$widgets_css = array();
 	
 	
-	foreach (glob(dirname(__FILE__).'/modules/*.widgets.users.php') as $widget_file) {
+	foreach (glob(dirname(__FILE__).'/modules/widgets/*/*.widgets.users.php') as $widget_file) {
 		$widget = substr(basename($widget_file), 0, -18);
 		$widget_class_name = "xv_users_modules_".$widget;
 			include_once($widget_file);
@@ -73,8 +71,8 @@ LoadLang('user');
 	}
 	
 	$Smarty->assignByRef('widgets_html',  $widgets_html);
-	
-	$Smarty->display('users_show.tpl');
+	$Smarty->assign('users_mode',  "profile");
+	$Smarty->display('users/index.tpl');
 	
 end:
 ?>

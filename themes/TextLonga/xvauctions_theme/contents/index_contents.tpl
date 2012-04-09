@@ -36,7 +36,7 @@
 		<div class="xvauction-index">
 			<div class="xvauction-index-right">	
 			{foreach from=$xva_index_page_categories item=category}
-					<a href="{$category.link}" class="xvauction-index-category">
+					<a href="{$category.link}" class="xvauction-index-category{if $category.selected} xvauction-index-selected{/if}">
 						<div>
 							<img src="{$URLS.Site}plugins/xvauctions/index/icons/{$category.icon}" />
 							<h3>{$category.title}</h3>
@@ -44,7 +44,7 @@
 						</div>
 					</a>	
 			{/foreach}
-					<a href="http://titek.pl/XVweb.git/auctions/" class="xvauction-index-category">
+					{*<a href="http://titek.pl/XVweb.git/auctions/" class="xvauction-index-category">
 						<div>
 							<img src="{$URLS.Site}plugins/xvauctions/index/icons/new.png" />
 							<h3>Nowe</h3>
@@ -64,7 +64,7 @@
 							<h3>Kończące się</h3>
 							<span>Lorem ipsum dolor sit amet consect</span>
 						</div>
-					</a>
+					</a>*}
 			</div>
 		
 		<div style="clear:both;"></div>
