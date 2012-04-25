@@ -165,5 +165,5 @@
   'WriteURL' => 'Adres artykułu (przykład: /Programowanie/)',
   'Yes' => 'Tak',
   'Zoom' => 'Powiększ',
-  'ZoomOut' => 'Pomniejsz',
+  'ZoomOut' => 'Pomniejsz',  'SingUp' => 'Rejestracja',  'SingIn' => 'Zaloguj',
 )); ?>

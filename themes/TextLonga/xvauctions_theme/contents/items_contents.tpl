@@ -22,6 +22,7 @@
 	
 	{$SubMode=0}
 		<div class="xvauction-sidebar-item">
+		{settings url="XVauctions/Categories/" mleft=200}
 			<div class="xvauction-sidebar-item-title">{"xca_categories"|xvLang}</div>
 			<div class="xvauction-sidebar-item-content">
 				<ul class="xvauction-categories">
@@ -130,6 +131,7 @@
 				{foreach from=$auctions_list item=auction}
 					<tr>
 						<td class="items-thumbnail">
+						{settings url="XVauctions/Auction/{$auction.ID}/"}
 							<a href="{$URLS.Auction}/{$auction.ID}/">
 							{if $auction.Thumbnail}
 								<img src="{$URLS.Thumbnails}/{$auction.Thumbnail}" style="width:64; height:48px;" />

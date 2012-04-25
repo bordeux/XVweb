@@ -18,7 +18,44 @@ header("Cache-Control: no-cache, must-revalidate");
 if(!isset($XVwebEngine)){
 	header("location: http://".$_SERVER['HTTP_HOST']."/");
 }
-$Smarty->assign('users_mode',  "edit");
-$Smarty->display('users/index.tpl');
+
+	$Smarty->assign('ContextEdit',  $ContextEdit);
+	$Smarty->assign('Title', $GLOBALS['Language']['User'].': '.htmlspecialchars($user_data->User,  ENT_QUOTES));
+	$Smarty->assign('SiteTopic', $GLOBALS['Language']['User'].': '.htmlspecialchars($user_data->User,  ENT_QUOTES));
+	$Smarty->assign('profile', $user_data->User);
 	
+	$Smarty->assign('MiniMap', array(
+			array("Url"=>"/Users/", "Name"=>$Language['Users']),
+			array("Url"=>"/Users/".urlencode($user_data->User).'/', "Name"=>$user_data->User),
+			array("Url"=>"/Users/".urlencode($user_data->User).'/Edit/', "Name"=>"Edit"),
+		)
+	);
+	
+	include_once(dirname(__FILE__).'/libs/fields_interface.php');
+	
+	$field_class = array();
+	$fields_html = array();
+	$fields_css = array();
+	
+	
+	foreach (glob(dirname(__FILE__).'/modules/fields/*/*.fields.users.php') as $field_file) {
+	
+		$field = substr(basename($field_file), 0, -17);
+		$field_class_name = "xv_users_fields_".$field;
+			include_once($field_file);
+			if (class_exists($field_class_name)) {
+				$field_class[$field] = new $field_class_name();
+			}
+	}
+	
+	$selected_big_fields = array("password");
+	foreach($selected_big_fields  as $big_field){
+		if(isset($field_class[$big_field]) && method_exists($field_class[$big_field], 'field')){
+			$fields_html[] = xvp()->field($field_class[$big_field]);
+		}
+	}
+	
+	$Smarty->assignByRef('fields_html',  $fields_html);
+	$Smarty->assign('users_mode',  "edit");
+	$Smarty->display('users/index.tpl');
 ?>

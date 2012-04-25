@@ -309,5 +309,11 @@ $(function () {
 					_gaq.push(['_trackEvent', 'Window', 'domError', ("MGS: "+msg+" - Line: "+line +" , URL: "+ url)]);
 				};
 			};
+			
+			$(".xv-login-header").click(function(){
+				$('.xvlogin-login').load(URLS['Site']+'Login?ajax=true&rand='+Math.random(), function() {
+				 // alert('Load was performed.');
+				});
+			});
 	});
  

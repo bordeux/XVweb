@@ -1,7 +1,7 @@
 <?php
 class xv_users_modules_files  extends xv_users_modules {
 	public function widget(){
-		global $LocationXVWeb, $XVwebEngine, $URLS;
+		global $LocationXVWeb, $XVwebEngine, $URLS, $user_data;
 		include_once(ROOT_DIR.'core'.DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'Pager.php');
 		xv_append_header("
 		<style  type='text/css' media='all'>
@@ -21,7 +21,7 @@ class xv_users_modules_files  extends xv_users_modules {
 			margin: 5px;
 			}
 		</style>");
-		$files_list = $XVwebEngine->module("user_info")->get_files($XVwebEngine->ReadUser['Nick'], (int) $_GET['files_pager']);
+		$files_list = $XVwebEngine->module("user_info")->get_files($user_data->User, (int) $_GET['files_pager']);
 		$files_count = $XVwebEngine->module("user_info")->get_last_count_records();
 		$files_pager = pager(30, (int) $files_count,  "?".$XVwebEngine->AddGet(array("files_pager"=>"-npage-id-"), true), (int) $_GET['files_pager']);
 		

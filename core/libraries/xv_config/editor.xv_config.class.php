@@ -23,10 +23,13 @@ class xv_config_editor_theme {
 				<div class="xv-config-caption">'.$this->data['caption'].'</div>
 				<div class="xv-config-content">
 					'.$this->data['content'].'
+					
+					<div class="xv-config-desc">'.$this->data['desc'].'</div>
 				</div>
-				<div class="xv-config-desc">'.$this->data['desc'].'</div>
+				<div class="xv-config-clear"></div>
 			</div>
 		';
+		
 		return $html;
 	}
 	public function __toString(){
@@ -110,6 +113,7 @@ class xv_config_editor {
 			}
 			$result_html .= '</script>';
 		}	
+		return $result_html;
 	}
 	/****************** HEADER*******************************/
 	public function header_css($name, $css){

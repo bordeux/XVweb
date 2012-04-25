@@ -15,8 +15,10 @@ $(function(){
 		 $(".xvauction-index-item").fadeTo(300, 0, function() {
 			$(this).remove();
 		});
-		$.getJSON(URLS.Script+'api/xvauctions/xvauctions/json/', { "get_auctions": '["'+($(this).attr("href"))+'"]'  }, function(data) {
-			$.each(data.get_auctions.result.list , function(key, val){
+		
+	
+		$.getJSON(URLS.Script+'api/xvauctions/xvauctions/json/', (window.btoa ? { "get_auctions_b64": '["'+(window.btoa($(this).attr("href")))+'"]'  } : { "get_auctions": '["'+(($(this).attr("href")))+'"]'  } ), function(data) {
+			$.each((window.btoa ? data.get_auctions_b64.result.list : data.get_auctions.result.list ), function(key, val){
 			var $theme_set = $theme.clone();
 
 			$theme_set.find(".xvauction-index-title").text(val.Title);

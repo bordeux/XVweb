@@ -8,6 +8,7 @@
 	</info>
 	<config>
 		<prefix prefix="register" include="plugins/register/register.php" />
+		<prefix prefix="activate" include="plugins/register/register.php" />
 	</config>
 	<ranks>
 	</ranks>

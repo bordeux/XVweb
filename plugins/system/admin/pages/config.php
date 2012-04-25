@@ -35,13 +35,46 @@ class XV_Admin_system_config {
 		$this->URL = "System/Config/".$config_name.'/';
 		$this->id = "xva-system-config-".$config_name;
 		$this->icon = $GLOBALS['URLS']['Site'].'admin/data/xvauctions/icons/auction.png';
+		
+		if(empty($config_name)){
+		$this->title = "Config editor";
+		$this->content = '';
+		$this->URL = "System/Config/";
+		$this->id = "xva-system-config";
+		$this->icon = $GLOBALS['URLS']['Site'].'admin/data/xvauctions/icons/auction.png';
+		$this->content .= '
+<style type="text/css" media="all">
+.xv-config-url-item {
+	padding: 10px;
+	margin: 10px;
+	font-size: 12px;
+	background: rgba(227,227,227, 1);
+	border: 1px solid #9C9C9C;
+	-webkit-border-radius: 7px;
+	-moz-border-radius: 7px;
+	border-radius: 7px;
+	display:block;
+	float:left;
+	color: #707070;
+	font-weight:bold;
+}
+</style>
+<div class="xv-config-list">';
+		foreach(glob((ROOT_DIR.'config/*.config')) as $filename){
+			$file_name = pathinfo($filename, PATHINFO_FILENAME);
+			$this->content .= ' <a href="'.$URLS['Script'].'Administration/System/Config/'.$file_name.'/" class="xv-get-window xv-config-url-item">'.$file_name.'</a>';
+		}
+		$this->content .='</div>';
+			return true;
+		}
 		$plugins_config = new xv_plugins_config();
 		$plugins_list = array();
 		foreach($plugins_config->get_all() as $val)
 				$plugins_list[] = $val["name"];
 			$file_to_include = null;
-		foreach (glob((ROOT_DIR.'plugins/{'.implode(",", $plugins_list).'}/config/'.$config_name.'.config.php'),GLOB_BRACE) as $filename) {
-			$file_to_include = $filename;
+		foreach (glob((ROOT_DIR.'plugins/*'), GLOB_ONLYDIR) as $dirname) {
+			if(in_array(basename($dirname), $plugins_list) && file_exists($dirname.'/config/'.$config_name.'.config.php') )
+				$file_to_include = $dirname.'/config/'.$config_name.'.config.php';
 		}
 		if(is_null($file_to_include)){
 			$this->content = "<div class='error'>File ".$config_name.'.config.php'." not found</div>";
@@ -64,15 +97,22 @@ class XV_Admin_system_config {
 		$this->content .= '
 <style type="text/css" media="all">
 .xv-config-form {
-
 width: 800px;
 margin: auto;
 padding: 40px;
 border-radius: 10px;
-
+max-height: 500px;
+overflow-y: scroll;
+}
+.xv-config-content {
+float:left;
+width: 500px;
+}
+.xv-config-clear {
+clear:both;
 }
 .xv-config-item {
-background: rgba(71, 255, 255, 0.4);
+background: rgba(255,255,255, 0.7);
 padding: 10px;
 margin-bottom: 10px;
 border-radius: 10px;
@@ -83,14 +123,15 @@ background: red;
 .xv-config-caption {
 float: left;
 width: 180px;
-background : #19D900;
+background : #B5B3B4;
+font-weight:bold;
 padding: 10px;
 margin-right: 20px;
 border-radius: 10px;
 }
 .xv-config-desc {
 background: #90FCF2;
-margin-left: 220px;
+
 padding: 8px;
 border-radius: 10px;
 margin-top: 10px;
@@ -111,6 +152,7 @@ border: 1px solid #17B509;
 }
 </style>
 ';
+
 		$this->content .= $headers;
 		$this->content .= $form_show;
 		

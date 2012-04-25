@@ -1,10 +1,10 @@
 <?php
 class xv_users_modules_modifications  extends xv_users_modules {
 	public function widget(){
-	global $LocationXVWeb, $XVwebEngine, $URLS;
+	global $LocationXVWeb, $XVwebEngine, $URLS, $user_data;
 	include_once(ROOT_DIR.'core'.DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'Pager.php');
 	
-	$modifications_list = $XVwebEngine->module("user_info")->get_modifications($XVwebEngine->ReadUser['Nick'], (int) $_GET['mod_pager']);
+	$modifications_list = $XVwebEngine->module("user_info")->get_modifications($user_data->User, (int) $_GET['mod_pager']);
 	$modifications_count = $XVwebEngine->module("user_info")->get_last_count_records();
 	$modifications_pager =  pager(30, (int) $modifications_count,  "?".$XVwebEngine->AddGet(array("mod_pager"=>"-npage-id-"), true), (int) $_GET['mod_pager']);
 		xv_append_header("

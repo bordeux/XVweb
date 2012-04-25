@@ -17,15 +17,15 @@
 	<div id="EditPanel" class="ui-tabs ui-widget ui-widget-content">
 		<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-top">
 			<li class="ui-state-default ui-corner-top ui-state-hover ui-button-text-icon-primary ui-state-hover">
-				<a href="{$URLS.Script}Users/{$profile.Nick|escape:'url'}" title="{$language.Profile}"  id="btViewProfile" style="padding-left:20px;"> <span class="ui-icon ui-icon-person" style="margin-left:-16px;"></span> {$language.Profile}</a>
+				<a href="{$URLS.Script}Users/{$profile->User|escape:'url'}" title="{$language.Profile}"  id="btViewProfile" style="padding-left:20px;"> <span class="ui-icon ui-icon-person" style="margin-left:-16px;"></span> {$language.Profile}</a>
 			</li>
-			{if "EditOtherProfil"|perm or ( "EditProfil"|perm and $profile.Nick eq $LogedUser)}
+			{if "EditOtherProfil"|perm or ( "EditProfil"|perm and $profile->User eq $LogedUser)}
 				<li class="ui-state-default ui-corner-top ui-state-hover ui-button-text-icon-primary ui-state-hover ui-state-active">
-					<a href="{$URLS.Script}Users/{$profile.Nick|escape:'url'}/Edit/" id="btEditProfile" style="padding-left:20px;"> <span class="ui-icon ui-icon-pencil" style="margin-left:-16px;"></span>{$language.EditProfile}</a>
+					<a href="{$URLS.Script}Users/{$profile->User|escape:'url'}/Edit/" id="btEditProfile" style="padding-left:20px;"> <span class="ui-icon ui-icon-pencil" style="margin-left:-16px;"></span>{$language.EditProfile}</a>
 				</li>
 			{/if}
 			<li class="ui-state-default ui-corner-top ui-state-hover ui-button-text-icon-primary ui-state-hover">
-					<a href="{$URLS.Script}Messages/Write/?To={$profile.Nick|escape:'url'}" title="{$language.Write}" style="padding-left:20px;"><span class="ui-icon ui-icon-mail-closed" style="margin-left:-16px;"></span> {$language.Write}...</a>
+					<a href="{$URLS.Script}Messages/Write/?To={$profile->User|escape:'url'}" title="{$language.Write}" style="padding-left:20px;"><span class="ui-icon ui-icon-mail-closed" style="margin-left:-16px;"></span> {$language.Write}...</a>
 			</li>
 		</ul>
 	</div>
@@ -33,7 +33,9 @@
 <div class="xv-text-wrapper">
 <!-- TEXT -->
 <div class="xv-user-content">
-
+{foreach from=$fields_html key=k item=field_html}
+	{$field_html}
+{/foreach}
 </div>
 <!-- TEXT -->
 <div style="clear:both;"></div>
@@ -41,10 +43,7 @@
 	<div class="reklamo" id="RCenter">
 		{$smarty.capture.ADVCenter}
 	</div>
-	
-{if $LoadComment}
-	{include  file='comment.tpl' inline}
-{/if}
+
 </div>
 </div>
 <div style="clear:both;"></div>

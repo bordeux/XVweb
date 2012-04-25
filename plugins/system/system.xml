@@ -24,7 +24,6 @@
 		<prefix prefix="cron" include="pages/cron.php"/>
 		<prefix prefix="ajax" include="pages/ajax.php"/>
 		<prefix prefix="captcha" include="pages/captcha.php"/>
-		<prefix prefix="login" include="pages/login.php"/>	
 		
 		<vars var="-xv-urls-theme-xv-" php="true">$GLOBALS['URLS']['Theme'];</vars>
 		<vars var="-xv-urls-script-xv-" php="true">$GLOBALS['URLS']['Script'];</vars>

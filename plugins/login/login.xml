@@ -1,0 +1,14 @@
+<plugin>
+	<info>
+		<name>Login</name>
+		<version>1.0</version>
+		<author>Krzysztof Bednarczyk</author>
+		<url>http://www.bordeux.net</url>
+		<description>Login module</description>
+	</info>
+	<config>
+		<prefix prefix="login" include="plugins/login/login.php" />
+	</config>
+	<ranks>
+	</ranks>
+</plugin>

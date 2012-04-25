@@ -127,7 +127,7 @@ class OperationXVWeb
 
 	public function GeneratePassword($LengthPassword = 5)
 	{
-		$CharPack = "abcdefghijklmnopqrstuvwxyz0123456789";
+		$CharPack = "abcdefghijklmnpqrstuvwxyz123456789";
 		srand((double)microtime() * 1000000);
 
 		while(strlen($haslo) < $LengthPassword)

@@ -1,4 +1,15 @@
 <?php
+
+$Language['invalid_sid'] = 'Wystąpił błąd - zły kod SID został przesłany. Proszę przeładuj stronę i spróbój jeszcze raz';
+$Language['password_changed'] = 'Hasło zostało zmienione pomyślnie';
+$Language['current_password'] = 'Aktualne hasło';
+$Language['new_password'] = 'Nowe hasło';
+$Language['repeat_password'] = 'Powtórz hasło';
+$Language['invalid_password'] = 'Podałeś nieprawidłowe hasło';
+$Language['password_not_equal'] = 'Źle przepisałeś hasło';
+$Language['password_too_short'] = 'Nowe hasło jest za krótkie';
+
+
 $Language['VorName'] = 'Nazwisko';
 $Language['GaduGadu'] = 'Gadu-Gadu';
 $Language['Skype'] = 'Skype';

@@ -478,6 +478,7 @@ footer {
 	background:#FEFAE4 url(../img/Lightbulb.png) no-repeat right;
 	border:1px solid #F6E174; 
 	padding:10px;
+	color: #000;
 }
 .ErrorTip , .error, .failed {
 	background:#EF7777 url(../img/cancel.png) center no-repeat;
@@ -835,4 +836,14 @@ font-weight:bold;
 }
 .xv-comment-spambot {
 padding: 10px;
+}
+.xv-settings{
+	display:block;
+	width:16px;
+	height:16px;
+	background: url(../img/settings.png?noinclude=true) no-repeat;
+	position:absolute;
+}
+.xv-settings span {
+	display:none;
 }

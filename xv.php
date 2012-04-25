@@ -233,13 +233,15 @@ LoadLang("general");
 
 /**Uzupelnienia**/
 if(isset($_GET['LogOut']) && $_GET['LogOut']=="true"){
+	$XVwebEngine->Session->Clear();
 	$XVwebEngine->LogOut();
-	@setcookie("LogedUser", "", time() - 3600, "/");
-	@setcookie("LogedUserPass", "", time() - 3600, "/");
-	@setcookie("UnLoged", "true", time()+10, "/");
+	$past = time() - 3600;
+	foreach ( $_COOKIE as $key => $value )
+		setcookie( $key, $value, $past, '/' );
 	header("location: ".$URLS['Script'].'System//Logout/');
 	exit;
 }
+
 try {
 	$Smarty = new Smarty();
 	$Smarty->plugins_dir[] = (getcwd()).DIRECTORY_SEPARATOR.'plugins'.DIRECTORY_SEPARATOR.'smarty'.DIRECTORY_SEPARATOR;

@@ -121,7 +121,16 @@ class xv_api_xvauctions {
 		}
 		return array("list"=>$result, "count_all"=>$auctions_list[1]);
 	}
-	
+	/**
+	 * List of category: category_list, by LIKE %pattern%
+	 * Usage : get_auctions("BASE64URL")
+	 * 
+	 * @param string $b64_url
+	 * @return array
+	 */	
+	function get_auctions_b64($b64_url){
+		return $this->get_auctions(base64_decode($b64_url));
+	}
     public function __wakeup(){
        
     }

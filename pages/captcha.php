@@ -24,6 +24,9 @@ $Command = $XVwebEngine->GetFromURL($PathInfo, 2);
 switch(strtolower($Command)){
 	case "audio" :
 		CaptchaWav();
+	break;	
+	case "iframe" :
+		CaptchaHTML();
 	break;
 	default :
 		CaptchaImage();
@@ -47,7 +50,29 @@ function CaptchaImage(){
 	GetCaptchaImage($GLOBALS['XVwebEngine']->Session->Session('Captcha_code'), 30, 90);
 exit;
 }
+function CaptchaHTML(){
+global $URLS;
+echo "<!DOCTYPE html>
+<html>
+<head>
+<title>Captcha</title>
+</head>
 
+<body style='width: 200px;'>
+<div style='float:left;'><img src='".$URLS['Script']."Captcha/CaptchaImage/captcha.gif?rand=".uniqid()."' id='CaptchaImage' /></div>
+<div style='float:left;'>		
+<a tabIndex='-1' href='".$URLS['Script']."Captcha/Audio?CaptchaWav' rel='nofollow'><img src='".$URLS['Theme']."img/audio_icon.png' alt='Audio Captcha' /></a> <br />
+<a tabIndex='-1' href='?rand=".uniqid()."' >
+	<img src='".$URLS['Theme']."img/refresh_icon.png'/>
+</a>
+</div>
+
+			
+</body>
+
+</html>";
+exit;
+}
 
 
 ?>

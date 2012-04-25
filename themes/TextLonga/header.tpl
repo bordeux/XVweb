@@ -2,7 +2,7 @@
 <html>
   <head>
   {if $smarty.server.HTTP_USER_AGENT|strpos:"MSIE"}{assign var="isie" value="true"}{/if}
-<!--
+<!--{include file="functions.tpl" inline}
 	 _                   _                              _   
 	| |__   ___  _ __ __| | ___ _   ___  __  _ __   ___| |_ 
 	| '_ \ / _ \| '__/ _` |/ _ \ | | \ \/ / | '_ \ / _ \ __|
@@ -72,20 +72,7 @@
 						{if !$Session.Logged_Logged}
 						<!-- LOGOWANIE -->
 							<div class="xvlogin-login xvlogin-tohide">
-							<!-- OPENID BUTTON -->
-								<div class="xvlogin-with-ext">
-									<a href="{$URLS.Site}OpenID/" rel="nofollow" class="xvshow" data-tohide=".xvlogin-tohide" data-toshow=".xvlogin-openid"><img src="{$URLS.Theme}img/openid.png" alt="{$language.OpenID}" /></a>
-									<a href="{$URLS.Site}Facebook/?Path={$URLS.Path|substr:1}" rel="nofollow"><img src="{$URLS.Theme}img/facebook_icon.png" alt="{$language.Facebook}" /></a>
-									<a href="{$URLS.Site}GoogleID/?Path={$URLS.Path|substr:1}" rel="nofollow"><img src="{$URLS.Theme}img/google_icon.png" alt="{$language.Google}" /></a>
-								</div>
-							<!-- /OPENID BUTTON -->
-								<div id="LoginResult"></div>
-							<form action="{$URLS.Script}Login/SignIn/" method="post" class="xv-form" data-xv-result="#LoginResult">
-								<label for="xvlogin-login-input-id">{$language.Nick}:</label> <input type="text" name="LoginLogin" id="xvlogin-login-input-id"/>
-								<label for="xvlogin-password-input-id">{$language.Password}:</label> <input type="password" name="LoginPassword" id="xvlogin-password-input-id"/>
-							 <input type="checkbox" name="LoginRemember" title="{$language.RememberPassword}" id="xvlogin-remember-input-id"/>
-								<input type="submit" id="xvlogin-submit-input-id" value="{$language.Login}"/>
-							</form>
+						
 							</div>
 							<!-- /LOGOWANIE -->
 							<!-- OPENID -->
@@ -105,52 +92,6 @@
 							</form>
 							</div>
 							<!-- /RESET PASSWORD -->
-							<!-- REJESTRACJA -->
-
-							<div class="xvlogin-register xvlogin-tohide">
-							<form action="{$URLS.Site}Register/?SingUp=true" method="post" class="xvlogin-register-form">
-								<div class="xvlogin-register-result error" style="display:none;"></div>
-								<table>
-									<tr>
-										<td><label for="xvlogin-login-input-id">{$language.Nick}:</label></label></td>
-										<td><input type="text" name="register[User]" id="xvlogin-login-input-id"/></td>										<td><label for="xvlogin-login-input-id">{$language.Mail}:</label></label></td>
-										<td><input type="text" name="register[Mail]" id="xvlogin-login-input-id"/></td>
-
-									</tr>
-									<tr>
-										<td><label for="xvlogin-password-input-id">{$language.Password}:</label></td>
-										<td><input type="password" name="register[Password]" id="xvlogin-password-input-id"/></td>
-										<td><label for="xvlogin-password-input-id">{$language.RewritePassword}:</label></td> <!-- language! -->
-										<td><input type="password" name="register[RPassword]" id="xvlogin-password-input-id"/></td>
-									</tr>
-									<tr>
-										<td style="vertical-align:top;"><label for="xvlogin-password-input-id">Captcha:</label></td>
-										<td style="vertical-align:top;">
-										<div style='float: left;'>
-											<div style='float: left; vertical-align:middle;'>
-												<img src='{$URLS.Script}Captcha/CaptchaImage/captcha.gif?rand={math equation="rand(10,1000)"}' id='CaptchaImage' />
-											
-											<a href='{$URLS.Script}Captcha/Audio?CaptchaWav' rel="nofollow"><img src='{$URLS.Theme}img/audio_icon.png' alt="Audio Captcha" /></a>
-	
-											<a href='#' class="xvlogin-register-captcha-refresh" rel="nofollow" data-captcha="#CaptchaImage">
-												<img src='{$URLS.Theme}img/refresh_icon.png'/>
-											</a>
-											</div>
-										</div>
-</td>
-										<td style="vertical-align:top;"><label for="xvlogin-password-input-id">Kod z obrazka:</label></td> <!-- language! -->
-										<td style="vertical-align:top;"><input type="text" name="register[Captcha]" id="xvlogin-password-input-id"/></td>
-									</tr>
-									<tr>
-										<td></td>
-										<td></td>
-										<td><input type="submit" value="{$language.Send}" id="xvlogin-login-input-id"/></td>										
-
-									</tr>
-								</table>
-								</form>
-							</div>
-							<!-- /REJESTRACJA -->
 						{/if}
 						<div class="xvlogin-hide"><a href="#hide" class="xvshow" rel="nofollow" data-tohide=".xvlogin-tohide"></a></div>
 						</div>
@@ -162,7 +103,7 @@
 						{$xv_panel_links}
 						<a href="?LogOut=true" class="xv-confirm-link" data-xv-question="Czy napewno chcesz się wylogować? ">{$language.LogOut}</a> 
 					{else}
-						<a href="{$URLS.Script}Login/" rel="nofollow" class="xvshow" data-tohide=".xvlogin-tohide" data-toshow=".xvlogin-login">Zaloguj</a> | <a href="{$URLS.Script}Register/" rel="nofollow" class="xvshow" data-tohide=".xvlogin-tohide" data-toshow=".xvlogin-register">Rejestracja</a>
+						<a href="{$URLS.Script}Login/" rel="nofollow" class="xvshow xv-login-header" data-tohide=".xvlogin-tohide" data-toshow=".xvlogin-login">{"SingIn"|xvLang}</a> | <a href="{$URLS.Script}Register/" rel="nofollow">{"SingUp"|xvLang}</a>
 					{/if}
 					</div>
 					</div>

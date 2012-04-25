@@ -20,30 +20,30 @@ if(!isset($XVwebEngine)){
 }
 
 LoadLang('user');
+include_once(ROOT_DIR.'plugins/users/libs/users.class.php');
 
-	if(!$XVwebEngine->ReadUser($UserFromUrl)){
+$user_class = new xv_users($XVwebEngine);
+$user_data = xvp()->get_user($user_class, $UserFromUrl);
+
+	if(empty($user_data)){
 		header("location: ".$URLS['Script'].'System/UserDoesNotExist/');
 		exit;
 	}
-	if(isset($_GET['delete'])){
-		if($_GET['SIDCheck'] == $XVwebEngine->Session->GetSID() && $XVwebEngine->ReadUser['ID']!=1)
-		$XVwebEngine->DeleteUser()->DeletUserByNick($XVwebEngine->ReadUser['User']);
-		header("location: ?");
-		exit;
-	}
+
+
 	if(!empty($Command) && strtolower($Command) == "edit"){
 		include(dirname(__FILE__).'/edit.php');
 		goto end;
 	}
-	$XVwebEngine->ReadUser['Password'] = "***Secure***";
+
 	$Smarty->assign('ContextEdit',  $ContextEdit);
-	$Smarty->assign('Title', $GLOBALS['Language']['User'].': '.htmlspecialchars($UserFromUrl,  ENT_QUOTES));
-	$Smarty->assign('SiteTopic', $GLOBALS['Language']['User'].': '.htmlspecialchars($UserFromUrl,  ENT_QUOTES));
-	$Smarty->assign('profile', $XVwebEngine->ReadUser);
+	$Smarty->assign('Title', $GLOBALS['Language']['User'].': '.htmlspecialchars($user_data->User,  ENT_QUOTES));
+	$Smarty->assign('SiteTopic', $GLOBALS['Language']['User'].': '.htmlspecialchars($user_data->User,  ENT_QUOTES));
+	$Smarty->assign('profile', $user_data);
 	
 	$Smarty->assign('MiniMap', array(
 			array("Url"=>"/Users/", "Name"=>$Language['Users']),
-			array("Url"=>"/Users/".urlencode($XVwebEngine->ReadUser['Nick']).'/', "Name"=>$XVwebEngine->ReadUser['Nick']),
+			array("Url"=>"/Users/".urlencode($user_data->User).'/', "Name"=>$user_data->User),
 		)
 	);
 	

@@ -17,6 +17,7 @@
 	<div style="clear:both;"></div>
 		<div class="xvauction-header">
 			<div class="xvauction-header-thumbnail">
+			{settings url="XVauctions/Auction/{$auction_info.ID}/"}
 					{if $auction_info.Thumbnail}
 						<img src="{$URLS.Thumbnails}/{$auction_info.Thumbnail}" alt='{$auction_info.Title|escape:"html"}'/>
 					{else}

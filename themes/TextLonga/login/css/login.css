@@ -1,0 +1,45 @@
+.xv-login-content {
+	width: 80%;
+	background: #E1F6FC;
+	margin:auto;
+	border: 1px solid #62D9FC;
+	padding: 40px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+}
+.xv-login-content table {
+font-size: 24px;
+font-weight: solid;
+color: #474747;
+width: 60%;
+margin: auto;
+}
+.xv-login-content table tr td {
+padding: 10px;
+vertical-align:middle;
+}
+.xv-login-content span {
+font-size: 9px;
+max-width: 240px;
+display:block;
+}
+.xv-login-content input {
+width: 250px;
+height: 24px;
+border: 1px solid #D0DB00;
+-webkit-border-radius: 10px;
+-moz-border-radius: 10px;
+border-radius: 10px;
+padding-left: 5px;
+}
+.xv-login-content input:focus {
+background : #F7FF5E;
+}
+input.xv_login_error {
+border: 1px solid #C20606;
+}
+
+.xv-info {
+	margin-bottom: 10px;
+}
