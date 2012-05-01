@@ -27,7 +27,7 @@
 		
 		
 		{if $forgot_error}
-			<div class="error">{$forgot_error_msg|xvLang:$forgot_error_msg}</div>
+			<div class="error">{$forgot_error_msg|xv_lang:$forgot_error_msg}</div>
 		{/if}
 {if $forgot_config->forgot_enabled}
 		<table>

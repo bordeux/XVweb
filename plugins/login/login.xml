@@ -8,7 +8,20 @@
 	</info>
 	<config>
 		<prefix prefix="login" include="plugins/login/login.php" />
+		<prefix prefix="logout" include="plugins/login/logout.php" />
 	</config>
+	<load>
+		<event name="xvweb.start">
+			<script language="PHP">
+			  <![CDATA[
+			global $XVwebEngine;
+				if($XVwebEngine->Session->Session('user_logged_in') !== true && isset($_COOKIE['xv_login_remember'])){
+					include(ROOT_DIR.'/plugins/login/login.trigger.php');
+				}
+				]]>
+			</script>
+		</event>
+	</load>
 	<ranks>
 	</ranks>
 </plugin>

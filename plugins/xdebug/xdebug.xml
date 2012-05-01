@@ -8,7 +8,7 @@
     <description>Xdebug for XVweb</description>
   </info>
   <load>
-    <event name="onload">
+    <event name="xvweb.end">
       <script language="PHP">
 	  <![CDATA[
 	  if(!function_exists("DebugFoo")){
@@ -29,10 +29,10 @@
 ]]>
 	  </script>
     </event>
-    <event name="preload">
+    <event name="xvweb.preload_module">
       <script language="PHP">
 	<![CDATA[
-	xv_appendJS($URLS['Site']."plugins/xdebug/debug.js");
+	xv_append_js($URLS['Site']."plugins/xdebug/debug.js");
 	]]>	
 	</script>
     </event>

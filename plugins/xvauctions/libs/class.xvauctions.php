@@ -322,8 +322,22 @@ class xvauctions {
 		if(isset($display_options['cost_from'])){
 			$WhereSQL .= 'AND {AuctionAuctions:BuyNow} > :a_c_from ';
 			$execute_parms[':a_c_from'] = $display_options['cost_from'];
-		}
+		}	
 		
+		if(isset($display_options['search'])){
+			$search_string = str_replace(array("'", '"', '-'), ' ', $display_options['search']);
+			$terms_search = explode(" ", $search_string);
+			foreach($terms_search as $word_search){
+				$word_search = trim($word_search);
+				if(strlen($word_search) > 1){
+					$uniqid_tmp = ":s_".uniqid();
+					$WhereSQL .=  'AND {AuctionAuctions:Title} LIKE  '.$uniqid_tmp.' ';
+					$execute_parms[$uniqid_tmp] = '%'.$word_search.'%';
+				}
+			}
+	
+		}
+
 		$count_queries = count($search_queries);
 		
 		$query_search = 'AND {AuctionAuctions:ID} IN (SELECT 
@@ -337,6 +351,7 @@ GROUP BY
 	{AuctionValues:Auction}
 HAVING 
 	COUNT({AuctionValues:Auction}) = '.$count_queries.')';
+
 		
 		$auctions =	$this->Data['XVweb']->DataBase->prepare('SELECT SQL_CALC_FOUND_ROWS
 {AuctionAuctions:*:prepend:a.},

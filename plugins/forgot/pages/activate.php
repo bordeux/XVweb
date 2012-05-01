@@ -1,4 +1,6 @@
 <?php
+xv_trigger("forgot.activate.start");
+
 $register_config = new register_config();
 
 $activate_user = ($XVwebEngine->GetFromURL($PathInfo, 3));

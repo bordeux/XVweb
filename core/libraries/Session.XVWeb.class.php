@@ -2,7 +2,7 @@
 
 class SessionClass
 {
-	var $CookieName = "SessionXVweb";
+	var $CookieName = "xv_session";
 	var $Cookie = array();
 	var $Server = array();
 	var $Session = array();
@@ -57,6 +57,11 @@ class SessionClass
 		}
 		return null;
 		
+	}
+	public function delete($name){
+		unset($this->Session[$name]);
+		$this->Date['Mod'] = true;
+		return true;
 	}
 
 	public function Clear(){

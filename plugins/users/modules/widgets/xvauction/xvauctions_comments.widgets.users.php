@@ -7,7 +7,7 @@ class xv_users_modules_xvauctions_comments extends xv_users_modules {
 	var $plg_description = "Show auction comments";
 	
 	public function widget(){
-	global $LocationXVWeb, $XVwebEngine, $URLS;
+	global $LocationXVWeb, $XVwebEngine, $URLS, $user_data;
 	include_once(ROOT_DIR.'plugins/xvauctions/includes/functions.xvauctions.php');
 	include_once(ROOT_DIR.'plugins/xvauctions/libs/class.xvauctions.php');
 	$XVauctions = &$XVwebEngine->InitClass("xvauctions");
@@ -16,7 +16,7 @@ class xv_users_modules_xvauctions_comments extends xv_users_modules {
 
 	$record_limit = 30;
 
-	$comments_list = xvp()->get_comments($XVauctions, $XVwebEngine->Session->Session('Logged_User'), array("type"=> ifsetor($_GET['xva_c_type'], "")), (int) $_GET['xva_comments'], $record_limit);
+	$comments_list = xvp()->get_comments($XVauctions, $user_data->User, array("type"=> ifsetor($_GET['xva_c_type'], "")), (int) $_GET['xva_comments'], $record_limit);
 	$comments_pager = pager($record_limit, (int) $comments_list[1],  "?".$XVwebEngine->AddGet(array("xva_comments"=>"-npage-id-"), true), (int) $_GET['xva_comments']);
 
 //var_dump($comments_list);
@@ -38,10 +38,14 @@ class xv_users_modules_xvauctions_comments extends xv_users_modules {
 				</div>';
 		}else{
 			foreach($comments_list[0] as $key=>$comment){
+			$author_comment = $comment['Seller'];
+			if($user_data->User == $author_comment){
+				$author_comment = $comment['Buyer'];
+			}
 			$result .=
 				'<div class="xv-xvauction-comments-opinion xv-xvauction-comments-otype-'.$comment['Type'].'">
 					<span>'.htmlspecialchars($comment['Opinion']).'</span>
-					<div class="xv-xvauction-comments-details">Data : '.$comment['Date'].', Aukcja nr <a href="'.$URLS['Script'].'auction/'.$comment['Auction'].'/">'.$comment['Auction'].'</a>, Użytkownik <a href="'.$URLS['Script'].'Users/admin/">admin</a></div>
+					<div class="xv-xvauction-comments-details">Data : '.$comment['Date'].', Aukcja nr <a href="'.$URLS['Script'].'auction/'.$comment['Auction'].'/">'.$comment['Auction'].'</a>, Użytkownik <a href="'.$URLS['Script'].'Users/'.$author_comment.'/">'.$author_comment.'</a></div>
 				</div>';
 			}
 		}

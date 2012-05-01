@@ -39,7 +39,7 @@
 			{if $smarty.foreach.minimap.last}
 				{$Value.Name}
 			{else}
-				<a href="{$UrlScript}{$Value.Url|replace:' ':'_'|urlrepair|substr:1}">{$Value.Name}</a> <img src="{$UrlTheme}img/blank.png" class="cssprite SpaceIconIMG" alt="&gt;&gt;"/>
+				<a href="{$URLS.Script}{$Value.Url|replace:' ':'_'|urlrepair|substr:1}">{$Value.Name}</a> <img src="{$UrlTheme}img/blank.png" class="cssprite SpaceIconIMG" alt="&gt;&gt;"/>
 			{/if}
 		{/foreach}
 		</div>
@@ -51,7 +51,7 @@
 		   
 <fieldset id="EditForm">
 				<div id="PreviewArticle">&nbsp;</div>
-<form name="ArticleEditForm" id="ArticleEditForm" method="post" action="{$UrlScript}Write/?save={$IDArticle}">
+<form name="ArticleEditForm" id="ArticleEditForm" method="post" action="{$URLS.Script}Write/?save={$IDArticle}">
 <table style="border-style: none; width:100%;">
 	<tr>
 		<td class="EditTD">
@@ -460,7 +460,7 @@
 			</div>
 		
 		<!--<input type="checkbox" name="AceptRules" id ="AceptRulesID" value="on" /> {$language.QuestionRules} <br />-->
-<input type="button" name="btn1" id="btn1id" id="SendArticle" onclick="ValidateArt(); return false;" class="StyleForm" value="{$language.Send}" /> <input type="button" name="PreView" onclick="$('#PreviewArticle').show('slow'); sendPost('PreviewArticle', 'ArticleEditForm', '{$UrlScript}Write/?PreView'); window.location.hash='#fp_article';" class="StyleForm" value="Podgląd" />
+<input type="button" name="btn1" id="btn1id" id="SendArticle" onclick="ValidateArt(); return false;" class="StyleForm" value="{$language.Send}" /> <input type="button" name="PreView" onclick="$('#PreviewArticle').show('slow'); sendPost('PreviewArticle', 'ArticleEditForm', '{$URLS.Script}Write/?PreView'); window.location.hash='#fp_article';" class="StyleForm" value="Podgląd" />
 		
 		</td>
 		</tr>
@@ -480,7 +480,7 @@
 </fieldset>
 <fieldset style="display:none;" id="EditStetting">
 <legend>{$language.Settings}</legend>
-<form action="{$UrlScript}Write/?settings={$IDArticle}" name="SettingsForm" method="post">
+<form action="{$URLS.Script}Write/?settings={$IDArticle}" name="SettingsForm" method="post">
 <div class="table">
 {foreach from=$SettingsInputs item=field key=handlefield name=InputsFields}
 	<div class="table-row {if $smarty.foreach.InputsFields.index % 2 == 0}ZebraWhite{else}ZebraLight{/if}">

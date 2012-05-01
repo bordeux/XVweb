@@ -62,7 +62,7 @@ if(!empty($IDFile)){
 			}
 	}
 	if(($XVwebEngine->GetFromURL($PathInfo, 3))){
-	if(!xvPerm("DownloadFile")){
+	if(!xv_perm("DownloadFile")){
 		header("location: ".$URLS['Script'].'System/AccessDenied/?flag=DownloadFile');
 		exit;
 	}
@@ -159,7 +159,7 @@ if(!empty($IDFile)){
 }
 
 if(isset($_GET['SendFile']) && is_array($_FILES['UploadForm'])){
-		if(!(xvPerm('AddFile'))){
+		if(!(xv_perm('AddFile'))){
 			header("location: ".$URLS['Script'].'System/AccessDenied/');
 			exit;
 		}

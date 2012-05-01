@@ -1,0 +1,25 @@
+<plugin>
+	<info>
+		<name>IP Ban</name>
+		<version>1.0</version>
+		<author>Krzysztof Bednarczyk</author>
+		<url>http://www.bordeux.net</url>
+		<description>IP Ban module</description>
+	</info>
+	<config>
+	</config>
+	<load>
+		<event name="xvweb.start">
+			<script language="PHP">
+			  <![CDATA[
+			global $XVwebEngine;
+				if($XVwebEngine->Session->Session('ip_ban_checked') !== true){
+					include(ROOT_DIR.'/plugins/ip_ban/ip_ban.trigger.php');
+				}
+				]]>
+			</script>
+		</event>
+	</load>
+	<ranks>
+	</ranks>
+</plugin>

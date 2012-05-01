@@ -33,7 +33,7 @@ if((xvp()->ReadArticle($XVwebEngine ,$PathInfo))){
 
 	if(!empty($XVwebEngine->ReadArticleIndexOut['Options']['AccessFlags'])){
 		foreach($XVwebEngine->ReadArticleIndexOut['Options']['AccessFlags'] as $flag){
-			if(!xvPerm($flag)){
+			if(!xv_perm($flag)){
 				header("location: ".$URLS['Script'].'System/AccessDenied/?Flag='.$flag);
 				exit;
 			}
@@ -55,7 +55,7 @@ if((xvp()->ReadArticle($XVwebEngine ,$PathInfo))){
 		$Failed = false;
 		if(!isset($_GET['SIDCheck']) or (isset($_GET['SIDCheck']) && $_GET['SIDCheck']!= ($XVwebEngine->Session->GetSID())))
 		$Failed = "SIDFailed";
-		if(!xvPerm('Voting'))
+		if(!xv_perm('Voting'))
 		$Failed =  "AccessDenied";
 		
 		if($_GET['t'] == "comment"){
@@ -194,10 +194,7 @@ if((xvp()->ReadArticle($XVwebEngine ,$PathInfo))){
 	}
 	$Smarty->assign('Title', $XVwebEngine->ReadArticleOut['Topic']);
 	$Smarty->assign('SiteTopic', $XVwebEngine->ReadArticleOut['Topic']);
-	//XVTemplate::xv_appendMeta("og:type", "article");
-	//XVTemplate::xv_appendMeta("og:site_name", $XVwebEngine->SrvName);
-	//XVTemplate::xv_appendMeta("og:title", $XVwebEngine->ReadArticleOut['Topic']);
-	
+
 	//**************MiniMap**************/
 	$Smarty->assign('MiniMap', array_merge(array(0=>array("Url"=>"", "Name"=>$Language['MainPage'])), $XVwebEngine->url_explode($XVwebEngine->ReadArticleIndexOut['URL'])));
 	//**************MiniMap**************/
@@ -220,7 +217,7 @@ if((xvp()->ReadArticle($XVwebEngine ,$PathInfo))){
 	//\Divisions
 
 
-	if(!(ifsetor($XVwebEngine->ReadArticleIndexOut['Options']['DisableComments'], false) OR $XVwebEngine->Config("config")->find("config disable comment")->text() == "true") &&  xvPerm('ViewComments')){
+	if(!(ifsetor($XVwebEngine->ReadArticleIndexOut['Options']['DisableComments'], false) OR $XVwebEngine->Config("config")->find("config disable comment")->text() == "true") &&  xv_perm('ViewComments')){
 		$Smarty->assign('LoadComment', true);
 		$CommentsList = xvp()->CommentArticle($XVwebEngine);
 		$Smarty->assign('CommentsCount', count($CommentsList));

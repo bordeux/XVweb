@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <rss version="2.0">
   <channel>
-    <title>{$SiteName}</title>
+    <title>{$xv_main_config->site_name}</title>
     <link>{$Url}</link>
     <description>{$Description}</description>
     <language>{$language.Lang}</language>
@@ -12,11 +12,11 @@
 {foreach from=$News item=NewsItem}
     <item>
       <title>{$NewsItem.Topic|escape:"html"}</title>
-      <link>{$UrlScript}{$NewsItem.URL|substr:1|urlrepair}</link>
+      <link>{$URLS.Script}{$NewsItem.URL|substr:1|urlrepair}</link>
       <description>{$NewsItem.Contents|strip_tags|escape:"html"|wordwrap:100:" ":1}...{$language.More}</description>
       <pubDate>{$NewsItem.Date}</pubDate>
       <author>{$NewsItem.Author}</author>
-      <comments>{$UrlScript}{$NewsItem.URL|substr:1|urlrepair}#fp_comment</comments>
+      <comments>{$URLS.Script}{$NewsItem.URL|substr:1|urlrepair}#fp_comment</comments>
     </item>
 {/foreach}
 

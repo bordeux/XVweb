@@ -8,7 +8,7 @@
 ****************   All rights reserved             *************************
 ***************************************************************************/
 
-if(!xvPerm("xva_Buy")){
+if(!xv_perm("xva_Buy")){
 	header("location: ".$URLS['Script'].'System/Auctions/Auction_permission_sell/');
 	exit;
 }

@@ -45,7 +45,7 @@ if(in_array($auction_info['Type'], array("buynow", "both", "dutch")) && ifsetor(
 	}
 	$to_pay = $auction_info['BuyNow']; // tutaj zmiana jak licytacja
 	if(isset($_POST['confirm_buy']) && $_POST['confirm_buy'] == "1"){
-		if(!xvPerm("xva_Buy")){
+		if(!xv_perm("xva_Buy")){
 			header("location: ".$URLS['Script'].'System/Auctions/Auction_permission_buy/');
 			exit;
 		}
@@ -79,7 +79,7 @@ if(in_array($auction_info['Type'], array("buynow", "both", "dutch")) && ifsetor(
 	}
 
 	if(isset($_POST['confirm_buy']) && $_POST['confirm_buy'] == "1"){
-		if(!xvPerm("xva_Buy")){
+		if(!xv_perm("xva_Buy")){
 			header("location: ".$URLS['Script'].'System/Auctions/Auction_permission_buy/');
 			exit;
 		}

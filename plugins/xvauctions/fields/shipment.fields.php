@@ -162,7 +162,7 @@ Odbiór osobisty",
 		foreach($options as $key=>$val){
 		$table .= "<tr>
 			<td style='padding-right: 15px;'>".$shipment_methods[$key]."</td>
-			<td>".number_format($val[0]/100, 2, '.', ' ')." ".xvLang('xca_coin_type')."</td>
+			<td>".number_format($val[0]/100, 2, '.', ' ')." ".xv_lang('xca_coin_type')."</td>
 		</tr>" ;
 		}
 		$table .= "</table>";

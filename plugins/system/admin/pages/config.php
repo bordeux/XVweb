@@ -112,10 +112,14 @@ width: 500px;
 clear:both;
 }
 .xv-config-item {
-background: rgba(255,255,255, 0.7);
+background: rgba(200,200,200, 0.5);
 padding: 10px;
 margin-bottom: 10px;
 border-radius: 10px;
+}
+.xv-config-item textarea {
+width: 400px;
+min-height: 150px;
 }
 .xv-config-error {
 background: red;
@@ -130,25 +134,30 @@ margin-right: 20px;
 border-radius: 10px;
 }
 .xv-config-desc {
-background: #90FCF2;
+border: 1px solid #00BA00;
+background: #E6FCE6;
 
 padding: 8px;
 border-radius: 10px;
 margin-top: 10px;
 }
-.xv-config-submit {
-width: 200px;
-padding: 20px;
-margin:0;
-line-height: 20px;
-margin: auto;
-}
-.xv-config-submit input {
+
+.xv-config-submit input[type!="submit"] {
 width: 200px;
 height: 40px;
 line-height: 40px;
 font-size: 30px;
 border: 1px solid #17B509;
+}
+.xv-config-submit {
+	width: 200px;
+	margin: auto;
+}
+.xv-config-submit input[type="submit"] {
+	width: 200px;
+	height: 30px;
+	line-height: 20px;
+	font-size: 15px;
 }
 </style>
 ';

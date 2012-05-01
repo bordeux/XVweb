@@ -22,7 +22,7 @@
 </div>
 {/if}
 {if !$Session.Logged_Logged}
-					<form method='post' action="{$UrlScript}Login/SignIn/">
+					<form method='post' action="{$URLS.Script}Login/SignIn/">
 						<div class="tablediv">
 							<div class="rowdiv">
 								<div  class="celldiv"><label for='textinput'>{$language.Nick}</label> :</div>

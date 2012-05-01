@@ -5,7 +5,7 @@
 		{if $smarty.foreach.minimap.last}
 			{$Value.Name}
 		{else}
-			<a href="{$UrlScript}{$Value.Url|urlrepair|substr:1}">{$Value.Name}</a> &gt;
+			<a href="{$URLS.Script}{$Value.Url|urlrepair|substr:1}">{$Value.Name}</a> &gt;
 		{/if}
 		{/foreach}
 		</div>
@@ -33,11 +33,11 @@
 </div>
 
 <div class="FileInfoRow">
-<div class="InfoFile"> {$language.OwnerFile}:</div>  <div class="FileInformation"><a href="{$UrlScript}Users/{$File.UserFile|escape:"url"}/">{$File.UserFile}</a></div>
+<div class="InfoFile"> {$language.OwnerFile}:</div>  <div class="FileInformation"><a href="{$URLS.Script}Users/{$File.UserFile|escape:"url"}/">{$File.UserFile}</a></div>
 </div>
 
 <div class="FileInfoRow">
-<div class="InfoFile"> {$language.FileName}:</div>  <div class="FileInformation"> <a href="{$UrlScript}File/{$File.ID}/{$File.FileName|escape:'url'}.{$File.Extension}"  id="FileNameJS">{$File.FileName|escape:'html'}.{$File.Extension}</a></div>
+<div class="InfoFile"> {$language.FileName}:</div>  <div class="FileInformation"> <a href="{$URLS.Script}File/{$File.ID}/{$File.FileName|escape:'url'}.{$File.Extension}"  id="FileNameJS">{$File.FileName|escape:'html'}.{$File.Extension}</a></div>
 </div>
 
 <div class="FileInfoRow">

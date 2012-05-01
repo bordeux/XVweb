@@ -29,7 +29,7 @@
 						{foreach from=$Column item=Value key=CharDivision}
 							<li data-role="list-divider">{$CharDivision}</li> 
 								{foreach from=$Value item=ArticleLink}
-								<li><a href="{$UrlScript}{$ArticleLink.URL|substr:1|replace:' ':'_'}" id="art-{$ArticleLink.ID}">{$ArticleLink.Topic}</a></li>
+								<li><a href="{$URLS.Script}{$ArticleLink.URL|substr:1|replace:' ':'_'}" id="art-{$ArticleLink.ID}">{$ArticleLink.Topic}</a></li>
 								{/foreach}
 						{/foreach}
 					{/if}

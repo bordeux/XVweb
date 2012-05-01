@@ -1,5 +1,5 @@
 				<div id="PreviewArticle">&nbsp;</div>
-<form name="ArticleEditForm" id="ArticleEditForm" method="post" action="{$UrlScript}Write/?save={$IDArticle}">
+<form name="ArticleEditForm" id="ArticleEditForm" method="post" action="{$URLS.Script}Write/?save={$IDArticle}">
 <table style="border-style: none; width:100%;">
 	<tr>
 		<td class="EditTD">
@@ -405,7 +405,7 @@
 				{$language.RewriteKey} : <span class="xv-comment-spambot-key">{$JSVars.SIDUser|substr:0:5}</span> : <input type="text" name="xv-captcha" value="" class="xv-comment-spambot-field" />
 			</div>
 		<!--<input type="checkbox" name="AceptRules" id ="AceptRulesID" value="on" /> {$language.QuestionRules} <br />-->
-<input type="submit" name="btn1" id="SendArticle"  class="StyleForm" value="{$language.Send}" /> <input type="button" name="PreView" onclick="$('#PreviewArticle').show('slow'); sendPost('PreviewArticle', 'ArticleEditForm', '{$UrlScript}Write/?PreView'); window.location.hash='#fp_article';" class="StyleForm" value="Podgląd" />
+<input type="submit" name="btn1" id="SendArticle"  class="StyleForm" value="{$language.Send}" /> <input type="button" name="PreView" onclick="$('#PreviewArticle').show('slow'); sendPost('PreviewArticle', 'ArticleEditForm', '{$URLS.Script}Write/?PreView'); window.location.hash='#fp_article';" class="StyleForm" value="Podgląd" />
 		
 		</td>
 		</tr>

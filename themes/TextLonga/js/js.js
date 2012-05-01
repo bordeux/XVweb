@@ -125,7 +125,7 @@ $(function () {
 		function isset(a) {
 			return typeof a == "undefined" ? false : true
 		}
-		ThemeClass.LoadLang = function (a, b) {
+		ThemeClass.xv_load_lang = function (a, b) {
 			ThemeClass.LoadJS(URLS.Script + "receiver/language.js?include=" + a, b)
 		};
 		ThemeClass.LoadJS = function (a, b) {

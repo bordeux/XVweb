@@ -7,7 +7,7 @@ class xv_users_modules_xvauctions_auctions extends xv_users_modules {
 	var $plg_description = "Show auctions";
 	
 	public function widget(){
-	global $LocationXVWeb, $XVwebEngine, $URLS;
+	global $LocationXVWeb, $XVwebEngine, $URLS, $user_data;
 	include_once(ROOT_DIR.'plugins/xvauctions/includes/functions.xvauctions.php');
 	include_once(ROOT_DIR.'plugins/xvauctions/libs/class.xvauctions.php');
 	$XVauctions = &$XVwebEngine->InitClass("xvauctions");

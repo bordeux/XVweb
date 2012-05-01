@@ -1,0 +1,12 @@
+body {
+	background: url(images/bg-green.gif) #008f03 repeat-x;
+}
+#logo.blank {
+	background: url(images/logo-green-blank.png) no-repeat;
+}
+h2 {
+	color: #3a5801;
+}
+#when, .textwidget {
+	color: #adff9f;
+}

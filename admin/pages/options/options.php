@@ -28,8 +28,8 @@ if(!isset($XVwebEngine)){
 		public function __construct(&$XVweb){
 			$this->title = "Zmień tło";
 			$this->icon = $GLOBALS['URLS']['Site'].'admin/data/icons/backgrounds.png';
-			foreach(glob(realpath(ADMIN_ROOT_DIR.'data/themes/'.$GLOBALS['ThemeSelected'].'/backgrounds').DIRECTORY_SEPARATOR."{*.gif,*.jpg,*.png,*.jpeg}", GLOB_BRACE) as $image){
-				$this->content .= '<a class="xv-change-background" href="'.$GLOBALS['URLS']['Site'].'admin/data/themes/'.$GLOBALS['ThemeSelected'].'/backgrounds/'.basename($image).'" data-background="url('.$GLOBALS['URLS']['Site'].'admin/data/themes/'.$GLOBALS['ThemeSelected'].'/backgrounds/'.basename($image).')"><img src="'.$GLOBALS['URLS']['Script'].'Administration/get/Options/Background_view/'.basename($image).'?th" style="width:256px; height:256px;"></a> ';
+			foreach(glob(realpath(ADMIN_ROOT_DIR.'data/themes/'.$GLOBALS['xv_theme_name'].'/backgrounds').DIRECTORY_SEPARATOR."{*.gif,*.jpg,*.png,*.jpeg}", GLOB_BRACE) as $image){
+				$this->content .= '<a class="xv-change-background" href="'.$GLOBALS['URLS']['Site'].'admin/data/themes/'.$GLOBALS['xv_theme_name'].'/backgrounds/'.basename($image).'" data-background="url('.$GLOBALS['URLS']['Site'].'admin/data/themes/'.$GLOBALS['xv_theme_name'].'/backgrounds/'.basename($image).')"><img src="'.$GLOBALS['URLS']['Script'].'Administration/get/Options/Background_view/'.basename($image).'?th" style="width:256px; height:256px;"></a> ';
 			}
 			$this->content .= '<script type="text/javascript">
 				$(function(){
@@ -70,7 +70,7 @@ if(!isset($XVwebEngine)){
 		public function __construct(&$XVweb){
 			
 			$ImageOrg = basename(strtolower($XVweb->GetFromURL($GLOBALS['PathInfo'], 5)));
-			$ImageSRC = realpath(ADMIN_ROOT_DIR.'data/themes/'.$GLOBALS['ThemeSelected'].'/backgrounds/'.$ImageOrg);
+			$ImageSRC = realpath(ADMIN_ROOT_DIR.'data/themes/'.$GLOBALS['xv_theme_name'].'/backgrounds/'.$ImageOrg);
 			if (!file_exists($ImageSRC)) {
 				header("Status: 404 Not Found");
 				exit("404 error");
@@ -96,7 +96,7 @@ if(!isset($XVwebEngine)){
 		public function __construct(&$XVweb){
 			$this->title = $GLOBALS['Language']['Options'];
 			$this->icon = $GLOBALS['URLS']['Site'].'admin/data/icons/logs.png';
-			foreach(glob(realpath(ADMIN_ROOT_DIR.'data/themes/'.$GLOBALS['ThemeSelected'].'/backgrounds/')."{*.gif,*.jpg,*.png,*.jpeg}") as $image){
+			foreach(glob(realpath(ADMIN_ROOT_DIR.'data/themes/'.$GLOBALS['xv_theme_name'].'/backgrounds/')."{*.gif,*.jpg,*.png,*.jpeg}") as $image){
 				$this->content .= $image;
 			}
 			$this->content .= '';

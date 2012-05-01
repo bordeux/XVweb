@@ -5,18 +5,18 @@
 		{if $smarty.foreach.minimap.last}
 			{$Value.Name}
 		{else}
-			<a href="{$UrlScript}{$Value.Url|urlrepair|substr:1}">{$Value.Name}</a> &gt;
+			<a href="{$URLS.Script}{$Value.Url|urlrepair|substr:1}">{$Value.Name}</a> &gt;
 		{/if}
 		{/foreach}
 		</div>
 	<div id="ArticleTools">
 			<ul>
 			<li>
-				<a href="{$UrlScript}history/{$ReadArticleIndexOut.ID}/" title="{$language.History}"  class="selected">{$language.History}</a>
+				<a href="{$URLS.Script}history/{$ReadArticleIndexOut.ID}/" title="{$language.History}"  class="selected">{$language.History}</a>
 			</li>
 			{if "EditArticle"|perm}
 				<li>
-					<a href="{$UrlScript}Write/?Edit&amp;id={$ReadArticleIndexOut.ID}"  >{$language.EditArticle}</a>
+					<a href="{$URLS.Script}Write/?Edit&amp;id={$ReadArticleIndexOut.ID}"  >{$language.EditArticle}</a>
 				</li>
 			{/if}
 			{if "EditTags"|perm}
@@ -63,9 +63,9 @@
 <tr class="TableCell">
 	<td><input type="radio" name="OldVer" value="{$HistoryArray.Version}"/> <input type="radio" name="NewVer" value="{$HistoryArray.Version}"/></td>
 	<td>{$HistoryArray.Topic}</td>
-	<td><a href="{$UrlScript}{$ArticleURL|substr:1}?version={$HistoryArray.Version}">{$HistoryArray.Date}</a></td>
+	<td><a href="{$URLS.Script}{$ArticleURL|substr:1}?version={$HistoryArray.Version}">{$HistoryArray.Date}</a></td>
 	<td>{$HistoryArray.Version}</td>
-	<td><a href="{$UrlScript}Users/{$HistoryArray.Author|urlrepair}/">{$HistoryArray.Author}</a></td>
+	<td><a href="{$URLS.Script}Users/{$HistoryArray.Author|urlrepair}/">{$HistoryArray.Author}</a></td>
 	<td>{$HistoryArray.DescriptionOfChange}</td>
 </tr>
 {/foreach}

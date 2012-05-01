@@ -25,11 +25,11 @@
 	<div id="EditPanel" class="ui-tabs ui-widget ui-widget-content ui-corner-top">
 		<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-top">
 			<li class="ui-state-default ui-corner-top ui-state-hover ui-button-text-icon-primary ui-state-hover">
-				<a href="{$UrlScript}Users/{$User.Nick|escape:'url'}" title="{$language.Profile}"  id="btViewProfile" style="padding-left:20px;"> <span class="ui-icon ui-icon-person" style="margin-left:-16px;"></span> {$language.Profile}</a>
+				<a href="{$URLS.Script}Users/{$User.Nick|escape:'url'}" title="{$language.Profile}"  id="btViewProfile" style="padding-left:20px;"> <span class="ui-icon ui-icon-person" style="margin-left:-16px;"></span> {$language.Profile}</a>
 			</li>
 			{if "EditOtherProfil"|perm or ( "EditProfil"|perm and $User.Nick eq $LogedUser)}
 				<li class="ui-state-default ui-corner-top ui-state-hover ui-state-active ui-button-text-icon-primary ui-state-hover">
-					<a href="{$UrlScript}Users/{$User.Nick|escape:'url'}/Edit/" id="btEditProfile" style="padding-left:20px;"> <span class="ui-icon ui-icon-pencil" style="margin-left:-16px;"></span>{$language.EditProfile}</a>
+					<a href="{$URLS.Script}Users/{$User.Nick|escape:'url'}/Edit/" id="btEditProfile" style="padding-left:20px;"> <span class="ui-icon ui-icon-pencil" style="margin-left:-16px;"></span>{$language.EditProfile}</a>
 				</li>
 			{/if}
 			{if  "DeleteUser"|perm}
@@ -43,7 +43,7 @@
 				</li>
 			{/if}
 				<li class="ui-state-default ui-corner-top ui-state-hover ui-button-text-icon-primary ui-state-hover">
-					<a href="{$UrlScript}Messages/Write/?To={$User.Nick|escape:'url'}" title="{$language.Write}" style="padding-left:20px;"><span class="ui-icon ui-icon-mail-closed" style="margin-left:-16px;"></span> {$language.Write}...</a>
+					<a href="{$URLS.Script}Messages/Write/?To={$User.Nick|escape:'url'}" title="{$language.Write}" style="padding-left:20px;"><span class="ui-icon ui-icon-mail-closed" style="margin-left:-16px;"></span> {$language.Write}...</a>
 				</li>
 		
 			
@@ -54,7 +54,7 @@
 			{if $smarty.foreach.minimap.last}
 				{$Value.Name}
 			{else}
-				<a href="{$UrlScript}{$Value.Url|replace:' ':'_'|urlrepair|substr:1}">{$Value.Name}</a> <img src="{$UrlTheme}img/blank.png" class="cssprite SpaceIconIMG" alt="&gt;&gt;"/>
+				<a href="{$URLS.Script}{$Value.Url|replace:' ':'_'|urlrepair|substr:1}">{$Value.Name}</a> <img src="{$UrlTheme}img/blank.png" class="cssprite SpaceIconIMG" alt="&gt;&gt;"/>
 			{/if}
 		{/foreach}
 		</div>{/if}

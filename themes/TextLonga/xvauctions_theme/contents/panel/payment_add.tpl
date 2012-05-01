@@ -7,8 +7,8 @@
 {/if}
 	<div class="xvauction-main" >
 	<div class="category_parents_tree" >
-		<a href="{$URLS.Auctions}/">{"xca_auctions"|xvLang}</a> 
-			&gt;&gt; <a href="{$URLS.AuctionPanel}">{"xca_auctions_panel"|xvLang}</a> 
+		<a href="{$URLS.Auctions}/">{"xca_auctions"|xv_lang}</a> 
+			&gt;&gt; <a href="{$URLS.AuctionPanel}">{"xca_auctions_panel"|xv_lang}</a> 
 			&gt;&gt; <a href="{$URLS.AuctionPanel}/payment_add/">{$Title}</a> 
 	
 	</div>

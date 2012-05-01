@@ -104,7 +104,7 @@ function ChangeTag(){
 function AddComment(){
 	global $Smarty, $XVwebEngine, $Language;
 	try {
-	if($XVwebEngine->Config("config")->find("config disable comment")->text() == "true" && !xvPerm('AdminPanel'))
+	if($XVwebEngine->Config("config")->find("config disable comment")->text() == "true" && !xv_perm('AdminPanel'))
 		exit($Language['Disabled']);
 	if(trim(ifsetor($_POST['xv-captcha'], "")) != substr($XVwebEngine->Session->GetSID(), 0, 5))
 		exit("You are spambot!");

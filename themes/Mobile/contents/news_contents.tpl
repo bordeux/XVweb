@@ -10,9 +10,9 @@
 					<div class="DownVote"></div>
 					</div>
 					<div class="celldiv RightContents">
-					<div class="NewsTitle"><a href="{$UrlScript}{$NewsItem.URL|substr:1|urlrepair}">{$NewsItem.Topic}</a></div>
-					<div class="NewsInfo">{$language.Date}: {$NewsItem.Date} | <a href="{$UrlScript}{$NewsItem.URL|substr:1|urlrepair}#fp_comment">{$language.Comments}: {$NewsItem.CommentsCount}</A> | {$language.Author}: <a href="{$UrlScript}Users/{$NewsItem.Author|urlrepair}/">{$NewsItem.Author}</a></div>
-					<div class="NewsContents">{$NewsItem.Contents} <a href="{$UrlScript}{$NewsItem.URL|substr:1|urlrepair}">{$language.More}</a></div>
+					<div class="NewsTitle"><a href="{$URLS.Script}{$NewsItem.URL|substr:1|urlrepair}">{$NewsItem.Topic}</a></div>
+					<div class="NewsInfo">{$language.Date}: {$NewsItem.Date} | <a href="{$URLS.Script}{$NewsItem.URL|substr:1|urlrepair}#fp_comment">{$language.Comments}: {$NewsItem.CommentsCount}</A> | {$language.Author}: <a href="{$URLS.Script}Users/{$NewsItem.Author|urlrepair}/">{$NewsItem.Author}</a></div>
+					<div class="NewsContents">{$NewsItem.Contents} <a href="{$URLS.Script}{$NewsItem.URL|substr:1|urlrepair}">{$language.More}</a></div>
 					</div>
 				</div>
 			</div>

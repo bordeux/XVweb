@@ -317,6 +317,7 @@ document.write('<a href=\"mailto:'+s+m+d+'\">'+s+m+d+'</a>');
 		$this->text = ($text);
 		return $this;
 	}
+		include_once(dirname(__FILE__).DIRECTORY_SEPARATOR.'phpQuery'.DIRECTORY_SEPARATOR.'phpQuery.php');
 		$this->text = phpQuery::newDocumentPHP($text);
 		foreach($this->text['include'] as $element)
 		$this->GetIncludeArticle($element);

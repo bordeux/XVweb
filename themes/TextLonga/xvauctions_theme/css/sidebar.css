@@ -29,3 +29,26 @@ padding-left: 15px;
 	height: 24px;
 	color: #333;
 }
+
+.xvauction-sidebar-search {
+	width: 95%;
+	padding: 5px;
+}
+.xvauction-sidebar-search input[type="search"]{
+width: 100%;
+margin:auto;
+height: 30px;
+padding: 5px;
+line-height: 30px;
+display:block;
+background: #F2F2F2;
+}
+.xvauction-sidebar-search input[type="submit"]{
+width: 100%;
+margin:auto;
+margin-top: 5px;
+height: 30px;
+padding: 5px;
+
+display:block;
+}

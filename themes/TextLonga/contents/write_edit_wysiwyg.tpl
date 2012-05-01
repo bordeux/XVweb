@@ -267,7 +267,7 @@
 		</div>
 		<!-- HTML5WYSIWYG Editor END --> 
 		
-		<form class="xv-form-wysiwyg" method="post" action="{$UrlScript}Write/?save={$IDArticle}">
+		<form class="xv-form-wysiwyg" method="post" action="{$URLS.Script}Write/?save={$IDArticle}">
 		<div class='xv-table'>
 			<table style="width : 100%; text-align: center;">
 			{if $WriteUrlArticle}

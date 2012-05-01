@@ -5,18 +5,18 @@
 		{if $smarty.foreach.minimap.last}
 			{$Value.Name}
 		{else}
-			<a href="{$UrlScript}{$Value.Url|urlrepair|substr:1}">{$Value.Name}</a> &gt;
+			<a href="{$URLS.Script}{$Value.Url|urlrepair|substr:1}">{$Value.Name}</a> &gt;
 		{/if}
 		{/foreach}
 		</div>
 	<div id="ArticleTools">
 			<ul>
 			<li>
-				<a href="{$UrlScript}history/{$ReadArticleIndexOut.ID}/" title="{$language.History}"  class="selected">{$language.History}</a>
+				<a href="{$URLS.Script}history/{$ReadArticleIndexOut.ID}/" title="{$language.History}"  class="selected">{$language.History}</a>
 			</li>
 			{if "EditArticle"|perm}
 				<li>
-					<a href="{$UrlScript}Write/?Edit&amp;id={$ReadArticleIndexOut.ID}"  >{$language.EditArticle}</a>
+					<a href="{$URLS.Script}Write/?Edit&amp;id={$ReadArticleIndexOut.ID}"  >{$language.EditArticle}</a>
 				</li>
 			{/if}
 			{if "EditTags"|perm}
@@ -66,7 +66,7 @@
 					<li><span>{$CharDivision}</span>
 						<ul>
 							{foreach from=$Value item=ArticleLink}
-							<li><a href="{$UrlScript}{$ArticleLink.URL|substr:1}" id="art-{$ArticleLink.ID}">{$ArticleLink.Topic}</a></li>
+							<li><a href="{$URLS.Script}{$ArticleLink.URL|substr:1}" id="art-{$ArticleLink.ID}">{$ArticleLink.Topic}</a></li>
 					{/foreach}
 						</ul>
 					</li>

@@ -21,7 +21,7 @@ $Smarty->assign('SiteTopic', $Language['MainPage'] );
 $Smarty->assign('RightBox', $Language['MainPage'] );
 $Smarty->assign('MainPage', true);
 
-	if(isset($_GET["SaveSort"]) && (xvPerm('AdminPanel'))){
+	if(isset($_GET["SaveSort"]) && (xv_perm('AdminPanel'))){
 	$oXMLout = new XMLWriter();
 	$oXMLout->openMemory();
 	$oXMLout->startElement("config");

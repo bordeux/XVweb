@@ -15,6 +15,20 @@ class login_config_editor extends  xv_config_editor {
 				"desc" => "Message showed after succesful login, HTML format",
 				"type" => "textarea",
 				"field_data" => array()
+			),			
+			"login_cookie_name" => array(
+				"caption" => "Cookie name",
+				"desc" => "Cookie name",
+				"type" => "text",
+				"field_data" => array()
+			),		
+			"login_cookie_time" => array(
+				"caption" => "Cookie time",
+				"desc" => "Cookie time",
+				"type" => "text",
+				"field_data" => array(
+					"type" => "number"
+				)
 			),
 		
 
@@ -24,6 +38,18 @@ class login_config_editor extends  xv_config_editor {
 				"type" => "boolean",
 			),
 
+			"logout_success_message" => array(
+				"caption" => "Logout - Success message",
+				"desc" => "Message showed after succesful logout, HTML format",
+				"type" => "textarea",
+				"field_data" => array()
+			),	
+			"logout_failed_message" => array(
+				"caption" => "Logout - failed message",
+				"desc" => "Message showed after failed logout, HTML format",
+				"type" => "textarea",
+				"field_data" => array()
+			),	
 	
 		);
 	}

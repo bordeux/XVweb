@@ -1,5 +1,5 @@
 <html lang="pl"><head>
-    <title>{$SiteTopic} :: {$SiteName} :.</title>
+    <title>{$SiteTopic} :: {$xv_main_config->site_name} :.</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
 	{foreach from=$MetaTags item=content key=equiv}
     <meta http-equiv="{$equiv}" content="{$content}" />

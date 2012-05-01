@@ -8,7 +8,7 @@ class xv_users_fields_password  extends xv_users_fields {
 	public function field(){
 		global $LocationXVWeb, $XVwebEngine, $URLS, $user_data, $user_class;
 		
-		if($user_data->User != $XVwebEngine->Session->Session('Logged_User') || !xvPerm("AdminPanel"))
+		if($user_data->User != $XVwebEngine->Session->Session('Logged_User') && !xv_perm("AdminPanel"))
 			return '';
 			
 			
@@ -50,21 +50,21 @@ class xv_users_fields_password  extends xv_users_fields {
 							"Password" => $new_password_hashed
 						));
 					
-						$result .= "<div class='success'>".xvLang("password_changed")."</div>";
+						$result .= "<div class='success'>".xv_lang("password_changed")."</div>";
 					}else{
-						$result .= "<div class='error'>".xvLang("password_too_short")."</div>";
+						$result .= "<div class='error'>".xv_lang("password_too_short")."</div>";
 					}
 					
 				}else{
-					$result .= "<div class='error'>".xvLang("password_not_equal")."</div>";
+					$result .= "<div class='error'>".xv_lang("password_not_equal")."</div>";
 				}
 			
 			}else{
-				$result .= "<div class='error'>".xvLang("invalid_password")."</div>";
+				$result .= "<div class='error'>".xv_lang("invalid_password")."</div>";
 			}
 			
 			}else{
-				$result .= "<div class='error'>".xvLang("invalid_sid")."</div>";
+				$result .= "<div class='error'>".xv_lang("invalid_sid")."</div>";
 			}
 		
 		}
@@ -74,16 +74,16 @@ class xv_users_fields_password  extends xv_users_fields {
 		<input type="hidden" name="xv_sid" value="'.$XVwebEngine->Session->GetSID().'" />
 			<table>
 				<tr>
-					<td>'.xvLang("current_password").': </td>
+					<td>'.xv_lang("current_password").': </td>
 					<td><input type="password" value="" name="xv_user_password[old]" autocomplete="off" /></td>
 				</tr>			
 				<tr>
-					<td>'.xvLang("new_password").': </td>
+					<td>'.xv_lang("new_password").': </td>
 					<td><input type="password" value="" name="xv_user_password[password]" autocomplete="off" /></td>
-					<td style="padding-left: 30px;"><input type="submit" value="'.xvLang("Send").'" /></td>
+					<td style="padding-left: 30px;"><input type="submit" value="'.xv_lang("Send").'" /></td>
 				</tr>		
 				<tr>
-					<td>'.xvLang("repeat_password").': </td>
+					<td>'.xv_lang("repeat_password").': </td>
 					<td><input type="password" value="" name="xv_user_password[rpassword]" autocomplete="off" /></td>
 				</tr>
 			</table>

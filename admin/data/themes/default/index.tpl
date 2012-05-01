@@ -51,7 +51,7 @@
 		{/foreach}
 			
 			
-			<li style="float:right"><a href="?LogOut=true" >{$language.LogOut}</a></li> 
+			<li style="float:right"><a href="?{$URLS.Script}Logout/{$JSVars.SIDUser}/" >{$language.LogOut}</a></li> 
 			<li style="float:right; padding: 0 3px 0 3px;"><a href="#" class='xv-close-all-windows' style="display:block; padding: 0 10px 0 10px; " title="Close windows">X</a></li> 
 			<li style="float:right; padding: 0 3px 0 3px;"><a href="#+" class="xv-enlarge" style="display:block; padding: 0 10px 0 10px; ">+</a></li> 
 			<li style="float:right;  padding: 0 3px 0 3px;"><a href="#+" class="xv-reduce" style="display:block; padding: 0 10px 0 10px;">-</a></li> 

@@ -10,7 +10,7 @@
 				<div  class="celldiv">{$language.LastModification}:</div>
 				<div  class="celldiv">{$ReadArticleOut.Date}</div>
 				<div  class="celldiv">{$language.LastAuthor}:</div>
-				<div  class="celldiv"><a href="{$UrlScript}Users/{$ReadArticleOut.Author|escape:'url'}/" >{$ReadArticleOut.Author}</a></div>
+				<div  class="celldiv"><a href="{$URLS.Script}Users/{$ReadArticleOut.Author|escape:'url'}/" >{$ReadArticleOut.Author}</a></div>
 			</div>
 			<div class="rowdiv">
 				<div  class="celldiv">{$language.ViewCount}:</div>

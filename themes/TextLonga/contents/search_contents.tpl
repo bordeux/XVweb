@@ -32,7 +32,7 @@
 					{if $smarty.foreach.minimap.last}
 						{$Value.Name}
 					{else}
-						<a href="{$UrlScript}{$Value.Url|replace:' ':'_'|urlrepair|substr:1}">{$Value.Name}</a> >>
+						<a href="{$URLS.Script}{$Value.Url|replace:' ':'_'|urlrepair|substr:1}">{$Value.Name}</a> >>
 					{/if}
 				{/foreach}
 			</div>
@@ -46,7 +46,7 @@
 <!-- TEXT -->
 <div id="xv-system-search-id">
 {if $JoinForm == false}
-<form action="{$UrlScript}Search/" method="get" name="SearchForm">
+<form action="{$URLS.Script}Search/" method="get" name="SearchForm">
 	{$language.Search}: <input accesskey="s" type="search" name="Search" value="{$smarty.get.Search|escape:'html'}" class="Search" />
 	<input type="checkbox" value="true" name="AllVersion" id="AllVersion" class="StyleForm" {if $smarty.get.AllVersion == true}checked="checked"{/if} /> <label for="AllVersion">Szukaj w wszyskich wersjach</label> 
 	<input type="submit" value="{$language.Search}" class="StyleForm" /> 
@@ -61,7 +61,7 @@
 			{foreach from=$SearchArray item=SearchResult}
 				<div id="Search-ID" style="background-color:#F8F8F8;">
 					<div id="TitleSearch-ID" style="font-size:15px; margin-top:10px; font-weight: bold;">
-						<a href="{$UrlScript}{$SearchResult.URL|substr:1|replace:' ':'_'}{if $smarty.get.AllVersion == true}?version={$SearchResult.Version}{/if}">{$SearchResult.Topic}</a>
+						<a href="{$URLS.Script}{$SearchResult.URL|substr:1|replace:' ':'_'}{if $smarty.get.AllVersion == true}?version={$SearchResult.Version}{/if}">{$SearchResult.Topic}</a>
 					</div>
 					<div id="DescriptionSearch-ID"> 
 						<div style="margin-left:10px;">
@@ -69,7 +69,7 @@
 						</div>
 					</div>
 					<div id="FooterSearch-ID" style="font-size: 11px; color : #1C8C1C; ">
-					{$UrlScript}{$SearchResult.URL|substr:1} -  {$SearchResult.StrByte} B {$SearchResult.Lenght} Char {math equation="round(x*10)" x=$SearchResult.Relevance}% {$language.Relevance} 
+					{$URLS.Script}{$SearchResult.URL|substr:1} -  {$SearchResult.StrByte} B {$SearchResult.Lenght} Char {math equation="round(x*10)" x=$SearchResult.Relevance}% {$language.Relevance} 
 					</div>
 				</div> 
 				<hr />

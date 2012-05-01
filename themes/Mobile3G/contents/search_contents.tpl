@@ -8,7 +8,7 @@
 	
 	{if $JoinForm == false}
 	<div data-role="fieldcontain">
-		<form action="{$UrlScript}Search/" method="get" name="SearchForm">
+		<form action="{$URLS.Script}Search/" method="get" name="SearchForm">
 				<label for="search">Search Input:</label>
 				<input type="search" name="Search" id="search" value="{$smarty.get.Search|escape:'html'}" />
 
@@ -28,7 +28,7 @@
 		<ul data-role="listview">
 			{foreach from=$SearchArray item=SearchResult} 
 				<li>
-					<a href="{$UrlScript}{$SearchResult.URL|substr:1|replace:' ':'_'}{if $smarty.get.AllVersion == true}?version={$SearchResult.Version}{/if}"> 
+					<a href="{$URLS.Script}{$SearchResult.URL|substr:1|replace:' ':'_'}{if $smarty.get.AllVersion == true}?version={$SearchResult.Version}{/if}"> 
 						<h3>{$SearchResult.Topic}</h3> 
 						<p style="color:#1C8C1C; font-weight:bold;">{$URLS.Script}{$SearchResult.URL|substr:1}</p> 
 						<p>{$SearchResult.Contents}</p> 

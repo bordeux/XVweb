@@ -21,7 +21,7 @@
 					{if $smarty.foreach.minimap.last}
 						{$Value.Name}
 					{else}
-						<a href="{$UrlScript}{$Value.Url|replace:' ':'_'|urlrepair|substr:1}">{$Value.Name}</a> >>
+						<a href="{$URLS.Script}{$Value.Url|replace:' ':'_'|urlrepair|substr:1}">{$Value.Name}</a> >>
 					{/if}
 				{/foreach}
 			</div>
@@ -53,10 +53,10 @@
 {foreach from=$FileList item=FileArray}
 			<tr>
 				<td>{$FileArray.ID}</td>
-				<td><a href="{$UrlScript}File/{$FileArray.ID}/">{$FileArray.FileName}.{$FileArray.Extension}</a></td>
+				<td><a href="{$URLS.Script}File/{$FileArray.ID}/">{$FileArray.FileName}.{$FileArray.Extension}</a></td>
 				<td>{$FileArray.Date}</td>
 				<td>{$FileArray.Downloads}</td>
-				<td><a href="{$UrlScript}Users/{$FileArray.UserFile|escape:'url'}/" >{$FileArray.UserFile}</a></td>
+				<td><a href="{$URLS.Script}Users/{$FileArray.UserFile|escape:'url'}/" >{$FileArray.UserFile}</a></td>
 				{if $ViewCode}
 				<td><input type="text" value="&lt;file id=&quot;{$FileArray.ID}&quot; /&gt;" /></td>
 				{/if}

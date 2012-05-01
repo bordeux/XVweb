@@ -1,10 +1,10 @@
 <?php
 header("Cache-Control: no-cache, must-revalidate");
-LoadLang('edit');
+xv_load_lang('edit');
 include_once($XVwebDir.'libraries'.DIRECTORY_SEPARATOR.'phpQuery'.DIRECTORY_SEPARATOR.'phpQuery.php');
 
 	$Smarty->assign('WriteUrlArticle', true);
-		if(!(xvPerm('WriteArticle'))){ // Brak dostepu
+		if(!(xv_perm('WriteArticle'))){ // Brak dostepu
 			header("location: ".$URLS['Script'].'System/AccessDenied/');
 			exit;
 			}

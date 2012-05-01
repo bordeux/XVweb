@@ -26,7 +26,7 @@
 					{if $smarty.foreach.minimap.last}
 						{$Value.Name}
 					{else}
-						<a href="{$UrlScript}{$Value.Url|replace:' ':'_'|urlrepair|substr:1}">{$Value.Name}</a> >>
+						<a href="{$URLS.Script}{$Value.Url|replace:' ':'_'|urlrepair|substr:1}">{$Value.Name}</a> >>
 					{/if}
 				{/foreach}
 			</div>
@@ -52,9 +52,9 @@
 	<tr class="TableCell">
 		<td><input type="radio" name="OldVer" value="{$HistoryArray.Version}"/> <input type="radio" name="NewVer" value="{$HistoryArray.Version}"/></td>
 		<td>{$HistoryArray.Topic}</td>
-		<td><a href="{$UrlScript}{$ArticleURL|substr:1|replace:' ':'_'}?version={$HistoryArray.Version}">{$HistoryArray.Date}</a></td>
+		<td><a href="{$URLS.Script}{$ArticleURL|substr:1|replace:' ':'_'}?version={$HistoryArray.Version}">{$HistoryArray.Date}</a></td>
 		<td>{$HistoryArray.Version}</td>
-		<td><a href="{$UrlScript}Users/{$HistoryArray.Author|urlrepair}/">{$HistoryArray.Author}</a></td>
+		<td><a href="{$URLS.Script}Users/{$HistoryArray.Author|urlrepair}/">{$HistoryArray.Author}</a></td>
 		<td>{$HistoryArray.DescriptionOfChange}</td>
 	</tr>
 	{/foreach}

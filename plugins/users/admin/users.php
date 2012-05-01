@@ -179,13 +179,12 @@ onUpdatePerms();
 	public function get_perms(){
 	$perms_names = array();
 	$perms_descriptions = array();
-	
-		foreach($this->XVweb->Config("plugins")->find("enabled plugin") as $plugin){
-			$plugin_file = pq($plugin)->attr('file');
-			if(empty($plugin_file))
-				$plugin_file = pq($plugin)->html();
-				
-			$plugin_xml = phpQuery::newDocumentFile(ROOT_DIR.'plugins'.DIRECTORY_SEPARATOR.$plugin_file);
+	$plugins_config = new xv_plugins_config();
+
+		foreach($plugins_config->get_all() as $val){
+
+			include_once(ROOT_DIR.'core'.DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'phpQuery'.DIRECTORY_SEPARATOR.'phpQuery.php');
+			$plugin_xml = phpQuery::newDocumentFile(ROOT_DIR.'plugins'.DIRECTORY_SEPARATOR.$val['name'].'/'.$val['name'].'.xml');
 			foreach($plugin_xml->find("ranks rank") as $perm){
 				$name_perm = pq($perm)->find("name")->html();
 				$desc_perm = pq($perm)->find("description")->html();

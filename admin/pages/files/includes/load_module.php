@@ -42,7 +42,7 @@
 					background: rgba(148,198, 255, 0.4 );
 				}
 				.xv-file-icon {
-					background: url(<?=$GLOBALS['URLS']['Site']?>admin/data/themes/{$GLOBALS['ThemeSelected']}/img/fileicons/file.png) no-repeat center center;
+					background: url(<?=$GLOBALS['URLS']['Site']?>admin/data/themes/{$GLOBALS['xv_theme_name']}/img/fileicons/file.png) no-repeat center center;
 					width:64px;
 					height:64px;
 				}<style type="text/css" media="all">
@@ -89,18 +89,18 @@
 					background: rgba(148,198, 255, 0.4 );
 				}
 				.xv-file-icon {
-					background: url(<?=$GLOBALS['URLS']['Site']?>admin/data/themes/<?=$GLOBALS['ThemeSelected']?>/img/fileicons/file.png) no-repeat center center;
+					background: url(<?=$GLOBALS['URLS']['Site']?>admin/data/themes/<?=$GLOBALS['xv_theme_name']?>/img/fileicons/file.png) no-repeat center center;
 					width:64px;
 					height:64px;
 				}
 <?php
-foreach (glob(realpath($GLOBALS['RootDir']."/admin/data/themes/".$GLOBALS['ThemeSelected']."/img/fileicons/").'/*.png') as $filename) {
+foreach (glob(realpath($GLOBALS['RootDir']."/admin/data/themes/".$GLOBALS['xv_theme_name']."/img/fileicons/").'/*.png') as $filename) {
 	$FileBaseName = basename($filename);
 	$FileExec = explode("-", pathinfo($FileBaseName, PATHINFO_FILENAME));
 	foreach($FileExec as $extt){
 ?>
 				.xv-file-icon.xv-ico-<?=$extt?> {
-					background: url(<?=$GLOBALS['URLS']['Site']?>admin/data/themes/<?=$GLOBALS['ThemeSelected']?>/img/fileicons/<?=$FileBaseName?>) no-repeat center center;
+					background: url(<?=$GLOBALS['URLS']['Site']?>admin/data/themes/<?=$GLOBALS['xv_theme_name']?>/img/fileicons/<?=$FileBaseName?>) no-repeat center center;
 				}
 				
 <?php

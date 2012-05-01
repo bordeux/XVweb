@@ -22,7 +22,7 @@
 	<div id="EditPanel" class="ui-tabs ui-widget ui-widget-content ui-corner-top">
 		<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-top">
 			<li class="ui-state-default ui-corner-top ui-state-hover ui-button-text-icon-primary">
-				<a href="{$UrlScript}history/{$ReadArticleIndexOut.ID}/" title="{$language.History}" style="padding-left:20px;"> <span class="ui-icon ui-icon-script" style="margin-left:-16px;"></span>{$language.History}</a>
+				<a href="{$URLS.Script}history/{$ReadArticleIndexOut.ID}/" title="{$language.History}" style="padding-left:20px;"> <span class="ui-icon ui-icon-script" style="margin-left:-16px;"></span>{$language.History}</a>
 			</li>
 		</ul>
 		
@@ -33,7 +33,7 @@
 					{if $smarty.foreach.minimap.last}
 						{$Value.Name}
 					{else}
-						<a href="{$UrlScript}{$Value.Url|replace:' ':'_'|urlrepair|substr:1}">{$Value.Name}</a> >>
+						<a href="{$URLS.Script}{$Value.Url|replace:' ':'_'|urlrepair|substr:1}">{$Value.Name}</a> >>
 					{/if}
 				{/foreach}
 			</div>

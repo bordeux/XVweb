@@ -1,4 +1,6 @@
 <?php
+xv_trigger("forgot.reset.start");
+
 $forgot_config = new forgot_config();
 $Smarty->assign('forgot_config', $forgot_config);
 $Smarty->assign('forgot_result', false);

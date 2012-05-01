@@ -69,46 +69,55 @@ if (class_exists($class_field_name)) {
 	}
 }
 $categories = xvp()->get_categories($XVauctions, $auction_category, $queries_search);
+
 $display_options = array(
 		"sort"=>$_GET['sort'],
 		"sortby"=>$_GET['sortby'],
 		
 	);
+	
 $record_limit = 30;
 	if(isset($_GET['auction_type'])&& strlen($_GET['auction_type']) != 0  && $_GET['auction_type'] != "all" ){
 		$display_options['type'] = $_GET['auction_type'];
 		$auction_type_c = "";
 		
 		if($_GET['auction_type']== "dutch")
-			$auction_type_c =  xvLang("xca_dutch_auction1");
+			$auction_type_c =  xv_lang("xca_dutch_auction1");
 		elseif($_GET['auction_type']== "auction")	
-			$auction_type_c = xvLang("xca_action1");	
+			$auction_type_c = xv_lang("xca_action1");	
 		elseif($_GET['auction_type']== "buynow")	
-			$auction_type_c = xvLang("xca_buynow");
+			$auction_type_c = xv_lang("xca_buynow");
 		$search_filters_remove[] = array(
 				"link"=> xvp()->AddGet($XVwebEngine, array("auction_type" => ""), true),
-				"caption"=> xvLang("xca_auction_type")." : ".$auction_type_c
+				"caption"=> xv_lang("xca_auction_type")." : ".$auction_type_c
 			);
 	}
 	if(isset($_GET['auction_seller'])&& strlen($_GET['auction_seller']) != 0){
 		$display_options['seller'] = $_GET['auction_seller'];
 		$search_filters_remove[] = array(
 					"link"=> xvp()->AddGet($XVwebEngine, array("auction_seller" => ''), true),
-					"caption"=> xvLang("xca_seller")." : ".htmlspecialchars($_GET['auction_seller'])
+					"caption"=> xv_lang("xca_seller")." : ".htmlspecialchars($_GET['auction_seller'])
 				);
 	}
 	if(isset($_GET['auction_cost_from'])&& strlen($_GET['auction_cost_from']) != 0){
 		$display_options['cost_from'] = $_GET['auction_cost_from'];
 		$search_filters_remove[] = array(
 				"link"=> xvp()->AddGet($XVwebEngine, array("auction_cost_from" => ''), true),
-				"caption"=> xvLang("xca_cost_from")." : ".htmlspecialchars($_GET['auction_cost_from']).' '.xvLang("xca_coin_type")
+				"caption"=> xv_lang("xca_cost_from")." : ".htmlspecialchars($_GET['auction_cost_from']).' '.xv_lang("xca_coin_type")
 			);
 	}
 	if(isset($_GET['auction_cost_to']) && strlen($_GET['auction_cost_to']) != 0){
 		$display_options['cost_to'] = $_GET['auction_cost_to'];
 		$search_filters_remove[] = array(
 				"link"=> xvp()->AddGet($XVwebEngine, array("auction_cost_to" =>''), true),
-				"caption"=> xvLang("xca_cost_to")." : ".htmlspecialchars($_GET['auction_cost_to']).' '.xvLang("xca_coin_type")
+				"caption"=> xv_lang("xca_cost_to")." : ".htmlspecialchars($_GET['auction_cost_to']).' '.xv_lang("xca_coin_type")
+			);
+	}	
+	if(isset($_GET['auction_search']) && !empty($_GET['auction_search'])){
+		$display_options['search'] = $_GET['auction_search'];
+		$search_filters_remove[] = array(
+				"link"=> xvp()->AddGet($XVwebEngine, array("auction_search" =>''), true),
+				"caption"=> xv_lang("xca_search")." : ".htmlspecialchars($_GET['auction_search'])
 			);
 	}
 $auctions_list = xvp()->get_auctions($XVauctions, $auction_category, $queries_search, $display_options, (int) $_GET['page'], $record_limit);

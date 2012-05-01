@@ -24,7 +24,7 @@ if(!($XVwebEngine->Session->Session('Logged_Logged'))){ // przekierowanie, jak n
 	}
 header("Cache-Control: no-cache, must-revalidate"); // HTTP/1.1
 header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
-LoadLang('user');
+xv_load_lang('user');
 
 $IDMessage = strtolower($XVwebEngine->GetFromURL($PathInfo, 2));
 $ActualPage = (int) ifsetor($_GET['Page'], 0);

@@ -7,8 +7,8 @@
 {/if}
 	<div class="xvauction-main" >
 	<div class="category_parents_tree" >
-		<a href="{$URLS.Auctions}/">{"xca_auctions"|xvLang}</a> 
-			&gt;&gt; <a href="{$URLS.AuctionPanel}">{"xca_auctions_panel"|xvLang}</a> 
+		<a href="{$URLS.Auctions}/">{"xca_auctions"|xv_lang}</a> 
+			&gt;&gt; <a href="{$URLS.AuctionPanel}">{"xca_auctions_panel"|xv_lang}</a> 
 			&gt;&gt; <a href="{$URLS.AuctionPanel}/to_add/">{$Title}</a> 
 	
 	</div>
@@ -43,10 +43,10 @@
 
 						<th class="items-checkbox"><input type="checkbox" name="select_all" value="true" class="select_all" data-selector='input[name="auction[]"]' /></th>
 						<th class="items-thumbnail"></th>
-						<th class="items-title"><a href='?{addget value="sortby=title&sort=$SmartySort"}'>{$SmartyChar} {"xca_description"|xvLang}</a></th>
-						<th class="items-cost"><a href='?{addget value="sortby=cost&sort=$SmartySort"}'>{$SmartyChar} {"xca_cost"|xvLang}</a></th>
-						<th class="items-pieces"><a href='?{addget value="sortby=start&sort=$SmartySort"}'>{$SmartyChar} {"xca_start"|xvLang}</a></th>
-						<th class="items-timeout"><a href='?{addget value="sortby=end&sort=$SmartySort"}'>{$SmartyChar}  {"xca_end"|xvLang}</a></th>
+						<th class="items-title"><a href='?{addget value="sortby=title&sort=$SmartySort"}'>{$SmartyChar} {"xca_description"|xv_lang}</a></th>
+						<th class="items-cost"><a href='?{addget value="sortby=cost&sort=$SmartySort"}'>{$SmartyChar} {"xca_cost"|xv_lang}</a></th>
+						<th class="items-pieces"><a href='?{addget value="sortby=start&sort=$SmartySort"}'>{$SmartyChar} {"xca_start"|xv_lang}</a></th>
+						<th class="items-timeout"><a href='?{addget value="sortby=end&sort=$SmartySort"}'>{$SmartyChar}  {"xca_end"|xv_lang}</a></th>
 
 					</tr>
 				</thead> 
@@ -67,7 +67,7 @@
 						<a href="{$URLS.Auction}/{$auction.ID}/">{$auction.Title}</a>
 						</td>
 						<td class="items-cost">
-							<span>{$auction.Auction|number_format:2:'.':' '} {"xca_coin_type"|xvLang}</span>
+							<span>{$auction.Auction|number_format:2:'.':' '} {"xca_coin_type"|xv_lang}</span>
 						</td>
 						<td class="items-start">
 							{$auction.Start}
@@ -88,7 +88,7 @@
 	{else}
 			<div style="margin: 40px;">
 				<div style="background: #F3FFCD; border: 1px solid #B1DA81; color: #4B5D40; text-align:center; padding: 20px; ">
-					<h2 style="color: #60A536; font-size: 16px; font-weight:bold;">{"xca_zero_results3"|xvLang}</h2>
+					<h2 style="color: #60A536; font-size: 16px; font-weight:bold;">{"xca_zero_results3"|xv_lang}</h2>
 				</div>
 			</div>
 	{/if}

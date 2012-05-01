@@ -18,7 +18,7 @@ header("Cache-Control: no-cache, must-revalidate");
 if(!isset($XVwebEngine)){
 	header("location: http://".$_SERVER['HTTP_HOST']."/");
 }
-
+xv_trigger("users.start");
 $UserFromUrl = $XVwebEngine->GetFromURL($PathInfo, 2);
 $Command = $XVwebEngine->GetFromURL($PathInfo, 3);
 

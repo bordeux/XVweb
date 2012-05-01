@@ -8,11 +8,11 @@
 ****************   All rights reserved             *************************
 ***************************************************************************/
 
-if(!xvPerm("xva_Buy")){
+if(!xv_perm("xva_Buy")){
 	header("location: ".$URLS['Script'].'System/Auctions/Auction_permission_buy/');
 	exit;
 }
-$Smarty->assign('Title',  xvLang("xca_bids"));
+$Smarty->assign('Title',  xv_lang("xca_bids"));
 $queries_search = array();
 $display_options = array(
 		"sort"=>$_GET['sort'],

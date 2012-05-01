@@ -7,7 +7,7 @@
 ****************   Authors   :  XVweb team         *************************
 ****************   All rights reserved             *************************
 ***************************************************************************/
-if(!xvPerm("xva_Sell")){
+if(!xv_perm("xva_Sell")){
 	header("location: ".$URLS['Script'].'System/Auctions/Auction_permission_sell/');
 	exit;
 }

@@ -8,7 +8,7 @@
 ****************   All rights reserved             *************************
 ***************************************************************************/
 
-if(!xvPerm("xva_Sell")){
+if(!xv_perm("xva_Sell")){
 	header("location: ".$URLS['Script'].'System/Auctions/Auction_permission_sell/');
 	exit;
 }
@@ -16,7 +16,7 @@ if(!xvPerm("xva_Sell")){
 if(isset($_POST['auction']) && is_array($_POST['auction']) && isset($_POST['hidde']))
 	xvp()->set_hidden_no_selled($XVauctions, $XVwebEngine->Session->Session('Logged_User'), $_POST['auction']);
 	
-$Smarty->assign('Title',  xvLang("xca_no_selled"));
+$Smarty->assign('Title',  xv_lang("xca_no_selled"));
 
 $queries_search = array();
 $display_options = array(

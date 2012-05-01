@@ -7,8 +7,8 @@
 {/if}
 	<div class="xvauction-main" >
 	<div class="category_parents_tree" >
-		<a href="{$URLS.Auctions}/">{"xca_auctions"|xvLang}</a> 
-			&gt;&gt; <a href="{$URLS.AuctionPanel}">{"xca_auctions_panel"|xvLang}</a> 
+		<a href="{$URLS.Auctions}/">{"xca_auctions"|xv_lang}</a> 
+			&gt;&gt; <a href="{$URLS.AuctionPanel}">{"xca_auctions_panel"|xv_lang}</a> 
 			&gt;&gt; <a href="{$URLS.AuctionPanel}/payment_transfer/">{$Title}</a> 
 	
 	</div>
@@ -27,27 +27,27 @@
 		<div>
 		{if $smarty.post.pre_send && $isset_user}
 			<div style="padding: 20px;">
-				<div class="LightBulbTip" style="width: 600px; margin: auto;">Czy jesteś pewien transferu <b>{$smarty.post.transfer.amount|escape:"html"} {"xca_coin_type"|xvLang}</b> dla użytkownika <a href="{$URLS.Script}/Users/{$smarty.post.transfer.user|escape:'url'}/" target="_blank"><b>{$smarty.post.transfer.user|escape:"html"}</b></a> </div>
+				<div class="LightBulbTip" style="width: 600px; margin: auto;">Czy jesteś pewien transferu <b>{$smarty.post.transfer.amount|escape:"html"} {"xca_coin_type"|xv_lang}</b> dla użytkownika <a href="{$URLS.Script}/Users/{$smarty.post.transfer.user|escape:'url'}/" target="_blank"><b>{$smarty.post.transfer.user|escape:"html"}</b></a> </div>
 							<form action="?transfer=true" method="post" style="text-align:center; padding: 10px; width: 300px; margin:auto;">
 								<input type="hidden" name="xv-sid" value="{$JSVars.SIDUser}" />
 								<input type="hidden" name="transfer[user]" value="{$smarty.post.transfer.user}"/>
 								<input type="hidden" name="transfer[amount]" value="{$smarty.post.transfer.amount}"  />
 								<input type="hidden" name="finish_mode" value="true" />
-								<a href="?" style="margin-right: 20px;">{'xca_back'|xvLang}</a> 
-								<input type="submit" value="{'xca_payments_send_transfer'|xvLang}" />
+								<a href="?" style="margin-right: 20px;">{'xca_back'|xv_lang}</a> 
+								<input type="submit" value="{'xca_payments_send_transfer'|xv_lang}" />
 							</form>
 				
 			</div>
 		{else}
 		
 		{if $smarty.post.pre_send}
-			<div class="error">{"xca_payments_send_invalid_user"|xvLang}</div>
+			<div class="error">{"xca_payments_send_invalid_user"|xv_lang}</div>
 		{/if}	
 		{if $smarty.get.transfer}
 			{if $send_mode}
-				<div class="success">{"xca_payments_send_success"|xvLang}</div>
+				<div class="success">{"xca_payments_send_success"|xv_lang}</div>
 			{else}
-				<div class="error">{"xca_payments_send_error"|xvLang}</div>
+				<div class="error">{"xca_payments_send_error"|xv_lang}</div>
 			{/if}
 		{/if}
 		
@@ -59,7 +59,7 @@
 					<table>
 						<tr>
 							<td style="width: 200px; font-weight: bold;">Dostępne saldo</td>
-							<td>{if $Session.xv_payments_amount > 0} <span style="font-weight:bold; color:#3f7f00;">{({$Session.xv_payments_amount}/100)|number_format:2:'.':' '}  {"xca_coin_type"|xvLang}</span>{else}<span style="font-weight:bold; color:#bf0000;">{({$Session.xv_payments_amount}/100)|number_format:2:'.':' '}  {"xca_coin_type"|xvLang}</span>{/if}</td>
+							<td>{if $Session.xv_payments_amount > 0} <span style="font-weight:bold; color:#3f7f00;">{({$Session.xv_payments_amount}/100)|number_format:2:'.':' '}  {"xca_coin_type"|xv_lang}</span>{else}<span style="font-weight:bold; color:#bf0000;">{({$Session.xv_payments_amount}/100)|number_format:2:'.':' '}  {"xca_coin_type"|xv_lang}</span>{/if}</td>
 						</tr>			
 						<tr>
 							<td style="width: 200px; font-weight: bold;">Kwota do transferu</td>
@@ -67,7 +67,7 @@
 						</tr>
 						<tr>
 							<td style="width: 200px; font-weight: bold;">Kwota która zostanie przelana</td>
-							<td><span class="xva-transfer-result">0</span> {"xca_coin_type"|xvLang}</td>
+							<td><span class="xva-transfer-result">0</span> {"xca_coin_type"|xv_lang}</td>
 						</tr>
 						<tr>
 							<td style="width: 200px; font-weight: bold;">Odbiorca przlewu</td>

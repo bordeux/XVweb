@@ -41,7 +41,7 @@
 					{if $smarty.foreach.minimap.last}
 						{$Value.Name}
 					{else}
-						<a href="{$UrlScript}{$Value.Url|replace:' ':'_'|urlrepair|substr:1}">{$Value.Name}</a> >>
+						<a href="{$URLS.Script}{$Value.Url|replace:' ':'_'|urlrepair|substr:1}">{$Value.Name}</a> >>
 					{/if}
 				{/foreach}
 			</div>
@@ -70,7 +70,7 @@
 
 <div id="MainFile">
 <div class="IconPreview">
-<a href="{$UrlScript}File/{$File.ID}/{$File.FileName|escape:'url'}.{$File.Extension}" > 
+<a href="{$URLS.Script}File/{$File.ID}/{$File.FileName|escape:'url'}.{$File.Extension}" > 
 {if $File.Extension == 'pdf'}
      <img src="{$UrlTheme}img/icons/pdf.png"  alt="PDF" />
 {elseif $File.Extension == 'doc' or $File.Extension == 'docx'}
@@ -112,11 +112,11 @@
 </div>
 
 <div class="FileInfoRow">
-<div class="InfoFile"> {$language.OwnerFile}:</div>  <div class="FileInformation"><a href="{$UrlScript}Users/{$File.UserFile|escape:"url"}/">{$File.UserFile}</a></div>
+<div class="InfoFile"> {$language.OwnerFile}:</div>  <div class="FileInformation"><a href="{$URLS.Script}Users/{$File.UserFile|escape:"url"}/">{$File.UserFile}</a></div>
 </div>
 
 <div class="FileInfoRow">
-<div class="InfoFile"> {$language.FileName}:</div>  <div class="FileInformation"> <a href="{$UrlScript}File/{$File.ID}/{$File.FileName|escape:'url'}.{$File.Extension}"  id="FileNameJS">{$File.FileName|escape:'html'}.{$File.Extension}</a></div>
+<div class="InfoFile"> {$language.FileName}:</div>  <div class="FileInformation"> <a href="{$URLS.Script}File/{$File.ID}/{$File.FileName|escape:'url'}.{$File.Extension}"  id="FileNameJS">{$File.FileName|escape:'html'}.{$File.Extension}</a></div>
 </div>
 
 <div class="FileInfoRow">

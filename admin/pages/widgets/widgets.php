@@ -28,7 +28,7 @@ if(!isset($XVwebEngine)){
 		var $id = "widets";
 		var $contentAddClass = "";
 		public function __construct(&$XVweb){
-		$this->title = xvLang("Widgets");
+		$this->title = xv_lang("Widgets");
 		$Widgets = array();
 		foreach (glob(ADMIN_ROOT_DIR.'data'.DIRECTORY_SEPARATOR.'widgets'.DIRECTORY_SEPARATOR.'*'.DIRECTORY_SEPARATOR.'info.widget.php') as $filename) {
 			include_once($filename);

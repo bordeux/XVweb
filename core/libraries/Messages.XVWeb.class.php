@@ -103,9 +103,7 @@ class Messages
 				));
 				//$this->Date['XVweb']->Date['URLS']['Script']
 				$EmailVars = array(
-					"{{sitename}}" => $this->Date['XVweb']->SrvName,
-					"{{domain}}" => $this->Date['XVweb']->SrvDomain,
-				);
+					);
 				$this->Date['XVweb']->SendMail($this->Date['XVweb']->ReadUser['Mail'], '/System/Emails/NewPrivMessage/', $EmailVars);
 			return true;
 	}

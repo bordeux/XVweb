@@ -7,8 +7,8 @@
 {/if}
 	<div class="xvauction-main" >
 	<div class="category_parents_tree" >
-		<a href="{$URLS.Auctions}/">{"xca_auctions"|xvLang}</a> 
-			&gt;&gt; <a href="{$URLS.AuctionPanel}">{"xca_auctions_panel"|xvLang}</a> 
+		<a href="{$URLS.Auctions}/">{"xca_auctions"|xv_lang}</a> 
+			&gt;&gt; <a href="{$URLS.AuctionPanel}">{"xca_auctions_panel"|xv_lang}</a> 
 			&gt;&gt; {$Title}
 	
 	</div>
@@ -49,28 +49,28 @@
 									{if $bought_info.Thumbnail}
 										<img src="{$URLS.Thumbnails}/{$bought_info.Thumbnail}" alt='{$bought_info.Title|escape:"html"}'/>
 									{else}
-										<img src="{$URLS.Theme}xvauctions_theme/img/no_picture.png" alt='{"xca_no_picture"|xvLang}'  />
+										<img src="{$URLS.Theme}xvauctions_theme/img/no_picture.png" alt='{"xca_no_picture"|xv_lang}'  />
 									{/if}
 								</a>
 							</td>
 							<td style="text-align:left; vertical-align: middle;">
 								<a href="{$URLS.Auction}/{$bought_info.Auction}/" target="_blank">{$bought_info.Title|escape:"htmlall"}</a> (<span style="font-size:8px;">ID: {$bought_info.Auction}</span>)</td>
-							<td style="vertical-align: middle;">{$bought_info.Cost|number_format:2:'.':' '} {"xca_coin_type"|xvLang} </td>
+							<td style="vertical-align: middle;">{$bought_info.Cost|number_format:2:'.':' '} {"xca_coin_type"|xv_lang} </td>
 							<td style="vertical-align: middle;">{$bought_info.Pieces}</td>
-							<td style="vertical-align: middle;"><b style="color:#0F9100;">{($bought_info.Cost*$bought_info.Pieces)|number_format:2:'.':' '} {"xca_coin_type"|xvLang}</b></td>
+							<td style="vertical-align: middle;"><b style="color:#0F9100;">{($bought_info.Cost*$bought_info.Pieces)|number_format:2:'.':' '} {"xca_coin_type"|xv_lang}</b></td>
 						</tr>						
 						<tr>
 							<td style="vertical-align: middle;"><b>Wysyłka</b></td>
 							<td style="vertical-align: middle;">
 										<select style="width: 90%;" name="shipment_method" id="shipment_method">
 											{foreach from=$shipment_available_methods item=method}
-												<option value="{$method.key}" class="shipment-method-{$method.key}" data-cost="{$method.cost}" data-pieces="{$method.pieces}" >{$method.name} ({$method.cost|number_format:2:'.':' '} {"xca_coin_type"|xvLang}  +  kolejna sztuka * {$method.pieces|number_format:2:'.':' '} {"xca_coin_type"|xvLang})</option>
+												<option value="{$method.key}" class="shipment-method-{$method.key}" data-cost="{$method.cost}" data-pieces="{$method.pieces}" >{$method.name} ({$method.cost|number_format:2:'.':' '} {"xca_coin_type"|xv_lang}  +  kolejna sztuka * {$method.pieces|number_format:2:'.':' '} {"xca_coin_type"|xv_lang})</option>
 											{/foreach}
 											</select>
 							</td>
 							<td style="vertical-align: middle;" class="shipment-cost-val"></td>
 							<td style="vertical-align: middle;" class="shipment-pieces-val"></td>
-							<td style="vertical-align: middle;"><b style="color:#0F9100;" class="shipment-result-val">{($bought_info.Cost*$bought_info.Pieces)|number_format:2:'.':' '} {"xca_coin_type"|xvLang}</b></td>
+							<td style="vertical-align: middle;"><b style="color:#0F9100;" class="shipment-result-val">{($bought_info.Cost*$bought_info.Pieces)|number_format:2:'.':' '} {"xca_coin_type"|xv_lang}</b></td>
 						</tr>						
 						<tr>
 							<td></td>
@@ -87,11 +87,11 @@
 								var shipment_key = $(this).val();
 								var shipment_cost = $(".shipment-method-"+shipment_key).data("cost");
 								var shipment_pieces = $(".shipment-method-"+shipment_key).data("pieces");
-								$(".shipment-pieces-val").html("+ "+ shipment_pieces+' {"xca_coin_type"|xvLang}');
-								$(".shipment-cost-val").html(""+ shipment_cost+' {"xca_coin_type"|xvLang}');
+								$(".shipment-pieces-val").html("+ "+ shipment_pieces+' {"xca_coin_type"|xv_lang}');
+								$(".shipment-cost-val").html(""+ shipment_cost+' {"xca_coin_type"|xv_lang}');
 								var shipment_result = (shipment_cost + (({$bought_info.Pieces}-1)*shipment_pieces));
-								$(".shipment-result-val").html(""+  shipment_result +' {"xca_coin_type"|xvLang}');
-								$(".shipment-all-val").html(""+ ( shipment_result + {($bought_info.Cost*$bought_info.Pieces)}) +' {"xca_coin_type"|xvLang}');
+								$(".shipment-result-val").html(""+  shipment_result +' {"xca_coin_type"|xv_lang}');
+								$(".shipment-all-val").html(""+ ( shipment_result + {($bought_info.Cost*$bought_info.Pieces)}) +' {"xca_coin_type"|xv_lang}');
 							}).change();
 						});
 					</script>

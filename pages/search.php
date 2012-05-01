@@ -19,12 +19,6 @@ if(!isset($XVwebEngine)){
 	header("location: http://".$_SERVER['HTTP_HOST']."/");
 }
 
-if($_GET['LogOut']=="true"){
-	$XVwebEngine->LogOut();
-	header("location: ?");
-	exit;
-}
-
 
 //Funckcje Search
 
@@ -45,7 +39,7 @@ $ActualPage = $_GET['Page'];
 
 $Smarty->assign('ContextEdit',  "Search");
 
-$Smarty->assign('SiteTopic',  xvLang("Search")." : ". htmlspecialchars($SearchKeyword));
+$Smarty->assign('SiteTopic',  xv_lang("Search")." : ". htmlspecialchars($SearchKeyword));
 
 include_once($LocationXVWeb.DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'Pager.php');
 

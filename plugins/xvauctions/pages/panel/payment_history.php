@@ -8,11 +8,11 @@
 ****************   All rights reserved             *************************
 ***************************************************************************/
 
-if(!xvPerm("xva_payments")){
+if(!xv_perm("xva_payments")){
 	header("location: ".$URLS['Script'].'System/Auctions/Auction_permission_payments/');
 	exit;
 }
-$Smarty->assign('Title',  xvLang("xca_payments_transaction_history"));
+$Smarty->assign('Title',  xv_lang("xca_payments_transaction_history"));
 
 include_once(ROOT_DIR.'plugins/xvauctions/libs/class.xvpayments.php');
 	

@@ -18,8 +18,8 @@ header("Cache-Control: no-cache, must-revalidate");
 if(!isset($XVwebEngine)){
 	header("location: http://".$_SERVER['HTTP_HOST']."/");
 }
-
-LoadLang('user');
+xv_trigger("users.profile.start");
+xv_load_lang('user');
 include_once(ROOT_DIR.'plugins/users/libs/users.class.php');
 
 $user_class = new xv_users($XVwebEngine);

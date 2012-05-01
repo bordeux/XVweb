@@ -29,7 +29,7 @@ exit;
 $XVwebEngine->Date['EngineVars'] = array_merge_recursive((is_array($XVwebEngine->Date['EngineVars']) ? $XVwebEngine->Date['EngineVars'] : array()), (is_array($XVwebEngine->Plugins()->Menager()->enginevars()) ? $XVwebEngine->Plugins()->Menager()->enginevars() : array()));
 $XVwebEngine->Date['EngineFunctions'] = $XVwebEngine->Plugins()->Menager()->enginefunctions(); // zmienne z plugina :D
 
-LoadLang('edit');
+xv_load_lang('edit');
 
 if(isset($_GET['PreView'])){
 	exit($XVwebEngine->TextParser()->set("Blocked", false)->SetText($_POST['EditArtPost'])->Parse()->ToHTML());
@@ -59,7 +59,7 @@ if(isset($_GET['settings']) && is_numeric($_GET['settings'])){
 		exit;
 	}
 	$ResultOperation = false;
-	if((xvPerm('AdminPanel'))){
+	if((xv_perm('AdminPanel'))){
 		$SaveSettings = array();
 		foreach($_POST['settings'] as $key=> $value)
 			$SaveSettings[$key] = ifsetor($_POST['settings'][$key] , 0);
@@ -70,23 +70,23 @@ if(isset($_GET['settings']) && is_numeric($_GET['settings'])){
 		$ResultOperation = $XVwebEngine->EditArticle()->EditIndexArticle($_GET['settings'], $IndexToChange);
 	}
 
-	if(!empty($_POST['urlpath']) && (xvPerm('MoveArticle'))){
+	if(!empty($_POST['urlpath']) && (xv_perm('MoveArticle'))){
 		$URLFrom = $XVwebEngine->IDtoURL($_GET['settings']);
 		$URLTo = $XVwebEngine->AddSlashesStartAndEnd($_POST['urlpath']);
 		if ( $URLTo != $URLFrom){
 			$ResultOperation = $XVwebEngine->EditArticle()->ChangeURL($URLFrom,$URLTo);
 		}
 	}
-	if(!empty($_POST['alias']) && $_POST['alias'] != $XVwebEngine->ReadArticleIndexOut['URL'] && (xvPerm('CreateAlias'))){
+	if(!empty($_POST['alias']) && $_POST['alias'] != $XVwebEngine->ReadArticleIndexOut['URL'] && (xv_perm('CreateAlias'))){
 		$ResultOperation = $XVwebEngine->EditArticle()->AddAlias($_POST['alias'],$_GET['settings']);
 	}
-	if(!empty($_POST['accept']) && (xvPerm('AcceptArticles'))){
+	if(!empty($_POST['accept']) && (xv_perm('AcceptArticles'))){
 	$AcceptResult = ($_POST['accept']['Accept'] == "yes" ? "yes" : "no");
 	if($XVwebEngine->ReadArticleIndexOut['Accepted'] != $AcceptResult)
 		$XVwebEngine->EditArticle()->AcceptArticle($_GET['settings'], $AcceptResult, (isset($_POST['accept']['SubArticles']) ? "yes": "no" ));
 	}
 	
-	if(xvPerm('BlockArticles')){
+	if(xv_perm('BlockArticles')){
 		$BlockResult = $_POST['block']['Article'];
 		if($XVwebEngine->ReadArticleIndexOut['Blocked'] != $BlockResult)
 		$XVwebEngine->EditArticle()->BlockArticle($_GET['settings'], $BlockResult, (isset($_POST['block']['SubArticles']) ? "yes" : "no" ));
@@ -104,11 +104,11 @@ if(isset($_GET['settings']) && is_numeric($_GET['settings'])){
 
 //Modyfication save
 if(isset($_GET['save']) && isset($_POST['xv-description'])){
-	if($XVwebEngine->Config("config")->find("config disable edit")->text() == "true" && !xvPerm('AdminPanel')){
+	if($XVwebEngine->Config("config")->find("config disable edit")->text() == "true" && !xv_perm('AdminPanel')){
 		header("location: ".$URLS['Script'].'System/AccessDenied/');
 		exit;
 		}
-	if(!(xvPerm('EditArticle'))){ // przekierowanie, jak nie zalogowany
+	if(!(xv_perm('EditArticle'))){ // przekierowanie, jak nie zalogowany
 		header("location: ".$URLS['Script'].'System/AccessDenied/');
 		exit;
 		}
@@ -148,11 +148,11 @@ if(isset($_GET['save']) && isset($_POST['xv-description'])){
 	exit;
 }
 if(isset($_GET['save']) && isset($_POST['xv-path'])){
-	if($XVwebEngine->Config("config")->find("config disable write")->text() == "true" && !xvPerm('AdminPanel')){
+	if($XVwebEngine->Config("config")->find("config disable write")->text() == "true" && !xv_perm('AdminPanel')){
 		header("location: ".$URLS['Script'].'System/AccessDenied/');
 		exit;
 		}
-	if(!(xvPerm('WriteArticle'))) {// Brak dostepu
+	if(!(xv_perm('WriteArticle'))) {// Brak dostepu
 		header("location: ".$URLS['Script'].'System/AccessDenied/');
 		exit;
 		}
@@ -217,12 +217,12 @@ if(isset($_GET['save']) && isset($_POST['xv-path'])){
 }
 
 if(isset($_GET['Edit']) && is_numeric($_GET['id'])){
-		if($XVwebEngine->Config("config")->find("config disable edit")->text() == "true" && !xvPerm('AdminPanel')){
+		if($XVwebEngine->Config("config")->find("config disable edit")->text() == "true" && !xv_perm('AdminPanel')){
 			header("location: ".$URLS['Script'].'System/AccessDenied/');
 			exit;
 		}
 
-	if(!(xvPerm('EditArticle'))){ // przekierowanie, jak nie zalogowany
+	if(!(xv_perm('EditArticle'))){ // przekierowanie, jak nie zalogowany
 			header("location: ".$URLS['Script'].'System/AccessDenied/');
 			exit;
 		}
@@ -232,19 +232,19 @@ if(isset($_GET['Edit']) && is_numeric($_GET['id'])){
 		header("location: ".$URLS['Script'].'System/ArticleDoesNotExist/');
 		exit;
 	}
-	if(($XVwebEngine->ReadArticleIndexOut['Blocked'] == "yes") && !(xvPerm('BlockArticles'))){
+	if(($XVwebEngine->ReadArticleIndexOut['Blocked'] == "yes") && !(xv_perm('BlockArticles'))){
 		header("location: ".$URLS['Script'].'System/ArticleBlocked/');
 		exit;
 	}
-		if(xvPerm('AcceptArticles')){
+		if(xv_perm('AcceptArticles')){
 			$SettingsInputs['AcceptArticle'] = array("tag"=>"select", "attr"=>array("name"=>"accept[Accept]"), "options"=>array("yes"=>$Language['Yes'], "no"=>$Language['No']), "checked"=>array($XVwebEngine->ReadArticleIndexOut['Accepted'] => true));
 			$SettingsInputs['AcceptSubArticles'] =  array("tag"=>"input" , "attr"=>array("name"=>"accept[SubArticles]", "value"=>"1", "type"=>"checkbox", "class"=>"xv-checkbox"));
 		}
-		if(xvPerm('BlockArticles')){
+		if(xv_perm('BlockArticles')){
 			$SettingsInputs['BlockArticle'] = array("tag"=>"select", "attr"=>array("name"=>"block[Article]"), "options"=>array("yes"=>$Language['Yes'], "no"=>$Language['No']), "checked"=>array($XVwebEngine->ReadArticleIndexOut['Blocked'] => true));
 			$SettingsInputs['BlockSubArticles'] =  array("tag"=>"input" , "attr"=>array("name"=>"block[SubArticles]", "value"=>"1", "type"=>"checkbox", "class"=>"xv-checkbox"));
 		}
-		if(xvPerm('AdminPanel')){
+		if(xv_perm('AdminPanel')){
 			$SettingsInputs['DisableCache'] =  array("tag"=>"input" , "attr"=>array("name"=>"settings[DisableCache]", "value"=>"1", "type"=>"checkbox", "class"=>"xv-checkbox", "checked"=>(ifsetor($XVwebEngine->ReadArticleIndexOut['Options']['DisableCache'], 0) ? "checked" : "unchecked")));
 			$SettingsInputs['DisableUI'] =  array("tag"=>"input" , "attr"=>array("name"=>"settings[DisableUI]", "value"=>"1", "type"=>"checkbox", "class"=>"xv-checkbox", "checked"=>(ifsetor($XVwebEngine->ReadArticleIndexOut['Options']['DisableUI'], 0) ? "checked" : "unchecked")));
 			$SettingsInputs['DisableDivisions'] =  array("tag"=>"input" , "attr"=>array("name"=>"settings[DisableDivisions]", "value"=>"1", "type"=>"checkbox", "class"=>"xv-checkbox", "checked"=>(ifsetor($XVwebEngine->ReadArticleIndexOut['Options']['DisableDivisions'], 0) ? "checked" : "unchecked")));
@@ -270,9 +270,9 @@ if(isset($_GET['Edit']) && is_numeric($_GET['id'])){
 			$SettingsInputs['Headers'] =  array("tag"=>"textarea" , "attr"=>array("name"=>"settings[Headers]"), "text"=> ifsetor($XVwebEngine->ReadArticleIndexOut['Options']['Headers'], ''));
 			$SettingsInputs['CSS'] =  array("tag"=>"textarea" , "attr"=>array("name"=>"settings[CSS]"), "text"=> ifsetor($XVwebEngine->ReadArticleIndexOut['Options']['CSS'], ''));
 		}
-		if((xvPerm('MoveArticle')))
+		if((xv_perm('MoveArticle')))
 		$SettingsInputs['URLPath'] =  array("tag"=>"input" , "attr"=>array("name"=>"urlpath",  "type"=>"text", "value"=>(ifsetor($XVwebEngine->ReadArticleIndexOut['URL'], '/'))));
-		if((xvPerm('CreateAlias')))
+		if((xv_perm('CreateAlias')))
 		$SettingsInputs['Alias'] =  array("tag"=>"input" , "attr"=>array("name"=>"alias",  "type"=>"text", "value"=>(ifsetor($XVwebEngine->ReadArticleIndexOut['URL'], '/'))));
 		
 		eval($XVwebEngine->Plugins()->Menager()->event("onButtonsSettings"));
@@ -284,7 +284,7 @@ if(isset($_GET['Edit']) && is_numeric($_GET['id'])){
 	$Smarty->assign('IDArticle', $XVwebEngine->ArticleFooIDinArticleIndex);
 }else{
 	$Smarty->assign('WriteUrlArticle', true);
-		if(!(xvPerm('WriteArticle'))){ // Brak dostepu
+		if(!(xv_perm('WriteArticle'))){ // Brak dostepu
 			header("location: ".$URLS['Script'].'System/AccessDenied/');
 			exit;
 			}

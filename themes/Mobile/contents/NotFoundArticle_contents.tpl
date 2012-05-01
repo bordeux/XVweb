@@ -26,7 +26,7 @@
 			{foreach from=$SearchArray item=SearchResult}
 				<div id="Search-ID" style="background-color:#F8F8F8;">
 					<div id="TitleSearch-ID" style="font-size:15px; margin-top:10px; font-weight: bold;">
-						<a href="{$UrlScript}{$SearchResult.URL|substr:1}?version={$SearchResult.Version}">{$SearchResult.Topic}</a>
+						<a href="{$URLS.Script}{$SearchResult.URL|substr:1}?version={$SearchResult.Version}">{$SearchResult.Topic}</a>
 					</div>
 					<div id="DescriptionSearch-ID"> 
 						<div style="margin-left:10px;">
@@ -34,7 +34,7 @@
 						</div>
 					</div>
 					<div id="FooterSearch-ID" style="font-size: 11px; color : #1C8C1C; ">
-					{$UrlScript}{$SearchResult.URL|substr:1} -  {$SearchResult.StrByte} B {$SearchResult.Lenght} Char {math equation="round(x*10)" x=$SearchResult.Relevance}% {$language.Relevance} 
+					{$URLS.Script}{$SearchResult.URL|substr:1} -  {$SearchResult.StrByte} B {$SearchResult.Lenght} Char {math equation="round(x*10)" x=$SearchResult.Relevance}% {$language.Relevance} 
 					</div>
 				</div> 
 				<hr />

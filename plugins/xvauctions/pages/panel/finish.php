@@ -8,12 +8,12 @@
 ****************   All rights reserved             *************************
 ***************************************************************************/
 
-if(!xvPerm("xva_Sell")){
+if(!xv_perm("xva_Sell")){
 	header("location: ".$URLS['Script'].'System/Auctions/Auction_permission_sell/');
 	exit;
 }
 
-$Smarty->assign('Title',  xvLang("xca_finish_auction"));
+$Smarty->assign('Title',  xv_lang("xca_finish_auction"));
 
 $auction_id = strtolower($XVwebEngine->GetFromURL($PathInfo, 3));
 

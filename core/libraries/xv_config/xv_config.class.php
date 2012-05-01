@@ -44,6 +44,7 @@ class xv_config {
 		return isset($this->__data[$name]) ? $this->__data[$name] : null;
 	}
 	public function __unset($name){
+		$this->__changed_value = true;
 		unset($this->__data[$name]);
 	}
 	public function save(){

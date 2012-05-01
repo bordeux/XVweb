@@ -18,11 +18,12 @@ header("Cache-Control: no-cache, must-revalidate");
 if(!isset($XVwebEngine)){
 	header("location: http://".$_SERVER['HTTP_HOST']."/");
 }
+xv_trigger("users.profile.edit.start");
 
 	$Smarty->assign('ContextEdit',  $ContextEdit);
 	$Smarty->assign('Title', $GLOBALS['Language']['User'].': '.htmlspecialchars($user_data->User,  ENT_QUOTES));
 	$Smarty->assign('SiteTopic', $GLOBALS['Language']['User'].': '.htmlspecialchars($user_data->User,  ENT_QUOTES));
-	$Smarty->assign('profile', $user_data->User);
+	$Smarty->assign('profile', $user_data);
 	
 	$Smarty->assign('MiniMap', array(
 			array("Url"=>"/Users/", "Name"=>$Language['Users']),
@@ -48,7 +49,7 @@ if(!isset($XVwebEngine)){
 			}
 	}
 	
-	$selected_big_fields = array("password");
+	$selected_big_fields = array("password", "email", "avatar");
 	foreach($selected_big_fields  as $big_field){
 		if(isset($field_class[$big_field]) && method_exists($field_class[$big_field], 'field')){
 			$fields_html[] = xvp()->field($field_class[$big_field]);

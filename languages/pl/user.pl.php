@@ -10,6 +10,13 @@ $Language['password_not_equal'] = 'Źle przepisałeś hasło';
 $Language['password_too_short'] = 'Nowe hasło jest za krótkie';
 
 
+$Language['new_email'] = 'Nowy email';
+$Language['email_changed'] = 'Email został poprawnie zmieniony';
+$Language['invalid_email'] = 'Podałeś nieporawny adres email';
+$Language['current_email'] = 'Aktualny email';
+$Language['avatar_saved'] = 'Avatar został pomyślnie zapisany';
+
+
 $Language['VorName'] = 'Nazwisko';
 $Language['GaduGadu'] = 'Gadu-Gadu';
 $Language['Skype'] = 'Skype';

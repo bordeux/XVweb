@@ -134,7 +134,7 @@
     </tr>
 	{foreach from=$UserFiles key=k item=file}
  <tr class="TableCell">
-      <td><a href="{$UrlScript}File/{$file.ID}/">{$file.FileName}.{$file.Extension}</a></td>
+      <td><a href="{$URLS.Script}File/{$file.ID}/">{$file.FileName}.{$file.Extension}</a></td>
 	  <td>{$file.Downloads}</td>
     </tr>
 {/foreach}

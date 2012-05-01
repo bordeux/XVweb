@@ -29,7 +29,7 @@ class xv_users_modules_files  extends xv_users_modules {
 		$result = '';
 		$result .=
 		'<div class="xv-user-files">
-		<div class="xv-user-seperate"><span> '.xvLang("Files").' </span></div>
+		<div class="xv-user-seperate"><span> '.xv_lang("Files").' </span></div>
 			<div class="xv-user-files-list">';
 			foreach($files_list as $key=>$file){
 			$result .=

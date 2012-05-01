@@ -28,12 +28,20 @@ class xva_index_page_editor extends  xv_config_editor {
 				
 				});
 			});
+		');		
+		
+		$this->header_css("categories", '
+			.xv-config-editor-categories-tbl {
+				margin: 15px;
+				border:1px solid #00AFC9;
+				background:#CCF8FF;
+			}
 		');
 		
 		foreach($val as $val_i){
 			$content .= 
 		"
-			<table class='xv-config-editor-categories' style='background: red; margin: 10px;'>
+			<table class='xv-config-editor-categories-tbl'>
 				<tr>
 					<td>Title:</td>
 					<td><input type='text' name='{$this->get_input_name(array($key))}[title][]' value='{$val_i['title']}' /></td>
@@ -60,6 +68,34 @@ class xva_index_page_editor extends  xv_config_editor {
 			</table>
 		";
 		}
+		$content .= 
+		"
+			<table class='xv-config-editor-categories-tbl'>
+				<tr>
+					<td>Title:</td>
+					<td><input type='text' name='{$this->get_input_name(array($key))}[title][]' value='' /></td>
+				<tr/>		
+				<tr>
+					<td>Description:</td>
+					<td><input type='text' name='{$this->get_input_name(array($key))}[desc][]' value='' /></td>
+				<tr/>				
+				<tr>
+					<td>Link:</td>
+					<td><input type='text' name='{$this->get_input_name(array($key))}[link][]' value='' /></td>
+				<tr/>		
+				<tr>
+					<td>Icon:</td>
+					<td><input type='text' name='{$this->get_input_name(array($key))}[icon][]' value='' /></td>
+				<tr/>			
+				<tr>
+					<td>Selected:</td>
+					<td><select name='{$this->get_input_name(array($key))}[checkbox][]'>
+						<option>false</option>
+						<option>true</option>
+					</select></td>
+				<tr/>
+			</table>
+		";
 		$content .= "</div>";
 		$item_theme->set_content($content);
 
@@ -70,6 +106,7 @@ class xva_index_page_editor extends  xv_config_editor {
 		$val_field = $_POST[$this->field_name][$keys];
 		$result = array();
 		foreach($val_field['title'] as $key=>$t_val){
+		if(!empty($val_field['title'][$key]) || !empty($val_field['link'][$key])){
 			$result[] = array(
 				'title'=> $val_field['title'][$key],
 				'desc'=> $val_field['desc'][$key],
@@ -77,6 +114,7 @@ class xva_index_page_editor extends  xv_config_editor {
 				'icon'=> $val_field['icon'][$key],
 				'selected'=> ($val_field['checkbox'][$key] == "true" ? true : false),
 			);
+		}
 		
 		}
 		$this->config->{$keys} =  $result;

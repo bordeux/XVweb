@@ -56,7 +56,7 @@ class XV_Admin_xvauctions_editcatoptions{
 		}
 		
 		$this->content .=	"<div style='clear:both;'>
-	<input type='submit' value='".xvLang("Save")."' />
+	<input type='submit' value='".xv_lang("Save")."' />
 		</form>
 	<div style='clear:both;'>
 </div>";

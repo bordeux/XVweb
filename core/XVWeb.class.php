@@ -21,7 +21,6 @@ include_once(dirname(__FILE__).DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARAT
 include_once(dirname(__FILE__).DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'Session.XVWeb.class.php');
 include_once(dirname(__FILE__).DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'operation.XVWeb.class.php');
 include_once(dirname(__FILE__).DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'db.XVWeb.class.php');
-include_once(dirname(__FILE__).DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'phpQuery'.DIRECTORY_SEPARATOR.'phpQuery.php');
 
 $LocationXVWeb = dirname(__FILE__);
 class XVWeb extends OperationXVWeb
@@ -48,10 +47,6 @@ class XVWeb extends OperationXVWeb
 	var $DataBasePrefix = '';
 
 	//*****/Ustawienia Tabel*******//
-	//**********Serwis**********//
-	var $SrvName='XVweb CMS';
-	var $SrvLocation='';
-	var $SrvDomain= 'xvweb.bordeux.net';
 	//**********/Serwis**********//
 	//**********Register********//
 	var $Register = '';
@@ -109,7 +104,7 @@ class XVWeb extends OperationXVWeb
 		return $this;
 	}
 	/************************************************************************************************/
-	public function ConnectPDO($host, $dbname, $user, $password) {
+	public function connect_db() {
 		try {
 			$this->DataBase = new xvDB($this);
 			$this->DataBase->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -797,6 +792,7 @@ class XVWeb extends OperationXVWeb
 					$this->ErrorClass($ErrorInfo);
 				return false;
 				}
+			include_once(dirname(__FILE__).DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'phpQuery'.DIRECTORY_SEPARATOR.'phpQuery.php');
 			$this->Date['Config'][$var] = phpQuery::newDocumentFile($File);
 		}
 		return $this->Date['Config'][$var];
@@ -865,8 +861,8 @@ class XVWeb extends OperationXVWeb
 				return false;
 		}
 		
-					$vars["{{sitename}}"] = $this->SrvName;
-					$vars["{{domain}}"] = $this->SrvDomain;
+			
+					
 		foreach($this->Date['URLS'] as $key=>$val)
 			$vars["{{urls.".$key."}}"] = $val;
 			

@@ -9,7 +9,7 @@
 		{if $smarty.foreach.minimap.last}
 		{$Value.Name}
 		{else}
-		<a href="{$UrlScript}{$Value.Url|urlrepair|substr:1}">{$Value.Name}</a> <img src="{$UrlTheme}img/space.gif" />
+		<a href="{$URLS.Script}{$Value.Url|urlrepair|substr:1}">{$Value.Name}</a> <img src="{$UrlTheme}img/space.gif" />
 		{/if}
 		{/foreach}
 		</div>
@@ -24,7 +24,7 @@ Przykro mi, ale musisz zmienić nick! Być może jest on zajęty,<br /> lub są 
 				
 	<div style="float:left; margin-left:10px; width:200px; height:100px; border: 1px solid #133877;">
 		<div style="margin-top:20px;">
-			<form action="{$UrlScript}OpenID/NewNick" method="post">
+			<form action="{$URLS.Script}OpenID/NewNick" method="post">
 				{$language.Nick}:<br/>
 				<input type="text" name="OpenIDNick" value="{$User.Name}" class="StyleForm" style="width:90%;" onchange="ThemeClass.ValidateUser(this)"/>
 				<br />

@@ -25,7 +25,7 @@
 				<script language="PHP">
 				<![CDATA[
 					if ($XVwebEngine->Config("config")->find("facebook fanpage enable")->text() == "true"){
-xv_appendFooter('<div style="position: fixed; right:0px; top:20%;">
+xv_append_footer('<div style="position: fixed; right:0px; top:20%;">
 	<div style="float:left"><a href="http://www.facebook.com/apps/application.php?id='.trim($XVwebEngine->Config("config")->find("config facebook appid")->text()).'#FacebookFan" id="FacebookFan"><img src="'.$GLOBALS['URLS']['Site'].'plugins/facebook/fb_btn.png" alt="Facebook" /></a></div>
 	<div id="FBFrame" style="float:left; display:none; background:#FFF;"></div></div>
 	<script type="text/javascript">

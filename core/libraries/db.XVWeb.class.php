@@ -1,4 +1,7 @@
 <?php
+if (!class_exists('db_config')) {
+	class db_config extends  xv_config {};
+}
 
 class xvDB extends PDO
 {
@@ -7,70 +10,55 @@ class xvDB extends PDO
 	public $dbPrefix = '';
 	public $Tables = array();
 	public $TablesOrgName = array();
+	public $db_config = array();
 	public function __construct(&$XVWeb){
 		$this->Data['XVWeb'] = &$XVWeb;
-		$this->dbPrefix = $this->Data['XVWeb']->Config('db')->find('config dbprefix')->text();
-		return @parent::__construct('mysql:host='.($this->Data['XVWeb']->Config('db')->find('config host')->text()).';dbname='.(($this->Data['XVWeb']->Config('db')->find('config dbname')->text())), ($this->Data['XVWeb']->Config('db')->find('config user')->text()), ($this->Data['XVWeb']->Config('db')->find('config password')->text()), 
+		$this->db_config = new db_config();
+		$this->dbPrefix = $this->db_config->db_prefix;
+		return @parent::__construct('mysql:host='.($this->db_config->db_host).';dbname='.($this->db_config->db_name), ($this->db_config->db_user), ($this->db_config->db_password), 
 			array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION)
 		);
 	}
-	public function loadTable($table){
-	if(isset($this->Tables[$table]))
-		return true;
-		
-		
-		$tablePQ = $this->Data['XVWeb']->Config('db')->find('tables table#'.$table);
-		$this->TablesOrgName[$table] = $tablePQ->attr("name");
-		
-		foreach($tablePQ->find("field") as $field)
-			$this->Tables[$table][$field->getAttribute("id")] = $field->getAttribute("name");
-			
-		//var_dump($this->TablesOrgName);
-		//exit;
-	}
-	public function ReplaceKeys($matched){
+	public function replace_keys($matched){
 		$matched = explode(":", $matched[1]);
 
-		$this->loadTable($matched[0]);
-		
 		if(!isset($matched[1])){
-			return '`'.$this->dbPrefix.ifsetor($this->TablesOrgName[$matched[0]], "|NO EXSIST TABLE ".$matched[0]."|").'`';
+			if(isset($this->db_config->db_tables[$matched[0]])){
+				return '`'.$this->dbPrefix.$this->db_config->db_tables[$matched[0]]['name'].'`';
+			}else{
+				return "|NO EXSIST TABLE ".$matched[0]."|";
+			}
 		}
-		$Prepend = (ifsetor($matched[2], "") == "prepend" ?  $matched[3] : '');
+		$prepend = (ifsetor($matched[2], "") == "prepend" ?  $matched[3] : '');
 
 		if($matched[1] == "*"){
 			$Result = array();
-			$ToRemove = array();
+			$to_remove = array();
 			if(ifsetor($matched[2], "") == "remove"){
-				$ToRemove = array_flip(explode("|", $matched[3]));
-				$Prepend = (ifsetor($matched[4], "") == "prepend" ?  $matched[5] : '');
+				$to_remove = array_flip(explode("|", $matched[3]));
+				$prepend = (ifsetor($matched[4], "") == "prepend" ?  $matched[5] : '');
 			}
 
-			foreach($this->Tables[$matched[0]] as $tbname=>$dbfield){
-				$Result[] =  $Prepend.'`'.$dbfield.'` AS `'.$tbname.'`';
+			foreach($this->db_config->db_tables[$matched[0]]['fields'] as $tb_name=>$tb_field){
+				$Result[] =  $prepend.'`'.$tb_field.'` AS `'.$tb_name.'`';
 			}
 			return implode(", \n", $Result);
 		}
 		
-		$field = ifsetor($this->Tables[$matched[0]][$matched[1]] , "|NOT FOUND FIELD ".$matched[1]."|"); //$this->Data['XVWeb']->Config('db')->find('tables table#'.$matched[0].'  field#'.$matched[1])->attr("name");
+			$field = ifsetor($this->db_config->db_tables[$matched[0]]['fields'][$matched[1]] , "|NOT FOUND FIELD ".$matched[1]."|"); 
 		return '`'.$field.'`';
 	}
 	public function isset_field($table, $key){
-		return $this->Data['XVWeb']->Config('db')->find('tables table#'.$table.'  field#'.$key)->length;
+		return isset($this->db_config->db_tables[$table]['fields'][$key]);
 	}
 	public function get_fields($table){
-		$Fields = array();
-		foreach($this->Data['XVWeb']->Config('db')->find('tables table#'.$table.'  field') as $field){
-			$fieldTMP = pq($field);
-			$Fields[$fieldTMP->attr("id")] = $fieldTMP->attr("name");
-		}
-		return $Fields;
+		return $this->db_config->db_tables[$table]['fields'];
 	}
 	
 	public function PrepareQuery($query){
 		return preg_replace_callback(
 		"/{(.*?)}/si",
-		array($this, "ReplaceKeys"),
+		array($this, "replace_keys"),
 		$query);
 	}
 	public function prepare( $statement, $driver_options = array() )

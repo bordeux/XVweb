@@ -7,8 +7,8 @@
 {/if}
 	<div class="xvauction-main" >
 	<div class="category_parents_tree" >
-		<a href="{$URLS.Auctions}/">{"xca_auctions"|xvLang}</a> 
-			&gt;&gt; <a href="{$URLS.AuctionPanel}">{"xca_auctions_panel"|xvLang}</a> 
+		<a href="{$URLS.Auctions}/">{"xca_auctions"|xv_lang}</a> 
+			&gt;&gt; <a href="{$URLS.AuctionPanel}">{"xca_auctions_panel"|xv_lang}</a> 
 			&gt;&gt; <a href="{$URLS.AuctionPanel}/comments/">{$Title}</a> 
 	
 	</div>
@@ -35,7 +35,7 @@
  {/if}
  {if $search_filters_remove}
 <div class="auctions-filters">
-	<div class="auctions-filters-caption">{"xca_filter_parameters"|xvLang}</div>
+	<div class="auctions-filters-caption">{"xca_filter_parameters"|xv_lang}</div>
 	<div class="auctions-filters-content">
 	{foreach from=$search_filters_remove item=filter}
 	 	<a href="?{$filter.link}">{$filter.caption}</a>
@@ -51,7 +51,7 @@
 				<thead> 
 					<tr>
 						<th class="items-seller"><a href='?{addget value="sortby=seller&sort=$SmartySort"}'>{$SmartyChar} Od</a></th>
-						<th class="items-date"><a href='?{addget value="sortby=date&sort=$SmartySort"}'>{$SmartyChar} {"xca_date"|xvLang}</a></th>
+						<th class="items-date"><a href='?{addget value="sortby=date&sort=$SmartySort"}'>{$SmartyChar} {"xca_date"|xv_lang}</a></th>
 						<th class="items-auction"><a href='?{addget value="sortby=auction&sort=$SmartySort"}'>{$SmartyChar} Auction ID</a></th>
 						<th class="items-comment"><a href='?{addget value="sortby=opinion&sort=$SmartySort"}'>{$SmartyChar} Komentarz</a></th>
 
@@ -83,7 +83,7 @@
 	{else}
 			<div style="margin: 40px;">
 				<div style="background: #F3FFCD; border: 1px solid #B1DA81; color: #4B5D40; text-align:center; padding: 20px; ">
-					<h2 style="color: #60A536; font-size: 16px; font-weight:bold;">{"xca_zero_results3"|xvLang}</h2>
+					<h2 style="color: #60A536; font-size: 16px; font-weight:bold;">{"xca_zero_results3"|xv_lang}</h2>
 				</div>
 			</div>
 	{/if}

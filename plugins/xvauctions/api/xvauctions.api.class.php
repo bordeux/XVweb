@@ -89,6 +89,9 @@ class xv_api_xvauctions {
 		if(isset($_GET['auction_cost_to']) && strlen($_GET['auction_cost_to']) != 0){
 			$display_options['cost_to'] = $_GET['auction_cost_to'];
 		}
+		if(isset($_GET['auction_search']) && !empty($_GET['auction_search'])){
+			$display_options['search'] = $_GET['auction_search'];
+		}
 	$auctions_list = xvp()->get_auctions($XVauctions, $auction_category, $queries_search, $display_options, (int) $_GET['page'], $record_limit);
 		$result = array();
 		$allowed_keys = array("ID", "Category", "Enabled", "Views", "Title", "Type", "AuctionsCount", "Thumbnail", "Start", "End", "Seller", "Pieces", "NowTime");

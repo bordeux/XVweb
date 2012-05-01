@@ -7,8 +7,8 @@
 {/if}
 	<div class="xvauction-main" >
 	<div class="category_parents_tree" >
-		<a href="{$URLS.Auctions}/">{"xca_auctions"|xvLang}</a> 
-			&gt;&gt; <a href="{$URLS.AuctionPanel}">{"xca_auctions_panel"|xvLang}</a> 
+		<a href="{$URLS.Auctions}/">{"xca_auctions"|xv_lang}</a> 
+			&gt;&gt; <a href="{$URLS.AuctionPanel}">{"xca_auctions_panel"|xv_lang}</a> 
 			&gt;&gt; {$Title}
 	
 	</div>
@@ -27,20 +27,20 @@
 		<div>
 			{if $finished}
 				<div class="success"> 
-				{"xca_sale_finished"|xvLang}
+				{"xca_sale_finished"|xv_lang}
 				
-				<p> <a href="{$URLS.Auction}/{$auction_info.ID}/" >{"xca_go_to_auction"|xvLang}</a></p>
+				<p> <a href="{$URLS.Auction}/{$auction_info.ID}/" >{"xca_go_to_auction"|xv_lang}</a></p>
 				</div>
 			{else}
 			<div style="padding: 20px;">
 				<div class="LightBulbTip" style="width: 600px; margin: auto;">
-				{"xca_finish_auction_question"|xvLang} <a href="{$URLS.Auction}/{$auction_info.ID}/" target="_blank">{$auction_info.Title}</a> ?
+				{"xca_finish_auction_question"|xv_lang} <a href="{$URLS.Auction}/{$auction_info.ID}/" target="_blank">{$auction_info.Title}</a> ?
 				 </div>
 							<form action="?transfer=true" method="post" style="text-align:center; padding: 10px; width: 300px; margin:auto;">
 								<input type="hidden" name="xv-sid" value="{$JSVars.SIDUser}" />
 								<input type="hidden" name="finish" value="true"/>
-								<a href="{$URLS.AuctionPanel}/selling/" style="margin-right: 20px;">{"xca_back"|xvLang}</a> 
-								<input type="submit" value="{'xca_finish'|xvLang}" />
+								<a href="{$URLS.AuctionPanel}/selling/" style="margin-right: 20px;">{"xca_back"|xv_lang}</a> 
+								<input type="submit" value="{'xca_finish'|xv_lang}" />
 							</form>
 				
 			</div>

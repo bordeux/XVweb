@@ -39,8 +39,8 @@ class xvauction_fields_gallery extends xvauction_fields {
 	global $URLS, $XVwebEngine;
 	$gallery = $XVwebEngine->Session->Session('xvauctions_gallery');
 	
-	xv_appendJS($URLS['Site'].'admin/data/themes/default/js/html5_uploader.jquery.js');
-	xv_appendJS($URLS['Site'].'plugins/xvauctions/data/js/gallery_uploader.js');
+	xv_append_js($URLS['Site'].'admin/data/themes/default/js/html5_uploader.jquery.js');
+	xv_append_js($URLS['Site'].'plugins/xvauctions/data/js/gallery_uploader.js');
 	xv_append_header("
 	<style type='text/css' media='all'>
 		.xva-gallery-drop {

@@ -110,7 +110,12 @@ class XV_Admin_xvauctions_auction{
 					</fieldset>';
 	}
 	public function edit_auction(&$XVweb, $auction_id){
+	
 		include_once($GLOBALS['XVwebDir'].'libraries/formgenerator/formgenerator.php');
+		include_once(ROOT_DIR.'/plugins/xvauctions/libs/class.xvauctions.php');
+		$XVauctions = &$XVweb->InitClass("xvauctions");
+		$auction_details = xvp()->get_auction($XVauctions, $auction_id);
+		
 		$form=new Form(); 
 		$form->set("title", "Edit Auction");
 		$form->set("name", "xva_auction_form");        
@@ -125,12 +130,42 @@ class XV_Admin_xvauctions_auction{
 		$form->set("errorPosition", "before");		
 		$form->set("submitMessage", "Zapisano");
 		$form->set("showAfterSuccess", true);
+		
+		$form->addField("text", "start", "Start" , true, $auction_details['Start'], "class='datepicker'");
+		$form->validator("start", "regExpValidator", "(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})", "Wrong date"); 
+			
+		$form->addField("text", "end", "End" , true, $auction_details['End'], "class='datepicker'");
+		$form->validator("end", "regExpValidator", "(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})", "Wrong date"); 
+					
+		$form->addField("text", "seller", "Seller" , true, $auction_details['Seller']);
+		$form->addField("text", "views", "Views" , true, $auction_details['Views']);
+		$form->addField("text", "category", "Category" , true, $auction_details['Category']);
+		
+				
+				
 		$form->JSprotection($XVweb->Session->GetSID());
-		$form_html = $form->display(xvLang("Save"), "xva_auction_submit", false);
+		$form_html = $form->display(xv_lang("Save"), "xva_auction_submit", false);
 		$result=($form->getData());
 		
 		if($result){
-			$form_html = "<div class='success'>Saved</div>".$form_html;
+		
+			$update_query = $XVweb->DataBase->prepare('UPDATE {AuctionAuctions} SET
+			{AuctionAuctions:Start} = :start, 
+			{AuctionAuctions:End} = :end,
+			{AuctionAuctions:Seller} = :seller,
+			{AuctionAuctions:Views} = :views,
+			{AuctionAuctions:Category} = :category
+			WHERE {AuctionAuctions:ID} = :id LIMIT 1;');
+			
+			$update_query->execute(array(
+				":id"=>$auction_id,
+				":seller"=>$result['seller'],
+				":views"=>$result['views'],
+				":category"=>$result['category'],
+				":end"=>$result['end'],
+				":start"=>$result['start'],
+			));
+		
 		}
 		
 		$form_html = '<div class="xva-auction-form">'.$form_html.'</div>';

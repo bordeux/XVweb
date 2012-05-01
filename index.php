@@ -14,6 +14,7 @@
 		Pełna dokumentacja znajduje się na stronie domowej projektu: 
 *********************http://www.bordeux.NET/Xvweb***************************
 ***************************************************************************/
+$_SERVER['PHP_SELF'] = $_SERVER['REQUEST_URI'].'xv.php/';
 if(!isset($XVwebEngine))
 	include_once('xv.php');
 ?>

@@ -67,7 +67,7 @@ $language_data = array (
             'CRCCheck', 'DetailsButtonText', 'DirShow', 'DirText', 'DirVar', 'DirVerify', 'FileErrorText',
             'Function', 'FunctionEnd', 'Icon', 'InstallButtonText', 'InstallColors', 'InstallDir',
             'InstallDirRegKey', 'InstProgressFlags', 'InstType', 'LangString', 'LangStringUP', 'LicenseBkColor',
-            'LicenseData', 'LicenseForceSelection', 'LicenseLangString', 'LicenseText', 'LoadLanguageFile',
+            'LicenseData', 'LicenseForceSelection', 'LicenseLangString', 'LicenseText', 'xv_load_languageFile',
             'MiscButtonText', 'Name', 'OutFile', 'Page', 'PageEx', 'PageExEnd', 'Section',
             'SectionEnd', 'SectionGroup', 'SectionGroupEnd', 'SetCompressor', 'SetFont', 'ShowInstDetails',
             'ShowUninstDetails', 'SilentInstall', 'SilentUnInstall', 'SpaceTexts', 'SubCaption', 'SubSection',

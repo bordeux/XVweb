@@ -1,6 +1,8 @@
 <?php
+xv_trigger("forgot.start");
+
 $command = ($XVwebEngine->GetFromURL($PathInfo, 2));
-LoadLang("forgot");
+xv_load_lang("forgot");
 include_once(dirname(__FILE__).'/config/forgot_config.xv_config.php');
 switch (strtolower($command)) {
     case "reset":

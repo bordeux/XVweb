@@ -5,7 +5,7 @@
 		{if $smarty.foreach.minimap.last}
 			{$Value.Name}
 		{else}
-			<a href="{$UrlScript}{$Value.Url|urlrepair|substr:1}">{$Value.Name}</a> &gt;
+			<a href="{$URLS.Script}{$Value.Url|urlrepair|substr:1}">{$Value.Name}</a> &gt;
 		{/if}
 		{/foreach}
 		</div>

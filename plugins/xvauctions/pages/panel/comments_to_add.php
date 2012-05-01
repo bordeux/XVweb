@@ -16,7 +16,7 @@ $display_options = array(
 		
 	);
 $record_limit = 30;
-$Smarty->assign('Title',  xvLang("xca_comments_to_add"));
+$Smarty->assign('Title',  xv_lang("xca_comments_to_add"));
 
 $comments_to_add_list = xvp()->get_comments_to_insert($XVauctions, $XVwebEngine->Session->Session('Logged_User'), $display_options, (int) $_GET['page'], $record_limit);
 

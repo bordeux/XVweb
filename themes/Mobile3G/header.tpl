@@ -23,7 +23,7 @@
 		<meta http-equiv="{$equiv}" content="{$content}" />
 	{/foreach}
 	<meta name="viewport" content="width=device-width, initial-scale=1"> 
-	<title>{$SiteTopic} :: {$SiteName} :.</title>
+	<title>{$SiteTopic} :: {$xv_main_config->site_name} :.</title>
 	<link rel="shortcut icon" href="{$Url}favicon.ico" type="image/x-icon" />
 	<link rel="stylesheet"  href="http://code.jquery.com/mobile/1.0rc1/jquery.mobile-1.0rc1.min.css" /> 
 	<script src="http://code.jquery.com/jquery-1.6.4.min.js"></script> 
@@ -50,34 +50,6 @@
 	var URLS = eval('({$URLS|@json_encode})'); 
 	/*{if $JSBinder}{$JSBinder|@sort}{/if}*/	
 	
-	{if $GAnalistics}
-	window.google_analytics_domain_name = "";
-		var _gaq = _gaq || [];
-		  _gaq.push(['_setAccount', '{$GAnalistics}']);{literal}
-		  _gaq.push(['_setDomainName', 'none']);
-		  _gaq.push(['_setAllowLinker', true]);
-		  _gaq.push(['_trackPageview']);
-		  _gaq.push(['_trackPageLoadTime']);
-		  (function() {
-			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-		  })();
-		  
-	$( '[data-role=page]' ).live( 'pageshow', function (event, ui) {
-        try {
-            if ( location.hash ){
-            	url = location.hash;
-            }else {
-               url = '/';
-            }
-            _gaq.push( ['_trackPageview', url] );
-        } catch( error ) {
- 
-        }
-    });
-		 {/literal}
-	{/if}
 	/*]]>*/
 	</script>  
 </head> 

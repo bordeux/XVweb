@@ -20,7 +20,7 @@ $auction_prefix = strtolower($XVwebEngine->GetFromURL($PathInfo, 1));
 xvp()->load_plugin('email_notification');
 
 
-LoadLang('xvauctions');
+xv_load_lang('xvauctions');
 
 $URLS['Auctions'] = $URLS['Script']."auctions";
 $URLS['AuctionsAdd'] = $URLS['Script']."auction_add";

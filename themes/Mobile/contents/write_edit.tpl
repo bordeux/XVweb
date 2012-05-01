@@ -5,7 +5,7 @@
 		{if $smarty.foreach.minimap.last}
 			{$Value.Name}
 		{else}
-			<a href="{$UrlScript}{$Value.Url|urlrepair|substr:1}">{$Value.Name}</a> &gt;
+			<a href="{$URLS.Script}{$Value.Url|urlrepair|substr:1}">{$Value.Name}</a> &gt;
 		{/if}
 		{/foreach}
 		</div>
@@ -17,7 +17,7 @@
 			<!-- TEXT -->
 			
 			<fieldset id="EditForm">
-	<form name="ArticleEditForm" id="ArticleEditForm" method="post" action="{$UrlScript}Write/?save={$IDArticle}">
+	<form name="ArticleEditForm" id="ArticleEditForm" method="post" action="{$URLS.Script}Write/?save={$IDArticle}">
 			<textarea class="EditArt" id="EditArtPost" name="EditArtPost">{$ContextEdit}</textarea><br/>
 		{if $WriteUrlArticle}
 			 <b><label for="UrlArticleID">{$language.WriteURL}</label></b>: <input type="text" id="UrlArticleID" name="xv-path" class="StyleForm" value="{$smarty.get.url|escape:'html'}" /><br /><br />
@@ -35,7 +35,7 @@
 
 			<fieldset id="EditStetting">
 <legend>{$language.Settings}</legend>
-<form action="{$UrlScript}Write/?settings={$IDArticle}" name="SettingsForm" method="post">
+<form action="{$URLS.Script}Write/?settings={$IDArticle}" name="SettingsForm" method="post">
 <div class="table">
 {foreach from=$SettingsInputs item=field key=handlefield name=InputsFields}
 	<div class="table-row {if $smarty.foreach.InputsFields.index % 2 == 0}ZebraWhite{else}ZebraLight{/if}">

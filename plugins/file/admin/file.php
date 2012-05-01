@@ -48,18 +48,18 @@ include_once(ROOT_DIR.'config'.DIRECTORY_SEPARATOR.'files.config.php');
 				<caption>'.$pager[0].'</caption>
 				<thead> 
 					<tr class="xv-pager">
-						<th><a href="?'.$XVweb->AddGet('SortBy=ID&Sort='.$SortByP, true).'">'.xvLang('ID').'</a></th>
-						<th><a href="?'.$XVweb->AddGet('SortBy=Date&Sort='.$SortByP, true).'">'.xvLang('Date').'</a></th>
-						<th><a href="?'.$XVweb->AddGet('SortBy=UserFile&Sort='.$SortByP, true).'">'.xvLang('User').'</a></th>
-						<th><a href="?'.$XVweb->AddGet('SortBy=FileName&Sort='.$SortByP, true).'">'.xvLang("FileName").'</a></th>
-						<th><a href="?'.$XVweb->AddGet('SortBy=Extension&Sort='.$SortByP, true).'">'.xvLang("Extension").'</a></th>
-						<th><a href="?'.$XVweb->AddGet('SortBy=LastDownload&Sort='.$SortByP, true).'">'.xvLang("LastDownload").'</a></th>
-						<th><a href="?'.$XVweb->AddGet('SortBy=IP&Sort='.$SortByP, true).'">'.xvLang("IP").'</a></th>
-						<th><a href="?'.$XVweb->AddGet('SortBy=FileSize&Sort='.$SortByP, true).'">'.xvLang("FileSize").'</a></th>
-						<th><a href="?'.$XVweb->AddGet('SortBy=Downloads&Sort='.$SortByP, true).'">'.xvLang("Downloads").'</a></th>
-						<th><a href="?'.$XVweb->AddGet('SortBy=Bandwidth&Sort='.$SortByP, true).'">'.xvLang("Bandwidth").'</a></th>
-						<th><a href="?'.$XVweb->AddGet('SortBy=Score&Sort='.$SortByP, true).'">'.xvLang("Score").'</a></th>
-						<th><a href="?'.$XVweb->AddGet('SortBy=Server&Sort='.$SortByP, true).'">'.xvLang("Server").'</a></th>
+						<th><a href="?'.$XVweb->AddGet('SortBy=ID&Sort='.$SortByP, true).'">'.xv_lang('ID').'</a></th>
+						<th><a href="?'.$XVweb->AddGet('SortBy=Date&Sort='.$SortByP, true).'">'.xv_lang('Date').'</a></th>
+						<th><a href="?'.$XVweb->AddGet('SortBy=UserFile&Sort='.$SortByP, true).'">'.xv_lang('User').'</a></th>
+						<th><a href="?'.$XVweb->AddGet('SortBy=FileName&Sort='.$SortByP, true).'">'.xv_lang("FileName").'</a></th>
+						<th><a href="?'.$XVweb->AddGet('SortBy=Extension&Sort='.$SortByP, true).'">'.xv_lang("Extension").'</a></th>
+						<th><a href="?'.$XVweb->AddGet('SortBy=LastDownload&Sort='.$SortByP, true).'">'.xv_lang("LastDownload").'</a></th>
+						<th><a href="?'.$XVweb->AddGet('SortBy=IP&Sort='.$SortByP, true).'">'.xv_lang("IP").'</a></th>
+						<th><a href="?'.$XVweb->AddGet('SortBy=FileSize&Sort='.$SortByP, true).'">'.xv_lang("FileSize").'</a></th>
+						<th><a href="?'.$XVweb->AddGet('SortBy=Downloads&Sort='.$SortByP, true).'">'.xv_lang("Downloads").'</a></th>
+						<th><a href="?'.$XVweb->AddGet('SortBy=Bandwidth&Sort='.$SortByP, true).'">'.xv_lang("Bandwidth").'</a></th>
+						<th><a href="?'.$XVweb->AddGet('SortBy=Score&Sort='.$SortByP, true).'">'.xv_lang("Score").'</a></th>
+						<th><a href="?'.$XVweb->AddGet('SortBy=Server&Sort='.$SortByP, true).'">'.xv_lang("Server").'</a></th>
 						<th></th>
 					</tr>
 				</thead> 

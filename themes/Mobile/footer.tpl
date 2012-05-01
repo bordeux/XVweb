@@ -14,7 +14,7 @@
 		
 	</div>
 	<div id="SearchForm">
-        <form action="{$UrlScript}Search/" method="get" name="SearchForm" id="SearchForm">
+        <form action="{$URLS.Script}Search/" method="get" name="SearchForm" id="SearchForm">
             {$language.Search}: <input accesskey="s" type="text" name="Search" class="Search" value="" id="SearchField" /> <input type="submit" value="{$language.Search}" id="SearchButton" />
         </form>
 	</div>

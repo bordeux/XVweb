@@ -469,7 +469,7 @@ ON DUPLICATE KEY UPDATE {Bookmarks:'.$type.'} = :ValExec ;');
 	public function BookmarkEvent($ID, $type, $articleURL, $info){
 		
 		$info = array_merge((array)$info, array(
-		'{{sitename}}'=>$this->Date['XVweb']->SrvName,
+	
 		'{{urlscript}}'=>$this->Date['XVweb']->Date['URLS']['Script'],
 		'{{url}}'=>$this->Date['XVweb']->Date['URLS']['Site'],
 		'{{theme}}'=>$this->Date['XVweb']->Date['URLS']['Theme'],

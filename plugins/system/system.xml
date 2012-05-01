@@ -21,7 +21,6 @@
 		<prefix prefix="admin" include="pages/admin.php"/>
 		<prefix prefix="administration" include="pages/admin.php"/>
 		<prefix prefix="receiver" include="pages/receiver.php"/>
-		<prefix prefix="cron" include="pages/cron.php"/>
 		<prefix prefix="ajax" include="pages/ajax.php"/>
 		<prefix prefix="captcha" include="pages/captcha.php"/>
 		

@@ -22,7 +22,7 @@
 	<div id="EditPanel" class="ui-tabs ui-widget ui-widget-content ui-corner-top">
 		<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-top">
 			<li class="ui-state-default ui-corner-top ui-state-hover ui-button-text-icon-primary">
-				<a href="{$UrlScript}history/{$ReadArticleIndexOut.ID}/" title="{$language.History}" style="padding-left:20px;"> <span class="ui-icon ui-icon-script" style="margin-left:-16px;"></span>{$language.History}</a>
+				<a href="{$URLS.Script}history/{$ReadArticleIndexOut.ID}/" title="{$language.History}" style="padding-left:20px;"> <span class="ui-icon ui-icon-script" style="margin-left:-16px;"></span>{$language.History}</a>
 			</li>
 		</ul>
 		
@@ -33,7 +33,7 @@
 					{if $smarty.foreach.minimap.last}
 						{$Value.Name}
 					{else}
-						<a href="{$UrlScript}{$Value.Url|replace:' ':'_'|urlrepair|substr:1}">{$Value.Name}</a> >>
+						<a href="{$URLS.Script}{$Value.Url|replace:' ':'_'|urlrepair|substr:1}">{$Value.Name}</a> >>
 					{/if}
 				{/foreach}
 			</div>
@@ -56,7 +56,7 @@
 			{foreach from=$SearchArray item=SearchResult}
 				<div id="Search-ID" style="background-color:#F8F8F8;">
 					<div id="TitleSearch-ID" style="font-size:15px; margin-top:10px; font-weight: bold;">
-						<a href="{$UrlScript}{$SearchResult.URL|substr:1|replace:' ':'_'}?version={$SearchResult.Version}">{$SearchResult.Topic}</a>
+						<a href="{$URLS.Script}{$SearchResult.URL|substr:1|replace:' ':'_'}?version={$SearchResult.Version}">{$SearchResult.Topic}</a>
 					</div>
 					<div id="DescriptionSearch-ID"> 
 						<div style="margin-left:10px;">
@@ -64,7 +64,7 @@
 						</div>
 					</div>
 					<div id="FooterSearch-ID" style="font-size: 11px; color : #1C8C1C; ">
-					{$UrlScript}{$SearchResult.URL|substr:1|replace:' ':'_'} -  {$SearchResult.StrByte} B {$SearchResult.Lenght} Char {math equation="round(x*10)" x=$SearchResult.Relevance}% {$language.Relevance} 
+					{$URLS.Script}{$SearchResult.URL|substr:1|replace:' ':'_'} -  {$SearchResult.StrByte} B {$SearchResult.Lenght} Char {math equation="round(x*10)" x=$SearchResult.Relevance}% {$language.Relevance} 
 					</div>
 				</div> 
 				<hr />

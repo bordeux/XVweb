@@ -25,17 +25,17 @@
 	<div id="EditPanel" class="ui-tabs ui-widget ui-widget-content ui-corner-top">
 		<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-top">
 				<li class="ui-state-default ui-corner-top {if $Page == 'inbox'}ui-state-active{/if} ui-state-default ui-button-text-icon-primary ui-state-hover" >
-					<a href="{$UrlScript}Messages/" title="{$language.Messages}"  style="padding-left:20px;"><span class="ui-icon ui-icon-mail-closed" style="margin-left:-16px;"></span>Odebrane</a>
+					<a href="{$URLS.Script}Messages/" title="{$language.Messages}"  style="padding-left:20px;"><span class="ui-icon ui-icon-mail-closed" style="margin-left:-16px;"></span>Odebrane</a>
 				</li>
 				<li class="ui-state-default ui-corner-top {if $Page == 'sent'}ui-state-active{/if} ui-state-default ui-button-text-icon-primary ui-state-hover">
-					<a href="{$UrlScript}Messages/Sent/" style="padding-left:20px;"><span class="ui-icon ui-icon-mail-open" style="margin-left:-16px;"></span> {$language.Sent}</a>
+					<a href="{$URLS.Script}Messages/Sent/" style="padding-left:20px;"><span class="ui-icon ui-icon-mail-open" style="margin-left:-16px;"></span> {$language.Sent}</a>
 				</li>
 				<li class="ui-state-default ui-corner-top {if $Page == 'trash'}ui-state-active{/if}  ui-state-default ui-button-text-icon-primary ui-state-hover">
-					<a href="{$UrlScript}Messages/Trash/"  style="padding-left:20px;"><span class="ui-icon ui-icon-trash" style="margin-left:-16px;"></span>{$language.Trash}</a>
+					<a href="{$URLS.Script}Messages/Trash/"  style="padding-left:20px;"><span class="ui-icon ui-icon-trash" style="margin-left:-16px;"></span>{$language.Trash}</a>
 				</li>
 
 				<li class="ui-state-default ui-corner-top {if $Page == 'write'}ui-state-active{/if}  ui-state-default ui-button-text-icon-primary ui-state-hover">
-					<a href="{$UrlScript}Messages/Write/"  style="padding-left:20px;"><span class="ui-icon ui-icon-pencil" style="margin-left:-16px;"></span>{$language.Write}</a>
+					<a href="{$URLS.Script}Messages/Write/"  style="padding-left:20px;"><span class="ui-icon ui-icon-pencil" style="margin-left:-16px;"></span>{$language.Write}</a>
 				</li>
 			
 			<li class="ui-state-default ui-corner-top ui-state-hover" style="float:right;">
@@ -52,7 +52,7 @@
 			{if $smarty.foreach.minimap.last}
 				{$Value.Name}
 			{else}
-				<a href="{$UrlScript}{$Value.Url|replace:' ':'_'|urlrepair|substr:1}">{$Value.Name}</a> <img src="{$UrlTheme}img/blank.png" class="cssprite SpaceIconIMG" alt="&gt;&gt;"/>
+				<a href="{$URLS.Script}{$Value.Url|replace:' ':'_'|urlrepair|substr:1}">{$Value.Name}</a> <img src="{$UrlTheme}img/blank.png" class="cssprite SpaceIconIMG" alt="&gt;&gt;"/>
 			{/if}
 		{/foreach}
 		</div>
@@ -73,11 +73,11 @@
 			<div  class="table-cell">
 						<div class="table" id="Table">
 							<div class="table-row">
-								<div  class="table-cell fromsg">{$language.From}: <a href="{$UrlScript}Users/{$MessageItem.From|escape:'url'}/">{$Message.From}</a></div>
-								<div  class="table-cell tomsg">{$language.To}: <a href="{$UrlScript}Users/{$Message.To|escape:'url'}/"><img src="{$AvantsURL}{if $Message.Avant}{$Message.From}{/if}_16.jpg"/> {$Message.To}</a></div>
+								<div  class="table-cell fromsg">{$language.From}: <a href="{$URLS.Script}Users/{$MessageItem.From|escape:'url'}/">{$Message.From}</a></div>
+								<div  class="table-cell tomsg">{$language.To}: <a href="{$URLS.Script}Users/{$Message.To|escape:'url'}/"><img src="{$AvantsURL}{if $Message.Avant}{$Message.From}{/if}_16.jpg"/> {$Message.To}</a></div>
 							</div>
 							<div class="table-row">
-								<div  class="table-cell topic">{$language.Topic}: <a href="{$UrlScript}Messages/{$Message.ID}/">{$Message.Topic}</a></div>
+								<div  class="table-cell topic">{$language.Topic}: <a href="{$URLS.Script}Messages/{$Message.ID}/">{$Message.Topic}</a></div>
 							</div>
 							<div class="table-row">
 								<div  class="table-cell messagetxt"><div>{$Message.Message}</div><div id="MSGDate">{$Message.Date}</div></div>
@@ -89,7 +89,7 @@
 	</div>
 	<div>
 	<div id="Replay">
-		<form action="{$UrlScript}Messages/Write/?Send=true" method="post">
+		<form action="{$URLS.Script}Messages/Write/?Send=true" method="post">
 			<div id="RTitle"><span>&gt;&gt;</span> Odpowiedz</div>
 			<div class="table" id="Table">
 					<div class="table-row">
@@ -124,7 +124,7 @@
 	<div id="RResult" class="{if $Result}success{else}failed{/if}">{if $Result}{$language.Sent}{else}{$language.SendFailed}{/if}</div>
 	{/if}
 	<div id="Replay">
-		<form action="{$UrlScript}Messages/Write/?Send=true" method="post">
+		<form action="{$URLS.Script}Messages/Write/?Send=true" method="post">
 			<div id="RTitle"><span>&gt;&gt;</span> {$language.Write}</div>
 			<div class="table" id="Table">
 					<div class="table-row">
@@ -175,10 +175,10 @@
 				{if $Page != 'sent'}<div  class="table-cell delete"><input type="checkbox" name="DeleteMSG[]" value="{$MessageItem.ID}" ></div>{/if}
 				<div  class="table-cell date">{$MessageItem.Date}</div>
 				<div  class="table-cell from">
-				{if $Page == 'sent'}<a href="{$UrlScript}Users/{$MessageItem.To|escape:'url'}/"><img src="{$AvantsURL}{if $MessageItem.Avant}{$MessageItem.To}{/if}_16.jpg" alt="{$MessageItem.Author}"/> {$MessageItem.To}</a>{else}<a href="{$UrlScript}Users/{$MessageItem.To|escape:'url'}/"><img src="{$AvantsURL}{if $MessageItem.Avant}{$MessageItem.From}{/if}_16.jpg" alt="{$MessageItem.Author}"/> {$MessageItem.From}</a>{/if}
+				{if $Page == 'sent'}<a href="{$URLS.Script}Users/{$MessageItem.To|escape:'url'}/"><img src="{$AvantsURL}{if $MessageItem.Avant}{$MessageItem.To}{/if}_16.jpg" alt="{$MessageItem.Author}"/> {$MessageItem.To}</a>{else}<a href="{$URLS.Script}Users/{$MessageItem.To|escape:'url'}/"><img src="{$AvantsURL}{if $MessageItem.Avant}{$MessageItem.From}{/if}_16.jpg" alt="{$MessageItem.Author}"/> {$MessageItem.From}</a>{/if}
 				</div>
 				<div  class="table-cell message">
-					<div class="MsgTitle"><a href="{$UrlScript}Messages/{$MessageItem.ID}/">{$MessageItem.Topic}</a></div>
+					<div class="MsgTitle"><a href="{$URLS.Script}Messages/{$MessageItem.ID}/">{$MessageItem.Topic}</a></div>
 					<div class="MsgText">
 					{$MessageItem.Message|strip_tags:true|escape:'html'}
 					</div>

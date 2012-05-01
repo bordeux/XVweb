@@ -49,13 +49,13 @@ if(!isset($XVwebEngine)){
 				<caption>'.$pager[0].'</caption>
 				<thead> 
 					<tr class="xv-pager">
-						<th><a href="?'.$XVweb->AddGet('sort_by=ID&sort='.$sort, true).'">'.xvLang("ID").'</a></th>
-						<th><a href="?'.$XVweb->AddGet('sort_by=Category&sort='.$sort, true).'">'.xvLang("xca_category").'</a></th>
-						<th><a href="?'.$XVweb->AddGet('sort_by=Title&sort='.$sort, true).'">'.xvLang("Title").'</a></th>
-						<th><a href="?'.$XVweb->AddGet('sort_by=Type&sort='.$sort, true).'">'.xvLang("xca_auction_type").'</a></th>
-						<th><a href="?'.$XVweb->AddGet('sort_by=Start&sort='.$sort, true).'">'.xvLang("xca_start").'</a></th>
-						<th><a href="?'.$XVweb->AddGet('sort_by=End&sort='.$sort, true).'">'.xvLang("xca_end").'</a></th>
-						<th><a href="?'.$XVweb->AddGet('sort_by=Seller&sort='.$sort, true).'">'.xvLang("xca_seller").'</a></th>
+						<th><a href="?'.$XVweb->AddGet('sort_by=ID&sort='.$sort, true).'">'.xv_lang("ID").'</a></th>
+						<th><a href="?'.$XVweb->AddGet('sort_by=Category&sort='.$sort, true).'">'.xv_lang("xca_category").'</a></th>
+						<th><a href="?'.$XVweb->AddGet('sort_by=Title&sort='.$sort, true).'">'.xv_lang("Title").'</a></th>
+						<th><a href="?'.$XVweb->AddGet('sort_by=Type&sort='.$sort, true).'">'.xv_lang("xca_auction_type").'</a></th>
+						<th><a href="?'.$XVweb->AddGet('sort_by=Start&sort='.$sort, true).'">'.xv_lang("xca_start").'</a></th>
+						<th><a href="?'.$XVweb->AddGet('sort_by=End&sort='.$sort, true).'">'.xv_lang("xca_end").'</a></th>
+						<th><a href="?'.$XVweb->AddGet('sort_by=Seller&sort='.$sort, true).'">'.xv_lang("xca_seller").'</a></th>
 					</tr>
 				</thead> 
 				<tbody>';
@@ -120,7 +120,7 @@ if(!isset($XVwebEngine)){
 			';
 			if(isset($_GET['search_mode']))
 				exit($this->content);
-			$this->title = xvLang("xca_auctions");
+			$this->title = xv_lang("xca_auctions");
 			$this->icon = $GLOBALS['URLS']['Site'].'admin/data/xvauctions/icons/auctions.png';
 			
 		}

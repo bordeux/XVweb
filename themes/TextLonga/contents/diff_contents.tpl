@@ -17,11 +17,11 @@
 	<div id="EditPanel" class="ui-tabs ui-widget ui-widget-content">
 		<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header">
 			<li class="ui-state-default ui-corner-top ui-state-hover ui-button-text-icon-primary">
-				<a href="{$UrlScript}history/{$ReadArticleIndexOut.ID}/" title="{$language.History}" style="padding-left:20px;"> <span class="ui-icon ui-icon-script" style="margin-left:-16px;"></span>{$language.History}</a>
+				<a href="{$URLS.Script}history/{$ReadArticleIndexOut.ID}/" title="{$language.History}" style="padding-left:20px;"> <span class="ui-icon ui-icon-script" style="margin-left:-16px;"></span>{$language.History}</a>
 			</li>
 			{if "EditArticle"|perm}
 				<li class="ui-state-default ui-corner-top ui-state-hover ui-button-text-icon-primary">
-					<a href="{$UrlScript}Write{$ReadArticleIndexOut.URL|replace:' ':'_'}?Edit&amp;id={$ReadArticleIndexOut.ID}"  style="padding-left:20px;"> <span class="ui-icon ui-icon-pencil" style="margin-left:-16px;"></span>{$language.EditArticle}</a>
+					<a href="{$URLS.Script}Write{$ReadArticleIndexOut.URL|replace:' ':'_'}?Edit&amp;id={$ReadArticleIndexOut.ID}"  style="padding-left:20px;"> <span class="ui-icon ui-icon-pencil" style="margin-left:-16px;"></span>{$language.EditArticle}</a>
 				</li>
 			{/if}
 			{if "DeleteVersion"|perm}
@@ -39,10 +39,10 @@
 			</li>		
 			
 			<li class="ui-state-default ui-corner-top ui-state-hover" style="float:right;">
-					<a href="{$UrlScript}Contact/?url={$URLS.Path|escape:'url'}&amp;topic=copyright" style=" padding:0px;"  class="xv-article-report"><span class="ui-button  ui-icon ui-icon-flag"></span></a>
+					<a href="{$URLS.Script}Contact/?url={$URLS.Path|escape:'url'}&amp;topic=copyright" style=" padding:0px;"  class="xv-article-report"><span class="ui-button  ui-icon ui-icon-flag"></span></a>
 			</li>
 			<li class="ui-state-default ui-corner-top ui-state-hover" style="float:right;">
-					<a href="{$UrlScript}RSS/{if $ReadArticleIndexOut.URL}?rss={$ReadArticleIndexOut.URL|escape:"url"}{/if}" style=" padding:0px;" title="RSS"><span class="ui-button  ui-icon ui-icon-signal-diag"></span></a>
+					<a href="{$URLS.Script}RSS/{if $ReadArticleIndexOut.URL}?rss={$ReadArticleIndexOut.URL|escape:"url"}{/if}" style=" padding:0px;" title="RSS"><span class="ui-button  ui-icon ui-icon-signal-diag"></span></a>
 			</li>
 			{if "EditTags"|perm}
 				<li class="ui-state-default ui-corner-top ui-state-hover" style="float:right;">
@@ -74,7 +74,7 @@
 					{if $smarty.foreach.minimap.last}
 						{$Value.Name}
 					{else}
-						<a href="{$UrlScript}{$Value.Url|replace:' ':'_'|urlrepair|substr:1}">{$Value.Name}</a> >>
+						<a href="{$URLS.Script}{$Value.Url|replace:' ':'_'|urlrepair|substr:1}">{$Value.Name}</a> >>
 					{/if}
 				{/foreach}
 			</div>

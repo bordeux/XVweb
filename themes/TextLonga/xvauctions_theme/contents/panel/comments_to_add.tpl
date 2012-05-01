@@ -7,8 +7,8 @@
 {/if}
 	<div class="xvauction-main" >
 	<div class="category_parents_tree" >
-		<a href="{$URLS.Auctions}/">{"xca_auctions"|xvLang}</a> 
-			&gt;&gt; <a href="{$URLS.AuctionPanel}">{"xca_auctions_panel"|xvLang}</a> 
+		<a href="{$URLS.Auctions}/">{"xca_auctions"|xv_lang}</a> 
+			&gt;&gt; <a href="{$URLS.AuctionPanel}">{"xca_auctions_panel"|xv_lang}</a> 
 			&gt;&gt; <a href="{$URLS.AuctionPanel}/comments_to_add/">{$Title}</a> 
 	
 	</div>
@@ -42,11 +42,11 @@
 					<tr>
 
 						<th class="items-checkbox"><input type="checkbox" name="select_all" value="true" class="select_all" data-selector='input[name="auction[]"]' /></th>
-						<th class="items-id"><a href='?{addget value="sortby=id&sort=$SmartySort"}'>{$SmartyChar} {"ID"|xvLang}</a></th>
+						<th class="items-id"><a href='?{addget value="sortby=id&sort=$SmartySort"}'>{$SmartyChar} {"ID"|xv_lang}</a></th>
 						<th class="items-thumbnail"></th>
-						<th class="items-title"><a href='?{addget value="sortby=title&sort=$SmartySort"}'>{$SmartyChar} {"xca_description"|xvLang}</a></th>
-						<th class="items-date"><a href='?{addget value="sortby=date&sort=$SmartySort"}'>{$SmartyChar} {"xca_date"|xvLang}</a></th>
-						<th class="items-contractor"><a href='?{addget value="sortby=contractor&sort=$SmartySort"}'>{$SmartyChar} {"xca_contractor"|xvLang}</a></th>
+						<th class="items-title"><a href='?{addget value="sortby=title&sort=$SmartySort"}'>{$SmartyChar} {"xca_description"|xv_lang}</a></th>
+						<th class="items-date"><a href='?{addget value="sortby=date&sort=$SmartySort"}'>{$SmartyChar} {"xca_date"|xv_lang}</a></th>
+						<th class="items-contractor"><a href='?{addget value="sortby=contractor&sort=$SmartySort"}'>{$SmartyChar} {"xca_contractor"|xv_lang}</a></th>
 						<th class="items-none"></th>
 
 					</tr>
@@ -77,7 +77,7 @@
 							{$auction.Contractor}
 						</td>
 						<td class="items-none">
-							<a href="{$URLS.AuctionPanel}/comment_add/{$auction.ID}/">{"xca_comment_add"|xvLang}</a>
+							<a href="{$URLS.AuctionPanel}/comment_add/{$auction.ID}/">{"xca_comment_add"|xv_lang}</a>
 						</td>
 	
 					</tr>
@@ -93,7 +93,7 @@
 	{else}
 			<div style="margin: 40px;">
 				<div style="background: #F3FFCD; border: 1px solid #B1DA81; color: #4B5D40; text-align:center; padding: 20px; ">
-					<h2 style="color: #60A536; font-size: 16px; font-weight:bold;">{"xca_zero_results3"|xvLang}</h2>
+					<h2 style="color: #60A536; font-size: 16px; font-weight:bold;">{"xca_zero_results3"|xv_lang}</h2>
 				</div>
 			</div>
 	{/if}

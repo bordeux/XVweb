@@ -1,0 +1,15 @@
+<plugin>
+	<info>
+		<name>Cron</name>
+		<version>1.0</version>
+		<author>Krzysztof Bednarczyk</author>
+		<url>http://www.bordeux.net</url>
+		<description>Cron module for XVweb</description>
+	</info>
+	<config>	
+		<prefix prefix="cron" include="plugins/cron/cron.php"/>	
+	</config>
+	<ranks>
+	
+	</ranks>
+</plugin>

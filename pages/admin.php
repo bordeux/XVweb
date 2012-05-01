@@ -31,13 +31,13 @@ if(!empty($_SERVER['HTTP_REFERER'])){
 }
 */
 @set_time_limit(0);
-$ThemeSelected  = "default";
+$xv_theme_name  = "default";
 DEFINE('ADMIN_ROOT_DIR', ROOT_DIR.'admin'.DIRECTORY_SEPARATOR);
 
 $URLS['ThemeCatalog']	= $URLS['Site'].'admin/data/themes/';
 $URLS['JSCatalog']		= $URLS['Site'].'admin/data/themes/';
-$URLS['Theme']			= $URLS['ThemeCatalog'].$ThemeSelected."/";
-$URLS['JSCatalog']		= $URLS['JSCatalog'].$ThemeSelected."/";
+$URLS['Theme']			= $URLS['ThemeCatalog'].$xv_theme_name."/";
+$URLS['JSCatalog']		= $URLS['JSCatalog'].$xv_theme_name."/";
 
 
 $Smarty->assignByRef('URLS', $URLS);
@@ -47,13 +47,13 @@ $Smarty->assign('JSVars', (array('SIDUser'=>$XVwebEngine->Session->GetSID(), 'ro
 
 
 try {
-	$Smarty->template_dir = ROOT_DIR.'admin'.DIRECTORY_SEPARATOR.'data'.DIRECTORY_SEPARATOR.'themes'.DIRECTORY_SEPARATOR.$ThemeSelected.DIRECTORY_SEPARATOR;
-	$CompileDir = ROOT_DIR.'tmp'.DIRECTORY_SEPARATOR.$ThemeSelected.DIRECTORY_SEPARATOR;
+	$Smarty->template_dir = ROOT_DIR.'admin'.DIRECTORY_SEPARATOR.'data'.DIRECTORY_SEPARATOR.'themes'.DIRECTORY_SEPARATOR.$xv_theme_name.DIRECTORY_SEPARATOR;
+	$CompileDir = ROOT_DIR.'tmp'.DIRECTORY_SEPARATOR.$xv_theme_name.DIRECTORY_SEPARATOR;
 	if(!is_dir($CompileDir))
 	mkdir($CompileDir);
 	$Smarty->compile_dir  = $CompileDir; unset($CompileDir);
-	$Smarty->config_dir   = ROOT_DIR.'admin'.DIRECTORY_SEPARATOR.'data'.DIRECTORY_SEPARATOR.'themes'.DIRECTORY_SEPARATOR.$ThemeSelected.DIRECTORY_SEPARATOR.'configs'.DIRECTORY_SEPARATOR;
-	$Smarty->cache_dir    = ROOT_DIR.'admin'.DIRECTORY_SEPARATOR.'data'.DIRECTORY_SEPARATOR.'themes'.DIRECTORY_SEPARATOR.$ThemeSelected.DIRECTORY_SEPARATOR.'cache'.DIRECTORY_SEPARATOR;
+	$Smarty->config_dir   = ROOT_DIR.'admin'.DIRECTORY_SEPARATOR.'data'.DIRECTORY_SEPARATOR.'themes'.DIRECTORY_SEPARATOR.$xv_theme_name.DIRECTORY_SEPARATOR.'configs'.DIRECTORY_SEPARATOR;
+	$Smarty->cache_dir    = ROOT_DIR.'admin'.DIRECTORY_SEPARATOR.'data'.DIRECTORY_SEPARATOR.'themes'.DIRECTORY_SEPARATOR.$xv_theme_name.DIRECTORY_SEPARATOR.'cache'.DIRECTORY_SEPARATOR;
 } catch (Exception $e) { 
 			$XVwebEngine->ErrorClass($e);
 } 

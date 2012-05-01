@@ -8,7 +8,7 @@
 ****************   All rights reserved             *************************
 ***************************************************************************/
 
-if(!xvPerm("xva_payments")){
+if(!xv_perm("xva_payments")){
 	header("location: ".$URLS['Script'].'System/Auctions/Auction_permission_payments/');
 	exit;
 }

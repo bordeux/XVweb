@@ -27,7 +27,7 @@
 		
 		
 		{if $register_error}
-			<div class="error">{$register_error_msg|xvLang:$register_error_msg}</div>
+			<div class="error">{$register_error_msg|xv_lang:$register_error_msg}</div>
 		{/if}
 {if $register_config->register_enabled}
 		<table>

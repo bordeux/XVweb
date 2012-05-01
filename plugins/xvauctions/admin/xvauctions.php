@@ -21,7 +21,7 @@ if(!isset($XVwebEngine)){
 	exit;
 }
 $xva_wiki_page = "http://xvauctions.bordeux.net/wiki/";
-LoadLang('xvauctions');
+xv_load_lang('xvauctions');
 include_once(ROOT_DIR.'plugins/xvauctions/includes/functions.xvauctions.php');
 function getClassesByPrefix($prefix){
 	$result = array();

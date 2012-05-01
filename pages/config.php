@@ -17,7 +17,7 @@ error_reporting(E_ALL & ~E_NOTICE & ~E_STRICT);
 //error_reporting(E_ALL);
 //ini_set('error_reporting', E_ALL);
 //ini_set('display_errors',0);
-DEFINE('PHP_PathInfo', 'PATH_INFO', true);
+
 DEFINE('XVweb_DisplayErrors', true, true); 
 DEFINE('MD5Key', 'PDjh6ljRaURd8Vr7HpjLpG7UabAzjb8Q', true); 
 DEFINE('HASH_SALT', 'nh`m46ORJBolcwD>eKyVgXMAMAuIkRbMexaqA.MZnZZdYbqirnRf', true); 

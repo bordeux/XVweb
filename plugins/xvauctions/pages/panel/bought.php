@@ -8,12 +8,12 @@
 ****************   All rights reserved             *************************
 ***************************************************************************/
 
-if(!xvPerm("xva_Buy")){
+if(!xv_perm("xva_Buy")){
 	header("location: ".$URLS['Script'].'System/Auctions/Auction_permission_buy/');
 	exit;
 }
 
-$Smarty->assign('Title',  xvLang("xca_bought"));
+$Smarty->assign('Title',  xv_lang("xca_bought"));
 
 
 if(isset($_POST['auction']) && is_array($_POST['auction']) && isset($_POST['hidde']))

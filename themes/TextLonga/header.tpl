@@ -9,14 +9,14 @@
 	| |_) | (_) | | | (_| |  __/ |_| |>  < _| | | |  __/ |_ 
 	|_.__/ \___/|_|  \__,_|\___|\__,_/_/\_(_)_| |_|\___|\__|
 -->                                                        					
-    <title>{$SiteTopic} :: {$SiteName} :.</title>
+    <title>{$xv_title|default:$SiteTopic}:: {$xv_main_config->site_name} :.</title>
 	{foreach from=$MetaTags item=content key=equiv}
 		<meta http-equiv="{$equiv}" content="{$content}" />
 	{/foreach}
 	<meta http-equiv="X-UA-Compatible" content="chrome=1">
 	<link rel="shortcut icon" href="{$Url}favicon.ico" type="image/x-icon" />
     <link rel="alternate" type="application/rss+xml" title="RSS" href="{$URLS.Script}RSS/{if $ReadArticleIndexOut.URL}?rss={$ReadArticleIndexOut.URL|escape:'url'}{/if}" />
-	{if !"Adv"|xvPerm}{include  file='adv.tpl'}{/if}
+	{if !"Adv"|xv_perm}{include  file='adv.tpl'}{/if}
 	<style type="text/css" media="all">
 	/*<![CDATA[*/
 	@import url('{$UrlTheme}css/custom-theme/jquery-ui-1.8.7.custom.css{if $isie}?ie=true{/if}');
@@ -35,23 +35,6 @@
 	{/foreach}
 	var URLS = eval('({$URLS|@json_encode})'); 
 	/*{if $JSBinder}{$JSBinder|@sort}{/if}*/	
-	
-	{if $GAnalistics}
-	window.google_analytics_domain_name = "";
-		var _gaq = _gaq || [];
-		  _gaq.push(['_setAccount', '{$GAnalistics}']);{literal}
-		  _gaq.push(['_setDomainName', 'none']);
-		  _gaq.push(['_setAllowLinker', true]);
-		  _gaq.push(['_trackPageview']);
-		  _gaq.push(['_trackPageLoadTime']);
-		  (function() {
-			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-		  })();
-		 {/literal}
-	{/if}
-
 	</script>
 	<script type="text/javascript" src="{$URLS.Script}receiver/language.js" charset="UTF-8"> </script>  
 	<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js" charset="UTF-8"> </script> 
@@ -101,14 +84,14 @@
 						<a href="{$URLS.Script}Users/{$Session.Logged_User|escape:'url'}/Edit">{$language.EditProfile}</a> | 
 						<a href="{$URLS.Script}Messages/">{$language.Messages} (0/0)</a> | 
 						{$xv_panel_links}
-						<a href="?LogOut=true" class="xv-confirm-link" data-xv-question="Czy napewno chcesz się wylogować? ">{$language.LogOut}</a> 
+						<a href="{$URLS.Script}Logout/{$JSVars.SIDUser}/" class="xv-confirm-link" data-xv-question="Czy napewno chcesz się wylogować? ">{$language.LogOut}</a> 
 					{else}
-						<a href="{$URLS.Script}Login/" rel="nofollow" class="xvshow xv-login-header" data-tohide=".xvlogin-tohide" data-toshow=".xvlogin-login">{"SingIn"|xvLang}</a> | <a href="{$URLS.Script}Register/" rel="nofollow">{"SingUp"|xvLang}</a>
+						<a href="{$URLS.Script}Login/" rel="nofollow" class="xvshow xv-login-header" data-tohide=".xvlogin-tohide" data-toshow=".xvlogin-login">{"SingIn"|xv_lang}</a> | <a href="{$URLS.Script}Register/" rel="nofollow">{"SingUp"|xv_lang}</a>
 					{/if}
 					</div>
 					</div>
 					<div class="search">
-					 <form action="{$UrlScript}Search/" method="get" name="SearchForm" id="SearchForm">
+					 <form action="{$URLS.Script}Search/" method="get" name="SearchForm" id="SearchForm">
 						<input type="search" results="5" name="Search" placeholder="{$language.Search}..." />
 					  </form>
 					</div>

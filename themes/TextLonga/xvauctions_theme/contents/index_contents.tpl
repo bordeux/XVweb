@@ -9,9 +9,20 @@
 	<div class="xvauction-main" >
 
 	<div class="xvauction-sidebar">
+	
+	<div class="xvauction-sidebar-item">
+		<div class="xvauction-sidebar-item-title">{"xca_search"|xv_lang}</div>
+		<div class="xvauction-sidebar-item-content">
+			<form action="{$URLS.Auctions}" method="get" class="xvauction-sidebar-search">
+				<input type="search" name="auction_search" value="{$smarty.get.auction_search|escape}" />
+				<input type="submit" value='{"xca_search"|xv_lang}'>
+			</form>
+		</div>
+	</div>
+	
 		<div class="xvauction-sidebar-item">
 		{settings url="XVauctions/Categories/" mleft=200}
-			<div class="xvauction-sidebar-item-title">{"xca_categories"|xvLang} </div>
+			<div class="xvauction-sidebar-item-title">{"xca_categories"|xv_lang} </div>
 			<div class="xvauction-sidebar-item-content">
 				<ul class="xvauction-categories">
 					{foreach from=$auctions_categories item=category key=equiv}

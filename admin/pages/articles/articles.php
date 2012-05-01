@@ -244,7 +244,7 @@ class XV_Admin_articles_ia{
 		$form->set("linebreaks", false);       
 		$form->set("errorBox", "error");    
 		$form->set("class", " xv-form");            
-		$form->set("attributes", " data-xv-result='.xv-config-form' ");     
+		$form->set("attributes", " data-xv-result='.content' ");     
 		$form->set("errorClass", "error");       
 		$form->set("divs", true);    
 		$form->set("action",$GLOBALS['URLS']['Script'].'Administration/Get/Articles/IA/?id='.$_GET['id']);
@@ -256,11 +256,11 @@ class XV_Admin_articles_ia{
 
 		$form->set("showAfterSuccess", true);
 		$form->JSprotection($XVweb->Session->GetSID());
-		
-
+		;
+		$tbl_flip_fields = array_flip($XVweb->DataBase->get_fields("Text_Index"));
 		
 				foreach($TableStructure as $field){
-				$field["FieldDisplay"] = $XVweb->Config('db')->find('tables table#Text_Index field[name="'.$field["Field"].'"]')->attr("id")." (".$field["Field"].")";
+				$field["FieldDisplay"] = $tbl_flip_fields[$field["Field"]]." (".$field["Field"].")";
 						switch ($field["Type"]["type"]) {
 							case "char":
 							case "varchar":
@@ -295,7 +295,7 @@ class XV_Admin_articles_ia{
 		$result=($form->getData());
 		$Content .= $form_html;
 		if($result){
-			//$Content .= "<div class='success'>Saved</div>";
+			$Content .= "<div class='success'>".var_dump($_POST, true)."</div>";
 		}else{
 			//$Content .= $form_html;
 		}
@@ -404,9 +404,10 @@ class XV_Admin_articles_a {
 		$form->set("showAfterSuccess", false);
 		$form->JSprotection(uniqid());
 
+		$tbl_articles_fields_flip = array_flip($XVweb->DataBase->get_fields("Articles"));
 		
 		foreach($TableStructure as $field){
-			$field["FieldDisplay"] = $XVweb->Config('db')->find('tables table#Articles field[name="'.$field["Field"].'"]')->attr("id")." (".$field["Field"].")";
+			$field["FieldDisplay"] =$tbl_articles_fields_flip['$field["Field"]']." (".$field["Field"].")";
 			switch ($field["Type"]["type"]) {
 			case "char":
 			case "varchar":

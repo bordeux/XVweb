@@ -56,19 +56,19 @@
 									{if $auction_info.Thumbnail}
 										<img src="{$URLS.Thumbnails}/{$auction_info.Thumbnail}" alt='{$auction_info.Title|escape:"html"}'/>
 									{else}
-										<img src="{$URLS.Theme}xvauctions_theme/img/no_picture.png" alt='{"xca_no_picture"|xvLang}'  />
+										<img src="{$URLS.Theme}xvauctions_theme/img/no_picture.png" alt='{"xca_no_picture"|xv_lang}'  />
 									{/if}
 								</a>
 							</td>
 							<td><a href="{$URLS.Auction}/{$auction_info.ID}/" target="_blank">{$auction_info.Title|escape:"htmlall"}</a> <br />
 							<span style="font-size:8px;">ID: {$auction_info.ID}</span></td>
-							<td>{if $buy_type == "buy_now"}<span class="item-buynow"> {$buy_cost|number_format:2:'.':' '} {"xca_coin_type"|xvLang} </span>{else} {$buy_cost|number_format:2:'.':' '} {"xca_coin_type"|xvLang} <br /> (licytacja) {/if}</td>
+							<td>{if $buy_type == "buy_now"}<span class="item-buynow"> {$buy_cost|number_format:2:'.':' '} {"xca_coin_type"|xv_lang} </span>{else} {$buy_cost|number_format:2:'.':' '} {"xca_coin_type"|xv_lang} <br /> (licytacja) {/if}</td>
 							<td>{$buy_pieces}</td>
-							<td><b style="color:#0F9100;">{$buy_sum|number_format:2:'.':' '} {"xca_coin_type"|xvLang}</b></td>
+							<td><b style="color:#0F9100;">{$buy_sum|number_format:2:'.':' '} {"xca_coin_type"|xv_lang}</b></td>
 						</tr>
 					</tbody>
 				</table>
-				{if "xva_Buy"|xvPerm}
+				{if "xva_Buy"|xv_perm}
 				<form action="?buy=true" method="post" style="text-align:center;">
 					<input type="hidden" name="xv-sid" value="{$JSVars.SIDUser}" />
 					<input type="hidden" name="pieces" value="{$smarty.post.pieces|escape:'htmlall'}" />

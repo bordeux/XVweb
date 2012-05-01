@@ -6,7 +6,7 @@
 											{foreach from=$MainMenu.links item=Submenu}
 												<a  href="{$Submenu.url}">{$Submenu.title}</a> |
 											{/foreach}
-								{/foreach} {if $LogedUser}<a  href="#" href="?LogOut=true" class="xv-confirm-link" data-xv-question="Czy napewno chcesz się wylogować? ">{$language.LogOut}</a>{else}<a  href="#" rel="nofollow" class="xvshow" data-tohide=".xvlogin-tohide" data-toshow=".xvlogin-login">{$language.Login}</a>{/if}
+								{/foreach} {if $LogedUser}<a  href="#" href="{$URLS.Script}Logout/{$JSVars.SIDUser}/" class="xv-confirm-link" data-xv-question="Czy napewno chcesz się wylogować? ">{$language.LogOut}</a>{else}<a  href="#" rel="nofollow" class="xvshow" data-tohide=".xvlogin-tohide" data-toshow=".xvlogin-login">{$language.Login}</a>{/if}
 </nav>
 				{if $Advertisement}
 					<div class="reklamo" id="RFooter">

@@ -27,7 +27,7 @@
 		
 		
 		{if $login_error}
-			<div class="error">{$login_error_msg|xvLang:$login_error_msg}</div>
+			<div class="error">{$login_error_msg|xv_lang:$login_error_msg}</div>
 		{/if}
 
 		<table>
@@ -43,7 +43,7 @@
 
 			</tr>				
 			<tr>
-				<td style="font-size: 10px;">{"remember_password"|xvLang}: </td>
+				<td style="font-size: 10px;">{"remember_password"|xv_lang}: </td>
 				<td><input type="checkbox" name="xv_login[remember]" id="xv-login-remember" value="true" /></td>
 
 			</tr>			
@@ -59,12 +59,15 @@
 			{/if}
 			<tr>
 				<td><input type="hidden"  name="xv_sid" value="{$JSVars.SIDUser}" /></td>
-				<td><input type="submit" name="xv_login[submit]" value="{'Send'|xvLang}" /></td>
+				<td><input type="submit" name="xv_login[submit]" value="{'Send'|xv_lang}" /></td>
 			</tr>
 		</table>
+		<div style="float:right;"><a href="{$URLS.Script}Forgot/">{"forgot_password"|xv_lang}</a></div>
 	</div>
 	</form>
+	
 	{/if}
+	
 </div>
 		
 

@@ -23,7 +23,7 @@ if(!isValidURL(pq($element)->html()) && !isset($_GET['digg'])){
 }
 
 if(empty($_GET) or isset($_GET['frame'])){
-	if(!file_exists($RootDir.'themes/'.$ThemeSelected."/digg.tpl")) {	
+	if(!file_exists($RootDir.'themes/'.$xv_theme_name."/digg.tpl")) {	
 		$Smarty->template_dir = $RootDir.'plugins/digg/theme/';
 		$CompileDir = $RootDir.'tmp'.DIRECTORY_SEPARATOR.'DiggPlugin'.DIRECTORY_SEPARATOR;
 		if(!is_dir($CompileDir))

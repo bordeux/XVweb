@@ -7,17 +7,17 @@
 		<description>Auctions module</description>
 	</info>
 	<load>
-		<event name="onlogin">
+		<event name="login.start">
 			<script language="PHP">
 			  <![CDATA[
-					include_once(ROOT_DIR.'plugins/xvauctions/libs/class.xvpayments.php');
-					$XVwebEngine->Session->Session('xv_payments_amount', $XVwebEngine->InitClass("xvpayments")->get_user_amount($XVwebEngine->Session->Session('Logged_User')));
+					xvp()->load_plugin('xvauctions_login');
 				]]>
 			</script>
 		</event>		
-		<event name="onpreassing">
+		<event name="xvweb.smarty.loaded">
 			<script language="PHP">
 			  <![CDATA[
+					global $Smarty;
 					$Smarty->assign('xv_panel_links', '<a href="'.$URLS['Script'].'auction_panel/">Panel aukcyjny</a> | ');
 				]]>
 			</script>

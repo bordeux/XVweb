@@ -6,51 +6,51 @@
 	{/if}
 {/function}
 
-		{if "xva_Buy"|xvPerm}
+		{if "xva_Buy"|xv_perm}
 		<div class="xvauction-sidebar-item">
-			<div class="xvauction-sidebar-item-title">{"xca_shopping"|xvLang}</div>
+			<div class="xvauction-sidebar-item-title">{"xca_shopping"|xv_lang}</div>
 			<div class="xvauction-sidebar-item-content">
 				<ul class="xvauction-links">
-							{menu_active data="bought" title="xca_bought"|xvLang}
-							{menu_active data="bid" title="xca_bid"|xvLang}
-							{menu_active data="no_bought" title="xca_no_bought"|xvLang}
+							{menu_active data="bought" title="xca_bought"|xv_lang}
+							{menu_active data="bid" title="xca_bid"|xv_lang}
+							{menu_active data="no_bought" title="xca_no_bought"|xv_lang}
 				</ul>
 			</div>
 		</div>
 		{/if}
-		{if "xva_Sell"|xvPerm}
+		{if "xva_Sell"|xv_perm}
 		<div class="xvauction-sidebar-item">
-			<div class="xvauction-sidebar-item-title">{"xca_sale"|xvLang}</div>
+			<div class="xvauction-sidebar-item-title">{"xca_sale"|xv_lang}</div>
 			<div class="xvauction-sidebar-item-content">
 				<ul class="xvauction-links">
-							<li><a href="{$URLS.AuctionsAdd}">{"xca_sell"|xvLang}</a></li>
-							{menu_active data="selled" title="xca_selled"|xvLang}
-							{menu_active data="selling" title="xca_selling"|xvLang}
-							{menu_active data="no_selled" title="xca_no_selled"|xvLang}
-							{menu_active data="to_add" title="xca_to_add"|xvLang}
+							<li><a href="{$URLS.AuctionsAdd}">{"xca_sell"|xv_lang}</a></li>
+							{menu_active data="selled" title="xca_selled"|xv_lang}
+							{menu_active data="selling" title="xca_selling"|xv_lang}
+							{menu_active data="no_selled" title="xca_no_selled"|xv_lang}
+							{menu_active data="to_add" title="xca_to_add"|xv_lang}
 				</ul>
 			</div>
 		</div>	
 		{/if}
-		{if "xva_Sell"|xvPerm || "xva_Buy"|xvPerm}
+		{if "xva_Sell"|xv_perm || "xva_Buy"|xv_perm}
 		<div class="xvauction-sidebar-item">
-			<div class="xvauction-sidebar-item-title">{"xca_comments"|xvLang}</div>
+			<div class="xvauction-sidebar-item-title">{"xca_comments"|xv_lang}</div>
 			<div class="xvauction-sidebar-item-content">
 				<ul class="xvauction-links">
-							{menu_active data="comments_to_add" title="xca_comments_add"|xvLang}
-							{menu_active data="comments" title="xca_comments_received"|xvLang}
+							{menu_active data="comments_to_add" title="xca_comments_add"|xv_lang}
+							{menu_active data="comments" title="xca_comments_received"|xv_lang}
 				</ul>
 			</div>
 		</div>
 		{/if}
-		{if "xva_payments"|xvPerm}
+		{if "xva_payments"|xv_perm}
 		<div class="xvauction-sidebar-item">
-			<div class="xvauction-sidebar-item-title">{"xca_payments"|xvLang}</div>
+			<div class="xvauction-sidebar-item-title">{"xca_payments"|xv_lang}</div>
 			<div class="xvauction-sidebar-item-content">
 				<ul class="xvauction-links">
-							{menu_active data="payment_history" title="xca_payments_history"|xvLang}
-							{menu_active data="payment_add" title="xca_payments_add_coins"|xvLang}
-							{menu_active data="payment_transfer" title="xca_payments_transfer"|xvLang}
+							{menu_active data="payment_history" title="xca_payments_history"|xv_lang}
+							{menu_active data="payment_add" title="xca_payments_add_coins"|xv_lang}
+							{menu_active data="payment_transfer" title="xca_payments_transfer"|xv_lang}
 				</ul>
 			</div>
 		</div>

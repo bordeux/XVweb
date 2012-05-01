@@ -27,14 +27,14 @@
 		{if $smarty.foreach.minimap.last}
 		{$Value.Name}
 		{else}
-		<a href="{$UrlScript}{$Value.Url|urlrepair|substr:1}">{$Value.Name}</a> <img src="{$UrlTheme}img/space.gif" />
+		<a href="{$URLS.Script}{$Value.Url|urlrepair|substr:1}">{$Value.Name}</a> <img src="{$UrlTheme}img/space.gif" />
 		{/if}
 		{/foreach}
 		</div>
 <div id="EditPanel">{$EditPanel}</div>
 <div id="TextDiv">
 		
-	<form action="{$UrlScript}File/?SendFile=true" method="post" enctype="multipart/form-data">
+	<form action="{$URLS.Script}File/?SendFile=true" method="post" enctype="multipart/form-data">
 <div id="UploadForm">
 		<div  class="tablediv" style="width:100%;">
 			<div class="rowdiv">

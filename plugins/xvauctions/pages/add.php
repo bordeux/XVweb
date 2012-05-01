@@ -8,7 +8,7 @@
 ****************   All rights reserved             *************************
 ***************************************************************************/
 
-if(!xvPerm("xva_Sell")){
+if(!xv_perm("xva_Sell")){
 	header("location: ".$URLS['Script'].'System/Auctions/Auction_permission_sell/');
 	exit;
 }
@@ -119,7 +119,10 @@ class xva_add_class {
 			header('Location: ?step=category');
 			exit;
 		} // tutaj sprawdz
-		if($XVwebEngine->Session->Session('xv_payments_amount') < $tmpvar['Options']['allowed_debt']*100){
+		$user_amount = (int) $XVwebEngine->Session->Session('xv_payments_amount');
+		if($user_amount < $tmpvar['Options']['allowed_debt']*100){
+		echo $XVwebEngine->Session->Session('xv_payments_amount');
+		exit("kurwa");
 			header("location: ".$URLS['Script'].'System/Auctions/You_must_buy_credit/');
 			exit;
 		}
@@ -201,31 +204,31 @@ class xva_add_class {
 		$_POST['add']['description'] = xvauction_fields_wysiwyg::convert_html($_POST['add']['description']);
 		
 		$price_list["add"] = array(
-				"caption" => xvLang("xca_adv_add"),
+				"caption" => xv_lang("xca_adv_add"),
 				"cost" => $category_info['Options']['auction_add_cost'], 
 			);
 		
 		if(ifsetor($_POST['add']['premium'][0], "false") == "true"){ //adv on top of list
 			$price_list['on_top'] = array(
-				"caption" => xvLang("xca_adv_on_the_top"),
+				"caption" => xv_lang("xca_adv_on_the_top"),
 				"cost" => $category_info['Options']['auction_on_top_cost'], 
 			);
 		}
 		if(ifsetor($_POST['add']['premium'][1], "false") == "true"){ //adv bold
 			$price_list['bold'] = array(
-				"caption" => xvLang("xca_adv_bold"),
+				"caption" => xv_lang("xca_adv_bold"),
 				"cost" => $category_info['Options']['auction_bold_cost'], 
 			);
 		}		
 		if(ifsetor($_POST['add']['premium'][2], "false") == "true"){ //adv highlight
 			$price_list['highlight'] = array(
-				"caption" => xvLang("xca_adv_highlight"),
+				"caption" => xv_lang("xca_adv_highlight"),
 				"cost" => $category_info['Options']['auction_highlight_cost'], 
 			);
 		}		
 		if(ifsetor($_POST['add']['premium'][3], "false") == "true"){ //adv on main page
 			$price_list['main_page'] = array(
-				"caption" => xvLang("xca_adv_on_main_page"),
+				"caption" => xv_lang("xca_adv_on_main_page"),
 				"cost" => $category_info['Options']['auction_main_page_cost'], 
 			);
 		}
@@ -417,6 +420,7 @@ class xva_add_class {
 				if(is_array($session_v)){
 						foreach($session_v as $val){
 							$session_to_save[$val] =$XVwebEngine->Session->Session($val);
+							$XVwebEngine->Session->delete($val);
 						}
 					}
 			

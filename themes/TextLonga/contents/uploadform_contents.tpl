@@ -21,7 +21,7 @@
 					{if $smarty.foreach.minimap.last}
 						{$Value.Name}
 					{else}
-						<a href="{$UrlScript}{$Value.Url|replace:' ':'_'|urlrepair|substr:1}">{$Value.Name}</a> >>
+						<a href="{$URLS.Script}{$Value.Url|replace:' ':'_'|urlrepair|substr:1}">{$Value.Name}</a> >>
 					{/if}
 				{/foreach}
 			</div>
@@ -33,7 +33,7 @@
 <div class="xv-text-wrapper">
 
 <!-- TEXT -->
-<form action="{$UrlScript}File/?SendFile=true" method="post" enctype="multipart/form-data">
+<form action="{$URLS.Script}File/?SendFile=true" method="post" enctype="multipart/form-data">
 	<div class="xv-uploader">
 			<input type="file" name="UploadForm[]"  multiple="true" />
 			<input type="submit" value="{$language.Send}"  />

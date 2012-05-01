@@ -19,7 +19,7 @@ if(!isset($XVwebEngine)){
 	header("location: http://".$_SERVER['HTTP_HOST']."/");
 }
 
-LoadLang('user');
+xv_load_lang('user');
 if(!empty($UserFromUrl)){
 	if(!$XVwebEngine->ReadUser($UserFromUrl)){
 		header("location: ".$URLS['Script'].'System/UserDoesNotExist/');
@@ -166,7 +166,7 @@ if(!empty($UserFromUrl)){
 			if(!empty($_POST['user']['Password']['Old']) && !empty($_POST['user']['Password']['New']) && !empty($_POST['user']['Password']['Replay'])){
 				if($_POST['user']['Password']['New'] != $_POST['user']['Password']['Replay']){
 					$SaveError[] = $Language['PassNotDoMatch'];
-				}elseif(!xvPerm('EditOtherProfil') && md5(MD5Key.$_POST['user']['Password']['Old']) != $XVwebEngine->ReadUser['Password']){
+				}elseif(!xv_perm('EditOtherProfil') && md5(MD5Key.$_POST['user']['Password']['Old']) != $XVwebEngine->ReadUser['Password']){
 					$SaveError[] = $Language['LogegedBadPassword'];
 				}else{
 					$XVwebEngine->Date['EditUser']->set("Password", md5(MD5Key.$_POST['user']['Password']['New']));

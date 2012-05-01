@@ -1,5 +1,5 @@
 
-	<form action="{$UrlScript}Write/?settings={$IDArticle}" name="SettingsForm" method="post">
+	<form action="{$URLS.Script}Write/?settings={$IDArticle}" name="SettingsForm" method="post">
 	<div class='xv-table'>
 					<table style="width : 100%; text-align: center;">
 				<caption>{$Pager.0}</caption>
