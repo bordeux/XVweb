@@ -20,7 +20,7 @@ if(!isset($XVwebEngine)){
 }
 
 
-	class XV_Admin_widgets {
+	class xv_admin_widgets {
 		var $style = "height: 400px; width: 100%;";
 		var $title = "Widgets";
 		var $URL = "Widgets/";
@@ -82,7 +82,7 @@ if(!isset($XVwebEngine)){
 			$this->icon = $GLOBALS['URLS']['Site'].'admin/data/icons/widgets.png';
 		}
 	}
-	class XV_Admin_widgets_position{
+	class xv_admin_widgets_position{
 	var $error = false;
 	var $result = false;
 		public function __construct(&$XVweb){
@@ -102,7 +102,7 @@ if(!isset($XVwebEngine)){
 		}
 	}
 	
-	class XV_Admin_widgets_close{
+	class xv_admin_widgets_close{
 	var $error = false;
 	var $result = false;
 		public function __construct(&$XVweb){
@@ -116,7 +116,7 @@ if(!isset($XVwebEngine)){
 		}
 	}
 
-	class XV_Admin_widgets_get {
+	class xv_admin_widgets_get {
 	var $error = false;
 	var $result = "{}";
 		public function __construct(&$XVweb){
@@ -132,9 +132,9 @@ if(!isset($XVwebEngine)){
 	
 	
 		$CommandSecond = strtolower($XVwebEngine->GetFromURL($PathInfo, 4));
-	if (class_exists('XV_Admin_widgets_'.$CommandSecond)) {
-		$XVClassName = 'XV_Admin_widgets_'.$CommandSecond;
+	if (class_exists('xv_admin_widgets_'.$CommandSecond)) {
+		$xv_admin_class_name = 'xv_admin_widgets_'.$CommandSecond;
 	}else
-		$XVClassName = "XV_Admin_widgets";
+		$xv_admin_class_name = "xv_admin_widgets";
 		
 ?>

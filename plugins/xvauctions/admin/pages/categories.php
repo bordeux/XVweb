@@ -18,7 +18,7 @@ if(!isset($XVwebEngine)){
 	header("location: http://".$_SERVER['HTTP_HOST']."/");
 	exit;
 }
-class XV_Admin_xvauctions_categories{
+class xv_admin_xvauctions_categories{
 	var $style = " width: 100%;";
 	var $title = "Auction Categories";
 	var $URL = "XVauctions/Categories/";
@@ -26,11 +26,11 @@ class XV_Admin_xvauctions_categories{
 	var $id = "xv-xvauctions-categories";
 
 	public function __construct(&$XVweb){
-		$this->icon = $GLOBALS['URLS']['Site'].'admin/data/xvauctions/icons/categories.png';
+		$this->icon = $GLOBALS['URLS']['Site'].'plugins/xvauctions/admin/xvauctions/icons/categories.png';
 		$this->content = "";
 		
-		$this->content .= '<link rel="stylesheet" href="'.$GLOBALS['URLS']['Site'].'admin/data/xvauctions/styles/categories.css"> ';
-		$this->content .= '<script type="text/javascript" src="'.$GLOBALS['URLS']['Site'].'admin/data/xvauctions/js/categories.js" charset="UTF-8"> </script>';
+		$this->content .= '<link rel="stylesheet" href="'.$GLOBALS['URLS']['Site'].'plugins/xvauctions/admin/xvauctions/styles/categories.css"> ';
+		$this->content .= '<script type="text/javascript" src="'.$GLOBALS['URLS']['Site'].'plugins/xvauctions/admin/xvauctions/js/categories.js" charset="UTF-8"> </script>';
 		
 		
 		$this->content .= '

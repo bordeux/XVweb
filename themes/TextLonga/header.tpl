@@ -14,7 +14,7 @@
 		<meta http-equiv="{$equiv}" content="{$content}" />
 	{/foreach}
 	<meta http-equiv="X-UA-Compatible" content="chrome=1">
-	<link rel="shortcut icon" href="{$Url}favicon.ico" type="image/x-icon" />
+	<link rel="shortcut icon" href="{$URLS.Site}favicon.ico" type="image/x-icon" />
     <link rel="alternate" type="application/rss+xml" title="RSS" href="{$URLS.Script}RSS/{if $ReadArticleIndexOut.URL}?rss={$ReadArticleIndexOut.URL|escape:'url'}{/if}" />
 	{if !"Adv"|xv_perm}{include  file='adv.tpl'}{/if}
 	<style type="text/css" media="all">

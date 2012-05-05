@@ -57,7 +57,7 @@ try {
 } catch (Exception $e) { 
 			$XVwebEngine->ErrorClass($e);
 } 
-		class XV_Admin_error{
+		class xv_admin_error{
 				var $style = "height: 100px; width: 200;";
 				var $title = "Error";
 				var $URL = "Error/";
@@ -93,17 +93,17 @@ if(strtolower($Command) == "get"){
 if (file_exists($admin_page_file)) 
 	require($admin_page_file);
 		else{
-			$XVClassName = "XV_Admin_error";
+			$xv_admin_class_name = "xv_admin_error";
 		}
-	if(!class_exists($XVClassName))
-		$XVClassName = "XV_Admin_error";
+	if(!class_exists($xv_admin_class_name))
+		$xv_admin_class_name = "xv_admin_error";
 	ob_get_clean();
 	header("Pragma: no-cache");
 	header("Cache-Control: no-cache"); 
 	header ("content-type: text/javascript; charset: UTF-8");   
 	header ('Vary: Accept-Encoding');
 	header("XVwebMSG: Sended");
-	exit(json_encode($XVwebEngine->InitClass($XVClassName)));
+	exit(json_encode($XVwebEngine->InitClass($xv_admin_class_name)));
 }else{
 include_once(ADMIN_ROOT_DIR.'data/menu/menu.php');
 

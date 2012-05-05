@@ -16,9 +16,9 @@ Klasa XVweb jest na licencji LGPL v3.0 ( GNU LESSER GENERAL PUBLIC LICENSE)
 ***************************************************************************/
 
 
-class XV_Admin_plugins {
+class xv_admin_plugins {
 		var $style = "height: 600px; width: 90%;";
-		var $contentStyle = "overflow-y:scroll; padding-bottom:10px;";
+		var $contentStyle = "overflow-y:scroll; overflow-x: hidden; padding-bottom:10px;";
 		var $URL = "Plugins/";
 		var $content = "";
 		var $id = "plugins-window";
@@ -178,7 +178,7 @@ class XV_Admin_plugins {
 	
 	}
 
-	class XV_Admin_plugins_set {
+	class xv_admin_plugins_set {
 		public function __construct(&$XVweb){
 		if($XVweb->Session->GetSID() != ifsetor($_GET['xv-sid'], "")){
 			exit(json_encode( array(
@@ -198,7 +198,7 @@ class XV_Admin_plugins {
 				unset($plugins_config->{$_GET['plugin']});
 		
 		}else{
-				$plugin_info = XV_Admin_plugins::get_info_plugin($_GET['plugin']);
+				$plugin_info = xv_admin_plugins::get_info_plugin($_GET['plugin']);
 				if(empty($plugin_info)){
 					$Result = array(
 					"result" => true,
@@ -222,7 +222,7 @@ class XV_Admin_plugins {
 		exit(json_encode($Result));
 		}
 	}	
-	class XV_Admin_plugins_upload {
+	class xv_admin_plugins_upload {
 		public function __construct(&$XVweb){
 			if($XVweb->Session->GetSID() != ifsetor($_GET['xv-sid'], "")){
 				exit("<div class='error'>Error: Wrong SID</div>");
@@ -238,7 +238,7 @@ class XV_Admin_plugins {
 			exit;
 		}
 	}	
-	class XV_Admin_plugins_uurl {
+	class xv_admin_plugins_uurl {
 		public function __construct(&$XVweb){
 			if($XVweb->Session->GetSID() != ifsetor($_GET['xv-sid'], "")){
 				exit("<div class='error'>Error: Wrong SID</div>");
@@ -269,10 +269,10 @@ class XV_Admin_plugins {
 	
 	
 $CommandSecond = strtolower($XVwebEngine->GetFromURL($PathInfo, 4));
-if (class_exists('XV_Admin_plugins_'.$CommandSecond)) {
-	$XVClassName = 'XV_Admin_plugins_'.$CommandSecond;
+if (class_exists('xv_admin_plugins_'.$CommandSecond)) {
+	$xv_admin_class_name = 'xv_admin_plugins_'.$CommandSecond;
 }else
-$XVClassName = "XV_Admin_plugins";
+$xv_admin_class_name = "xv_admin_plugins";
 
 
 ?>

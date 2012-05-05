@@ -18,8 +18,8 @@ if(!isset($XVwebEngine)){
 	header("location: http://".$_SERVER['HTTP_HOST']."/");
 	exit;
 }
-	$XVClassName = "XV_Admin_example";
-	class XV_Admin_example{
+	$xv_admin_class_name = "xv_admin_example";
+	class xv_admin_example{
 		var $style = "height: 400px; width: 40%;";
 		var $title = "testWindow";
 		var $URL = "Test/";

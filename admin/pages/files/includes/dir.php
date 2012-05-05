@@ -44,6 +44,7 @@
 								/*ThemeClass.history("#xv-file-menager", "?dir=<?php echo $_GET['dir']; ?>", "XVweb::Files", { type: "filemenager" , todo: function(){
 										alert("jasne");
 									}});*/
+								
 								$("#xv-file-menager").data("xv-url", 'Files/?dir=<?php echo $_GET['dir']; ?>')
 								$('.xv-icon').single_double_click(function () {
 									  ThemeClass.GetInfo($(this).data('xv-location'));

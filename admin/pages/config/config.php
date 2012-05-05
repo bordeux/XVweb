@@ -174,9 +174,9 @@ if ($result){
 if(!empty($_POST))
 	exit($FormXHTML);
 
-class XV_Admin_config_visual{
+class xv_admin_config_visual{
 	var $style = "height: 500px; width: 90%;";
-	var $contentStyle = "overflow-y:scroll; padding-bottom:10px;";
+	var $contentStyle = "overflow-y:scroll; overflow-x: hidden; padding-bottom:10px;";
 	var $URL = "Config/Visual/";
 	var $content = "";
 	var $id = "config-visual-window";
@@ -193,10 +193,10 @@ class XV_Admin_config_visual{
 }
 
 $CommandSecond = strtolower($XVwebEngine->GetFromURL($PathInfo, 4));
-if (class_exists('XV_Admin_config_'.$CommandSecond)) {
-	$XVClassName = 'XV_Admin_config_'.$CommandSecond;
+if (class_exists('xv_admin_config_'.$CommandSecond)) {
+	$xv_admin_class_name = 'xv_admin_config_'.$CommandSecond;
 }else
-$XVClassName = "XV_Admin_config_visual";
+$xv_admin_class_name = "xv_admin_config_visual";
 
 
 ?>

@@ -19,9 +19,9 @@ if(!isset($XVwebEngine)){
 	exit;
 }
 
-	class XV_Admin_xvauctions_auctions{
+	class xv_admin_xvauctions_auctions{
 		var $style = "width: 90%;";
-		var $contentStyle = "overflow-y:scroll; padding-bottom:10px;";
+		var $contentStyle = "overflow-y:scroll; overflow-x: hidden; padding-bottom:10px;";
 		var $URL = "XVauctions/Auctions/";
 		var $content = "";
 		var $id = "xva-auctions-window";
@@ -121,7 +121,7 @@ if(!isset($XVwebEngine)){
 			if(isset($_GET['search_mode']))
 				exit($this->content);
 			$this->title = xv_lang("xca_auctions");
-			$this->icon = $GLOBALS['URLS']['Site'].'admin/data/xvauctions/icons/auctions.png';
+			$this->icon = $GLOBALS['URLS']['Site'].'plugins/xvauctions/admin/xvauctions/icons/auctions.png';
 			
 		}
 	public function get_auctions(&$XVweb, $actual_page = 0, $records_limit =30, $Search = array()){

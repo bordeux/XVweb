@@ -9,17 +9,20 @@
 	<config>
 	</config>
 	<load>
-		<event name="xvweb.start">
+		<event name="xvweb.smarty.loaded">
 			<script language="PHP">
 			  <![CDATA[
-			global $XVwebEngine;
-				if($XVwebEngine->Session->Session('ip_ban_checked') !== true){
+			  global $XVwebEngine, $Smarty;
+				if($XVwebEngine->Session->Session('xv_check_ban') !== true)
 					include(ROOT_DIR.'/plugins/ip_ban/ip_ban.trigger.php');
-				}
 				]]>
 			</script>
 		</event>
 	</load>
 	<ranks>
+		<rank>
+			<name>ip_ban_add_bans</name>
+			<description>Add bans IP</description>
+		</rank>
 	</ranks>
 </plugin>

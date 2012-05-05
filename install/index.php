@@ -84,6 +84,7 @@ function Step3(){
 	"libxml",
 	"iconv",
 	"date",
+	"mcrypt",
 	);
 
 	$CheckingResult = array();
@@ -224,7 +225,7 @@ $doc->save($XMLConfigFile);
 $Smarty->assign('MySQLResult', $MySQLResult);
 }
 function step8(){
-rename('install/', mt_rand().'install/');
+rename('install/', mt_rand().'install'.uniqid().'/');
 $Catalog = $_SESSION['Config']['Catalog'];
 	session_unset();
 	session_destroy();  

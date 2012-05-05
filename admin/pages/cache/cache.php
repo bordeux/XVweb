@@ -19,7 +19,7 @@ if(!isset($XVwebEngine)){
 	exit;
 }
 
-	class XV_Admin_cache{
+	class xv_admin_cache{
 		var $style = "width: 200px;  left: 40%; top: 100px;";
 		var $contentStyle = "";
 		var $URL = "Cache/";
@@ -78,7 +78,7 @@ if(!isset($XVwebEngine)){
 
 	}
 	
-		class XV_Admin_cache_clear{
+		class xv_admin_cache_clear{
 			public function __construct(&$XVweb){
 			
 			
@@ -86,15 +86,15 @@ if(!isset($XVwebEngine)){
 				$Result['Smarty'] = (bool) !$GLOBALS['Smarty']->clearAllCache();
 				$Result['XVweb'] = $XVweb->Cache->clear();
 				$Result['Plugins'] = @unlink(ROOT_DIR."config/pluginscompiled.xml");;
-				$CacheInfo = XV_Admin_cache::dirSize(Cache_dir);
-				$Result['Size'] = XV_Admin_cache::format_bytes($CacheInfo[0]);
+				$CacheInfo = xv_admin_cache::dirSize(Cache_dir);
+				$Result['Size'] = xv_admin_cache::format_bytes($CacheInfo[0]);
 				$Result['Cached'] = $CacheInfo[1];
 			exit(json_encode($Result));
 			}
 		}
 $CommandSecond = strtolower($XVwebEngine->GetFromURL($PathInfo, 4));
-	if (class_exists('XV_Admin_cache_'.$CommandSecond)) {
-		$XVClassName = 'XV_Admin_cache_'.$CommandSecond;
+	if (class_exists('xv_admin_cache_'.$CommandSecond)) {
+		$xv_admin_class_name = 'xv_admin_cache_'.$CommandSecond;
 	}else
-		$XVClassName = "XV_Admin_cache";
+		$xv_admin_class_name = "xv_admin_cache";
 ?>

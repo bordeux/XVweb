@@ -22,7 +22,7 @@ if(!isset($XVwebEngine)){
 
 
 
-class XV_Admin_xvauctions_editfields{
+class xv_admin_xvauctions_editfields{
 	var $style = "min-height: 400px; width: 100%;";
 	var $title = "Auctions - Edit fields";
 	var $URL = "";
@@ -33,7 +33,7 @@ class XV_Admin_xvauctions_editfields{
 		$CatUNIQ = substr(md5($_GET['cat']), 28);
 		$this->id = "xv-xvauctions-editfields-".$CatUNIQ;
 		$this->URL = "XVauctions/EditFields/?cat=".urlencode($_GET['cat']);
-		$this->icon = $GLOBALS['URLS']['Site'].'admin/data/xvauctions/icons/main.png';
+		$this->icon = $GLOBALS['URLS']['Site'].'plugins/xvauctions/admin/xvauctions/icons/main.png';
 		include_once(ROOT_DIR.'plugins/xvauctions/fields/fields.php');
 		foreach (glob(ROOT_DIR.'plugins/xvauctions/fields/*.fields.php') as $filename) {
 			include_once($filename);

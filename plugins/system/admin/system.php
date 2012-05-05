@@ -22,7 +22,7 @@ if(!isset($XVwebEngine)){
 }
 
 
-class XV_Admin_xvauctions{
+class xv_admin_xvauctions{
 	var $style = "width: 80%;";
 	var $title = "System";
 	var $URL = "System/";
@@ -58,13 +58,13 @@ class XV_Admin_xvauctions{
 $CommandSecond = strtolower($XVwebEngine->GetFromURL($PathInfo, 4));
 if (file_exists(dirname(__FILE__).'/pages/'.$CommandSecond.'.php')) {
 	include_once(dirname(__FILE__).'/pages/'.$CommandSecond.'.php');
-	if (class_exists('XV_Admin_system_'.$CommandSecond)) {
-		$XVClassName = 'XV_Admin_system_'.$CommandSecond;
+	if (class_exists('xv_admin_system_'.$CommandSecond)) {
+		$xv_admin_class_name = 'xv_admin_system_'.$CommandSecond;
 	}else{
-	$XVClassName = "XV_Admin_system";
+	$xv_admin_class_name = "xv_admin_system";
 	}
 }else{
-$XVClassName = "XV_Admin_system";
+$xv_admin_class_name = "xv_admin_system";
 }
 
 ?>

@@ -19,9 +19,9 @@ if(!isset($XVwebEngine)){
 	exit;
 }
 
-	class XV_Admin_lang{
+	class xv_admin_lang{
 		var $style = "height: 500px; width: 80%;";
-		var $contentStyle = "overflow-y:scroll; padding-bottom:10px;";
+		var $contentStyle = "overflow-y:scroll; overflow-x: hidden; padding-bottom:10px;";
 		var $URL = "Lang/";
 		var $content = "";
 		var $id = "lang-window";
@@ -81,7 +81,7 @@ if(!isset($XVwebEngine)){
 		}
 	}
 	
-		class XV_Admin_lang_load{
+		class xv_admin_lang_load{
 		var $Date;
 		public function __construct(&$XVweb){
 		
@@ -144,9 +144,9 @@ if(!isset($XVwebEngine)){
 	
 	
 	$CommandSecond = strtolower($XVwebEngine->GetFromURL($PathInfo, 4));
-	if (class_exists('XV_Admin_lang_'.$CommandSecond)) {
-		$XVClassName = 'XV_Admin_lang_'.$CommandSecond;
+	if (class_exists('xv_admin_lang_'.$CommandSecond)) {
+		$xv_admin_class_name = 'xv_admin_lang_'.$CommandSecond;
 	}else
-		$XVClassName = "XV_Admin_lang";
+		$xv_admin_class_name = "xv_admin_lang";
 
 ?>

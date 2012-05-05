@@ -21,14 +21,13 @@ class xvDB extends PDO
 	}
 	public function replace_keys($matched){
 		$matched = explode(":", $matched[1]);
-
-		if(!isset($matched[1])){
-			if(isset($this->db_config->db_tables[$matched[0]])){
-				return '`'.$this->dbPrefix.$this->db_config->db_tables[$matched[0]]['name'].'`';
-			}else{
-				return "|NO EXSIST TABLE ".$matched[0]."|";
-			}
+		if(!is_array($this->db_config->db_tables[$matched[0]])){
+			return "|NO EXSIST TABLE ".$matched[0]."|";
 		}
+		if(!isset($matched[1])){
+				return '`'.$this->dbPrefix.$this->db_config->db_tables[$matched[0]]['name'].'`';
+		}
+		
 		$prepend = (ifsetor($matched[2], "") == "prepend" ?  $matched[3] : '');
 
 		if($matched[1] == "*"){
@@ -38,7 +37,6 @@ class xvDB extends PDO
 				$to_remove = array_flip(explode("|", $matched[3]));
 				$prepend = (ifsetor($matched[4], "") == "prepend" ?  $matched[5] : '');
 			}
-
 			foreach($this->db_config->db_tables[$matched[0]]['fields'] as $tb_name=>$tb_field){
 				$Result[] =  $prepend.'`'.$tb_field.'` AS `'.$tb_name.'`';
 			}

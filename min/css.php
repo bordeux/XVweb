@@ -14,6 +14,7 @@ Klasa XVweb jest na licencji LGPL v3.0 ( GNU LESSER GENERAL PUBLIC LICENSE)
 		Pełna dokumentacja znajduje się na stronie domowej projektu: 
 *********************http://www.bordeux.NET/Xvweb***************************
 ***************************************************************************/
+error_reporting(0);
 ob_clean(); // czyszczenie wyjscia
 chdir(dirname(__FILE__).DIRECTORY_SEPARATOR.'..'); 
 	if (isset($_GET['file']) && file_exists($_GET['file']) && pathinfo($_GET['file'], PATHINFO_EXTENSION) == "css") { //sprawdzanie czy plik istnieje, i czy ma rozrzeszenie css
@@ -57,7 +58,7 @@ chdir(dirname(__FILE__).DIRECTORY_SEPARATOR.'..');
 			file_put_contents($TMPDir.$IDFile.'.css',$CSSCompres); //zapisanie do cache
 		}
 
-		if (substr_count ($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip')) { //sprawdzanie czy klient obsługuje gzip
+		if (isset($_SERVER['HTTP_ACCEPT_ENCODING']) && substr_count ($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip')) { //sprawdzanie czy klient obsługuje gzip
 			$filegz = $TMPDir.$IDFile.'.css.gz'; // lokalizacja pliku w gzip w cache
 			if(!file_exists($TMPDir.$IDFile.'.css.gz')){ // sprawdzanie czy istnieje
 				$BindFile = file_get_contents($TMPDir.$IDFile.'.css'); //jesli nie istnieje, otworz przekonwertowany juz plik css (powyzej juz zostalo to robione)

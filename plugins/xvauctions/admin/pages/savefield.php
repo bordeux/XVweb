@@ -19,7 +19,7 @@ if(!isset($XVwebEngine)){
 	exit;
 }
 
-class XV_Admin_xvauctions_savefield{ 
+class xv_admin_xvauctions_savefield{ 
 	public function __construct(&$XVweb){
 		if($XVweb->Session->GetSID() != $_POST['xv-sid']){
 			exit("<div class='failed'>Error: Bad SID!</div>");

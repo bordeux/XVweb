@@ -22,7 +22,7 @@ if(!isset($XVwebEngine)){
 	exit;
 }
 
-	class XV_Admin_files{
+	class xv_admin_files{
 		var $style = "height: 400px; width: 100%;";
 		var $title = "Files Menager";
 		var $URL = "Files/";
@@ -34,12 +34,12 @@ if(!isset($XVwebEngine)){
 			$this->content = get_include_contents(dirname(__FILE__).'/includes/load_module.php');
 		}
 	}
-	class XV_Admin_files_dir{
+	class xv_admin_files_dir{
 		public function __construct(&$XVweb){
 			include(dirname(__FILE__).'/includes/dir.php');
 	}
 	}
-		class XV_Admin_files_upload{
+		class xv_admin_files_upload{
 			public function __construct(&$XVweb){
 
 			$XVweb->fixFilesArray($_FILES['filemenager']);
@@ -63,7 +63,7 @@ if(!isset($XVwebEngine)){
 		
 		}
 	
-	class XV_Admin_files_rename{
+	class xv_admin_files_rename{
 		var $style = "max-height: 200px; width: 250px";
 		public function __construct(&$XVweb){
 			$this->URL = "Files/Rename/?file=".urlencode($_GET['file']);
@@ -74,9 +74,9 @@ if(!isset($XVwebEngine)){
 			
 			if(isset( $_POST['xv-sid']) && $XVweb->Session->GetSID() == $_POST['xv-sid']){
 				if(@rename ($_POST['xv-file'], $_POST['xv-new-name'])){
-					echo("<div class='success'>Zmieniono nazwę</div>");
+					echo("<div class='success'>File name changed</div>");
 				}else{
-					echo("<div class='failed'>Błąd podczas zmiany nazwy. Sprawdź poprawność nowej nazwy.</div>");
+					echo("<div class='failed'>Error: Wrong new file name</div>");
 				}
 				exit("
 					<script type='text/javascript'>
@@ -99,7 +99,7 @@ if(!isset($XVwebEngine)){
 			';
 		}
 	}
-	class XV_Admin_files_newdir{
+	class xv_admin_files_newdir{
 		var $style = "max-height: 200px; width: 250px";
 		public function __construct(&$XVweb){
 			$this->URL = "Files/NewDir/?file=".urlencode($_GET['file']);
@@ -109,9 +109,9 @@ if(!isset($XVwebEngine)){
 			$this->style = "left: 40%; top: 100px; ";
 			if(isset( $_POST['xv-sid']) && $XVweb->Session->GetSID() == $_POST['xv-sid']){
 				if(@mkdir(dirname($_POST['xv-file']).'/'.$_POST['xv-dir-name'])){
-					echo("<div class='success'>Stworzono folder</div>");
+					echo("<div class='success'>Created dir</div>");
 				}else{
-					echo("<div class='failed'>Błąd podczas tworzenia folderu</div>");
+					echo("<div class='failed'>Error: I cant create new folder</div>");
 				}
 				exit("
 					<script type='text/javascript'>
@@ -126,8 +126,8 @@ if(!isset($XVwebEngine)){
 					<input type="text" name="xv-dir-name" value="FolderName" /></div>
 					<table style="border:none; width:200px; margin:auto;">
 						<tr>
-							<td><input type="submit" value="Dodaj folder" /></td>
-							<td><input type="button" value="Anuluj" class="xv-window-close" /></td>
+							<td><input type="submit" value="Add dir" /></td>
+							<td><input type="button" value="Cancel" class="xv-window-close" /></td>
 						</tr>
 					</table>
 				</form>
@@ -136,7 +136,7 @@ if(!isset($XVwebEngine)){
 	}
 	
 	
-	class XV_Admin_files_chmod{
+	class xv_admin_files_chmod{
 		var $style = "max-height: 200px; width: 250px";
 		public function __construct(&$XVweb){
 			$this->URL = "Files/Chmod/?file=".urlencode($_GET['file']);
@@ -146,9 +146,9 @@ if(!isset($XVwebEngine)){
 			$this->style = "left: 40%; top: 100px; ";
 			if(isset( $_POST['xv-sid']) && $XVweb->Session->GetSID() == $_POST['xv-sid']){
 				if(@chmod($_POST['xv-file'], $_POST['xv-chmod'])){
-					echo("<div class='success'>Zmieniono Chmod</div>");
+					echo("<div class='success'>CHMOD changed</div>");
 				}else{
-					echo("<div class='failed'>Błąd podczas zmiany chmod</div>");
+					echo("<div class='failed'>Error: I cant change chmod</div>");
 				}
 				exit("
 					<script type='text/javascript'>
@@ -163,8 +163,8 @@ if(!isset($XVwebEngine)){
 					<input type="text" name="xv-chmod" value="'.@fileperms($_GET['file']).'" /></div>
 					<table style="border:none; width:200px; margin:auto;">
 						<tr>
-							<td><input type="submit" value="Zmień chmod" /></td>
-							<td><input type="button" value="Anuluj" class="xv-window-close" /></td>
+							<td><input type="submit" value="Change CHMOD" /></td>
+							<td><input type="button" value="Cancel" class="xv-window-close" /></td>
 						</tr>
 					</table>
 				</form>
@@ -174,7 +174,7 @@ if(!isset($XVwebEngine)){
 	
 	
 	// Delete Files //
-	class XV_Admin_files_delete{
+	class xv_admin_files_delete{
 		var $style = "max-height: 200px; width: 250px; left: 40%; top: 100px;";
 		public function __construct(&$XVweb){
 			$this->URL = "Files/Delete/?file=".urlencode($_GET['file']);
@@ -189,8 +189,8 @@ if(!isset($XVwebEngine)){
 					<div style="text-align:center;">Do you want delete <span style="color: #BA0000;">'.basename($_GET['file']).'</span> ?</div>
 					<table style="border:none; width:200px; margin:auto;">
 						<tr>
-							<td><input type="submit" value="Tak" /></td>
-							<td><input type="button" value="Nie" class="xv-window-close" /></td>
+							<td><input type="submit" value="Yes" /></td>
+							<td><input type="button" value="No" class="xv-window-close" /></td>
 						</tr>
 					</table>
 				</form>
@@ -198,7 +198,7 @@ if(!isset($XVwebEngine)){
 		}
 	}
 
-	class XV_Admin_files_paste{
+	class xv_admin_files_paste{
 		var $style = "max-height: 200px; width: 250px; left: 40%; top: 100px;"; 
 		public function __construct(&$XVweb){
 			$this->URL = "Files/Paste/?file=".urlencode($_GET['file']).'&destination='.urlencode($_GET['destination']).'&operation='.urlencode($_GET['operation']);
@@ -215,8 +215,8 @@ if(!isset($XVwebEngine)){
 					<div style="text-align:center;">Do you want '.htmlspecialchars($_GET['operation']).' <span style="font-weight:bold;">'.basename($_GET['file']).'</span>  to <span style="font-weight:bold;">'.htmlspecialchars($_GET['destination']).'</span> dir ?</div>
 					<table style="border:none; width:200px; margin:auto;">
 						<tr>
-							<td><input type="submit" value="Tak" /></td>
-							<td><input type="button" value="Nie" class="xv-window-close" /></td>
+							<td><input type="submit" value="Yes" /></td>
+							<td><input type="button" value="No" class="xv-window-close" /></td>
 						</tr>
 					</table>
 				</form>
@@ -225,7 +225,7 @@ if(!isset($XVwebEngine)){
 	}
 	
 	
-	class XV_Admin_files_confirmpaste{
+	class xv_admin_files_confirmpaste{
 		public function __construct(&$XVweb){
 		
 		$FileLoc = $GLOBALS['RootDir'].$_POST['xv-file'];
@@ -236,17 +236,17 @@ if(!isset($XVwebEngine)){
 			if($XVweb->Session->GetSID() == $_POST['xv-sid']){
 				if(file_exists($FileLoc) && file_exists($FileDest)){
 					if(isset($_POST['xv-operation']) && (($_POST['xv-operation'] == "copy" && $this->smartCopy(($FileLoc), ($FileDest.'/'))) OR ($_POST['xv-operation'] == "cut" && rename(($FileLoc), ($FileDest.'/').basename($FileLoc)))))
-					echo "<div class='success'>Plik/Folder przeniesiono/skopiowano.</div>
+					echo "<div class='success'>File/dir moved/copied.</div>
 					<script type='text/javascript'>
 						ThemeClass.LoadDir($('#xv-file-menager').data('xv-current-dir'));
 					</script>
 					"; else
-					echo "<div class='failed'>Błąd : Nie można przenieść / skopiować pliku/folderu.</div>";
+					echo "<div class='failed'>Error : I cant move this dir/file</div>";
 				}else{
-					echo "<div class='failed'>Błąd: Nie istnieje plik lub miejsce docelowe</div>";
+					echo "<div class='failed'>Error: This file not exist or new destination not exsist</div>";
 				}
 			}else{
-				echo "<div class='failed'>Błąd : Zły SID</div>";
+				echo "<div class='failed'>Error: Wrong SID</div>";
 			}
 
 			exit;
@@ -334,7 +334,7 @@ if(!isset($XVwebEngine)){
     } 
 	
 	}
-	class XV_Admin_files_confirmdelete{
+	class xv_admin_files_confirmdelete{
 		public function __construct(&$XVweb){
 		
 		$FileLoc = $GLOBALS['RootDir'].$_POST['xv-file'];
@@ -354,24 +354,24 @@ if(!isset($XVwebEngine)){
 			if($XVweb->Session->GetSID() == $_POST['xv-sid']){
 				if(file_exists($FileLoc)){
 					if(( is_file($FileLoc) && @unlink($FileLoc)) or (is_dir($FileLoc) && SureRemoveDir($FileLoc, true)))
-					echo "<div class='success'>Plik/Folder usunięto</div>
+					echo "<div class='success'>File/Dir deleted</div>
 					<script type='text/javascript'>
 						ThemeClass.LoadDir($('#xv-file-menager').data('xv-current-dir'));
 					</script>
 					"; else
-					echo "<div class='failed'>Błąd : Nie można usunąć pliku</div>";
+					echo "<div class='failed'>Error : I cant delete this file</div>";
 				}else{
-					echo "<div class='failed'>Błąd: Element nie jest plikiem/folderem</div>";
+					echo "<div class='failed'>Error: This element is not file or dir</div>";
 				}
 			}else{
-				echo "<div class='failed'>Błąd : Zły SID</div>";
+				echo "<div class='failed'>Error: Wrong SID</div>";
 			}
 
 			exit;
 		}
 	}
 	// Delete Files //
-	class XV_Admin_files_info{
+	class xv_admin_files_info{
 		public function __construct(&$XVweb){
 		$FileDir = $GLOBALS['RootDir'].$_POST['filedir'];
 		$TableInfo = array();
@@ -511,7 +511,7 @@ $info .= (($perms & 0x0001) ?
 		} 
 			
 		}
-	class XV_Admin_files_download{
+	class xv_admin_files_download{
 		var $style = "max-height: 200px; width: 250px";
 		public function __construct(&$XVweb){
 		$FileLoc = $GLOBALS['RootDir'].$_GET['file'];
@@ -580,7 +580,7 @@ $info .= (($perms & 0x0001) ?
 			return Cache_dir . basename($dir).'.zip';
 		}
 	}
-	class XV_Admin_files_view{
+	class xv_admin_files_view{
 		var $style = " width: 95%";
 		public function __construct(&$XVweb){
 			$this->URL = "Files/View/?file=".urlencode($_GET['file']);
@@ -589,10 +589,10 @@ $info .= (($perms & 0x0001) ?
 			$this->icon = $GLOBALS['URLS']['Site'].'admin/data/icons/trash.png';
 		if(isset( $_POST['xv-sid']) && $XVweb->Session->GetSID() == $_POST['xv-sid']){
 				if(file_put_contents($_POST['xv-file'], $_POST['xv-content'])){
-					echo "<div class='success'>Zapisano plik pomyślnie</div>";
+					echo "<div class='success'>File was saved</div>";
 				
 				}else{
-					echo "<div class='failed'>Błąd : Nie można zapisać pliku</div>";
+					echo "<div class='failed'>Error : I cant save this file</div>";
 				}
 				exit("
 					<script type='text/javascript'>
@@ -638,10 +638,10 @@ $info .= (($perms & 0x0001) ?
 	
 	
 	$CommandSecond = strtolower($XVwebEngine->GetFromURL($PathInfo, 4));
-	if (class_exists('XV_Admin_files_'.$CommandSecond)) {
-		$XVClassName = 'XV_Admin_files_'.$CommandSecond;
+	if (class_exists('xv_admin_files_'.$CommandSecond)) {
+		$xv_admin_class_name = 'xv_admin_files_'.$CommandSecond;
 	}else
-		$XVClassName = "XV_Admin_files";
+		$xv_admin_class_name = "xv_admin_files";
 		
 
 ?>

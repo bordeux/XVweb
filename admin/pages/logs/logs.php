@@ -18,10 +18,10 @@ if(!isset($XVwebEngine)){
 	header("location: http://".$_SERVER['HTTP_HOST']."/");
 	exit;
 }
-	$XVClassName = "XV_Admin_logs";
-	class XV_Admin_logs{
+	$xv_admin_class_name = "xv_admin_logs";
+	class xv_admin_logs{
 		var $style = "height: 500px; width: 90%;";
-		var $contentStyle = "overflow-y:scroll; padding-bottom:10px;";
+		var $contentStyle = "overflow-y:scroll; overflow-x: hidden; padding-bottom:10px;";
 		var $URL = "Logs/";
 		var $content = "test";
 		var $id = "logs-window";

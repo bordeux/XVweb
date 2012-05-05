@@ -225,9 +225,11 @@ $(function () {
 
 	
 		ThemeClass.RefreshWindows = function () {
-			$(".app-window").resizable("destroy").resizable({
-					ghost : true
+			$(".app-window .content").each(function(){
+				$(this).resizable("destroy").resizable({
+					alsoResize : $(this).parents(".app-window")
 				});
+			});
 			ThemeClass.RefreshDock();
 		};
 		ThemeClass.RefreshDock = function () {

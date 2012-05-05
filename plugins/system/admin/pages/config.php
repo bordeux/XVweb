@@ -19,9 +19,9 @@ if(!isset($XVwebEngine)){
 	exit;
 }
 
-class XV_Admin_system_config {
+class xv_admin_system_config {
 	var $style = "width: 80%;";
-	var $contentStyle = "overflow-y:scroll; padding-bottom:10px;";
+	var $contentStyle = "overflow-y:scroll; overflow-x: hidden; padding-bottom:10px;";
 	var $URL = "";
 	var $content = "";
 	var $id = "";

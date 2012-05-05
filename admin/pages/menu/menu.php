@@ -18,7 +18,7 @@ if(!isset($XVwebEngine)){
 	header("location: http://".$_SERVER['HTTP_HOST']."/");
 	exit;
 }
-	class XV_Admin_menu_save{
+	class xv_admin_menu_save{
 		var $Date;
 		public function __construct(&$XVweb){
 		if(isset($_POST['XMLMenu'])){
@@ -54,9 +54,9 @@ if(!isset($XVwebEngine)){
 		}
 	}
 	
-	class XV_Admin_menu_visual{
+	class xv_admin_menu_visual{
 		var $style = "height: 500px; width: 90%;";
-		var $contentStyle = "overflow-y:scroll; padding-bottom:10px;";
+		var $contentStyle = "overflow-y:scroll; overflow-x: hidden; padding-bottom:10px;";
 		var $URL = "Menu/Visual/";
 		var $content = "";
 		var $id = "menu-visual-window";
@@ -79,9 +79,9 @@ if(!isset($XVwebEngine)){
 			';
 		}
 	}
-	class XV_Admin_menu_text{
+	class xv_admin_menu_text{
 		var $style = "height: 500px; width: 90%;";
-		var $contentStyle = "overflow-y:scroll; padding-bottom:10px;";
+		var $contentStyle = "overflow-y:scroll; overflow-x: hidden; padding-bottom:10px;";
 		var $URL = "Menu/Text/";
 		var $content = "";
 		var $id = "menu-text-window";
@@ -126,9 +126,9 @@ if(!isset($XVwebEngine)){
 	
 	
 	$CommandSecond = strtolower($XVwebEngine->GetFromURL($PathInfo, 4));
-	if (class_exists('XV_Admin_menu_'.$CommandSecond)) {
-		$XVClassName = 'XV_Admin_menu_'.$CommandSecond;
+	if (class_exists('xv_admin_menu_'.$CommandSecond)) {
+		$xv_admin_class_name = 'xv_admin_menu_'.$CommandSecond;
 	}else
-		$XVClassName = "XV_Admin_menu_text";
+		$xv_admin_class_name = "xv_admin_menu_text";
 
 ?>

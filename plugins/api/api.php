@@ -66,7 +66,7 @@ if($class_mode == "soap"){
 	exit;
 }elseif($class_mode == "wsdl"){
 	include_once($class_file);
-	include_once($XVwebDir.'libraries/apis_servers/WSDL_Gen.php');
+	include_once(dirname(__FILE__).'/apis_servers/WSDL_Gen.php');
 	$wsdlgen = new WSDL_Gen("xv_api_".$class_name, $soap_url.$class_name.'/soap/', "xv_api_".$class_name);
 		
 	header("Content-Type: text/xml");
@@ -132,7 +132,7 @@ if($class_mode == "soap"){
 		} 
 		echo assocArrayToXML("result", $result);
 	}elseif($class_mode == "yaml"){
-		include_once($XVwebDir.'libraries/apis_servers/spyc.php');
+		include_once(dirname(__FILE__).'/apis_servers/spyc.php');
 		echo Spyc::YAMLDump($result);
 	}
 	$XVwebEngine->Session->Session($class_api_real_name, (array) $class_api);
@@ -141,7 +141,7 @@ if($class_mode == "soap"){
 	
 
 include_once($class_file);
-include_once($XVwebDir.'libraries/apis_servers/WSDL_Gen.php');
+include_once(dirname(__FILE__).'/apis_servers/WSDL_Gen.php');
 $wsdlgen = new WSDL_Gen("xv_api_".$class_name, $soap_url.$class_name.'/soap/', "xv_api_".$class_name);
 	
 echo "<table>";

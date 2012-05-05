@@ -1,4 +1,0 @@
-<FilesMatch "^(.*)\.(xml|xmlx)$">
-    Order allow,deny
-    Deny from all
-</FilesMatch>

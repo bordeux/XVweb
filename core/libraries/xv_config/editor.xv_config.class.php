@@ -174,7 +174,6 @@ class xv_config_editor {
 		$item_theme->set_content($this->control_select(array($key), ($val ? "true" : "false"), array("true", "false")));
 
 		return $item_theme;
-	
 	}	
 	public function element_textarea($val,$key, $data){
 		$item_theme = new xv_config_editor_theme;
@@ -188,6 +187,17 @@ class xv_config_editor {
 		return $item_theme;
 	
 	}
+	public function element_select($val,$key, $data){
+		$item_theme = new xv_config_editor_theme;
+		if(isset($this->valid_errors[$key]))
+			$item_theme->set_error($this->valid_errors[$key]);
+			
+		$item_theme->set_caption($data['caption']);
+		$item_theme->set_desc($data['desc']);
+		$item_theme->set_content($this->control_select(array($key), ($val), $data['options']));
+
+		return $item_theme;
+	}	
 	/***************** /ELEMENTS ****************************/
 	/***************** /SAVE ****************************/
 	public function save_text($key, $val){
@@ -202,6 +212,11 @@ class xv_config_editor {
 		$val_field = $_POST[$this->field_name][$key];
 
 		$this->config->{$key} =  ($val_field == "true" ? true : false);
+		return true;
+	}	
+	public function save_select($key, $val){
+		$val_field = $_POST[$this->field_name][$key];
+		$this->config->{$key} =  $val_field;
 		return true;
 	}
 	/*****************  SAVE ****************************/

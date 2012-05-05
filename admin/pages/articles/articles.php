@@ -18,9 +18,9 @@ if(!isset($XVwebEngine)){
 	header("location: http://".$_SERVER['HTTP_HOST']."/");
 	exit;
 }
-class XV_Admin_articles{
+class xv_admin_articles{
 	var $style = "height: 500px; width: 90%;";
-	var $contentStyle = "overflow-y:scroll; padding-bottom:10px;";
+	var $contentStyle = "overflow-y:scroll; overflow-x: hidden; padding-bottom:10px;";
 	var $URL = "Articles/";
 	var $content = "test";
 	var $id = "articles-window";
@@ -100,9 +100,9 @@ class XV_Admin_articles{
 }
 
 
-class XV_Admin_articles_comments{
+class xv_admin_articles_comments{
 	var $style = "height: 500px; width: 90%;";
-	var $contentStyle = "overflow-y:scroll; padding-bottom:10px;";
+	var $contentStyle = "overflow-y:scroll; overflow-x: hidden; padding-bottom:10px;";
 	var $URL = "Articles/Comments/";
 	var $content = "";
 	var $id = "comments-window";
@@ -205,9 +205,9 @@ LIMIT
 	}
 }
 
-class XV_Admin_articles_ia{
+class xv_admin_articles_ia{
 	var $style = "height: 500px; width: 60%;";
-	var $contentStyle = "overflow-y:scroll; padding-bottom:10px;";
+	var $contentStyle = "overflow-y:scroll; overflow-x: hidden; padding-bottom:10px;";
 	var $URL = "";
 	var $content = "";
 	var $id = "";
@@ -290,7 +290,7 @@ class XV_Admin_articles_ia{
 				
 				}
 				
-		$form_html = $form->display($Language['Save'], "ia_submit", false);
+		$form_html = $form->display($Language['Save'].' (ToDo)', "ia_submit", false);
 		
 		$result=($form->getData());
 		$Content .= $form_html;
@@ -357,9 +357,9 @@ class XV_Admin_articles_ia{
 	}
 	
 }	
-class XV_Admin_articles_a {
+class xv_admin_articles_a {
 	var $style = "height: 500px; width: 80%;";
-	var $contentStyle = "overflow-y:scroll; padding-bottom:10px;";
+	var $contentStyle = "overflow-y:scroll; overflow-x: hidden;  padding-bottom:10px;";
 	var $URL = "";
 	var $content = "";
 	var $id = "";
@@ -438,7 +438,7 @@ class XV_Admin_articles_a {
 		}
 		
 		$form->addField("hidden", "a_submit", $Language['Save'], false);
-		$Content .= $form->display($Language['Save'], "a_submit", false);  
+		$Content .= $form->display($Language['Save'].' (ToDo)', "a_submit", false);  
 		$result=($form->getData());
 		if($result){
 			exit("zapisano");
@@ -455,7 +455,7 @@ class XV_Admin_articles_a {
 	}
 	
 }
-class XV_Admin_articles_dc {
+class xv_admin_articles_dc {
 	var $style = "max-height: 200px; width: 250px; left: 40%; top: 100px;";
 	public function __construct(&$XVweb){
 		$this->URL = "Articles/DC/?id=".urlencode($_GET['id']);
@@ -500,10 +500,10 @@ class XV_Admin_articles_dc {
 }
 
 $CommandSecond = strtolower($XVwebEngine->GetFromURL($PathInfo, 4));
-if (class_exists('XV_Admin_articles_'.$CommandSecond)) {
-	$XVClassName = 'XV_Admin_articles_'.$CommandSecond;
+if (class_exists('xv_admin_articles_'.$CommandSecond)) {
+	$xv_admin_class_name = 'xv_admin_articles_'.$CommandSecond;
 }else
-$XVClassName = "XV_Admin_articles";
+$xv_admin_class_name = "xv_admin_articles";
 
 
 ?>

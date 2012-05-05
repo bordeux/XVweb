@@ -20,9 +20,9 @@ if(!isset($XVwebEngine)){
 }
 include_once(ROOT_DIR.'config'.DIRECTORY_SEPARATOR.'files.config.php');
 
-	class XV_Admin_file{
+	class xv_admin_file{
 		var $style = "height: 500px; width: 90%;";
-		var $contentStyle = "overflow-y:scroll; padding-bottom:10px;";
+		var $contentStyle = "overflow-y:scroll; overflow-x: hidden; padding-bottom:10px;";
 		var $URL = "File/";
 		var $content = "test";
 		var $id = "file-window";
@@ -185,7 +185,7 @@ include_once(ROOT_DIR.'config'.DIRECTORY_SEPARATOR.'files.config.php');
 			return sprintf($retstring, $size, $sizestring);
 		}
 	}
-		class XV_Admin_file_changeserver{
+		class xv_admin_file_changeserver{
 			public function __construct(&$XVweb){
 			$Result = array();
 			if(!is_array($_POST['xv-file-server']))
@@ -247,7 +247,7 @@ include_once(ROOT_DIR.'config'.DIRECTORY_SEPARATOR.'files.config.php');
 			}
 		}
 	// Delete Files //
-	class XV_Admin_file_delete{
+	class xv_admin_file_delete{
 		var $style = "max-height: 200px; width: 250px; left: 40%; top: 100px;";
 		public function __construct(&$XVweb){
 			$this->URL = "File/Delete/?file=".urlencode($_GET['file']).'&name='.urlencode($_GET['name']);
@@ -272,7 +272,7 @@ include_once(ROOT_DIR.'config'.DIRECTORY_SEPARATOR.'files.config.php');
 	}	
 	
 	// Delete Files //
-	class XV_Admin_file_confirmdelete{
+	class xv_admin_file_confirmdelete{
 		public function __construct(&$XVweb){
 
 			if($XVweb->Session->GetSID() == $_POST['xv-sid']){
@@ -293,10 +293,10 @@ include_once(ROOT_DIR.'config'.DIRECTORY_SEPARATOR.'files.config.php');
 	
 
 	$CommandSecond = strtolower($XVwebEngine->GetFromURL($PathInfo, 4));
-	if (class_exists('XV_Admin_file_'.$CommandSecond)) {
-		$XVClassName = 'XV_Admin_file_'.$CommandSecond;
+	if (class_exists('xv_admin_file_'.$CommandSecond)) {
+		$xv_admin_class_name = 'xv_admin_file_'.$CommandSecond;
 	}else
-		$XVClassName = "XV_Admin_file";
+		$xv_admin_class_name = "xv_admin_file";
 		
 
 ?>

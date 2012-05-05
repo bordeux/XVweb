@@ -50,6 +50,19 @@
 				<?php
 					}
 				?>
+				<?php
+				$total_space =  disk_total_space("/");
+				$free_space = disk_free_space("/");
+				$used_space = $total_space- $free_space;
+				$used_space_percent = round(($used_space/$total_space)*100);
+				?>
+				<tr>
+					<td>Disk usage</td>
+					<td>
+					<div style="background: #94FC88;">
+						<div style="width: <?php echo $used_space_percent; ?>%; text-align:center; height: 13px; background: #E84141;"><?php echo ($used_space_percent > 5) ? $used_space_percent .'%': ''; ?></div>
+					</div></td>
+				</tr>
 			</table>
 		</div>
 	</div>

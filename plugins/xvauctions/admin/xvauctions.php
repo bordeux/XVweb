@@ -55,14 +55,14 @@ function string_to_url($string){
 }
 
 
-class XV_Admin_xvauctions{
+class xv_admin_xvauctions{
 	var $style = "width: 80%;";
 	var $title = "Auctions menager";
 	var $URL = "XVauctions/";
 	var $content = "";
 	var $id = "xv-xvauctions-main";
 	public function __construct(&$XVweb){
-		$this->icon = $GLOBALS['URLS']['Site'].'admin/data/xvauctions/icons/main.png';
+		$this->icon = $GLOBALS['URLS']['Site'].'plugins/xvauctions/admin/xvauctions/icons/main.png';
 		$xva_admin_menu = array();
 		foreach (glob(dirname(__FILE__).'/menu/*.xva_menu.php') as $filename) 
 			include($filename);
@@ -91,13 +91,13 @@ class XV_Admin_xvauctions{
 $CommandSecond = strtolower($XVwebEngine->GetFromURL($PathInfo, 4));
 if (file_exists(dirname(__FILE__).'/pages/'.$CommandSecond.'.php')) {
 	include_once(dirname(__FILE__).'/pages/'.$CommandSecond.'.php');
-	if (class_exists('XV_Admin_xvauctions_'.$CommandSecond)) {
-		$XVClassName = 'XV_Admin_xvauctions_'.$CommandSecond;
+	if (class_exists('xv_admin_xvauctions_'.$CommandSecond)) {
+		$xv_admin_class_name = 'xv_admin_xvauctions_'.$CommandSecond;
 	}else{
-	$XVClassName = "XV_Admin_xvauctions";
+	$xv_admin_class_name = "xv_admin_xvauctions";
 	}
 }else{
-$XVClassName = "XV_Admin_xvauctions";
+$xv_admin_class_name = "xv_admin_xvauctions";
 }
 
 ?>

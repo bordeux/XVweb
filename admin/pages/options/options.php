@@ -18,9 +18,9 @@ if(!isset($XVwebEngine)){
 	header("location: http://".$_SERVER['HTTP_HOST']."/");
 	exit;
 }
-	class XV_Admin_options_background{
+	class xv_admin_options_background{
 		var $style = "height: 500px; width: 80%;";
-		var $contentStyle = "overflow-y:scroll; padding-bottom:10px;";
+		var $contentStyle = "overflow-y:scroll; overflow-x: hidden;  padding-bottom:10px;";
 		var $URL = "Options/Background/";
 		var $content = "";
 		var $id = "background-window";
@@ -53,7 +53,7 @@ if(!isset($XVwebEngine)){
 		}
 	}
 	
-	class XV_Admin_options_setconfig{
+	class xv_admin_options_setconfig{
 		public function __construct(&$XVweb){
 			if((isset( $_POST['xv-sid']) && $XVweb->Session->GetSID() == $_POST['xv-sid']) || (isset( $_GET['xv-sid']) && $XVweb->Session->GetSID() == $_GET['xv-sid'])){
 				$this->result = $XVweb->user_config( $XVweb->Session->Session('Logged_User'), (isset($_POST) ? $_POST : null));
@@ -65,7 +65,7 @@ if(!isset($XVwebEngine)){
 		}
 	}
 	
-	class XV_Admin_options_background_view{
+	class xv_admin_options_background_view{
 		var $Date;
 		public function __construct(&$XVweb){
 			
@@ -86,9 +86,9 @@ if(!isset($XVwebEngine)){
 		}
 	}
 	
-	class XV_Admin_options{
+	class xv_admin_options{
 		var $style = "height: 500px; width: 90%;";
-		var $contentStyle = "overflow-y:scroll; padding-bottom:10px;";
+		var $contentStyle = "overflow-y:scroll; overflow-x: hidden; padding-bottom:10px;";
 		var $URL = "Options/";
 		var $content = "";
 		var $id = "options-window";
@@ -106,9 +106,9 @@ if(!isset($XVwebEngine)){
 	
 	
 	$CommandSecond = strtolower($XVwebEngine->GetFromURL($PathInfo, 4));
-	if (class_exists('XV_Admin_options_'.$CommandSecond)) {
-		$XVClassName = 'XV_Admin_options_'.$CommandSecond;
+	if (class_exists('xv_admin_options_'.$CommandSecond)) {
+		$xv_admin_class_name = 'xv_admin_options_'.$CommandSecond;
 	}else
-		$XVClassName = "XV_Admin_options";
+		$xv_admin_class_name = "xv_admin_options";
 
 ?>

@@ -17,7 +17,7 @@
 		<event name="xvweb.smarty.loaded">
 			<script language="PHP">
 			  <![CDATA[
-					global $Smarty;
+					global $Smarty, $URLS;
 					$Smarty->assign('xv_panel_links', '<a href="'.$URLS['Script'].'auction_panel/">Panel aukcyjny</a> | ');
 				]]>
 			</script>

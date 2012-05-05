@@ -9,7 +9,6 @@
 			/*<![CDATA[*/
 			@import url('{$URLS.Theme}css/custom-theme/jquery-ui-1.8.11.custom.css');
 			@import url('{$URLS.Theme}css/style.css');
-			@import url('{$URLS.Theme}css/notes.css');
 			{if $CCSLoad}
 			/*{$CCSLoad|@ksort}*/
 			{foreach from=$CCSLoad item=CSSLink key=kess}
@@ -32,13 +31,12 @@
 		<script type="text/javascript" src='{$URLS.Theme}js/jquery.contextMenu.js' charset="UTF-8"> </script> 
 		<script type="text/javascript" src="{$URLS.Theme}js/js.js" charset="UTF-8"> </script>
 		<script type="text/javascript" src="{$URLS.Theme}js/widgets.js" charset="UTF-8"> </script>
-		<script type="text/javascript" src="{$URLS.Theme}js/notes.js" charset="UTF-8"> </script>
 		<script type="text/javascript" src="{$URLS.Theme}js/desktop.js" charset="UTF-8"> </script>
 	</head> 
 	<body> 
 		<ul class="menu"> 
-		{foreach from=$admin_menu item=menu_cat}
-			<li>
+		{foreach from=$admin_menu item=menu_cat key=menu_key}
+			<li id="xv-menu-{$menu_key}">
 				<a href="{$menu_cat.href|default:'#'}">{$menu_cat.name}</a> 
 				{if $menu_cat.submenu}
 				<ul class="sub-menu"> 
@@ -56,7 +54,7 @@
 			<li style="float:right; padding: 0 3px 0 3px;"><a href="#+" class="xv-enlarge" style="display:block; padding: 0 10px 0 10px; ">+</a></li> 
 			<li style="float:right;  padding: 0 3px 0 3px;"><a href="#+" class="xv-reduce" style="display:block; padding: 0 10px 0 10px;">-</a></li> 
 			
-			<li style="float:right;  padding: 0 3px 0 3px;"><a href="#+" class="xv-create-note" style="display:block; padding: 0 10px 0 10px; ">Add Note</a></li> 
+
 			
 			
 		</ul>

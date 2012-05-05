@@ -20,7 +20,7 @@ if(!isset($XVwebEngine)){
 }
 
 
-class XV_Admin_xvauctions_getcat{ // get categories
+class xv_admin_xvauctions_getcat{ // get categories
 	public function __construct(&$XVweb){
 		$Parent = (isset($_GET['cat']) ?  $_GET['cat']  : "/");
 		$SelectCategories = $XVweb->DataBase->prepare('SELECT

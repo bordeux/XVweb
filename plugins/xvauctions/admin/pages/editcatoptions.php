@@ -20,7 +20,7 @@ if(!isset($XVwebEngine)){
 }
 
 
-class XV_Admin_xvauctions_editcatoptions{
+class xv_admin_xvauctions_editcatoptions{
 	var $style = "min-height: 400px; width: 90%;";
 	var $title = "Auctions - Edit options";
 	var $URL = "";
@@ -30,7 +30,7 @@ class XV_Admin_xvauctions_editcatoptions{
 		$CatUNIQ = substr(md5($_GET['cat']), 28);
 		$this->id = "xv-xvauctions-editoptions-".$CatUNIQ;
 		$this->URL = "XVauctions/EditOptions/?cat=".urlencode($_GET['cat']);
-		$this->icon = $GLOBALS['URLS']['Site'].'admin/data/xvauctions/icons/main.png';
+		$this->icon = $GLOBALS['URLS']['Site'].'plugins/xvauctions/admin/xvauctions/icons/main.png';
 		include_once(ROOT_DIR.'plugins/xvauctions/libs/class.xvauctions.php');
 		$XVauctions = &$XVweb->InitClass("xvauctions");
 

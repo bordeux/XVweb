@@ -179,14 +179,14 @@ if(!$XVwebEngine->Session->Session('xv_visit')){
 
 /**************************Lang*******************/
 function xv_load_lang($lang){
-	global $Language, $XVwebEngine, $RootDir;
+	global $Language, $XVwebEngine;
 	
 	$user_lang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
-	if (!file_exists(getcwd().DIRECTORY_SEPARATOR.'languages'.DIRECTORY_SEPARATOR.$user_lang.DIRECTORY_SEPARATOR.$lang.'.'.$user_lang.'.php')) {
-		@include_once(getcwd().'/languages'.DIRECTORY_SEPARATOR.$user_lang.DIRECTORY_SEPARATOR.$lang.'.'.$user_lang.'.php');
+	if (file_exists(ROOT_DIR.'languages'.DIRECTORY_SEPARATOR.$user_lang.DIRECTORY_SEPARATOR.$lang.'.'.$user_lang.'.php')) {
+		@include_once(ROOT_DIR.'languages'.DIRECTORY_SEPARATOR.$user_lang.DIRECTORY_SEPARATOR.$lang.'.'.$user_lang.'.php');
 	} else {
 		$default_lang = xv_main_config()->lang;
-		if(!@include_once($RootDir.'languages'.DIRECTORY_SEPARATOR.$default_lang.DIRECTORY_SEPARATOR.$lang.'.'.$default_lang.'.php'))
+		if(!@include_once(ROOT_DIR.'languages'.DIRECTORY_SEPARATOR.$default_lang.DIRECTORY_SEPARATOR.$lang.'.'.$default_lang.'.php'))
 		die("XVweb Fatal Error. Don't isset language ".$lang.".".$default_lang);
 	}
 	
@@ -227,7 +227,6 @@ $MetaTags = array(
 	"Content-Style-Type"=>"text/css",
 );
 
-xv_trigger("xvweb.smarty.loaded");
 
 $Smarty->assign('MetaTags', $MetaTags); unset($MetaTags);
 $Smarty->assignByRef('Menu',   xvp()->genMenu($XVwebEngine));
@@ -243,6 +242,7 @@ $Smarty->assign('LogedUser', $XVwebEngine->Session->Session("Logged_Logged"));
 $Smarty->assign('UrlTheme', $URLS['Theme']);
 $Smarty->assign('AvantsURL', $URLS['Avats']);
 $Smarty->assign('JSVars', (array('SIDUser'=>$XVwebEngine->Session->GetSID(), 'rootDir'=>$URLS['Site'], "UrlScript"=>$URLS['Script'], "JSCatalog"=>$URLS['JSCatalog'])	));
+xv_trigger("xvweb.smarty.loaded");
 
 
 $Prefix =$XVwebEngine->Plugins()->Menager()->prefix($URLS['Prefix']);

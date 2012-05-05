@@ -19,9 +19,9 @@ if(!isset($XVwebEngine)){
 	exit;
 }
 
-class XV_Admin_xvauctions_auction{
+class xv_admin_xvauctions_auction{
 	var $style = "height: 500px; width: 60%;";
-	var $contentStyle = "overflow-y:scroll; padding-bottom:10px;";
+	var $contentStyle = "overflow-y:scroll; overflow-x: hidden;  padding-bottom:10px;";
 	var $URL = "XVauctions/Auctions/";
 	var $content = "";
 	var $id = "xva-auction-window";
@@ -47,7 +47,7 @@ class XV_Admin_xvauctions_auction{
 		';
 		$this->URL = "XVauctions/Auction/".$auction_id.'/';
 		$this->id = "xva-auction-window-".$auction_id;
-		$this->icon = $GLOBALS['URLS']['Site'].'admin/data/xvauctions/icons/auction.png';
+		$this->icon = $GLOBALS['URLS']['Site'].'plugins/xvauctions/admin/xvauctions/icons/auction.png';
 		
 		if(!empty($_POST)){
 			exit($this->content );

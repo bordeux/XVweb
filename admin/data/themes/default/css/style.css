@@ -141,7 +141,7 @@ div.app-window {
  
 .app-window .titlebar::selection { background-color: white; }
 .app-window .content {
-	padding-top: 0.2em;
+
 	-webkit-box-shadow:  0.3em 0.9em 2em rgba(0, 0, 0, 0.9);
 	box-shadow:  0.3em 0.9em 2em rgba(0, 0, 0, 0.9);
 	background-color: #FFF;

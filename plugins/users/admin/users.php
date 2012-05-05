@@ -20,7 +20,7 @@ if(!isset($XVwebEngine)){
 }
 
 
-	class XV_Admin_users{
+	class xv_admin_users{
 		var $style = "height: 400px; width: 40%;";
 		var $title = "testWindow";
 		var $URL = "Test/";
@@ -32,7 +32,7 @@ if(!isset($XVwebEngine)){
 			$this->icon = $GLOBALS['URLS']['Site'].'admin/data/icons/ban.png';
 		}
 	}
-	class XV_Admin_users_groups{
+	class xv_admin_users_groups{
 		var $style = "width: 500px;";
 		var $title = "Groups";
 		var $URL = "Users/Groups/";
@@ -78,7 +78,7 @@ $(function(){
 			$this->icon = $GLOBALS['URLS']['Site'].'admin/data/icons/users.png';
 		}
 	}
-	class XV_Admin_users_get_permissions{
+	class xv_admin_users_get_permissions{
 		var $XVweb;
 		public function __construct(&$XVweb){
 		$this->XVweb = &$XVweb;
@@ -196,7 +196,7 @@ onUpdatePerms();
 	return array("names"=>$perms_names , "descriptions"=>$perms_descriptions);
 	}
 }
-class XV_Admin_users_groups_save{
+class xv_admin_users_groups_save{
 	var $XVweb;
 	public function __construct(&$XVweb){
 		if($XVweb->Session->GetSID() != $_POST['xv-sid']){
@@ -229,9 +229,9 @@ class XV_Admin_users_groups_save{
 	
 	//Groups_Save
 	$CommandSecond = strtolower($XVwebEngine->GetFromURL($PathInfo, 4));
-	if (class_exists('XV_Admin_users_'.$CommandSecond)) {
-		$XVClassName = 'XV_Admin_users_'.$CommandSecond;
+	if (class_exists('xv_admin_users_'.$CommandSecond)) {
+		$xv_admin_class_name = 'xv_admin_users_'.$CommandSecond;
 	}else
-		$XVClassName = "XV_Admin_users";
+		$xv_admin_class_name = "xv_admin_users";
 
 ?>
