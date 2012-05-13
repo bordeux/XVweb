@@ -76,7 +76,7 @@ LIMIT '.($this->Date['Options']["ActualPage"]*$this->Date['Options']["EveryPage"
 	public function gethtml(){
 		global $Smarty;
 		include_once($GLOBALS['LocationXVWeb'].DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'Pager.php');
-		$pager = pager($this->Date['Options']['EveryPage'], (int) $this->Date['CountRows'],  "?".$this->Date['XVweb']->AddGet(array("NewsPage"=>"-npage-id-"), true), $this->Date['Options']['ActualPage']);
+		$pager = pager($this->Date['Options']['EveryPage'], (int) $this->Date['CountRows'],  "?".$this->Date['XVweb']->add_get_var(array("NewsPage"=>"-npage-id-"), true), $this->Date['Options']['ActualPage']);
 		$Smarty->assign('Pager', $pager);
 		$Smarty->assign('News', $this->Date['News']);
 		$Smarty->display('contents'.DIRECTORY_SEPARATOR.$this->Date['Options']['Template']);

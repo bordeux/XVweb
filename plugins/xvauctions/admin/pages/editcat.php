@@ -47,7 +47,7 @@ class xv_admin_xvauctions_editcat { // delete categories
 			":Category" => $_POST['editcat']['category'],
 			));
 			$CatInfo = $SelectCategory->fetch(PDO::FETCH_ASSOC);
-			$CatInfo['CatURL'] = $XVweb->ReadTopicArticleFromUrl($CatInfo['Category']);
+			$CatInfo['CatURL'] = $XVweb->read_sufix_from_url($CatInfo['Category']);
 
 			$NewCatURL = string_to_url($_POST['editcat']['caturl']);
 			

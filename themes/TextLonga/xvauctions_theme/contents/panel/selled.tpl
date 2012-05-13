@@ -53,11 +53,11 @@
 
 						<th class="items-checkbox"><input type="checkbox" name="select_all" value="true" class="select_all" data-selector='input[name="auction[]"]' /></th>
 						<th class="items-thumbnail"></th>
-						<th class="items-title"><a href='?{addget value="sortby=title&sort=$SmartySort"}'>{$SmartyChar} {"xca_description"|xv_lang}</a></th>
-						<th class="items-cost"><a href='?{addget value="sortby=cost&sort=$SmartySort"}'>{$SmartyChar} {"xca_cost"|xv_lang}</a></th>
-						<th class="items-pieces"><a href='?{addget value="sortby=pieces&sort=$SmartySort"}'>{$SmartyChar} {"xca_pieces"|xv_lang}</a></th>
-						<th class="items-date"><a href='?{addget value="sortby=date&sort=$SmartySort"}'>{$SmartyChar} {"xca_date"|xv_lang}</a></th>			
-						<th class="items-seppere><a href='?{addget value="sortby=user&sort=$SmartySort"}'>{$SmartyChar} {"xca_buyer"|xv_lang}</a></th>
+						<th class="items-title"><a href='?{add_get_var value="sortby=title&sort=$SmartySort"}'>{$SmartyChar} {"xca_description"|xv_lang}</a></th>
+						<th class="items-cost"><a href='?{add_get_var value="sortby=cost&sort=$SmartySort"}'>{$SmartyChar} {"xca_cost"|xv_lang}</a></th>
+						<th class="items-pieces"><a href='?{add_get_var value="sortby=pieces&sort=$SmartySort"}'>{$SmartyChar} {"xca_pieces"|xv_lang}</a></th>
+						<th class="items-date"><a href='?{add_get_var value="sortby=date&sort=$SmartySort"}'>{$SmartyChar} {"xca_date"|xv_lang}</a></th>			
+						<th class="items-seppere><a href='?{add_get_var value="sortby=user&sort=$SmartySort"}'>{$SmartyChar} {"xca_buyer"|xv_lang}</a></th>
 						<th class="items-none"></th>
 
 					</tr>
@@ -91,9 +91,9 @@
 							{$auction.User}
 						</td>
 						<td class="items-none">
-							{if $auction.Paid == 0}Niezapłacone{else} ✓ Zapłacone <a href="{$URLS.AuctionPanel}/payment_details/{$auction.Paid}/">ID {$auction.Paid}</a>{/if} <br />
-							{if $auction.CommentedBuyer == 0}Nie wystawił komentarza {else} ✓ Wystawił komentarz{/if}<br />
-							{if $auction.CommentedSeller == 0}<a href="{$URLS.AuctionPanel}/comment_add/{$auction.ID}/">{"xca_comment_add"|xv_lang}</a> {else} ✓ Komentarz wystawiony{/if}<br />
+							{if $auction.Paid == 0}{"xca_not_paid"|xv_lang}{else} ✓ {"xca_paid"|xv_lang} <a href="{$URLS.AuctionPanel}/payment_details/{$auction.Paid}/">ID {$auction.Paid}</a>{/if} <br />
+							{if $auction.CommentedBuyer == 0}{"xca_comment_not_inserted"|xv_lang} {else} ✓ {"xca_comment_inserted"|xv_lang}{/if}<br />
+							{if $auction.CommentedSeller == 0}<a href="{$URLS.AuctionPanel}/comment_add/{$auction.ID}/">{"xca_comment_add"|xv_lang}</a> {else} ✓ {"xca_comment_inserted2"|xv_lang}{/if}<br />
 						</td>
 					</tr>
 				{/foreach}

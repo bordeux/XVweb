@@ -1,0 +1,15 @@
+<plugin>
+	<info>
+		<name>Translation</name>
+		<version>1.0</version>
+		<author>Krzysztof Bednarczyk</author>
+		<url>http://www.bordeux.net</url>
+		<description>Translation tool</description>
+	</info>
+	<config>
+	</config>
+	<load>
+	</load>
+	<ranks>
+	</ranks>
+</plugin>

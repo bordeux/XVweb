@@ -44,7 +44,7 @@ $Smarty->assign('SiteTopic',  xv_lang("Search")." : ". htmlspecialchars($SearchK
 include_once($LocationXVWeb.DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'Pager.php');
 
 $Smarty->assign('SearchArray',  $XVwebEngine->Search($SearchKeyword, $ActualPage, $RecordsLimit));
-$pager = pager($RecordsLimit, (int) $XVwebEngine->Date['SearchResultCount'],  "?".$XVwebEngine->AddGet(array("Page"=>"-npage-id-"), true), $ActualPage);
+$pager = pager($RecordsLimit, (int) $XVwebEngine->Date['SearchResultCount'],  "?".$XVwebEngine->add_get_var(array("Page"=>"-npage-id-"), true), $ActualPage);
 $Smarty->assign('Pager',        $pager);
 $Smarty->assign('ActualPage',   $ActualPage);
 

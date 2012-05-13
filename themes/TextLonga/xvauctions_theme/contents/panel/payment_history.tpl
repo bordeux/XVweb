@@ -40,11 +40,11 @@
 				<caption>{$pager.0}</caption>
 				<thead> 
 					<tr>
-						<th class="items-title"><a href='?{addget value="sortby=id&sort=$SmartySort"}'>{$SmartyChar} {"ID"|xv_lang}</a></th>
-						<th class="items-title"><a href='?{addget value="sortby=title&sort=$SmartySort"}'>{$SmartyChar} {"Title"|xv_lang}</a></th>
-						<th class="items-cost"><a href='?{addget value="sortby=amount&sort=$SmartySort"}'>{$SmartyChar} {"xca_payments_amount"|xv_lang}</a></th>
-						<th class="items-date"><a href='?{addget value="sortby=date&sort=$SmartySort"}'>{$SmartyChar} {"xca_date"|xv_lang}</a></th>
-						<th class="items-date"><a href='?{addget value="sortby=auction&sort=$SmartySort"}'>{$SmartyChar} {"xca_auction_id"|xv_lang}</a></th>
+						<th class="items-title"><a href='?{add_get_var value="sortby=id&sort=$SmartySort"}'>{$SmartyChar} {"ID"|xv_lang}</a></th>
+						<th class="items-title"><a href='?{add_get_var value="sortby=title&sort=$SmartySort"}'>{$SmartyChar} {"Title"|xv_lang}</a></th>
+						<th class="items-cost"><a href='?{add_get_var value="sortby=amount&sort=$SmartySort"}'>{$SmartyChar} {"xca_payments_amount"|xv_lang}</a></th>
+						<th class="items-date"><a href='?{add_get_var value="sortby=date&sort=$SmartySort"}'>{$SmartyChar} {"xca_date"|xv_lang}</a></th>
+						<th class="items-date"><a href='?{add_get_var value="sortby=auction&sort=$SmartySort"}'>{$SmartyChar} {"xca_auction_id"|xv_lang}</a></th>
 
 					</tr>
 				</thead> 

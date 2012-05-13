@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+  <sitename xv-lang="SiteName">Bordeux.NET</sitename>
+  <adv xv-lang="Adv" xv-values="true,false">true</adv>
+  <downloadlimit xv-lang="DownloadLimit" xv-required="false" xv-validator-1-arg="/^[0-9]+$/" xv-validator-2-arg="BadNumber">205</downloadlimit>
+  <disable xv-lang="Disable">
+		<page xv-lang="Page">
+			<disable xv-values="true,false" xv-lang="Disable">false</disable>
+			<method xv-values="message,redirect" xv-lang="Method">message</method>
+			<url xv-lang="URL" xv-validator="regExpValidator" xv-validator-1-arg="/^(https?:\/\/+[\w\-]+\.[\w\-]+)/i" xv-validator-2-arg="BadURL">http://bordeux.net</url>
+			<message xv-lang="Message" xv-type="textarea">Serwis tymczasowo wyłączony</message>
+			<allow xv-lang="AlowedIPS" xv-type="textarea">89.25.173.*</allow>
+		</page>
+    <write xv-values="true,false" xv-lang="Write">false</write>
+    <edit xv-values="true,false" xv-lang="Edit">false</edit>
+    <comment xv-values="true,false" xv-lang="Comments">false</comment>
+  </disable>
+  <cachelimit xv-lang="Cache">
+    <article xv-lang="Article" xv-validator="regExpValidator" xv-validator-1-arg="/^[0-9]+$/" xv-validator-2-arg="BadNumber">600</article>
+    <diffarticle xv-lang="DiffArticle" xv-validator="regExpValidator" xv-validator-1-arg="/^[0-9]+$/" xv-validator-2-arg="BadNumber">600</diffarticle>
+    <file xv-lang="File" xv-validator="regExpValidator" xv-validator-1-arg="/^[0-9]+$/" xv-validator-2-arg="BadNumber">600</file>
+    <articleblocked xv-lang="ArticleBlocked" xv-validator="regExpValidator" xv-validator-1-arg="/^[0-9]+$/" xv-validator-2-arg="BadNumber">600</articleblocked>
+    <articleblockedurl xv-lang="ArticleBlockedURl" xv-validator="regExpValidator" xv-validator-1-arg="/^[0-9]+$/" xv-validator-2-arg="BadNumber">600</articleblockedurl>
+    <articlefoo xv-lang="ArticleFoo" xv-validator="regExpValidator" xv-validator-1-arg="/^[0-9]+$/" xv-validator-2-arg="BadNumber">600</articlefoo>
+    <plugins xv-lang="Plugins" xv-validator="regExpValidator" xv-validator-1-arg="/^[0-9]+$/" xv-validator-2-arg="BadNumber">6000</plugins>
+    <idtourl xv-lang="IDtoURL" xv-validator="regExpValidator" xv-validator-1-arg="/^[0-9]+$/" xv-validator-2-arg="BadNumber">594</idtourl>
+    <comment xv-lang="Comments" xv-required="false" xv-validator="regExpValidator" xv-validator-1-arg="/^[0-9]+$/" xv-validator-2-arg="BadNumber"></comment>
+    <getdivisions xv-lang="Divisions" xv-validator="regExpValidator" xv-validator-1-arg="/^[0-9]+$/" xv-validator-2-arg="BadNumber">600</getdivisions>
+  </cachelimit>
+  <pagelimit xv-lang="PageLimits">
+    <search xv-lang="Search" xv-validator="regExpValidator" xv-validator-1-arg="/^[0-9]+$/" xv-validator-2-arg="BadNumber">30</search>
+    <users xv-lang="Users" xv-validator="regExpValidator" xv-validator-1-arg="/^[0-9]+$/" xv-validator-2-arg="BadNumber">30</users>
+    <notfound xv-lang="NotFound" xv-validator="regExpValidator" xv-validator-1-arg="/^[0-9]+$/" xv-validator-2-arg="BadNumber">30</notfound>
+    <userfiles xv-lang="UserFiles" xv-validator="regExpValidator" xv-validator-1-arg="/^[0-9]+$/" xv-validator-2-arg="BadNumber">30</userfiles>
+    <userlist xv-lang="UserList" xv-validator="regExpValidator" xv-validator-1-arg="/^[0-9]+$/" xv-validator-2-arg="BadNumber">30</userlist>
+    <news xv-lang="News" xv-validator="regExpValidator" xv-validator-1-arg="/^[0-9]+$/" xv-validator-2-arg="BadNumber">300</news>
+  </pagelimit>
+</config>

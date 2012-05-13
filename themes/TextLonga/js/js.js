@@ -291,25 +291,6 @@ $(function () {
 					});
 			});
 			
-		
-			if(typeof _gaq != "undefined"){
-				$("a").live("click", function(){
-				
-			var ParentMap = $(this).parents().map(function () { 
-                  return this.tagName+"["+$(this).attr("class")+"]"; 
-                }).get().join(">");
-			
-					_gaq.push(['_trackEvent', 'Clicks', 'Anchors', location.href + " - "+ $(this).attr("href")+" - "+ParentMap]);
-				});
-				
-				$('img').error(function() {
-					_gaq.push(['_trackEvent', 'Images', 'unLoad', location.href +" - "+$(this).attr("src")]);
-				  });
-				 window.onerror = function(msg, url, line){
-					_gaq.push(['_trackEvent', 'Window', 'domError', ("MGS: "+msg+" - Line: "+line +" , URL: "+ url)]);
-				};
-			};
-			
 			$(".xv-login-header").click(function(){
 				$('.xvlogin-login').load(URLS['Site']+'Login?ajax=true&rand='+Math.random(), function() {
 				 // alert('Load was performed.');

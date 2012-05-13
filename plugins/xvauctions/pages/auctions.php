@@ -88,35 +88,35 @@ $record_limit = 30;
 		elseif($_GET['auction_type']== "buynow")	
 			$auction_type_c = xv_lang("xca_buynow");
 		$search_filters_remove[] = array(
-				"link"=> xvp()->AddGet($XVwebEngine, array("auction_type" => ""), true),
+				"link"=> xvp()->add_get_var($XVwebEngine, array("auction_type" => ""), true),
 				"caption"=> xv_lang("xca_auction_type")." : ".$auction_type_c
 			);
 	}
 	if(isset($_GET['auction_seller'])&& strlen($_GET['auction_seller']) != 0){
 		$display_options['seller'] = $_GET['auction_seller'];
 		$search_filters_remove[] = array(
-					"link"=> xvp()->AddGet($XVwebEngine, array("auction_seller" => ''), true),
+					"link"=> xvp()->add_get_var($XVwebEngine, array("auction_seller" => ''), true),
 					"caption"=> xv_lang("xca_seller")." : ".htmlspecialchars($_GET['auction_seller'])
 				);
 	}
 	if(isset($_GET['auction_cost_from'])&& strlen($_GET['auction_cost_from']) != 0){
 		$display_options['cost_from'] = $_GET['auction_cost_from'];
 		$search_filters_remove[] = array(
-				"link"=> xvp()->AddGet($XVwebEngine, array("auction_cost_from" => ''), true),
+				"link"=> xvp()->add_get_var($XVwebEngine, array("auction_cost_from" => ''), true),
 				"caption"=> xv_lang("xca_cost_from")." : ".htmlspecialchars($_GET['auction_cost_from']).' '.xv_lang("xca_coin_type")
 			);
 	}
 	if(isset($_GET['auction_cost_to']) && strlen($_GET['auction_cost_to']) != 0){
 		$display_options['cost_to'] = $_GET['auction_cost_to'];
 		$search_filters_remove[] = array(
-				"link"=> xvp()->AddGet($XVwebEngine, array("auction_cost_to" =>''), true),
+				"link"=> xvp()->add_get_var($XVwebEngine, array("auction_cost_to" =>''), true),
 				"caption"=> xv_lang("xca_cost_to")." : ".htmlspecialchars($_GET['auction_cost_to']).' '.xv_lang("xca_coin_type")
 			);
 	}	
 	if(isset($_GET['auction_search']) && !empty($_GET['auction_search'])){
 		$display_options['search'] = $_GET['auction_search'];
 		$search_filters_remove[] = array(
-				"link"=> xvp()->AddGet($XVwebEngine, array("auction_search" =>''), true),
+				"link"=> xvp()->add_get_var($XVwebEngine, array("auction_search" =>''), true),
 				"caption"=> xv_lang("xca_search")." : ".htmlspecialchars($_GET['auction_search'])
 			);
 	}
@@ -124,7 +124,7 @@ $auctions_list = xvp()->get_auctions($XVauctions, $auction_category, $queries_se
 $_GET = array_filter($_GET);
 
 include_once(ROOT_DIR.'core'.DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'Pager.php');
-$pager = pager($record_limit, (int) $auctions_list[1],  "?".$XVwebEngine->AddGet(array("page"=>"-npage-id-"), true), (int) $_GET['page']);
+$pager = pager($record_limit, (int) $auctions_list[1],  "?".$XVwebEngine->add_get_var(array("page"=>"-npage-id-"), true), (int) $_GET['page']);
 
 $Smarty->assignByRef('pager', $pager);
 $Smarty->assignByRef('quick_search_fields', $quick_search_fields);

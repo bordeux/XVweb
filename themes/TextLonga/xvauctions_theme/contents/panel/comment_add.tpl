@@ -22,12 +22,12 @@
 
 	<div class="xauction-tabs ui-tabs ui-widget ui-widget-content ui-corner-top">
 		<div class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-top">
-			<div style="text-align:center; color: #474747; font-size: 14px;">Dodawanie komentarza</div>
+			<div style="text-align:center; color: #474747; font-size: 14px;">{"xca_adding_opinion"|xv_lang}</div>
 		</div>
 		<div>
 		{if $added_comment}
 			<div style="padding: 20px;">
-				<div class="success">Komentarz został wystawiony!</div>
+				<div class="success">{"xca_opinion_added"|xv_lang}.</div>
 				
 			</div>
 		{else}
@@ -46,13 +46,13 @@
 			<form action="?add=true" method="post">
 			<input type="hidden" name="xv-sid" value="{$JSVars.SIDUser}" />
 				<div class="LightBulbTip" style="margin-bottom: 20px;">
-				 Wystawiasz teraz komentarz do aukcji <a href="{$URLS.Auction}/{$bought_info.Auction}/" target="_blank"><b>{$bought_info.Title}</b> , id: {$bought_info.Auction}</a> dla użytkownika 
+				 {"xca_you_are_adding_opinion"|xv_lang|sprintf:'<a href="{$URLS.Auction}/{$bought_info.Auction}/" target="_blank"><b>{$bought_info.Title}</b> , id: {$bought_info.Auction}</a>'}
 				</div>
 				<div style="float:left">
 					<table>	
 					{if $comment_mode == "buyer"}					
 						<tr>
-							<td style="width: 200px; font-weight: bold;">Zgodność przedmiotu z opisem</td>
+							<td style="width: 200px; font-weight: bold;">{"xca_compliance_with_desc"|xv_lang}</td>
 							<td>
 								<select class="xva-stars" name="compatibility">
 									<option value="1">Very poor</option>
@@ -64,7 +64,7 @@
 							</td>
 						</tr>			
 						<tr>
-							<td style="width: 200px; font-weight: bold;">Kontakt ze Sprzedającym</td>
+							<td style="width: 200px; font-weight: bold;">{"xca_contact_with_seller"|xv_lang}</td>
 							<td>
 								<select class="xva-stars" name="contact">
 									<option value="1">Very poor</option>
@@ -76,7 +76,7 @@
 							</td>
 						</tr>
 						<tr>
-							<td style="width: 200px; font-weight: bold;">Czas realizacji zamówienia</td>
+							<td style="width: 200px; font-weight: bold;">{"xca_realization_time"|xv_lang}</td>
 							<td>
 								<select class="xva-stars" name="realization">
 									<option value="1">Very poor</option>
@@ -88,7 +88,7 @@
 							</td>
 						</tr>
 						<tr>
-							<td style="width: 200px; font-weight: bold;">Koszt wysyłki</td>
+							<td style="width: 200px; font-weight: bold;">{"xca_shipment_cost"|xv_lang}</td>
 							<td>
 								<select class="xva-stars" name="shipping">
 									<option value="1">Very poor</option>
@@ -101,38 +101,38 @@
 						</tr>
 						{/if}
 						<tr>
-							<td style="width: 200px; font-weight: bold;">Typ komentarza</td>
+							<td style="width: 200px; font-weight: bold;">{"xca_comment_type"|xv_lang}</td>
 							<td>
 								<input type="radio" name="comment_type" value="positive" id="comment-type-positive" checked="checked"/>
-									<label for="comment-type-positive" style="color: #009B00; font-weight: bold;">Pozytywny</label>
+									<label for="comment-type-positive" style="color: #009B00; font-weight: bold;">{"xca_positive"|xv_lang}</label>
 								<input type="radio" name="comment_type" value="neutral" id="comment-type-neutral"/>
-									<label for="comment-type-neutral" style="color: #646464; font-weight: bold;">Neutralny</label>
+									<label for="comment-type-neutral" style="color: #646464; font-weight: bold;">{"xca_neutral"|xv_lang}</label>
 								<input type="radio" name="comment_type" value="negative" id="comment-type-negative"/>
-									<label for="comment-type-negative" style="color: #EE3E2B; font-weight: bold;">Negatywny</label>
+									<label for="comment-type-negative" style="color: #EE3E2B; font-weight: bold;">{"xca_negative"|xv_lang}</label>
 					
 							</td>
 						</tr>
 			
 			
 						<tr>
-							<td style="width: 200px; font-weight: bold;">Komentarz</td>
-							<td><textarea name="comment"  style="width: 300px; height: 60px;">Transakcja udana. Serdecznie polecam.</textarea></td>
+							<td style="width: 200px; font-weight: bold;">{'xca_comment'|xv_lang}</td>
+							<td><textarea name="comment"  style="width: 300px; height: 60px;">{"xca_default_comment"|xv_lang}</textarea></td>
 						</tr>
 						<tr>
 							<td></td>
-							<td><input type="submit" value="Wystaw komentarz" name="submit" /></td>
+							<td><input type="submit" value="{'xca_comment_add'|xv_lang}" name="submit" /></td>
 						</tr>
 
 					</table>
 				</div>
 				{if $comment_mode == "buyer"}
 				<div style="float:left; margin-left: 40px; width: 300px;" class="LightBulbTip">
-					Oceń w skali od 1 do 5. Ocena 1 ozacza ocenę najniższą. Pamiętaj, że oceny już nie będziesz mógł zmienić. Proszę o rozwagę.
+					{"xca_coment_add_tip"|xv_lang}
 				</div> 
 				{/if}
 				
 				<div style="float:left; margin-left: 40px; margin-top: 30px; width: 300px;" class="LightBulbTip">
-					W komentarzu opisz przebieg tranzakcji.
+					{"xca_comment_add_tip2"|xv_lang}
 				</div>
 				</form>
 				<div style="clear:both;"></div>

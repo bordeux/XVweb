@@ -20,7 +20,7 @@
 		<div class="xvauction-price-list">
 			<table>
 				<thead>
-					<tr> <td colspan="2">Cennik</td></tr>
+					<tr> <td colspan="2">{"xca_prices"|xv_lang}</td></tr>
 				<thead>
 				<tfoot>
 					 <tr> 
@@ -56,7 +56,7 @@
 		<div><form action="?" method="get" style="text-align:center;">
 			<input type="hidden" name="xv-sid" value="{$JSVars.SIDUser}" />
 			<input type="hidden" name="step" value="save" />
-		<input type="submit" value="Wystaw licytacje (koszt: {$xvauctions_price_sum|number_format:2:'.':' '} {'xca_coin_type'|xv_lang})" /></form></div>
+		<input type="submit" value="{"xca_make_auction"|xv_lang} ({'xca_cost2'|xv_lang}: {$xvauctions_price_sum|number_format:2:'.':' '} {'xca_coin_type'|xv_lang})" /></form></div>
 	</div>
 
 	</div>

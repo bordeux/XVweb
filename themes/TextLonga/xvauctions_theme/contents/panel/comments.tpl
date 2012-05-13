@@ -50,10 +50,10 @@
 				<caption>{$pager.0}</caption>
 				<thead> 
 					<tr>
-						<th class="items-seller"><a href='?{addget value="sortby=seller&sort=$SmartySort"}'>{$SmartyChar} Od</a></th>
-						<th class="items-date"><a href='?{addget value="sortby=date&sort=$SmartySort"}'>{$SmartyChar} {"xca_date"|xv_lang}</a></th>
-						<th class="items-auction"><a href='?{addget value="sortby=auction&sort=$SmartySort"}'>{$SmartyChar} Auction ID</a></th>
-						<th class="items-comment"><a href='?{addget value="sortby=opinion&sort=$SmartySort"}'>{$SmartyChar} Komentarz</a></th>
+						<th class="items-seller"><a href='?{add_get_var value="sortby=seller&sort=$SmartySort"}'>{$SmartyChar} {"xca_from"|xv_lang}</a></th>
+						<th class="items-date"><a href='?{add_get_var value="sortby=date&sort=$SmartySort"}'>{$SmartyChar} {"xca_date"|xv_lang}</a></th>
+						<th class="items-auction"><a href='?{add_get_var value="sortby=auction&sort=$SmartySort"}'>{$SmartyChar} {"xca_auction_id"|xv_lang}</a></th>
+						<th class="items-comment"><a href='?{add_get_var value="sortby=opinion&sort=$SmartySort"}'>{$SmartyChar} {"xca_comment"|xv_lang}</a></th>
 
 					</tr>
 				</thead> 

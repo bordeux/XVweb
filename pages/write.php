@@ -40,7 +40,7 @@ if(isset($_GET['UrlCheck'])){
 	if(empty($_GET['xv-path']))
 	$result = false;
 	else{
-		$URLArticlePrefix = $XVwebEngine->ReadPrefix($_GET['xv-path']);
+		$URLArticlePrefix = $XVwebEngine->read_prefix_from_url($_GET['xv-path']);
 		if($XVwebEngine->Plugins()->Menager()->prefix(($URLArticlePrefix)))
 		$result = false;
 		if($XVwebEngine->ReadArticle($_GET['xv-path']))
@@ -72,7 +72,7 @@ if(isset($_GET['settings']) && is_numeric($_GET['settings'])){
 
 	if(!empty($_POST['urlpath']) && (xv_perm('MoveArticle'))){
 		$URLFrom = $XVwebEngine->IDtoURL($_GET['settings']);
-		$URLTo = $XVwebEngine->AddSlashesStartAndEnd($_POST['urlpath']);
+		$URLTo = $XVwebEngine->add_path_slashes($_POST['urlpath']);
 		if ( $URLTo != $URLFrom){
 			$ResultOperation = $XVwebEngine->EditArticle()->ChangeURL($URLFrom,$URLTo);
 		}
@@ -124,7 +124,7 @@ if(isset($_GET['save']) && isset($_POST['xv-description'])){
 		
 	if(isset($_POST['amendment']) && $_POST['amendment'] == "true"){
 		if($XVwebEngine->EditArticle()->SaveAmendment($_GET['save'], $_POST['EditArtPost'], $_POST['arttitle'])){
-			header("location: ".$URLS['Script'].substr($XVwebEngine->URLRepair($XVwebEngine->AddSlashesStartAndEnd($XVwebEngine->ReadArticleIndexOut['URL'])), 1));
+			header("location: ".$URLS['Script'].substr($XVwebEngine->URLRepair($XVwebEngine->add_path_slashes($XVwebEngine->ReadArticleIndexOut['URL'])), 1));
 		}else{
 		header("location: ".$URLS['Script'].'System/Error/');
 		}
@@ -133,7 +133,7 @@ if(isset($_GET['save']) && isset($_POST['xv-description'])){
 		$XVwebEngine->SaveModificationArticle['Topic'] = htmlspecialchars($_POST['arttitle']);
 
 		if($XVwebEngine->EditArticle()->Edit($_GET['save'], $_POST['EditArtPost'], $_POST['xv-description'])){
-			header("location: ".$URLS['Script'].substr($XVwebEngine->URLRepair($XVwebEngine->AddSlashesStartAndEnd($XVwebEngine->ReadArticleIndexOut['URL'])), 1));
+			header("location: ".$URLS['Script'].substr($XVwebEngine->URLRepair($XVwebEngine->add_path_slashes($XVwebEngine->ReadArticleIndexOut['URL'])), 1));
 			exit;
 		}
 	}
@@ -160,7 +160,7 @@ if(isset($_GET['save']) && isset($_POST['xv-path'])){
 			header("location: ".$URLS['Script'].'System/SpamBot/');
 		exit;
 		}
-	$URLArticlePrefix = $XVwebEngine->ReadPrefix($_POST['xv-path']);
+	$URLArticlePrefix = $XVwebEngine->read_prefix_from_url($_POST['xv-path']);
 
 	if($XVwebEngine->Plugins()->Menager()->prefix(($URLArticlePrefix))){
 		$XVwebEngine->Session->Session('CategoryBlockedPost', serialize($_POST));
@@ -168,15 +168,15 @@ if(isset($_GET['save']) && isset($_POST['xv-path'])){
 		exit;
 	}
 
-	$TopicArticle = (empty($_POST['arttitle']) ? $XVwebEngine->ReadTopicArticleFromUrl($XVwebEngine->AddSlashesStartAndEnd($_POST['xv-path'])) : htmlspecialchars($_POST['arttitle']));
+	$TopicArticle = (empty($_POST['arttitle']) ? $XVwebEngine->read_sufix_from_url($XVwebEngine->add_path_slashes($_POST['xv-path'])) : htmlspecialchars($_POST['arttitle']));
 
-	$XVwebEngine->EditArticle()->Add($XVwebEngine->AddSlashesStartAndEnd($_POST['xv-path']), $_POST['EditArtPost'], null, $TopicArticle, $XVwebEngine->ReadCategoryArticle($_POST['xv-path'], true));
+	$XVwebEngine->EditArticle()->Add($XVwebEngine->add_path_slashes($_POST['xv-path']), $_POST['EditArtPost'], null, $TopicArticle, $XVwebEngine->ReadCategoryArticle($_POST['xv-path'], true));
 	if($XVwebEngine->SaveArticleError){
 		$XVwebEngine->Session->Session('CategoryBlockedPost', serialize($_POST));
 		switch($XVwebEngine->SaveArticleError)
 		{
 		case 1:
-			header("location: ".$URLS['Script'].substr($XVwebEngine->URLRepair($XVwebEngine->AddSlashesStartAndEnd($_POST['xv-path'])), 1));
+			header("location: ".$URLS['Script'].substr($XVwebEngine->URLRepair($XVwebEngine->add_path_slashes($_POST['xv-path'])), 1));
 			exit;			
 			break;
 		case "ArticleIsset":
@@ -210,7 +210,7 @@ if(isset($_GET['save']) && isset($_POST['xv-path'])){
 		}
 	}
 
-	header("location: ".$URLS['Script'].substr($XVwebEngine->AddSlashesStartAndEnd($_POST['xv-path']),1));
+	header("location: ".$URLS['Script'].substr($XVwebEngine->add_path_slashes($_POST['xv-path']),1));
 	exit;
 
 

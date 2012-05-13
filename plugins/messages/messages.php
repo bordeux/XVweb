@@ -96,7 +96,7 @@ if(!empty($IDMessage) && is_numeric($IDMessage)){
 	}
 $Smarty->assign('MessagesList', $ListMessages);
 include_once($LocationXVWeb.DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'Pager.php');
-$pager = pager($RecordsLimit, (int) $ListMessages->Count,  "?".$XVwebEngine->AddGet(array("Page"=>"-npage-id-"), true), $ActualPage);
+$pager = pager($RecordsLimit, (int) $ListMessages->Count,  "?".$XVwebEngine->add_get_var(array("Page"=>"-npage-id-"), true), $ActualPage);
 $Smarty->assign('Pager', $pager);
 
 }

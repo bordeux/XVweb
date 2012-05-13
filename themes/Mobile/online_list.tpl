@@ -24,10 +24,10 @@
  {else}
  {assign var='SmartySort' value='desc'}
  {/if}
- <td><a href='?{addget value="SortBy=IP&Sort=$SmartySort"}'>{$language.AdressIP}</a></td>
- <td><a href='?{addget value="SortBy=User&Sort=$SmartySort"}'>{$language.User}</a></td>
- <td><a href='?{addget value="SortBy=Url&Sort=$SmartySort"}'>{$language.URL}</a></td>
- <td><a href='?{addget value="SortBy=Info&Sort=$SmartySort"}'>{$language.Info}</a></td>
+ <td><a href='?{add_get_var value="SortBy=IP&Sort=$SmartySort"}'>{$language.AdressIP}</a></td>
+ <td><a href='?{add_get_var value="SortBy=User&Sort=$SmartySort"}'>{$language.User}</a></td>
+ <td><a href='?{add_get_var value="SortBy=Url&Sort=$SmartySort"}'>{$language.URL}</a></td>
+ <td><a href='?{add_get_var value="SortBy=Info&Sort=$SmartySort"}'>{$language.Info}</a></td>
 
 </tr>
 {foreach from=$OnlineList item=OnlineArray}

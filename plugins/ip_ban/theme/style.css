@@ -99,3 +99,33 @@ input.submit {
 .alignright {
 	float: right;
 }
+.login {
+position: fixed;
+bottom: 0;
+height: 40px;
+width: 100%;
+left: 0;
+}
+.login  div {
+height: 40px;
+width: 500px;
+margin:auto;
+background: rgba(0, 0, 0, 0.6);
+border: 1px solid #6E6E6E;
+border-top-left-radius: 20px;
+border-top-right-radius: 20px;
+text-align:center;
+padding-top: 8px;
+color: #FFF;
+}
+.login   div input {
+background: rgba(0, 0, 0, 0.4);
+border: 1px solid #6E6E6E;
+height: 20px;
+font-size: 15px;
+line-height: 20px;
+width: 200px;
+}
+.login  div input[type="submit"] {
+width: 40px;
+}

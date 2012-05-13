@@ -11,25 +11,25 @@
 			{if $buy_done}
 			<div style="margin: 40px;">
 				<div style="background: #F3FFCD; border: 1px solid #B1DA81; color: #4B5D40; text-align:center; padding: 20px; ">
-					<h2 style="color: #60A536; font-size: 16px; font-weight:bold;">Gratulujemy złożenia oferty dla <a href="{$URLS.Auction}/{$auction_info.ID}/">{$auction_info.Title|escape:"htmlall"}</a></h2>
+					<h2 style="color: #60A536; font-size: 16px; font-weight:bold;">{"xca_buy_message2"|xv_lang} <a href="{$URLS.Auction}/{$auction_info.ID}/">{$auction_info.Title|escape:"htmlall"}</a></h2>
 					{if $buy_type == "buy_now"}
-					<span>Możesz teraz przejść do płatności za przedmiot</span>
+					<span>{"xca_buy_message1"|xv_lang}</span>
 						<form method="get" action="{$URLS.AuctionPanel}/payment_pay/{$bought_id}/" style="text-align:center;"> 
-							<input style="line-height: 30px; height: 32px; " type="submit" value="Zapłać za przedmiot" />
+							<input style="line-height: 30px; height: 32px; " type="submit" value="{'xca_pay_for_think'|xv_lang}" />
 						</form>
 						{else}
-							<span>Listę licytowanych przedmiotów znajdziesz <a href="{$URLS.AuctionPanel}/bid/">tutaj</a></span>
+							<span>{"xca_buy_message3"|xv_lang} <a href="{$URLS.AuctionPanel}/bid/">{"xca_here"|xv_lang}</a></span>
 						{/if}
 					<p>Czynności:</p>
 					<ul>
-						<li><a href="{$URLS.AuctionPanel}/Bought/">Idź do listy kupionych przedmiotów</a></li>
-						<li><a href="{$URLS.Auction}/{$auction_info.ID}/">Powrót do aukcji</a></li>
+						<li><a href="{$URLS.AuctionPanel}/Bought/">{"xca_go_to_bought"|xv_lang}</a></li>
+						<li><a href="{$URLS.Auction}/{$auction_info.ID}/">{"xca_back_to_auction"|xv_lang}</a></li>
 					</ul>
 				</div>
 			</div>
 			{if $buy_message}
 				<fieldset style="margin-top: 10px;">
-					<legend>Wiadomość od sprzedawcy</legend>
+					<legend>{"xca_message_from_seller"|xv_lang}</legend>
 					
 						<div class="xva-seller-message">
 							{$buy_message}
@@ -43,10 +43,10 @@
 					<thead> 
 						<tr>
 							<th class="items-thumbnail"></th>	
-							<th class="items-title">Tytuł</th>	
-							<th class="items-cost">Cena/szt</th>	
-							<th class="items-pieces">Sztuk</th>	
-							<th class="items-sum">Razem</th>	
+							<th class="items-title">{"xca_title"|xv_lang}</th>	
+							<th class="items-cost">{"xca_cost_per_one"|xv_lang}</th>	
+							<th class="items-pieces">{"xca_piece"|xv_lang}</th>	
+							<th class="items-sum">{"xca_sum"|xv_lang}</th>	
 						</tr>
 					</thead>
 					<tbody>
@@ -75,16 +75,16 @@
 					<input type="hidden" name="type" value="{$smarty.post.type|escape:'htmlall'}" />
 					<input type="hidden" name="offer" value="{$smarty.post.offer|escape:'htmlall'}" />
 					<input type="hidden" name="confirm_buy" value="1" />
-					<input type="submit" value="Złóż ofertę!" />
+					<input type="submit" value="{'xca_make_offer'|xv_lang}!" />
 				</form>
 				{else}
-					<div class="error">Nie masz uprawnień do kupywania przedmiotów. </div>
+					<div class="error">{"xca_not_have_access_to_buy"|xv_lang}. </div>
 				{/if}
 			<div>
 				<p>Czynności:</p>
 					<ul>
-						<li><a href="{$URLS.AuctionPanel}/Bought/">Idź do listy kupionych przedmiotów</a></li>
-						<li><a href="{$URLS.Auction}/{$auction_info.ID}/">Powrót do aukcji</a></li>
+						<li><a href="{$URLS.AuctionPanel}/Bought/">{"xca_go_to_bought"|xv_lang}</a></li>
+						<li><a href="{$URLS.Auction}/{$auction_info.ID}/">{"xca_back_to_auction"|xv_lang}</a></li>
 					</ul>
 			</div>
 			{/if}

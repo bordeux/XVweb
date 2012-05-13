@@ -172,7 +172,7 @@ class XVWeb extends OperationXVWeb
                                 $this->ArticleFooVersion = $VersionArticle;
                         }
                         if(!is_null($address)){
-                                $this->ArticleFooLocation = $this->AddSlashesStartAndEnd($address); //tu
+                                $this->ArticleFooLocation = $this->add_path_slashes($address); //tu
                                 $this->ArticleFooLocation = str_replace("_", " ", $this->ArticleFooLocation);
                         }
                         if(!empty($this->ArticleFooIDinArticleIndex) && !is_numeric($this->ArticleFooIDinArticleIndex)){
@@ -279,7 +279,7 @@ class XVWeb extends OperationXVWeb
 				return true;
 			}
 			$IssetArticleSQL = $this->DataBase->prepare('SELECT SQL_CACHE {Text_Index:ID}  FROM {Text_Index} WHERE {Text_Index:URL} = :UrlIdexArticle LIMIT 1');
-			$IssetArticleSQL->execute(array(':UrlIdexArticle' => ($this->AddSlashesStartAndEnd($Location)))); //tu
+			$IssetArticleSQL->execute(array(':UrlIdexArticle' => ($this->add_path_slashes($Location)))); //tu
 			if(!($IssetArticleSQL->rowCount())){
 				return false;
 			}
@@ -392,58 +392,6 @@ class XVWeb extends OperationXVWeb
 		if(is_null($this->ReadArticleOut) or is_null($this->ReadArticleIndexOut))
 		return false; else
 		$this->HTMLtoDoc->createDoc($this->ParseArticleContents(), $this->ReadArticleIndexOut['Topic'], true);
-	}
-	/************************************************************************************************/
-	var $Loggin = null;
-	public function Loggin($User= null, $Password= null, $MD5Pass=false , $ValidPass = true){
-			if(!is_null($User)){
-				$this->Loggin['User'] = $User;
-			}
-			if(!is_null($Password)){
-				$this->Loggin['Password'] = $Password;
-			}
-			if(!$this->ReadUser($this->Loggin['User'])){
-				$this->Loggin['Error'] = 1 ; //brak usera
-				return false;
-			}
-			if(!empty($this->ReadUser['OpenID'])) {
-				$this->Loggin['Error'] = 3 ; //open id check it is
-				return false;
-			}
-
-			if($ValidPass){
-				if($MD5Pass==true){
-					if($this->Loggin['Password'] != md5(MD5Key.$this->ReadUser['Password'])){
-						$this->Loggin['Error'] = 2; //zle haslo
-						return false;
-					}
-				}else{
-					if(md5(MD5Key.$this->Loggin['Password']) != $this->ReadUser['Password']){ //tu
-						$this->Loggin['Error'] = 2; //zle haslo
-						return false;
-					}
-				}
-			}
-
-			$this->EditUserInit();
-			$this->Date['EditUser']->Date['Log'] = false;
-			$this->Date['EditUser']->Date['OffSecure']=true;
-			$this->Date['EditUser']->Init($this->ReadUser['User']);
-			$this->Date['EditUser']->set("IP", $_SERVER['REMOTE_ADDR'].", ".gethostbyaddr($_SERVER['REMOTE_ADDR']).", ".$_SERVER['HTTP_USER_AGENT']);
-			$this->Date['EditUser']->set("LastLogin",  date('Y-m-d H:i:s'));
-			$this->Date['EditUser']->set("LoginCount", $this->ReadUser['LoginCount']+1);
-			$this->Date['EditUser']->execute();
-			
-			$this->Session->Session('Logged_Logged', true);
-			$this->Session->Session('Logged_ID', $this->ReadUser['ID']);
-			$this->Session->Session('Logged_User', $this->ReadUser['Nick']);
-			$this->Session->Session('Logged_Password', $this->ReadUser['Password']);
-			$this->Session->Session('Logged_Theme', $this->ReadUser['Theme']);
-			$this->Session->Session('Logged_Avant', $this->ReadUser['Avant']);
-			$this->Session->Session('user_group', $this->ReadUser['Group']);
-			$this->Session->Session('user_permissions', $this->get_group_permissions($this->ReadUser['Group']));
-			$this->Log("LoggedUser", array("User"=>$this->ReadUser['Nick']));
-			return true;
 	}
 	/************************************************************************************************/
 	var $LogginWithOpenIDVar;
@@ -589,7 +537,7 @@ class XVWeb extends OperationXVWeb
 	/************************************************************************************************/
 	public function URLtoID($UrlArticle){
 			if(!empty($UrlArticle)){
-				$UrlArticle = $this->AddSlashesStartAndEnd($UrlArticle);
+				$UrlArticle = $this->add_path_slashes($UrlArticle);
 				if($this->Cache->exist("URLtoID",($UrlArticle))){
 					return $this->Cache->get();
 				}
@@ -660,7 +608,7 @@ class XVWeb extends OperationXVWeb
 	}
 	/************************************************************************************************/
 	function GetOnlyContextArticle($URL){
-		$URL = $this->AddSlashesStartAndEnd($URL);
+		$URL = $this->add_path_slashes($URL);
 		$GetOnlyContex = $this->DataBase->prepare('SELECT {Articles:Contents} AS `Contents`  FROM  {Text_Index} ArticleIndex RIGHT JOIN {Articles} Article ON ArticleIndex.{Text_Index:AdressInSQL}=Article.{Articles:AdressInSQL} WHERE ArticleIndex.{Text_Index:URL} = :URLExecute ORDER BY Article.{Articles:Version} DESC LIMIT 1;');
 		$GetOnlyContex->execute(
 		array(

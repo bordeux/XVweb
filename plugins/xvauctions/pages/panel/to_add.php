@@ -26,7 +26,7 @@ $to_add_list = xvp()->get_to_add($XVauctions, $XVwebEngine->Session->Session('Lo
 $_GET = array_filter($_GET);
 
 include_once(ROOT_DIR.'core'.DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'Pager.php');
-$pager = pager($record_limit, (int) $to_add_list[1],  "?".$XVwebEngine->AddGet(array("page"=>"-npage-id-"), true), (int) $_GET['page']);
+$pager = pager($record_limit, (int) $to_add_list[1],  "?".$XVwebEngine->add_get_var(array("page"=>"-npage-id-"), true), (int) $_GET['page']);
 
 $Smarty->assignByRef('pager', $pager);
 $Smarty->assignByRef('to_add_list', $to_add_list[0] );

@@ -146,7 +146,7 @@ class xvauction_fields_option extends xvauction_fields {
 		
 	$options = explode("\n", $field['FieldOptions']['options']);
 		return array(
-			"link"=> $this->XVweb->AddGet(array(
+			"link"=> $this->XVweb->add_get_var(array(
 				($field['Name']) => ''	
 			), true),
 			"caption" => $fieldOptions['caption'].'  '.htmlspecialchars(ifsetor($options[$_GET[$field['Name']]], ''))

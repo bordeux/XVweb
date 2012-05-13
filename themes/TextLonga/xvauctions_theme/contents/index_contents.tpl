@@ -37,7 +37,7 @@
 							</ul>
 							{$SubMode=0}
 						{/if}
-							<li><a href="{$URLS.Auctions}{$category.Category}{if $smarty.server.QUERY_STRING != ""}?{addget value=""}{/if}">{$category.Name} ({$category.AuctionsCount})</a></li>
+							<li><a href="{$URLS.Auctions}{$category.Category}{if $smarty.server.QUERY_STRING != ""}?{add_get_var value=""}{/if}">{$category.Name} ({$category.AuctionsCount})</a></li>
 						{/if}
 					{/foreach}
 				</ul>

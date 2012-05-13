@@ -1,5 +1,5 @@
 $(function(){
-	$(".xvauction-index-category").click(function(){
+	$(".xvauction-index .xvauction-index-category").click(function(){
 		if($(this).is(".xvauction-index-selected")){
 			//return false;
 		}

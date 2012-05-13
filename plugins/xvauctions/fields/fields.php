@@ -130,7 +130,7 @@ class xvauction_fields {
 	 * @return ARRAY() - w formacie
 	 @code
 		return array(
-			"link"=> $this->XVweb->AddGet(array(
+			"link"=> $this->XVweb->add_get_var(array(
 				($field['Name']) => ''	
 			), true), // domyślnie
 			"caption" => "Opis : Wartosc"

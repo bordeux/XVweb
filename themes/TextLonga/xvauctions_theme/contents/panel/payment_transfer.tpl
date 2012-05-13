@@ -58,34 +58,34 @@
 				<input type="hidden" name="pre_send" value="true" />
 					<table>
 						<tr>
-							<td style="width: 200px; font-weight: bold;">Dostępne saldo</td>
+							<td style="width: 200px; font-weight: bold;">{"xca_available_balance"|xv_lang}</td>
 							<td>{if $Session.xv_payments_amount > 0} <span style="font-weight:bold; color:#3f7f00;">{({$Session.xv_payments_amount}/100)|number_format:2:'.':' '}  {"xca_coin_type"|xv_lang}</span>{else}<span style="font-weight:bold; color:#bf0000;">{({$Session.xv_payments_amount}/100)|number_format:2:'.':' '}  {"xca_coin_type"|xv_lang}</span>{/if}</td>
 						</tr>			
 						<tr>
-							<td style="width: 200px; font-weight: bold;">Kwota do transferu</td>
+							<td style="width: 200px; font-weight: bold;">{"xca_amount_of_transfer"|xv_lang}</td>
 							<td><input type="text" value="" name="transfer[amount]" class="xva-transfer-amount" {literal}pattern="((([0-9]){0,10})|(([0-9]){0,10}(\.)([0-9]){2}))"{/literal} placeholder="ex. 53.42" /></td>
 						</tr>
 						<tr>
-							<td style="width: 200px; font-weight: bold;">Kwota która zostanie przelana</td>
+							<td style="width: 200px; font-weight: bold;">{"xca_amount_of_transfer_result"|xv_lang}</td>
 							<td><span class="xva-transfer-result">0</span> {"xca_coin_type"|xv_lang}</td>
 						</tr>
 						<tr>
-							<td style="width: 200px; font-weight: bold;">Odbiorca przlewu</td>
-							<td><input type="text" value="" name="transfer[user]" maxlength="50" placeholder="nazwa uzytkownika.." /></td>
+							<td style="width: 200px; font-weight: bold;">{"xca_transfer_recipient"|xv_lang}</td>
+							<td><input type="text" value="" name="transfer[user]" maxlength="50" placeholder="username.." /></td>
 						</tr>				
 						<tr>
-							<td style="width: 200px; font-weight: bold;">Wiadomość dla odbiorcy</td>
+							<td style="width: 200px; font-weight: bold;">{"xca_message_to_recipient"|xv_lang}</td>
 							<td><textarea name="transfer[message]" ></textarea></td>
 						</tr>
 						<tr>
 							<td></td>
-							<td><input type="submit" value="Dalej" name="submit" /></td>
+							<td><input type="submit" value="{'xca_next'|xv_lang}" name="submit" /></td>
 						</tr>
 
 					</table>
 				</div>
 				<div style="float:left; margin-left: 40px;" class="LightBulbTip">
-					Pamiętaj o tym, że serwis bierze {$amount_commission*100}% prowizji od przelewu.
+					{"xca_provision_message"|xv_lang|sprintf:($amount_commission*100)}
 				</div>
 				</form>
 				<script>

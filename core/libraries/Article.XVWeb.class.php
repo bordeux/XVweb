@@ -176,7 +176,7 @@ UPDATE {Text_Index} SET {Text_Index:URL} = CONCAT(:PathTo, SUBSTRING({Text_Index
 		if(!is_null($CategoryArticle)){
 			$this->Date['XVweb']->SaveArticle['Category'] = $CategoryArticle;
 		}
-		$this->Date['XVweb']->SaveArticle['URL'] = $this->Date['XVweb']->AddSlashesStartAndEnd($UrlArticle); //yu
+		$this->Date['XVweb']->SaveArticle['URL'] = $this->Date['XVweb']->add_path_slashes($UrlArticle); //yu
 		$this->Date['XVweb']->SaveArticle['URL'] = str_replace("_", " ", $this->Date['XVweb']->SaveArticle['URL']);
 		if(strripos($this->Date['XVweb']->SaveArticle['URL'], '"') or strripos(($this->Date['XVweb']->SaveArticle['URL']), "'")){
 			$this->Date['XVweb']->SaveArticleError = "IllegalCharacters";
@@ -222,7 +222,7 @@ UPDATE {Text_Index} SET {Text_Index:URL} = CONCAT(:PathTo, SUBSTRING({Text_Index
 			}
 		}
 		if(empty($this->Date['XVweb']->SaveArticle['Topic'])){
-			$this->Date['XVweb']->SaveArticle['Topic'] =  $this->Date['XVweb']->ReadTopicArticleFromUrl(($this->Date['XVweb']->SaveArticle['URL'])); //tu
+			$this->Date['XVweb']->SaveArticle['Topic'] =  $this->Date['XVweb']->read_sufix_from_url(($this->Date['XVweb']->SaveArticle['URL'])); //tu
 		}
 
 		// blokowanie pisania w zablokowanej kategorii
@@ -250,8 +250,8 @@ INSERT INTO {Articles} ({Articles:AdressInSQL} , {Articles:Date}, {Articles:Topi
 		return true;
 	}
 	public function AddAlias($url, $IDArticle){
-		$url =  $this->Date['XVweb']->AddSlashesStartAndEnd($url); 
-		$topic =  $this->Date['XVweb']->ReadTopicArticleFromUrl($url);
+		$url =  $this->Date['XVweb']->add_path_slashes($url); 
+		$topic =  $this->Date['XVweb']->read_sufix_from_url($url);
 		$category =  $this->Date['XVweb']->ReadCategoryArticle($url);
 		if($category != "/"){
 			if(!$this->Date['XVweb']->isset_article($category))

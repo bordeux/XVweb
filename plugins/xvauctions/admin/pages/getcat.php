@@ -61,7 +61,7 @@ class xv_admin_xvauctions_getcat{ // get categories
 		if(empty($CatInfo)){
 			$CatInfo = array("CatURL" => "/", "Title" =>"You can't edit this", "Name"=>"You can't edit this", "Use" => "0", "Category" => "/" );
 		}else{
-			$CatInfo['CatURL'] = $XVweb->ReadTopicArticleFromUrl($CatInfo['Category']);
+			$CatInfo['CatURL'] = $XVweb->read_sufix_from_url($CatInfo['Category']);
 		}
 		
 		$ParentsCategories = getCategoryParents($CatInfo['Category']);

@@ -26,7 +26,7 @@
 		</div>
 
 		{if $smarty.get.error == "amount"}
-			<div class="error"> Masz za mało środków na koncie. Musisz doładować konto </div>
+			<div class="error"> {"xca_not_enaught_amount"|xv_lang}</div>
 		{/if}
 		
 		<form method="post" action="?pay=true">
@@ -36,10 +36,10 @@
 					<thead> 
 						<tr>	
 							<th class="items-thumbnail" style="width: 70px;"></th>	
-							<th class="items-description" style="width: 60%;">Tytuł</th>	
-							<th class="items-cost">Cena/szt</th>	
-							<th class="items-pieces">Sztuk</th>	
-							<th class="items-sum">Razem</th>	
+							<th class="items-description" style="width: 60%;">{"xca_title"|xv_lang}</th>	
+							<th class="items-cost">{"xca_cost_per_one"|xv_lang}</th>	
+							<th class="items-pieces">{"xca_pieces"|xv_lang}</th>	
+							<th class="items-sum">{"xca_sum"|xv_lang}</th>	
 						</tr>
 					</thead>
 					<tbody>
@@ -64,7 +64,7 @@
 							<td style="vertical-align: middle;">
 										<select style="width: 90%;" name="shipment_method" id="shipment_method">
 											{foreach from=$shipment_available_methods item=method}
-												<option value="{$method.key}" class="shipment-method-{$method.key}" data-cost="{$method.cost}" data-pieces="{$method.pieces}" >{$method.name} ({$method.cost|number_format:2:'.':' '} {"xca_coin_type"|xv_lang}  +  kolejna sztuka * {$method.pieces|number_format:2:'.':' '} {"xca_coin_type"|xv_lang})</option>
+												<option value="{$method.key}" class="shipment-method-{$method.key}" data-cost="{$method.cost}" data-pieces="{$method.pieces}" >{$method.name} ({$method.cost|number_format:2:'.':' '} {"xca_coin_type"|xv_lang}  +  {"xca_next_piece"|xv_lang} * {$method.pieces|number_format:2:'.':' '} {"xca_coin_type"|xv_lang})</option>
 											{/foreach}
 											</select>
 							</td>
@@ -98,7 +98,7 @@
 			
 			<div style="clear:both;"></div>
 		</div>
-			<div style="text-align:center;"><input type="submit" value="Zapłać" /></div>
+			<div style="text-align:center;"><input type="submit" value="{'xca_pay'|xv_lang}" /></div>
 		</form>
 		</div>
 		

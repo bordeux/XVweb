@@ -29,11 +29,11 @@ class xv_admin_ip_ban {
 	global $URLS;
 		$this->icon = $GLOBALS['URLS']['Site'].'plugins/ip_ban/admin/icons/ban.png';
 		
-			$this->URL = "IP_Ban/".(empty($_SERVER['QUERY_STRING']) ? "" : "?".$XVweb->AddGet(array(), true));
+			$this->URL = "IP_Ban/".(empty($_SERVER['QUERY_STRING']) ? "" : "?".$XVweb->add_get_var(array(), true));
 
 			$bans_list = $this->get_records($XVweb, ((int) ifsetor($_GET['page'], 0)), 30);
 			include_once(ROOT_DIR.'core'.DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'Pager.php');
-			$pager = pager(30, (int) $bans_list->list_count,  "?".$XVweb->AddGet(array("page"=>"-npage-id-"), true), $actual_page);
+			$pager = pager(30, (int) $bans_list->list_count,  "?".$XVweb->add_get_var(array("page"=>"-npage-id-"), true), $actual_page);
 			
 			$this->content =  '<div class="xv-ban-table-div xv-table">
 				<div style="float:right;">
@@ -69,8 +69,8 @@ class xv_admin_ip_ban {
 		</div>';
 		
 		$this->content .=  '<div class="xv-ban-search">
-				<a href="#" class="xv-toggle" data-xv-toggle=".xv-ban-search-form" action="?'.$XVweb->AddGet(array(), true).'" > Search... </a>
-					<form style="display:none" class="xv-ban-search-form xv-form" method="get" data-xv-result=".content" action="'.$GLOBALS['URLS']['Script'].'Administration/get/IP_Ban/?'.$XVweb->AddGet(array(), true).'">
+				<a href="#" class="xv-toggle" data-xv-toggle=".xv-ban-search-form" action="?'.$XVweb->add_get_var(array(), true).'" > Search... </a>
+					<form style="display:none" class="xv-ban-search-form xv-form" method="get" data-xv-result=".content" action="'.$GLOBALS['URLS']['Script'].'Administration/get/IP_Ban/?'.$XVweb->add_get_var(array(), true).'">
 						<table>
 						<tbody>';
 				foreach($XVweb->DataBase->get_fields("Bans") as $keyf=>$field){		

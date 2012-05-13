@@ -165,9 +165,9 @@
 	<div class="table" id="Table">
 			<div class="table-row" id="TableHeader">
 				{if $Page != 'sent'}<div  class="table-cell delete"> <input type="checkbox" name="All" id="SelectAll" value="all"></div>{/if}
-				<div  class="table-cell date"><a href='?{addget value="SortBy=Date&Sort=$SmartySort"}'>{$language.Date}</a></div>
-				<div  class="table-cell {if $Page == 'sent'}to{else}from{/if}">{if $Page == 'sent'}<a href='?{addget value="SortBy=To&Sort=$SmartySort"}'>{$language.To}</a>{else}<a href='?{addget value="SortBy=From&Sort=$SmartySort"}'>{$language.From}</a>{/if}</div>
-				<div  class="table-cell message"><a href='?{addget value="SortBy=Topic&Sort=$SmartySort"}'>{$language.Message}</a></div>
+				<div  class="table-cell date"><a href='?{add_get_var value="SortBy=Date&Sort=$SmartySort"}'>{$language.Date}</a></div>
+				<div  class="table-cell {if $Page == 'sent'}to{else}from{/if}">{if $Page == 'sent'}<a href='?{add_get_var value="SortBy=To&Sort=$SmartySort"}'>{$language.To}</a>{else}<a href='?{add_get_var value="SortBy=From&Sort=$SmartySort"}'>{$language.From}</a>{/if}</div>
+				<div  class="table-cell message"><a href='?{add_get_var value="SortBy=Topic&Sort=$SmartySort"}'>{$language.Message}</a></div>
 			</div>
 			{if $MessagesList->List}
 			{foreach from=$MessagesList->List item=MessageItem name=MessagesForeach}

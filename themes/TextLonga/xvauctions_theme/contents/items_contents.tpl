@@ -48,7 +48,7 @@
 							</ul>
 							{$SubMode=0}
 						{/if}
-							<li><a href="{$URLS.Auctions}{$category.Category}{if $smarty.server.QUERY_STRING != ""}?{addget value=""}{/if}">{$category.Name} ({$category.AuctionsCount})</a></li>
+							<li><a href="{$URLS.Auctions}{$category.Category}{if $smarty.server.QUERY_STRING != ""}?{add_get_var value=""}{/if}">{$category.Name} ({$category.AuctionsCount})</a></li>
 						{/if}
 					{/foreach}
 				</ul>
@@ -85,20 +85,20 @@
 	<div class="xauction-tabs ui-tabs ui-widget ui-widget-content ui-corner-top">
 		<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-top">
 			<li class="ui-state-default ui-corner-top ui-state-hover ui-button-text-icon-primary {if $smarty.get.auction_type == '' ||  $smarty.get.auction_type == 'all'}ui-state-active{/if}">
-				<a href="?{addget value="auction_type="}" title='{"xca_all1"|xv_lang}' style="padding-left:20px;"> <span class="ui-icon ui-icon-script" style="margin-left:-16px;"></span>{"xca_all1"|xv_lang}</a>
+				<a href="?{add_get_var value="auction_type="}" title='{"xca_all1"|xv_lang}' style="padding-left:20px;"> <span class="ui-icon ui-icon-script" style="margin-left:-16px;"></span>{"xca_all1"|xv_lang}</a>
 			</li>
 			<li class="ui-state-default ui-corner-top ui-state-hover ui-button-text-icon-primary {if $smarty.get.auction_type == 'buynow'}ui-state-active{/if}">
-				<a href="?{addget value="auction_type=buynow"}" title="{"xca_only_buy_now"|xv_lang}" style="padding-left:20px;"> <span class="ui-icon ui-icon-script" style="margin-left:-16px;"></span>{"xca_only_buy_now"|xv_lang}</a>
+				<a href="?{add_get_var value="auction_type=buynow"}" title="{"xca_only_buy_now"|xv_lang}" style="padding-left:20px;"> <span class="ui-icon ui-icon-script" style="margin-left:-16px;"></span>{"xca_only_buy_now"|xv_lang}</a>
 			</li>	
 			<li class="ui-state-default ui-corner-top ui-state-hover ui-button-text-icon-primary {if $smarty.get.auction_type == 'auction'}ui-state-active{/if}">
-				<a  href="?{addget value="auction_type=auction"}" title="{"xca_only_auctions"|xv_lang}" style="padding-left:20px;"> <span class="ui-icon ui-icon-script" style="margin-left:-16px;"></span>{"xca_only_auctions"|xv_lang}</a>
+				<a  href="?{add_get_var value="auction_type=auction"}" title="{"xca_only_auctions"|xv_lang}" style="padding-left:20px;"> <span class="ui-icon ui-icon-script" style="margin-left:-16px;"></span>{"xca_only_auctions"|xv_lang}</a>
 			</li>
 			<li class="ui-state-default ui-corner-top ui-state-hover ui-button-text-icon-primary {if $smarty.get.auction_type == 'dutch'}ui-state-active{/if}">
-				<a  href="?{addget value="auction_type=dutch"}" title="{"xca_only_dutch_auctions"|xv_lang}" style="padding-left:20px;"> <span class="ui-icon ui-icon-script" style="margin-left:-16px;"></span>{"xca_only_dutch_auctions"|xv_lang}</a>
+				<a  href="?{add_get_var value="auction_type=dutch"}" title="{"xca_only_dutch_auctions"|xv_lang}" style="padding-left:20px;"> <span class="ui-icon ui-icon-script" style="margin-left:-16px;"></span>{"xca_only_dutch_auctions"|xv_lang}</a>
 			</li>
 			{if "AdminPanel"|perm}
 			<li class="ui-state-default ui-corner-top ui-state-hover" style="float:right;">
-				<a href="{$URLS.Script}Administration/XVauctions/Categories/?cat={$auctions_category|escape:'url'}" style="padding:0px" target="_blank"><span class="ui-button  ui-icon ui-icon-wrench " title="Edytuj kategorie"></span></a>
+				<a href="{$URLS.Script}Administration/XVauctions/Categories/?cat={$auctions_category|escape:'url'}" style="padding:0px" target="_blank"><span class="ui-button  ui-icon ui-icon-wrench " title="{'xca_edit_category'|xv_lang}"></span></a>
 			</li>
 			{/if}
 
@@ -131,10 +131,10 @@
 					<tr>
 
 						<th class="items-thumbnail"></th>
-						<th class="items-title"><a href='?{addget value="sortby=title&sort=$SmartySort"}'>{$SmartyChar} {"xca_description"|xv_lang}</a></th>
-						<th class="items-cost"><a href='?{addget value="sortby=cost&sort=$SmartySort"}'>{$SmartyChar} {"xca_cost"|xv_lang}</a></th>
-						<th class="items-offers"><a href='?{addget value="sortby=offers&sort=$SmartySort"}'>{$SmartyChar} {"xca_offer"|xv_lang}</a></th>
-						<th class="items-timeout"><a href='?{addget value="sortby=end&sort=$SmartySort"}'>{$SmartyChar} {"xca_to_end"|xv_lang}</a></th>
+						<th class="items-title"><a href='?{add_get_var value="sortby=title&sort=$SmartySort"}'>{$SmartyChar} {"xca_description"|xv_lang}</a></th>
+						<th class="items-cost"><a href='?{add_get_var value="sortby=cost&sort=$SmartySort"}'>{$SmartyChar} {"xca_cost"|xv_lang}</a></th>
+						<th class="items-offers"><a href='?{add_get_var value="sortby=offers&sort=$SmartySort"}'>{$SmartyChar} {"xca_offer"|xv_lang}</a></th>
+						<th class="items-timeout"><a href='?{add_get_var value="sortby=end&sort=$SmartySort"}'>{$SmartyChar} {"xca_to_end"|xv_lang}</a></th>
 					</tr>
 				</thead> 
 				<tbody> 

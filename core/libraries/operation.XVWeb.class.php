@@ -47,52 +47,6 @@ class OperationXVWeb
 	}
 
 
-	public function CryptPassword( $str ) {
-		return md5(MD5Key.$str);
-		$temp = '';
-		$result = null;
-		for ( $i = 0; $i < strlen( $str ); ++$i) {
-			$temp = ord( $str[$i] );
-			$temp = dechex( $temp );
-			$temp = str_pad( $temp, 2, '0', STR_PAD_LEFT );
-			$result .= $temp;
-		}
-		return $result;
-	}
-	public function DecryptPassword( $str ) {
-		$temp = '';
-		$result = null;
-		for ( $i = 0; $i < strlen( $str ); $i = $i + 2 ) {
-			$temp = $str[$i] . $str[$i+1];
-			$temp = hexdec( $temp );
-			$temp = chr( $temp );
-			$result .= $temp;
-		}
-		return $result;
-	}
-	public function checkValidIp($cidr) {
-		if(!eregi("EXPR", $cidr)) {
-			$return = FALSE;
-		} else {
-			$return = TRUE;
-		}
-		if ( $return == TRUE ) {
-			$parts = explode("/", $cidr);
-			$ip = $parts[0];
-			$netmask = $parts[1];
-			$octets = explode(".", $ip);
-			foreach ( $octets AS $octet ) {
-				if ( $octet > 255 ) {
-					$return = FALSE;
-				}
-			}
-			if ( ( $netmask != "" ) && ( $netmask > 32 ) ) {
-				$return = FALSE;
-			}
-		}
-		return $return;
-	}
-
 	public function get_size( $path )
 	{
 		$size = 0;
@@ -125,20 +79,6 @@ class OperationXVWeb
 	}
 
 
-	public function GeneratePassword($LengthPassword = 5)
-	{
-		$CharPack = "abcdefghijklmnpqrstuvwxyz123456789";
-		srand((double)microtime() * 1000000);
-
-		while(strlen($haslo) < $LengthPassword)
-		{
-			$znak = $CharPack[rand(0, strlen($CharPack) - 1)];
-			if(!is_integer(strpos($haslo, $znak))) $haslo .= $znak;
-		}
-		return $haslo;
-	}  
-
-
 	public function URLRepair($url) {
 		$arr = explode ('/', $url);
 		$counter = 0;
@@ -153,7 +93,7 @@ class OperationXVWeb
 		return $return;
 	}
 
-	public function AddSlashesStartAndEnd($string){
+	public function add_path_slashes($string){
 		$last = $string{strlen($string)-1};
 		if ($last != "/"){
 			$string .= '/';
@@ -166,7 +106,7 @@ class OperationXVWeb
 
 
 	public function ReadCategoryArticle($str, $Slash= false){
-		$str = $this->AddSlashesStartAndEnd($str);
+		$str = $this->add_path_slashes($str);
 		preg_match("/(.*)\/(.*)\//",$str, $matches);
 		return $matches[1].'/';
 
@@ -182,26 +122,17 @@ class OperationXVWeb
 	}
 
 
-	public function ReadPrefix($str, $index=1){
-		$str = $this->AddSlashesStartAndEnd($str);
+	public function read_prefix_from_url($str, $index=1){
+		$str = $this->add_path_slashes($str);
 		$str = explode("/", $str);
 		return $str[$index];
 	}
 
 
-	public function ReadTopicArticleFromUrl($str){
-		$str = $this->AddSlashesStartAndEnd($str);
+	public function read_sufix_from_url($str){
+		$str = $this->add_path_slashes($str);
 		$str = explode("/", $str);
 		return $str[count($str)-2];
-	}
-
-	public function LightText($text){
-		$text = str_replace(chr(13), "", $text);
-		$text = str_replace('"', "", $text);
-		$text = str_replace("'", "", $text);
-		$text = str_replace("/", "", $text);
-		$text = str_replace("\\", "", $text);
-		return $text;
 	}
 
 	public function delete_dir( $dir , $DeleteMatrix=true){
@@ -214,14 +145,14 @@ class OperationXVWeb
 		} 
 		if ($DeleteMatrix) rmdir( $dir ); 
 	}
-	public function AddGet($ArrayOrString, $XHTML=false){
+	public function add_get_var($ArrayOrString, $XHTML=false){
 		if(is_array($ArrayOrString))
 		return ($XHTML ? str_replace("&", "&amp;",http_build_query(array_merge($GLOBALS['_GET'], $ArrayOrString))) : http_build_query(array_merge($GLOBALS['_GET'], $ArrayOrString)));
 		parse_str($ArrayOrString, $output);
 		return ($XHTML ? str_replace("&", "&amp;",http_build_query(array_merge($GLOBALS['_GET'], $output))) : http_build_query(array_merge($GLOBALS['_GET'], $output)));
 	}
 	public function GetFromURL($url, $int =1, $Char = "/"){
-		$url = $this->AddSlashesStartAndEnd($url);
+		$url = $this->add_path_slashes($url);
 		$return = explode($Char, $url);
 		return (isset($return[$int]) ? $return[$int] : null);
 	}
@@ -234,20 +165,6 @@ class OperationXVWeb
 			unset( $array[$orig] );
 		}
 		return $array;
-	}
-	public function SortArrayByOrder($array, $Order){
-		$NewArray = array();
-		foreach ($Order as $valueOrder) {
-			if(isset($array[$valueOrder])){
-				$NewArray[] = array($valueOrder => $array[$valueOrder]);
-				unset($array[$valueOrder]);
-			}
-		}
-		foreach ($array as $key=> $valueOrder) {
-			$NewArray[] = array($key => $valueOrder);
-		}
-		unset($array);
-		return $NewArray;
 	}
 	function url_explode($string)
 	{
@@ -264,6 +181,7 @@ class OperationXVWeb
 		}
 		return $result;
 	}
+	
 	var $Cookies;
 	public function setcookie($name, $value, $expire=0, $path='', $domain='',  $secure=false, $httponly=false){
 		if (headers_sent($filename, $linenum)){
@@ -310,13 +228,8 @@ class OperationXVWeb
 		}
 		return $partition;
 	}
-	function SelectImplode($array, $prefix=""){
-		$Return = array();
-		foreach($array as $key=>$val)
-		$Return[] = $prefix."`".$val."` AS `".$key."`";
-		return implode(" ,", $Return);
-	}
-	public function SortDivisions($Divisions){
+
+	public function sort_divisions($Divisions){
 		$DivisionsReturn = "";
 		$DivisionsReturn = "<div id='divisions'>";
 		$Char = "";

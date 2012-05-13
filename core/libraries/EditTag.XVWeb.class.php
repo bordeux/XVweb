@@ -19,7 +19,7 @@ class EditArticle
 				return false;
 			}
 
-			$Tags =  $this->Date['XVweb']->LightText($Tags);
+			//$Tags =  $this->Date['XVweb']->LightText($Tags);
 
 			$EditTags = $this->Date['XVweb']->DataBase->prepare('UPDATE {Text_Index} SET {Text_Index:Tag} = :TagsExecute WHERE {Text_Index:ID} = :IDExecute');
 			$EditTagsReturn = $EditTags->execute(

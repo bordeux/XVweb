@@ -25,7 +25,7 @@ $comments_list = xvp()->get_comments($XVauctions, $XVwebEngine->Session->Session
 $_GET = array_filter($_GET);
 
 include_once(ROOT_DIR.'core'.DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'Pager.php');
-$pager = pager($record_limit, (int) $comments_list[1],  "?".$XVwebEngine->AddGet(array("page"=>"-npage-id-"), true), (int) $_GET['page']);
+$pager = pager($record_limit, (int) $comments_list[1],  "?".$XVwebEngine->add_get_var(array("page"=>"-npage-id-"), true), (int) $_GET['page']);
 
 $Smarty->assignByRef('pager', $pager);
 $Smarty->assignByRef('comments_list', $comments_list[0] );

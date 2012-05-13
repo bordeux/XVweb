@@ -25,9 +25,9 @@
 	
 	<div class="xv-article-tags">{$language.Tags}: <span id="tags">{$ReadArticleIndexOut.Tag}</span></div>
 	<div class="xv-article-addons">		
-		<a href='?{addget value="doc=true"}'><img src="{$URLS.Theme}img/blank.png" class="xv-icon-doc" alt="Microsoft Word" /></a>
-		<a href='?{addget value="view=true&download=true&html=true"}'><img src="{$URLS.Theme}img/blank.png" class="xv-icon-html" alt="HTML" /></a>
-		<a href='?{addget value="pdf=true&ajax=true"}'><img src="{$URLS.Theme}img/blank.png" class="xv-icon-pdf" alt="PDF" /></a>
+		<a href='?{add_get_var value="doc=true"}'><img src="{$URLS.Theme}img/blank.png" class="xv-icon-doc" alt="Microsoft Word" /></a>
+		<a href='?{add_get_var value="view=true&download=true&html=true"}'><img src="{$URLS.Theme}img/blank.png" class="xv-icon-html" alt="HTML" /></a>
+		<a href='?{add_get_var value="pdf=true&ajax=true"}'><img src="{$URLS.Theme}img/blank.png" class="xv-icon-pdf" alt="PDF" /></a>
 		<a href="?view=true" class="xv-print-page"><img src="{$URLS.Theme}img/blank.png" class="xv-icon-print" alt="Print" /></a>
 		<g:plusone size="small"></g:plusone>
 		

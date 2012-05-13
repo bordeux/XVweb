@@ -244,13 +244,13 @@ if(!empty($UserFromUrl)){
 	$modifications_count = $XVwebEngine->module("user_info")->get_last_count_records();
 	$Smarty->assign('modifications_list',    $modifications_list);
 	$Smarty->assign('modifications_count',    $modifications_count);
-	$Smarty->assign('modifications_pager',   pager(30, (int) $modifications_count,  "?".$XVwebEngine->AddGet(array("mod_pager"=>"-npage-id-"), true), (int) $_GET['mod_pager']));	
+	$Smarty->assign('modifications_pager',   pager(30, (int) $modifications_count,  "?".$XVwebEngine->add_get_var(array("mod_pager"=>"-npage-id-"), true), (int) $_GET['mod_pager']));	
 	
 	$files_list = $XVwebEngine->module("user_info")->get_files($XVwebEngine->ReadUser['Nick'], (int) $_GET['files_pager']);
 	$files_count = $XVwebEngine->module("user_info")->get_last_count_records();
 	$Smarty->assign('files_list',    $files_list);
 	$Smarty->assign('files_count',    $files_count);
-	$Smarty->assign('files_pager',   pager(30, (int) $files_count,  "?".$XVwebEngine->AddGet(array("files_pager"=>"-npage-id-"), true), (int) $_GET['mod_pager']));
+	$Smarty->assign('files_pager',   pager(30, (int) $files_count,  "?".$XVwebEngine->add_get_var(array("files_pager"=>"-npage-id-"), true), (int) $_GET['mod_pager']));
 	
 	
 	$Smarty->assign('MiniMap', array(
@@ -272,7 +272,7 @@ if(!empty($UserFromUrl)){
 	$UserList = $XVwebEngine->UserList(array("ActualPage"=>(int) $_GET['Page'] , "EveryPage" => $RecordsLimit));
 	$Smarty->assign('UserList',$UserList[0]);
 
-	$pager = pager($RecordsLimit, (int) $UserList[1],  "?".$XVwebEngine->AddGet(array("Page"=>"-npage-id-"), true), (int) $_GET['Page']);
+	$pager = pager($RecordsLimit, (int) $UserList[1],  "?".$XVwebEngine->add_get_var(array("Page"=>"-npage-id-"), true), (int) $_GET['Page']);
 	
 	$Smarty->assign('Pager',        $pager);
 	$Smarty->assign('ActualPage',   $ActualPage);

@@ -202,9 +202,9 @@
 				<thead> 
 					<tr>
 						{if $Page != 'sent'}<th> <input type="checkbox" name="All" id="SelectAll" value="all"> </th>{/if}
-						<th><a href='?{addget value="SortBy=Date&Sort=$SmartySort"}'>{$language.Date}</a></th>
-						<th>{if $Page == 'sent'}<a href='?{addget value="SortBy=To&Sort=$SmartySort"}'>{$language.To}</a>{else}<a href='?{addget value="SortBy=From&Sort=$SmartySort"}'>{$language.From}</a>{/if}</th>
-						<th><a href='?{addget value="SortBy=Topic&Sort=$SmartySort"}'>{$language.Message}</a></th>
+						<th><a href='?{add_get_var value="SortBy=Date&Sort=$SmartySort"}'>{$language.Date}</a></th>
+						<th>{if $Page == 'sent'}<a href='?{add_get_var value="SortBy=To&Sort=$SmartySort"}'>{$language.To}</a>{else}<a href='?{add_get_var value="SortBy=From&Sort=$SmartySort"}'>{$language.From}</a>{/if}</th>
+						<th><a href='?{add_get_var value="SortBy=Topic&Sort=$SmartySort"}'>{$language.Message}</a></th>
 					</tr>
 				</thead> 
 				<tbody> 

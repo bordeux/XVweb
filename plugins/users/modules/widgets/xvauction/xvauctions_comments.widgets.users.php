@@ -17,7 +17,7 @@ class xv_users_modules_xvauctions_comments extends xv_users_modules {
 	$record_limit = 30;
 
 	$comments_list = xvp()->get_comments($XVauctions, $user_data->User, array("type"=> ifsetor($_GET['xva_c_type'], "")), (int) $_GET['xva_comments'], $record_limit);
-	$comments_pager = pager($record_limit, (int) $comments_list[1],  "?".$XVwebEngine->AddGet(array("xva_comments"=>"-npage-id-"), true), (int) $_GET['xva_comments']);
+	$comments_pager = pager($record_limit, (int) $comments_list[1],  "?".$XVwebEngine->add_get_var(array("xva_comments"=>"-npage-id-"), true), (int) $_GET['xva_comments']);
 
 //var_dump($comments_list);
 	$result = '';
@@ -25,10 +25,10 @@ class xv_users_modules_xvauctions_comments extends xv_users_modules {
 	'<div class="xv-xvauction-comments">
 		<div class="xv-user-seperate"><span> Komentarze xvAuctions </span></div>
 		<div class="xv-xvauction-legends">
-			 <a href="?'.$XVwebEngine->AddGet(array("xva_c_type"=>null), true).'"><span class="xv-xvauction-legend xv-xvauction-legend-all"></span> Wszystkie</a>
-			 <a href="?'.$XVwebEngine->AddGet(array("xva_c_type"=>"positive"), true).'"><span class="xv-xvauction-legend xv-xvauction-legend-positive"></span> Pozytywne</a>
-			 <a href="?'.$XVwebEngine->AddGet(array("xva_c_type"=>"neutral"), true).'"><span class="xv-xvauction-legend xv-xvauction-legend-neutral"></span> Neutralne</a>
-			 <a href="?'.$XVwebEngine->AddGet(array("xva_c_type"=>"negative"), true).'"><span class="xv-xvauction-legend xv-xvauction-legend-negative"></span> Negatywne</a>
+			 <a href="?'.$XVwebEngine->add_get_var(array("xva_c_type"=>null), true).'"><span class="xv-xvauction-legend xv-xvauction-legend-all"></span> Wszystkie</a>
+			 <a href="?'.$XVwebEngine->add_get_var(array("xva_c_type"=>"positive"), true).'"><span class="xv-xvauction-legend xv-xvauction-legend-positive"></span> Pozytywne</a>
+			 <a href="?'.$XVwebEngine->add_get_var(array("xva_c_type"=>"neutral"), true).'"><span class="xv-xvauction-legend xv-xvauction-legend-neutral"></span> Neutralne</a>
+			 <a href="?'.$XVwebEngine->add_get_var(array("xva_c_type"=>"negative"), true).'"><span class="xv-xvauction-legend xv-xvauction-legend-negative"></span> Negatywne</a>
 		</div>
 		<div class="xv-xvauction-comments-list">';
 		if(empty($comments_list[0])){

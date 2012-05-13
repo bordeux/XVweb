@@ -43,10 +43,10 @@
 
 						<th class="items-checkbox"><input type="checkbox" name="select_all" value="true" class="select_all" data-selector='input[name="auction[]"]' /></th>
 						<th class="items-thumbnail"></th>
-						<th class="items-title"><a href='?{addget value="sortby=title&sort=$SmartySort"}'>{$SmartyChar} {"xca_description"|xv_lang}</a></th>
-						<th class="items-cost"><a href='?{addget value="sortby=cost&sort=$SmartySort"}'>{$SmartyChar} {"xca_cost"|xv_lang}</a></th>
-						<th class="items-pieces"><a href='?{addget value="sortby=seller&sort=$SmartySort"}'>{$SmartyChar} {"xca_seller"|xv_lang}</a></th>
-						<th class="items-timeout"><a href='?{addget value="sortby=offers&sort=$SmartySort"}'>{$SmartyChar}  {"xca_offers"|xv_lang}</a></th>
+						<th class="items-title"><a href='?{add_get_var value="sortby=title&sort=$SmartySort"}'>{$SmartyChar} {"xca_description"|xv_lang}</a></th>
+						<th class="items-cost"><a href='?{add_get_var value="sortby=cost&sort=$SmartySort"}'>{$SmartyChar} {"xca_cost"|xv_lang}</a></th>
+						<th class="items-pieces"><a href='?{add_get_var value="sortby=seller&sort=$SmartySort"}'>{$SmartyChar} {"xca_seller"|xv_lang}</a></th>
+						<th class="items-timeout"><a href='?{add_get_var value="sortby=offers&sort=$SmartySort"}'>{$SmartyChar}  {"xca_offers"|xv_lang}</a></th>
 
 					</tr>
 				</thead> 

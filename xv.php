@@ -131,7 +131,7 @@ xvp()->connect_db($XVwebEngine);
 
 /**Config File**/
 $XVwebEngine->Date['ConfigFile'] = getcwd().DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'config.xml';
-$XVwebEngine->Date['RootDir'] = $RootDir;
+$XVwebEngine->Date['RootDir'] = ROOT_DIR;
 /**Config File**/
 
 xvp()->PreWork($XVwebEngine);
@@ -144,7 +144,8 @@ $xv_theme_name = xv_main_config()->theme;
 
 xv_trigger("xvweb.pre_set_urls");
 
-$URLS['Catalog'] = substr(substr($_SERVER['PHP_SELF'], 0,  stripos($_SERVER['PHP_SELF'], basename(__FILE__))), 1); 
+$URLS['Catalog'] = parse_url(substr(substr($_SERVER['PHP_SELF'], 0,  stripos($_SERVER['PHP_SELF'], basename(__FILE__))), 1),  PHP_URL_PATH); 
+
 if(empty($URLS['Site'])) 			$URLS['Site']			= 'http'.(isset($_SERVER['HTTPS'])?'s':'').'://'.$_SERVER['HTTP_HOST']."/".$URLS['Catalog'];
 if(empty($URLS['Path']))	        $URLS['Path']	        = (isset($_SERVER['ORIG_PATH_INFO']) ? $_SERVER['ORIG_PATH_INFO'] : $_SERVER['PATH_INFO']);
 if(empty($URLS['ThemeCatalog']))	$URLS['ThemeCatalog']	= $URLS['Site'].'themes/';
@@ -154,8 +155,8 @@ if(empty($URLS['Theme']))			$URLS['Theme']			= $URLS['ThemeCatalog'].$xv_theme_n
 if(empty($URLS['Avats']))			$URLS['Avats']			= $URLS['Site'].'plugins/users/modules/fields/avatar/f/';
 if(empty($UploadDir))		       	$UploadDir		        = getcwd().DIRECTORY_SEPARATOR.'files'.DIRECTORY_SEPARATOR;
 if(empty($URLS['Path']))			$URLS['Path'] 			= xv_main_config()->index_page; //index page
-$URLS['PathInfo']					= $XVwebEngine->AddSlashesStartAndEnd($URLS['Path']);
-$URLS['Prefix'] 					= $XVwebEngine->ReadPrefix($URLS['PathInfo']);
+$URLS['PathInfo']					= $XVwebEngine->add_path_slashes($URLS['Path']);
+$URLS['Prefix'] 					= $XVwebEngine->read_prefix_from_url($URLS['PathInfo']);
 $XVwebEngine->Date['UrlSite'] =		$URLS['Site'];
 $XVwebEngine->Date['URLS'] =		$URLS;
 $URLS['JSCatalog']		= $URLS['JSCatalog'].$xv_theme_name."/";
@@ -169,7 +170,7 @@ if($XVwebEngine->Plugins()->Menager()->event("onready")) eval($XVwebEngine->Plug
 
 //!Plugin:onReady
 
-$PathInfo = $XVwebEngine->AddSlashesStartAndEnd($URLS['Path']);
+$PathInfo = $XVwebEngine->add_path_slashes($URLS['Path']);
 
 if(!$XVwebEngine->Session->Session('xv_visit')){
 	xv_trigger("xvweb.visit");
@@ -196,6 +197,7 @@ xv_load_lang("general");
 
 try {
 	$Smarty = new Smarty();
+	$Smarty->addPluginsDir(ROOT_DIR.'plugins/smarty/');
 	$Smarty->plugins_dir[] = (getcwd()).DIRECTORY_SEPARATOR.'plugins'.DIRECTORY_SEPARATOR.'smarty'.DIRECTORY_SEPARATOR;
 	$Smarty->template_dir = 'themes'.DIRECTORY_SEPARATOR.$xv_theme_name.DIRECTORY_SEPARATOR;
 	$CompileDir = getcwd().DIRECTORY_SEPARATOR.'tmp'.DIRECTORY_SEPARATOR.$xv_theme_name.DIRECTORY_SEPARATOR;

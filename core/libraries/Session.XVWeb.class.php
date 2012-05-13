@@ -30,7 +30,7 @@ class SessionClass
 				$this->Date['SessionIsset'] = true;
 			}
 		}else{
-			$SidRandomCookie = md5(MD5Key.mt_rand(0, mt_getrandmax()));
+			$SidRandomCookie = md5(uniqid().mt_rand(0, mt_getrandmax()));
 			setcookie(($this->CookieName), $SidRandomCookie, 0, "/");
 			$this->SID = $SidRandomCookie;
 			$this->Date['Mod'] = true;

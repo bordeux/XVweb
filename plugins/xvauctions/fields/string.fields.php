@@ -122,7 +122,7 @@ class xvauction_fields_string extends xvauction_fields {
 		return null;
 		
 		return array(
-			"link"=> $this->XVweb->AddGet(array(
+			"link"=> $this->XVweb->add_get_var(array(
 				($field['Name']) => ''	
 			), true),
 			"caption" => $fieldOptions['caption'].'  '.htmlspecialchars(ifsetor($_GET[$field['Name']], ''))

@@ -42,11 +42,11 @@
 					<tr>
 
 						<th class="items-checkbox"><input type="checkbox" name="select_all" value="true" class="select_all" data-selector='input[name="auction[]"]' /></th>
-						<th class="items-id"><a href='?{addget value="sortby=id&sort=$SmartySort"}'>{$SmartyChar} {"ID"|xv_lang}</a></th>
+						<th class="items-id"><a href='?{add_get_var value="sortby=id&sort=$SmartySort"}'>{$SmartyChar} {"ID"|xv_lang}</a></th>
 						<th class="items-thumbnail"></th>
-						<th class="items-title"><a href='?{addget value="sortby=title&sort=$SmartySort"}'>{$SmartyChar} {"xca_description"|xv_lang}</a></th>
-						<th class="items-date"><a href='?{addget value="sortby=date&sort=$SmartySort"}'>{$SmartyChar} {"xca_date"|xv_lang}</a></th>
-						<th class="items-contractor"><a href='?{addget value="sortby=contractor&sort=$SmartySort"}'>{$SmartyChar} {"xca_contractor"|xv_lang}</a></th>
+						<th class="items-title"><a href='?{add_get_var value="sortby=title&sort=$SmartySort"}'>{$SmartyChar} {"xca_description"|xv_lang}</a></th>
+						<th class="items-date"><a href='?{add_get_var value="sortby=date&sort=$SmartySort"}'>{$SmartyChar} {"xca_date"|xv_lang}</a></th>
+						<th class="items-contractor"><a href='?{add_get_var value="sortby=contractor&sort=$SmartySort"}'>{$SmartyChar} {"xca_contractor"|xv_lang}</a></th>
 						<th class="items-none"></th>
 
 					</tr>

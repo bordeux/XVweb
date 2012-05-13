@@ -32,7 +32,7 @@ $no_selled_list = xvp()->get_no_selled($XVauctions, $XVwebEngine->Session->Sessi
 $_GET = array_filter($_GET);
 
 include_once(ROOT_DIR.'core'.DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'Pager.php');
-$pager = pager($record_limit, (int) $no_selled_list[1],  "?".$XVwebEngine->AddGet(array("page"=>"-npage-id-"), true), (int) $_GET['page']);
+$pager = pager($record_limit, (int) $no_selled_list[1],  "?".$XVwebEngine->add_get_var(array("page"=>"-npage-id-"), true), (int) $_GET['page']);
 
 $Smarty->assignByRef('pager', $pager);
 $Smarty->assignByRef('no_selled_list', $no_selled_list[0] );

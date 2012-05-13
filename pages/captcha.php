@@ -32,6 +32,18 @@ switch(strtolower($Command)){
 		CaptchaImage();
 	break;
 }
+function GeneratePassword($LengthPassword = 5)
+	{
+		$CharPack = "abcdefghijklmnpqrstuvwxyz123456789";
+		srand((double)microtime() * 1000000);
+
+		while(strlen($haslo) < $LengthPassword)
+		{
+			$znak = $CharPack[rand(0, strlen($CharPack) - 1)];
+			if(!is_integer(strpos($haslo, $znak))) $haslo .= $znak;
+		}
+		return $haslo;
+	}  
 function CaptchaWav(){
 	global $XVwebEngine;
 	include_once('core'.DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'Captcha'.DIRECTORY_SEPARATOR.'CaptchaWav.php');
@@ -45,7 +57,7 @@ function CaptchaWav(){
 }
 
 function CaptchaImage(){
-	$GLOBALS['XVwebEngine']->Session->Session('Captcha_code', $GLOBALS['XVwebEngine']->GeneratePassword());
+	$GLOBALS['XVwebEngine']->Session->Session('Captcha_code', GeneratePassword());
 	include_once('core'.DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'Captcha'.DIRECTORY_SEPARATOR.'CaptchaImage.php');
 	GetCaptchaImage($GLOBALS['XVwebEngine']->Session->Session('Captcha_code'), 30, 90);
 exit;
@@ -56,6 +68,11 @@ echo "<!DOCTYPE html>
 <html>
 <head>
 <title>Captcha</title>
+<style>
+* {
+border: none;
+}
+</style>
 </head>
 
 <body style='width: 200px;'>

@@ -28,7 +28,7 @@
 		{if $payments_mode == "select_method"}
 			<div style="padding: 20px;">
 				<div class="LightBulbTip" style="width: 90%; margin: auto;">
-					<div style="margin: 20px; text-align:center;">Proszę wybrać metodę płatności</div>
+					<div style="margin: 20px; text-align:center;">{"xca_select_payment_method"|xv_lang}</div>
 					
 					<div style="margin: 20px; text-align:center;">
 						 {foreach from=$payments_buttons item=payment}

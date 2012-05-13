@@ -51,11 +51,11 @@
 				<thead> 
 					<tr>
 						<th class="items-thumbnail"></th>
-						<th class="items-title"><a href='?{addget value="sortby=title&sort=$SmartySort"}'>{$SmartyChar} {"xca_description"|xv_lang}</a></th>
-						<th class="items-cost"><a href='?{addget value="sortby=cost&sort=$SmartySort"}'>{$SmartyChar} {"xca_cost"|xv_lang}</a></th>
-						<th class="items-offers"><a href='?{addget value="sortby=offers&sort=$SmartySort"}'>{$SmartyChar} {"xca_offer"|xv_lang}</a></th>
-						<th class="items-timeout"><a href='?{addget value="sortby=end&sort=$SmartySort"}'>{$SmartyChar} {"xca_to_end"|xv_lang}</a></th>
-						<th class="items-timeout"><a href='?{addget value="sortby=views&sort=$SmartySort"}'>{$SmartyChar} {"Views"|xv_lang}</a></th>
+						<th class="items-title"><a href='?{add_get_var value="sortby=title&sort=$SmartySort"}'>{$SmartyChar} {"xca_description"|xv_lang}</a></th>
+						<th class="items-cost"><a href='?{add_get_var value="sortby=cost&sort=$SmartySort"}'>{$SmartyChar} {"xca_cost"|xv_lang}</a></th>
+						<th class="items-offers"><a href='?{add_get_var value="sortby=offers&sort=$SmartySort"}'>{$SmartyChar} {"xca_offer"|xv_lang}</a></th>
+						<th class="items-timeout"><a href='?{add_get_var value="sortby=end&sort=$SmartySort"}'>{$SmartyChar} {"xca_to_end"|xv_lang}</a></th>
+						<th class="items-timeout"><a href='?{add_get_var value="sortby=views&sort=$SmartySort"}'>{$SmartyChar} {"Views"|xv_lang}</a></th>
 						<th class="items-none"></th>
 					</tr>
 				</thead> 
@@ -99,8 +99,8 @@
 							{$auction.Views}
 						</td>
 						<td class="items-timeout">
-							<a href="{$URLS.AuctionsAdd}?step=edit&amp;id={$auction.ID}">Edytuj aukcje</a>
-							<a href="{$URLS.AuctionPanel}/finish/{$auction.ID}/">Zakończ</a>
+							<a href="{$URLS.AuctionsAdd}?step=edit&amp;id={$auction.ID}">{"xca_edit_auction"|xv_lang}</a>
+							<a href="{$URLS.AuctionPanel}/finish/{$auction.ID}/">{"xca_finish"|xv_lang}</a>
 						</td>
 					</tr>
 				{/foreach}

@@ -23,7 +23,7 @@ class xv_users_modules_files  extends xv_users_modules {
 		</style>");
 		$files_list = $XVwebEngine->module("user_info")->get_files($user_data->User, (int) $_GET['files_pager']);
 		$files_count = $XVwebEngine->module("user_info")->get_last_count_records();
-		$files_pager = pager(30, (int) $files_count,  "?".$XVwebEngine->AddGet(array("files_pager"=>"-npage-id-"), true), (int) $_GET['files_pager']);
+		$files_pager = pager(30, (int) $files_count,  "?".$XVwebEngine->add_get_var(array("files_pager"=>"-npage-id-"), true), (int) $_GET['files_pager']);
 		
 
 		$result = '';

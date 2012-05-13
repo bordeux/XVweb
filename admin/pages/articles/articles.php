@@ -38,7 +38,7 @@ class xv_admin_articles{
 		$TextsList =	$this->GetAricles($XVweb, $ActualPage,$RecordsLimit, $_GET['SortBy'], $SortByP );
 		//$TextsList = $this->GetAricles($XVweb, $ActualPage,$RecordsLimit, (isset($_GET['LogSelect']) ? $_GET['LogSelect'] : null));
 		include_once($GLOBALS['LocationXVWeb'].DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'Pager.php');
-		$pager = pager($RecordsLimit, (int) $TextsList->Count,  "?".$XVweb->AddGet(array("Page"=>"-npage-id-"), true), $ActualPage);
+		$pager = pager($RecordsLimit, (int) $TextsList->Count,  "?".$XVweb->add_get_var(array("Page"=>"-npage-id-"), true), $ActualPage);
 		
 
 
@@ -47,12 +47,12 @@ class xv_admin_articles{
 				<caption>'.$pager[0].'</caption>
 				<thead> 
 					<tr class="xv-pager">
-						<th><a href="?'.$XVweb->AddGet('SortBy=ID&Sort='.$SortByP, true).'">'.$GLOBALS['Language']['ID'].'</a></th>
-						<th><a href="?'.$XVweb->AddGet('SortBy=Date&Sort='.$SortByP, true).'">'.$GLOBALS['Language']['Date'].'</a></th>
-						<th><a href="?'.$XVweb->AddGet('SortBy=Topic&Sort='.$SortByP, true).'">'.$GLOBALS['Language']['Topic'].'</a></th>
-						<th><a href="?'.$XVweb->AddGet('SortBy=Accepted&Sort='.$SortByP, true).'">'.$GLOBALS['Language']['Accepted'].'</a></th>
-						<th><a href="?'.$XVweb->AddGet('SortBy=Blocked&Sort='.$SortByP, true).'">'.$GLOBALS['Language']['Blocked'].'</a></th>
-						<th><a href="?'.$XVweb->AddGet('SortBy=Views&Sort='.$SortByP, true).'">'.$GLOBALS['Language']['Views'].'</a></th>
+						<th><a href="?'.$XVweb->add_get_var('SortBy=ID&Sort='.$SortByP, true).'">'.$GLOBALS['Language']['ID'].'</a></th>
+						<th><a href="?'.$XVweb->add_get_var('SortBy=Date&Sort='.$SortByP, true).'">'.$GLOBALS['Language']['Date'].'</a></th>
+						<th><a href="?'.$XVweb->add_get_var('SortBy=Topic&Sort='.$SortByP, true).'">'.$GLOBALS['Language']['Topic'].'</a></th>
+						<th><a href="?'.$XVweb->add_get_var('SortBy=Accepted&Sort='.$SortByP, true).'">'.$GLOBALS['Language']['Accepted'].'</a></th>
+						<th><a href="?'.$XVweb->add_get_var('SortBy=Blocked&Sort='.$SortByP, true).'">'.$GLOBALS['Language']['Blocked'].'</a></th>
+						<th><a href="?'.$XVweb->add_get_var('SortBy=Views&Sort='.$SortByP, true).'">'.$GLOBALS['Language']['Views'].'</a></th>
 					</tr>
 				</thead> 
 				<tbody>';
@@ -119,7 +119,7 @@ class xv_admin_articles_comments{
 		$ActualPage = (int) ifsetor($_GET['Page'], 0);
 		$TextsList =	$this->GetComments($XVweb, $ActualPage,$RecordsLimit, $_GET['SortBy'], $SortByP );
 		include_once($GLOBALS['LocationXVWeb'].DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'Pager.php');
-		$pager = pager($RecordsLimit, (int) $TextsList->Count,  "?".$XVweb->AddGet(array("Page"=>"-npage-id-"), true), $ActualPage);
+		$pager = pager($RecordsLimit, (int) $TextsList->Count,  "?".$XVweb->add_get_var(array("Page"=>"-npage-id-"), true), $ActualPage);
 		
 
 
@@ -128,12 +128,12 @@ class xv_admin_articles_comments{
 				<caption>'.$pager[0].'</caption>
 				<thead> 
 					<tr class="xv-pager">
-						<th><a href="?'.$XVweb->AddGet('SortBy=ID&Sort='.$SortByP, true).'">'.$GLOBALS['Language']['ID'].'</a></th>
-						<th><a href="?'.$XVweb->AddGet('SortBy=Date&Sort='.$SortByP, true).'">'.$GLOBALS['Language']['Date'].'</a></th>
-						<th><a href="?'.$XVweb->AddGet('SortBy=Topic&Sort='.$SortByP, true).'">'.$GLOBALS['Language']['Topic'].'</a></th>
-						<th><a href="?'.$XVweb->AddGet('SortBy=IP&Sort='.$SortByP, true).'">'.$GLOBALS['Language']['IP'].'</a></th>
-						<th><a href="?'.$XVweb->AddGet('SortBy=Author&Sort='.$SortByP, true).'">'.$GLOBALS['Language']['User'].'</a></th>
-						<th><a href="?'.$XVweb->AddGet('SortBy=Comment&Sort='.$SortByP, true).'">'.$GLOBALS['Language']['Comment'].'</a></th>
+						<th><a href="?'.$XVweb->add_get_var('SortBy=ID&Sort='.$SortByP, true).'">'.$GLOBALS['Language']['ID'].'</a></th>
+						<th><a href="?'.$XVweb->add_get_var('SortBy=Date&Sort='.$SortByP, true).'">'.$GLOBALS['Language']['Date'].'</a></th>
+						<th><a href="?'.$XVweb->add_get_var('SortBy=Topic&Sort='.$SortByP, true).'">'.$GLOBALS['Language']['Topic'].'</a></th>
+						<th><a href="?'.$XVweb->add_get_var('SortBy=IP&Sort='.$SortByP, true).'">'.$GLOBALS['Language']['IP'].'</a></th>
+						<th><a href="?'.$XVweb->add_get_var('SortBy=Author&Sort='.$SortByP, true).'">'.$GLOBALS['Language']['User'].'</a></th>
+						<th><a href="?'.$XVweb->add_get_var('SortBy=Comment&Sort='.$SortByP, true).'">'.$GLOBALS['Language']['Comment'].'</a></th>
 						<th></th>
 					</tr>
 				</thead> 

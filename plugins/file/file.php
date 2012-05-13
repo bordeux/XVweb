@@ -128,19 +128,7 @@ if(!empty($IDFile)){
 		header("Content-Disposition:".$viewFileHeader." filename=\"".$FileInfo['FileName'].'.'.$FileInfo['Extension']."\";");
 		header("Content-Transfer-Encoding: binary");
 		header("Content-Length: ".filesize($FileLocation));
-		$DownloadRate = $XVwebEngine->Config("config")->find('config downloadlimit')->text();
-		if(!empty($DownloadRate) && $DownloadRate != 0){
-		flush();
-		$file = fopen($FileLocation , "r");    
-				while(!feof($file)) {
-					print fread($file, round($DownloadRate * 1024));    
-					flush();
-					sleep(1);    
-				}    
-		fclose($file);
-	}else {
 			@readfile($FileLocation ) or die($Language['Error']);
-		}
 		exit;
 
 	}

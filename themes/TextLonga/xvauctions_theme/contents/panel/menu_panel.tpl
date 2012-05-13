@@ -60,7 +60,6 @@
 			<div class="xvauction-sidebar-item-content">
 				<ul class="xvauction-links">
 							{menu_active data="account_address" title="Adres zamieszkania"}
-							{menu_active data="account_notifications" title="Powiadomienia"}
 				</ul>
 			</div>
 		</div>

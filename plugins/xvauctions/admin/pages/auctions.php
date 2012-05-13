@@ -33,7 +33,7 @@ if(!isset($XVwebEngine)){
 			$actual_page = (int) ifsetor($_GET['Page'], 0);
 			$auction_list = $this->get_auctions($XVweb, $actual_page,$records_limit, $_GET);
 			include_once($GLOBALS['LocationXVWeb'].DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'Pager.php');
-			$pager = pager($records_limit, (int) $auction_list->count_records,  "?".$XVweb->AddGet(array("Page"=>"-npage-id-"), true), $actual_page);
+			$pager = pager($records_limit, (int) $auction_list->count_records,  "?".$XVweb->add_get_var(array("Page"=>"-npage-id-"), true), $actual_page);
 				if(isset($_GET['sort']) && $_GET['sort'] == "desc")
 			$sort = 'asc'; else
 			$sort = 'desc';
@@ -49,13 +49,13 @@ if(!isset($XVwebEngine)){
 				<caption>'.$pager[0].'</caption>
 				<thead> 
 					<tr class="xv-pager">
-						<th><a href="?'.$XVweb->AddGet('sort_by=ID&sort='.$sort, true).'">'.xv_lang("ID").'</a></th>
-						<th><a href="?'.$XVweb->AddGet('sort_by=Category&sort='.$sort, true).'">'.xv_lang("xca_category").'</a></th>
-						<th><a href="?'.$XVweb->AddGet('sort_by=Title&sort='.$sort, true).'">'.xv_lang("Title").'</a></th>
-						<th><a href="?'.$XVweb->AddGet('sort_by=Type&sort='.$sort, true).'">'.xv_lang("xca_auction_type").'</a></th>
-						<th><a href="?'.$XVweb->AddGet('sort_by=Start&sort='.$sort, true).'">'.xv_lang("xca_start").'</a></th>
-						<th><a href="?'.$XVweb->AddGet('sort_by=End&sort='.$sort, true).'">'.xv_lang("xca_end").'</a></th>
-						<th><a href="?'.$XVweb->AddGet('sort_by=Seller&sort='.$sort, true).'">'.xv_lang("xca_seller").'</a></th>
+						<th><a href="?'.$XVweb->add_get_var('sort_by=ID&sort='.$sort, true).'">'.xv_lang("ID").'</a></th>
+						<th><a href="?'.$XVweb->add_get_var('sort_by=Category&sort='.$sort, true).'">'.xv_lang("xca_category").'</a></th>
+						<th><a href="?'.$XVweb->add_get_var('sort_by=Title&sort='.$sort, true).'">'.xv_lang("Title").'</a></th>
+						<th><a href="?'.$XVweb->add_get_var('sort_by=Type&sort='.$sort, true).'">'.xv_lang("xca_auction_type").'</a></th>
+						<th><a href="?'.$XVweb->add_get_var('sort_by=Start&sort='.$sort, true).'">'.xv_lang("xca_start").'</a></th>
+						<th><a href="?'.$XVweb->add_get_var('sort_by=End&sort='.$sort, true).'">'.xv_lang("xca_end").'</a></th>
+						<th><a href="?'.$XVweb->add_get_var('sort_by=Seller&sort='.$sort, true).'">'.xv_lang("xca_seller").'</a></th>
 					</tr>
 				</thead> 
 				<tbody>';
@@ -85,7 +85,7 @@ if(!isset($XVwebEngine)){
 			
 			<div class="xv-log-search">
 				<a href="#" class="xv-toggle" data-xv-toggle=".xv-log-search-form"  > Szukaj </a>
-					<form style="display:none"  class="xv-log-search-form xv-form" method="get" data-xv-result=".content" action="'.$GLOBALS['URLS']['Script'].'Administration/get/XVauctions/Auctions/?'.$XVweb->AddGet(array(), true).'">
+					<form style="display:none"  class="xv-log-search-form xv-form" method="get" data-xv-result=".content" action="'.$GLOBALS['URLS']['Script'].'Administration/get/XVauctions/Auctions/?'.$XVweb->add_get_var(array(), true).'">
 						<table>
 						<tbody>';
 				foreach($XVweb->DataBase->get_fields("AuctionAuctions") as $keyf=>$field){		

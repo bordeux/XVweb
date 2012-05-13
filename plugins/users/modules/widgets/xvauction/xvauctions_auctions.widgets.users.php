@@ -17,7 +17,7 @@ class xv_users_modules_xvauctions_auctions extends xv_users_modules {
 	$record_limit = 30;
 
 	$comments_list = xvp()->get_comments($XVauctions, $XVwebEngine->Session->Session('Logged_User'), array("type"=> ifsetor($_GET['xva_c_type'], "")), (int) $_GET['xva_comments'], $record_limit);
-	$comments_pager = pager($record_limit, (int) $comments_list[1],  "?".$XVwebEngine->AddGet(array("xva_comments"=>"-npage-id-"), true), (int) $_GET['xva_comments']);
+	$comments_pager = pager($record_limit, (int) $comments_list[1],  "?".$XVwebEngine->add_get_var(array("xva_comments"=>"-npage-id-"), true), (int) $_GET['xva_comments']);
 
 //var_dump($comments_list);
 	$result = '';

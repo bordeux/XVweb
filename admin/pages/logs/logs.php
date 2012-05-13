@@ -33,7 +33,7 @@ if(!isset($XVwebEngine)){
 			$ActualPage = (int) ifsetor($_GET['Page'], 0);
 			$LogList = $this->GetLog($XVweb, $ActualPage,$RecordsLimit, (isset($_GET['LogSelect']) ? $_GET['LogSelect'] : null), $_GET);
 			include_once($GLOBALS['LocationXVWeb'].DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'Pager.php');
-			$pager = pager($RecordsLimit, (int) $LogList->LogCount,  "?".$XVweb->AddGet(array("Page"=>"-npage-id-"), true), $ActualPage);
+			$pager = pager($RecordsLimit, (int) $LogList->LogCount,  "?".$XVweb->add_get_var(array("Page"=>"-npage-id-"), true), $ActualPage);
 			$Types = array_keys($LogList->Types);
 			
 		$this->content = '	<div class="xv-table">
@@ -73,8 +73,8 @@ if(!isset($XVwebEngine)){
 			</div>
 			
 			<div class="xv-log-search">
-				<a href="#" class="xv-toggle" data-xv-toggle=".xv-log-search-form" action="?'.$XVweb->AddGet(array(), true).'" > Szukaj </a>
-					<form style="display:none" class="xv-log-search-form xv-form" method="get" data-xv-result=".content" action="'.$GLOBALS['URLS']['Script'].'Administration/get/Logs/?'.$XVweb->AddGet(array(), true).'">
+				<a href="#" class="xv-toggle" data-xv-toggle=".xv-log-search-form" action="?'.$XVweb->add_get_var(array(), true).'" > Szukaj </a>
+					<form style="display:none" class="xv-log-search-form xv-form" method="get" data-xv-result=".content" action="'.$GLOBALS['URLS']['Script'].'Administration/get/Logs/?'.$XVweb->add_get_var(array(), true).'">
 						<table>
 						<tbody>';
 				foreach($XVweb->DataBase->get_fields("Logs") as $keyf=>$field){		

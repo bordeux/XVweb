@@ -19,6 +19,7 @@ class xvDB extends PDO
 			array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION)
 		);
 	}
+
 	public function replace_keys($matched){
 		$matched = explode(":", $matched[1]);
 		if(!is_array($this->db_config->db_tables[$matched[0]])){

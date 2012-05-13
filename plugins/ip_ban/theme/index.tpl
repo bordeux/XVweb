@@ -19,7 +19,23 @@
 </div>
 <div id="form">{"ip_ban_reason"|xv_lang}:
 <p>{$check_ip->Message}</p>
-</div>
+</div>
+{if $smarty.get.ip_ban_login_mode}
+	<div class="login">
+	<form method="post" action="{$URLS.Script}">
+	<input type="hidden" name="ip_ban_login" value="true" />
+	<input type="hidden" name="xv_sid" value="{$JSVars.SIDUser}" />
+		<div>
+				<input type="text" name="login" autocomplete="off" placeholder="Login..." />
+				<input type="password" autocomplete="off" name="password" placeholder="Password..." />
+				<input type="submit" value="Login" />
+		</div>
+	</form>
+	</div>
+{else}
+<div style="position:fixed; right:5px; bottom:2px;">
+	<a style="color:#000;" href="?ip_ban_login_mode=true">?</a>
+</div>{/if}
 </div>
 </body>
 </html>

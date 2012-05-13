@@ -211,7 +211,7 @@ if((xvp()->ReadArticle($XVwebEngine ,$PathInfo))){
 	
 		$Divisions = xvp()->GetDivisions($XVwebEngine);
 		$Smarty->assign('DivisionsCount', count($Divisions));
-		$Divisions = xvp()->partition($XVwebEngine, xvp()->SortDivisions($XVwebEngine, $Divisions) , 2);
+		$Divisions = xvp()->partition($XVwebEngine, xvp()->sort_divisions($XVwebEngine, $Divisions) , 2);
 		$Smarty->assign('Divisions', $Divisions); unset($Divisions);
 	}
 	//\Divisions
@@ -235,7 +235,7 @@ if((xvp()->ReadArticle($XVwebEngine ,$PathInfo))){
 	$XVwebEngine->SearchInVersion = false;
 	$ActualPage = (int) $_GET['Page'];
 	$RecordsLimit = ifsetor($XVwebEngine->Config("config")->find('config pagelimit notfound')->text(), 30);
-	$TitleQuery =  $XVwebEngine->ReadTopicArticleFromUrl($XVwebEngine->ArticleFooLocation);
+	$TitleQuery =  $XVwebEngine->read_sufix_from_url($XVwebEngine->ArticleFooLocation);
 	$Smarty->assign('NotFoundArticle',true);
 	$Smarty->assign('Title',$TitleQuery);
 	$Smarty->assign('SiteTopic', sprintf($Language['NotFoundArticleTopic'], $TitleQuery));
@@ -245,7 +245,7 @@ if((xvp()->ReadArticle($XVwebEngine ,$PathInfo))){
 	$Smarty->assignByRef('SearchArray', $SearchResult);
 	if(!empty($SearchResult)){
 		include_once($LocationXVWeb.DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'Pager.php');
-		$pager = pager($RecordsLimit, (int) $XVwebEngine->Date['SearchResultCount'],  "?".$XVwebEngine->AddGet(array("Page"=>"-npage-id-"), true), $ActualPage);
+		$pager = pager($RecordsLimit, (int) $XVwebEngine->Date['SearchResultCount'],  "?".$XVwebEngine->add_get_var(array("Page"=>"-npage-id-"), true), $ActualPage);
 		$Smarty->assignByRef('Pager',     $pager);
 	}
 

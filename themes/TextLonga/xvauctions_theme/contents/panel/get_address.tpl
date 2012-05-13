@@ -26,7 +26,7 @@
 		</div>
 		<div style="padding: 20px;">
 				<div class="LightBulbTip">
-				<div style="font-size: 14px; font-weight:bold">Dane użytkownika {$user_data.User} :</div>
+				<div style="font-size: 14px; font-weight:bold">{"xca_user_data"|xv_lang} {$user_data.User} :</div>
 				<div style="padding-left: 50px;">
 					{$user_data.Name} {$user_data.Vorname}</b> {$user_data.Corporation} <br />
 					{$user_data.Street}<br />
