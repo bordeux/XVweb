@@ -99,7 +99,7 @@ foreach(scandir($dirname_extract) as $file){
 
 send_message("Moving done");
 send_message("Now refresh the page");
-send_message("<script>location.href='index.php'; </script>");
+send_message("<script>location.href='install/'; </script>");
 
 ob_end_flush();
 
