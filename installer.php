@@ -50,7 +50,7 @@ function download_file($file, $local_path, $newfilename)
     curl_close($ch); 
 
 }
-download_file('https://nodeload.github.com/bordeux/XVweb/zipball/master',dirname(__FILE__).'/', 'xvweb.zip');
+download_file('https://nodeload.github.com/bordeux/XVweb/zipball/production',dirname(__FILE__).'/', 'xvweb.zip');
 send_message("<span style='color: #00A305;'>File downloaded</span>");
 send_message("Unziping file xvweb.zip");
 
