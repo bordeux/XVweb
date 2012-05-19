@@ -56,7 +56,7 @@ class xv_api_ajax {
 	 */	
 
 	public function quick_search($search, $page){
-		$RecordsLimit = $XVwebEngine->Config("config")->find('config pagelimit quicksearch')->text();
+		$RecordsLimit = 30;
 		$RecordsLimit = is_numeric($RecordsLimit) ? $RecordsLimit : 6;
 		$SearchClass = &$XVwebEngine->module('SearchClass', 'SearchClass');
 		$SearchClass->set("noContent", true);

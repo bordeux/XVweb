@@ -65,6 +65,9 @@ class xv_admin_plugins {
 				<tbody>';
 				foreach($plugins_status['all'] as $plugin){
 				$plugin_info= $this->get_info_plugin($plugin);
+				if($plugin_info->find("name")->html() == "System"){
+					continue;
+				}
 					$this->content .= ' <tr>
 						<td style="width:80%; text-align:left;"><div class="xv-plg-header"> <span class="xv-plg-title" style="font-size:14px; font-weight:bold;">'.$plugin_info->find("name")->html().'</span> <span style="font-size:9px"> <a href="'.$plugin_info->find("url")->html().'" target="_blank"> '.$plugin_info->find("author")->html().' </a></span></div>
 						<div class="xv-plg-description" style="padding-top:10px;">'.$plugin_info->find("description")->html().'</div>

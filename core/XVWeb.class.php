@@ -93,7 +93,7 @@ class XVWeb extends OperationXVWeb
 	}
 	/************************************************************************************************/
 	public function &PreWork(){
-		$this->Cache = new Cache($this);
+		$this->Cache = new xv_cache($this);
 		$this->Session = new SessionClass($this);
 		if(is_null($this->Session->Session('user_permissions'))){
 			$this->Session->Session('Logged_ID', 2);

@@ -19,6 +19,11 @@ if($XVwebEngine->Session->GetSID() != $_POST['xv-sid']){
 	header("location: ".$URLS['Script'].'System/Auctions/Bad_SID/');
 	exit;
 }
+$user_data = xvp()->get_user_data($XVauctions, $XVwebEngine->Session->Session('Logged_User'));
+if(empty($user_data)){
+	header("location: ".$URLS['Script'].'Users/'.$XVwebEngine->Session->Session('Logged_User').'/edit/?xva_set_data=true#xvauction-user-data');
+	exit;
+}
 $buy_pieces = 1;
 
 if(isset($_POST['pieces']) && is_numeric($_POST['pieces']) && $_POST['pieces'] > 0 )

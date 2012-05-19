@@ -17,11 +17,11 @@
 
 <div class="xv-text-wrapper">
 {if $logout_success}
-	<div class="success">{$login_config->logout_success_message}</div>
+	<div class="success">{"logout_success_message"|xv_lang}</div>
 	{literal}
 	<script>new function(){var c=document.cookie.split(";");for(var i=0;i<c.length;i++){var e=c[i].indexOf("=");var n=e>-1?c[i].substr(0,e):c[i];document.cookie=n+"=;expires=Thu, 01 Jan 1970 00:00:00 GMT";}}()</script>{/literal}
 {else}
-	<div class="failed">{$login_config->logout_failed_message}</div>
+	<div class="failed">{"logout_failed_message"|xv_lang}</div>
 {/if}
 </div>
 		

@@ -23,7 +23,7 @@ if(!isset($XVwebEngine)){
 //Funckcje Search
 
 //Koniec
-$RecordsLimit = ifsetor($XVwebEngine->Config("config")->find('config pagelimit search')->text(), 30);
+$RecordsLimit = 30;
 
 $SearchKeyword = $_GET['Search'];
 if(!isset($_GET['Search']))

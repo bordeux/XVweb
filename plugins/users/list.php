@@ -264,7 +264,7 @@ if(!empty($UserFromUrl)){
 }else{
 	include_once($LocationXVWeb.DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'Pager.php');
 
-	$RecordsLimit = (int) ifsetor($XVwebEngine->Config("config")->find('config pagelimit userlist')->text(), 30);;
+	$RecordsLimit = 30;
 	$Smarty->assign('Title', $GLOBALS['Language']['Users']);
 	$Smarty->assign('SiteTopic', $GLOBALS['Language']['Users']);
 	$Smarty->assign('RightBox', $GLOBALS['Language']['Users']);

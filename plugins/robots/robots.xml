@@ -1,0 +1,16 @@
+<plugin>
+	<info>
+		<name>Robots</name>
+		<version>1.0</version>
+		<author>Krzysztof Bednarczyk</author>
+		<url>http://www.bordeux.net</url>
+		<description>Robots.txt editor</description>
+	</info>
+	<config>
+		<prefix prefix="robots.txt" include="plugins/robots/robots.php" />
+	</config>
+	<load>
+	</load>
+	<ranks>
+	</ranks>
+</plugin>

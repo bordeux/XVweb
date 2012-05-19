@@ -55,11 +55,3 @@
 			</div>
 		</div>
 		{/if}
-		<div class="xvauction-sidebar-item">
-			<div class="xvauction-sidebar-item-title">Moje konto</div>
-			<div class="xvauction-sidebar-item-content">
-				<ul class="xvauction-links">
-							{menu_active data="account_address" title="Adres zamieszkania"}
-				</ul>
-			</div>
-		</div>

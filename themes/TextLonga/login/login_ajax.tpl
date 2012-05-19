@@ -1,8 +1,8 @@
 <div style=" color: #000; width: 640px; text-align:center; margin:auto;">
 	<form action="{$URLS.Script}Login/" method="post">
 	<div class="xv-login-content">
-		{if $login_config->login_message}
-			<div class="xv-info">{$login_config->login_message}</div>
+		{if "login_message"|xv_lang}
+			<div class="xv-info">{"login_message"|xv_lang}</div>
 		{/if}
 		
 		

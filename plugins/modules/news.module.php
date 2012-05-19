@@ -11,7 +11,7 @@ class NewsPageScript
 		$GLOBALS['Debug']['Classes'][] = array("ClassName"=>get_class(), "File"=>__FILE__, "Time"=>microtime(true), "MemoryUsage"=>memory_get_usage());
 		$this->Date['LastArticles'] = array();
 		$this->Date['CountRows'] = 0;
-		$this->Date['Options'] = array("Template"=>"news_contents.tpl", "Parse"=>false, "CharsLimit"=>0, "ActualPage"=>(int)$_GET['NewsPage'], "Category"=>"/News/", "EveryPage"=> (int) ifsetor($this->Date['XVweb']->Config("config")->find('config pagelimit news')->text(), 30));
+		$this->Date['Options'] = array("Template"=>"news_contents.tpl", "Parse"=>false, "CharsLimit"=>0, "ActualPage"=>(int)$_GET['NewsPage'], "Category"=>"/News/", "EveryPage"=> 30);
 	}
 	public function &LastNews($Date= array()){
 

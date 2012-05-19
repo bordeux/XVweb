@@ -18,6 +18,12 @@ if(isset($_GET['cat'])){
 	echo json_encode($get_cats);
 	exit;
 }
+$user_data = xvp()->get_user_data($XVauctions, $XVwebEngine->Session->Session('Logged_User'));
+if(empty($user_data)){
+	header("location: ".$URLS['Script'].'Users/'.$XVwebEngine->Session->Session('Logged_User').'/edit/?xva_set_data=true#xvauction-user-data');
+	exit;
+}
+
 
 $URLS['AuctionsAdd'] = $URLS['Script'].$auction_prefix;
 $add_class = new xva_add_class();

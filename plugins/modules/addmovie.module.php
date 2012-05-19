@@ -15,7 +15,7 @@ class AddVideoMod
 		$this->Date['BuildArticle'] = "";
 		$this->Date['ArticleLink'] = "";
 		
-		$this->Date['Options'] = array("Template"=>"news_contents.tpl", "Parse"=>false, "CharsLimit"=>0, "ActualPage"=>(int)$_GET['NewsPage'], "Category"=>"/News/", "EveryPage"=> (int) ifsetor($this->Date['XVweb']->Config("config")->find('config pagelimit news')->text(), 30));
+		$this->Date['Options'] = array("Template"=>"news_contents.tpl", "Parse"=>false, "CharsLimit"=>0, "ActualPage"=>(int)$_GET['NewsPage'], "Category"=>"/News/", "EveryPage"=> 30);
 	}
 	
 	public function SetPrepare(){

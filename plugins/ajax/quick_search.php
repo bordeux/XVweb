@@ -7,7 +7,7 @@ class XV_Ajax_quick_search {
 	}
 	public function run(){
 	global $XVwebEngine;
-		$RecordsLimit = $XVwebEngine->Config("config")->find('config pagelimit quicksearch')->text();
+		$RecordsLimit = 30;
 		$RecordsLimit = is_numeric($RecordsLimit) ? $RecordsLimit : 6;
 		$SearchClass = &$XVwebEngine->module('SearchClass', 'SearchClass');
 		$SearchClass->set("noContent", true);

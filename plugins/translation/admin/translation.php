@@ -29,15 +29,7 @@ class xv_admin_translation {
 	global $URLS, $XVwebEngine;
 			$this->icon = $URLS['Site'].'plugins/translation/admin/icons/translation.png';
 			$this->URL = "Translation/".(empty($_SERVER['QUERY_STRING']) ? "" : "?".$XVweb->add_get_var(array(), true));
-			/*$XVwebEngine->DataBase->add_table("Translation", array(
-				"name" => "translation",
-				"fields" => array(
-					"ID" => "tran_id",
-					"Lang" => "tran_lang",
-					"Key" => "tran_key",
-					"Val" => "tran_val"
-				)
-			));*/
+
 			if(strlen(ifsetor($_GET['lang'], '')) == 2){
 				if(isset($_GET['file'])){
 					include(dirname(__FILE__).'/includes/lang_editor.php');
@@ -49,6 +41,20 @@ class xv_admin_translation {
 				$this->content =  get_include_contents(dirname(__FILE__).'/includes/load.php');
 			}
 	
+	}
+}
+class xv_admin_translation_save{
+	public function __construct(&$XVweb){
+			if($XVweb->Session->GetSID() != $_POST['xv-sid']){
+				exit("<div class='error'>Error: Wrong SID</div>");
+			}
+		$update_key = $XVweb->DataBase->prepare("INSERT INTO {Translation} ({Translation:Lang}, {Translation:Key}, {Translation:Val}) VALUES ( :lang, :key, :val) ON DUPLICATE KEY UPDATE {Translation:Val} = :val;");
+		$update_key->execute(array(
+			":val" => $_POST['val'],
+			":key" =>$_POST['key'],
+			":lang" => $_POST['lang'],
+		));
+		exit("<div class='success'>Saved</div>");
 	}
 }
 

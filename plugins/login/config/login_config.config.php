@@ -4,18 +4,7 @@ class login_config extends xv_config {}
 
 class login_config_editor extends  xv_config_editor {
 	public function init_fields(){
-		return array(
-			"login_message" => array(
-				"caption" => "Login message",
-				"desc" => "Message showed while user creating the account",
-				"type" => "textarea",
-			),
-			"login_success_message" => array(
-				"caption" => "Login - Success message",
-				"desc" => "Message showed after succesful login, HTML format",
-				"type" => "textarea",
-				"field_data" => array()
-			),			
+		return array(	
 			"login_cookie_name" => array(
 				"caption" => "Cookie name",
 				"desc" => "Cookie name",
@@ -38,18 +27,6 @@ class login_config_editor extends  xv_config_editor {
 				"type" => "boolean",
 			),
 
-			"logout_success_message" => array(
-				"caption" => "Logout - Success message",
-				"desc" => "Message showed after succesful logout, HTML format",
-				"type" => "textarea",
-				"field_data" => array()
-			),	
-			"logout_failed_message" => array(
-				"caption" => "Logout - failed message",
-				"desc" => "Message showed after failed logout, HTML format",
-				"type" => "textarea",
-				"field_data" => array()
-			),	
 	
 		);
 	}

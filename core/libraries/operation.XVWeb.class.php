@@ -1,12 +1,5 @@
 <?php
-function ifsetor(&$val, $default = null)
-{
-	return isset($val) ? $val : $default;
-}
-function LogMode($name){
-	$LogFile = 'E:\wamp\www\Xvweb\log.txt';
-	file_put_contents($LogFile, file_get_contents($LogFile).$name.chr(13));
-}
+function ifsetor(&$val, $default = null){return isset($val) ? $val : $default;}
 
 class OperationXVWeb
 {
@@ -294,7 +287,7 @@ class OperationXVWeb
 				case $SubMenuPQ->attr("rank") && !$this->permissions($SubMenuPQ->attr("rank")) :
 					break;
 				case $SubMenuPQ->attr("link") != "":
-					$MenuResult[$MenuName][$SubMenuID]['url'] = $this->Date['URLS']['Script'].$this->URLRepair($SubMenuPQ->attr("link"));
+					$MenuResult[$MenuName][$SubMenuID]['url'] = $this->Data['URLS']['Script'].$this->URLRepair($SubMenuPQ->attr("link"));
 				default:
 					$SubContinue = true;
 					break;
@@ -311,7 +304,7 @@ class OperationXVWeb
 							case $UrlLinkPQ->attr("rank") && !$this->permissions($UrlLinkPQ->attr("rank")):
 								break;
 							case $UrlLinkPQ->attr("link") !="":
-								$MenuResult[$MenuName][$SubMenuID]['links'][$LinkID]['url'] = $this->Date['URLS']['Script'].$this->URLRepair($UrlLinkPQ->attr("link"));	
+								$MenuResult[$MenuName][$SubMenuID]['links'][$LinkID]['url'] = $this->Data['URLS']['Script'].$this->URLRepair($UrlLinkPQ->attr("link"));	
 							default:
 								$URLContinue = true;
 								break;
@@ -373,41 +366,49 @@ class OperationXVWeb
 }
 
 
+class cache_config extends  xv_config {
+	public function init_fields(){
+		return array(
+			"expires" => array(),
+			"default_time" => 600
+		);
+	}
+}
 
-class Cache
-{
-	var $Date;
+class xv_cache {
+	var $Data;
 	public function __construct(&$Xvweb) {
-		$this->Date['XVweb'] = $Xvweb;
-		$this->Date['DefaultTime'] = 600;
+		$this->Data['XVweb'] = $Xvweb;
 		$GLOBALS['Debug']['Classes'][] = array("ClassName"=>get_class(), "File"=>__FILE__, "Time"=>microtime(true), "MemoryUsage"=>memory_get_usage());
 		
-		$this->Date['Times'] = array();
-		foreach($this->Date['XVweb']->Config("config")->find('config cachelimit') as $time)
-			$this->Date['Times'][strtolower($time->tagName)] = $time->nodeValue;
+		$this->Data['Times'] = array();
+		$cache_expires  = new cache_config();
+		$this->Data['Times'] = $cache_expires->expires;
+		$this->Data['DefaultTime'] = $cache_expires->default_time;
+		
 		
 	}
 	function exist($Category, $Handle, $CacheTime = null) {
-		if(ifsetor($this->Date['Disable'], false)==true)
+		if(ifsetor($this->Data['Disable'], false)==true)
 		return false;
 		$Handle = strtolower($Handle).".tmp";
 		$Category = strtolower($Category);
-		$HandleMD5 = md5(MD5Key.$Handle).".tmp";
-		$CategoryMD5 = md5(MD5Key.$Category);
+		$md5_handle = md5(MD5Key.$Handle).".tmp";
+		$md5_category = md5(MD5Key.$Category);
 		if(is_null($CacheTime)){
-			//$ConfigInfo = $this->Date['XVweb']->Config("config")->find(' config cachelimit '.($Category));
-			$CacheTime = (int) ( isset($this->Date['Times'][$Category]) ? $this->Date['Times'][$Category] : $this->Date['DefaultTime']);
+			//$ConfigInfo = $this->Data['XVweb']->Config("config")->find(' config cachelimit '.($Category));
+			$CacheTime = (int) ( isset($this->Data['Times'][$Category]) ? $this->Data['Times'][$Category] : $this->Data['DefaultTime']);
 		}
 		if($CacheTime == 0){
 			$GLOBALS['Debug']['Cache']['NoCached'][] = array($Category, $Handle, $CacheTime); //!Debug
 			return false;
 		}
-		if (file_exists(Cache_dir.$CategoryMD5.DIRECTORY_SEPARATOR.$HandleMD5)) {
-			if((date("Ymdgis") - date("Ymdgis", filemtime(Cache_dir.$CategoryMD5.DIRECTORY_SEPARATOR.$HandleMD5))) > $CacheTime){
-				@unlink(Cache_dir.$CategoryMD5.DIRECTORY_SEPARATOR.$HandleMD5);
+		if (file_exists(Cache_dir.$md5_category.DIRECTORY_SEPARATOR.$md5_handle)) {
+			if((date("Ymdgis") - date("Ymdgis", filemtime(Cache_dir.$md5_category.DIRECTORY_SEPARATOR.$md5_handle))) > $CacheTime){
+				@unlink(Cache_dir.$md5_category.DIRECTORY_SEPARATOR.$md5_handle);
 				return false;
 			}
-			$this->Date['Result'] = unserialize(file_get_contents(Cache_dir.$CategoryMD5.DIRECTORY_SEPARATOR.$HandleMD5));
+			$this->Data['Result'] = unserialize(file_get_contents(Cache_dir.$md5_category.DIRECTORY_SEPARATOR.$md5_handle));
 			$GLOBALS['Debug']['Cache']['Cached'][] = array($Category, $Handle, $CacheTime);//!Debug
 			return true;
 		}else{
@@ -416,70 +417,50 @@ class Cache
 		}
 	}
 	public function get(){
-		return $this->Date['Result'];
+		return $this->Data['Result'];
 	}
 	
 	function &put($Category, $Handle, $Variable=null, $CacheTime = null) {
-		//LogMode($Category." = ".$Handle);
-		if(ifsetor($this->Date['Disable'], false) == true)
+		if(ifsetor($this->Data['Disable'], false) == true)
 		return $Variable;
 		$Handle = strtolower($Handle).".tmp";
 		$Category = strtolower($Category);
-		$HandleMD5 = md5(MD5Key.$Handle).".tmp";
-		$CategoryMD5 = md5(MD5Key.$Category);
+		$md5_handle = md5(MD5Key.$Handle).".tmp";
+		$md5_category = md5(MD5Key.$Category);
 		if(is_null($CacheTime)){
-			$ConfigInfo = $this->Date['XVweb']->Config("config")->find('config cachelimit '.($Category));
-			$CacheTime = (int) ( $ConfigInfo->length ? $ConfigInfo->text() : $this->Date['DefaultTime']);
+			$CacheTime = (int) ( isset($this->Data['Times'][$Category]) ? $this->Data['Times'][$Category] : $this->Data['DefaultTime']);
 		}
 		if($CacheTime == 0)
 		return $Variable;
-		if(!is_dir(Cache_dir.$CategoryMD5)){
-			mkdir(Cache_dir.$CategoryMD5, 0700);
+		if(!is_dir(Cache_dir.$md5_category)){
+			mkdir(Cache_dir.$md5_category, 0700);
 		}
-		file_put_contents(Cache_dir.$CategoryMD5.DIRECTORY_SEPARATOR.$HandleMD5, serialize($Variable));
+		file_put_contents(Cache_dir.$md5_category.DIRECTORY_SEPARATOR.$md5_handle, serialize($Variable));
 		$GLOBALS['Debug']['Cache']['Put'][] = array($Category, $Handle, $CacheTime); //!Debug
 		return $Variable;
 	}
 	public function clear($category=null,$Handle=null) {
 		if(is_null($Handle)){
 			if(is_null($category)){
-				$this->Date['XVweb']->delete_dir(Cache_dir,false);
+				$this->Data['XVweb']->delete_dir(Cache_dir,false);
 				return true;
 			}
 			$category = strtolower($category);
-			$this->Date['XVweb']->delete_dir(Cache_dir.md5(MD5Key.$category),false);
+			$this->Data['XVweb']->delete_dir(Cache_dir.md5(MD5Key.$category),false);
 			return true;
 		}
 		$category = strtolower($category);
 		$Handle = strtolower($Handle).".tmp";
-		$HandleMD5 = md5(MD5Key.$Handle).".tmp";
-		@unlink(Cache_dir.md5(MD5Key.$category).DIRECTORY_SEPARATOR.$HandleMD5);
+		$md5_handle = md5(MD5Key.$Handle).".tmp";
+		@unlink(Cache_dir.md5(MD5Key.$category).DIRECTORY_SEPARATOR.$md5_handle);
 		return true;
 	}
 	public function disable(){
-		$this->Date['Disable'] = true;
+		$this->Data['Disable'] = true;
 	}
 	public function enable(){
-		$this->Date['Disable'] = false;
+		$this->Data['Disable'] = false;
 	}
 }
-class BanClass
-{
-	var $Date;
-
-	public function __construct(&$Xvweb) {
-		$this->Date['XVweb'] = &$Xvweb;
-		$GLOBALS['Debug']['Classes'][] = array("ClassName"=>get_class(), "File"=>__FILE__, "Time"=>microtime(true), "MemoryUsage"=>memory_get_usage());
-	}
-	public function CheckBanned($email=null, $ip=null){
-		$SQLDate[':IPExecute'] = is_null($ip) ?  $_SERVER['REMOTE_ADDR'] : $ip;
-		if(!is_null($email))
-		$SQLDate[':EmailExecute'] = $email;
-		$CheckBan = $this->Date['XVweb']->DataBase->prepare('SELECT {Bans:*} FROM {Bans} WHERE  '.(is_null($email) ? "" : '{Bans:Mail} = :EmailExecute OR ').' {Bans:IP} = :IPExecute  AND {Bans:TimeOut} > NOW() LIMIT 1');
-		$CheckBan->execute($SQLDate);
-		return $CheckBan->fetch(PDO::FETCH_ASSOC);
-	}
-}
-
 
 ?>

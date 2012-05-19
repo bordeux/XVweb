@@ -90,12 +90,16 @@ function xv_append_meta($name, $content){
 		return true;
 }
 
-
 // DEFINED
 DEFINE('SMARTY_DIR', getcwd().DIRECTORY_SEPARATOR.'core'.DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'smarty3'.DIRECTORY_SEPARATOR);
 DEFINE('Cache_dir', getcwd().DIRECTORY_SEPARATOR.'tmp'.DIRECTORY_SEPARATOR);
 DEFINE('ROOT_DIR', getcwd().DIRECTORY_SEPARATOR);
 DEFINE('XV_CONFIG_DIR', getcwd().DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR);
+
+if (!file_exists(ROOT_DIR.'config/db_config.config')){
+	header('Location: install/');
+	exit();
+}
 
 
 $RootDir = dirname(__FILE__).DIRECTORY_SEPARATOR;

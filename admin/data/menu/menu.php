@@ -9,7 +9,6 @@ $admin_menu['system'] = array(
 		"submenu" =>
 			array(
 				array ("name"=> "Language", "href"=>'Administration/Lang/'),
-				array ("name"=> "Configuration", "href"=>'Administration/Config/'),
 				array ("name"=> "Cache", "href"=>'Administration/Cache/'),
 				array ("name"=> "Plugins", "href"=>'Administration/Plugins/'),
 			)

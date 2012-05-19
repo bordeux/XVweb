@@ -163,11 +163,10 @@ if((xvp()->ReadArticle($XVwebEngine ,$PathInfo))){
 	
 	
 	
-	if( $XVwebEngine->Config("config")->find("config disable quicksearch")->text() != "true" && !ifsetor($XVwebEngine->ReadArticleIndexOut['Options']['DisableQuickSearch'], 0)){
 		if($XVwebEngine->Cache->exist("QuickSearch", $XVwebEngine->ReadArticleIndexOut['ID'])){
 			$Smarty->assign('QuickSearch', $XVwebEngine->Cache->get());
 		}else{
-			$RecordsLimit = $XVwebEngine->Config("config")->find('config pagelimit quicksearch')->text();
+			$RecordsLimit = 30;
 			$RecordsLimit = is_numeric($RecordsLimit) ? $RecordsLimit : 6;
 			$SearchClass = &$XVwebEngine->module('SearchClass', 'SearchClass');
 			xvp()->set($SearchClass, "noContent", true);
@@ -177,7 +176,7 @@ if((xvp()->ReadArticle($XVwebEngine ,$PathInfo))){
 			$Smarty->assign('QuickSearch', $XVwebEngine->Cache->put("QuickSearch", $XVwebEngine->ReadArticleIndexOut['ID'], $QuickResult));
 			unset($QuickResult);
 		}
-	}
+	
 	
 	if(!empty($XVwebEngine->ReadArticleIndexOut['Options']['CSS'])){
 		$CSSStyle = strtr($XVwebEngine->ReadArticleIndexOut['Options']['CSS'] , array(
@@ -217,7 +216,7 @@ if((xvp()->ReadArticle($XVwebEngine ,$PathInfo))){
 	//\Divisions
 
 
-	if(!(ifsetor($XVwebEngine->ReadArticleIndexOut['Options']['DisableComments'], false) OR $XVwebEngine->Config("config")->find("config disable comment")->text() == "true") &&  xv_perm('ViewComments')){
+	if(!(ifsetor($XVwebEngine->ReadArticleIndexOut['Options']['DisableComments'], false)) &&  xv_perm('ViewComments')){
 		$Smarty->assign('LoadComment', true);
 		$CommentsList = xvp()->CommentArticle($XVwebEngine);
 		$Smarty->assign('CommentsCount', count($CommentsList));
@@ -234,7 +233,7 @@ if((xvp()->ReadArticle($XVwebEngine ,$PathInfo))){
 	header("Status: 404 Not Found");
 	$XVwebEngine->SearchInVersion = false;
 	$ActualPage = (int) $_GET['Page'];
-	$RecordsLimit = ifsetor($XVwebEngine->Config("config")->find('config pagelimit notfound')->text(), 30);
+	$RecordsLimit = 30;
 	$TitleQuery =  $XVwebEngine->read_sufix_from_url($XVwebEngine->ArticleFooLocation);
 	$Smarty->assign('NotFoundArticle',true);
 	$Smarty->assign('Title',$TitleQuery);

@@ -1,6 +1,6 @@
 <?php
 extract($GLOBALS);
-$CacheNode = $XVwebEngine->Config("config")->find('config cachelimit articleparse');
+$CacheNode = 600;
 if($CacheNode->length){
 	$CacheNode->item(0)->nodeValue = 0;
 }else{

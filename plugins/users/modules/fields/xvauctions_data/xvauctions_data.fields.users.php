@@ -39,7 +39,7 @@ class xv_users_fields_xvauctions_data extends xv_users_fields {
 	$form->set("errorBox", "error");                            
 	$form->set("sanitize", false);            
 	$form->set("divs", true);                
-	$form->set("action", $URLS['AuctionPanel'].'/account_address/');
+	$form->set("action", '?save=true&amp;xvauction_data=true#xvauction-user-data');
 	$form->set("method", "post");
 	$form->set("submitMessage", "Dane zostały zmienione");
 
@@ -72,9 +72,10 @@ class xv_users_fields_xvauctions_data extends xv_users_fields {
 	}
 		$result = '';
 		$result .=
-		'<div class="xv-user-xvauctions">
+		'<div class="xv-user-xvauctions" id="xvauction-user-data">
 		<div class="xv-user-seperate"><span> Adres zamieszkania </span></div>
 		<div class="xv-user-xvauctions-content">
+		'.(isset($_GET['xva_set_data']) ? '<div class="xv-info">Aby wykonać poprzednią operacje, musisz uzupełnić dane poniżej</div> <br/>': '').'
 			'.$address_form.'
 		</div>
 			<div style="clear: both;" ></div>

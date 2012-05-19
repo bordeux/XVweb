@@ -104,10 +104,6 @@ if(isset($_GET['settings']) && is_numeric($_GET['settings'])){
 
 //Modyfication save
 if(isset($_GET['save']) && isset($_POST['xv-description'])){
-	if($XVwebEngine->Config("config")->find("config disable edit")->text() == "true" && !xv_perm('AdminPanel')){
-		header("location: ".$URLS['Script'].'System/AccessDenied/');
-		exit;
-		}
 	if(!(xv_perm('EditArticle'))){ // przekierowanie, jak nie zalogowany
 		header("location: ".$URLS['Script'].'System/AccessDenied/');
 		exit;
@@ -148,10 +144,6 @@ if(isset($_GET['save']) && isset($_POST['xv-description'])){
 	exit;
 }
 if(isset($_GET['save']) && isset($_POST['xv-path'])){
-	if($XVwebEngine->Config("config")->find("config disable write")->text() == "true" && !xv_perm('AdminPanel')){
-		header("location: ".$URLS['Script'].'System/AccessDenied/');
-		exit;
-		}
 	if(!(xv_perm('WriteArticle'))) {// Brak dostepu
 		header("location: ".$URLS['Script'].'System/AccessDenied/');
 		exit;
@@ -217,10 +209,6 @@ if(isset($_GET['save']) && isset($_POST['xv-path'])){
 }
 
 if(isset($_GET['Edit']) && is_numeric($_GET['id'])){
-		if($XVwebEngine->Config("config")->find("config disable edit")->text() == "true" && !xv_perm('AdminPanel')){
-			header("location: ".$URLS['Script'].'System/AccessDenied/');
-			exit;
-		}
 
 	if(!(xv_perm('EditArticle'))){ // przekierowanie, jak nie zalogowany
 			header("location: ".$URLS['Script'].'System/AccessDenied/');
