@@ -16,7 +16,7 @@ $Smarty->assign('Title',  "Doładowanie konta");
 $selected_payment_method = strtolower($XVwebEngine->GetFromURL($PathInfo, 3));
 if(empty($selected_payment_method)){
 if(!xv_perm("xva_payments")){
-	header("location: ".$URLS['Script'].'System/Auctions/Auction_permission_payments/');
+	header("location: ".$URLS['Script'].'Page/xvAuctions/Permission/Payments/');
 	exit;
 }
 	$Smarty->assign('payments_mode', "select_method");
@@ -52,7 +52,7 @@ if(!xv_perm("xva_payments")){
 	$selected_payment_method2 = strtolower($XVwebEngine->GetFromURL($PathInfo, 4));
 	if($selected_payment_method2 == "form"){
 		if(!xv_perm("xva_payments")){
-			header("location: ".$URLS['Script'].'System/Auctions/Auction_permission_payments/');
+			header("location: ".$URLS['Script'].'Page/xvAuctions/Permission/Payments/');
 			exit;
 		}
 		$payments_form = xvp()->form($payment_class);

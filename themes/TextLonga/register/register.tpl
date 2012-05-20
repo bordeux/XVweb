@@ -1,28 +1,14 @@
 <!-- Content -->
  <div id="Content">
 <div id="ContentDiv">
-	{if $smarty.get.msg}
-		<div class="{if $smarty.get.success}success{else}failed{/if}">
-		{if $smarty.get.title}<h2>{$smarty.get.title|escape:"html"}</h2>{/if}
-			{$smarty.get.msg|escape:"html"}
-			{if $smarty.get.list}
-			<ul>
-				{foreach from=$smarty.get.list item=Value name=minimap}
-				<li>{$Value|escape:"html"}</li>
-				{/foreach}
-			</ul>
-			{/if}
-		</div>
-	{/if}
-
 <div class="xv-text-wrapper">
 {if $register_success}
-	<div class="success">{$register_config->register_success_message}</div>
+	<div class="success">{"register_success_message"|xv_lang}</div>
 {else}
 	<form action="{$URLS.Script}Register/" method="post">
 	<div class="xv-register-content">
-		{if $register_config->register_message}
-			<div class="xv-info">{$register_config->register_message}</div>
+		{if "register_message"|xv_lang}
+			<div class="xv-info">{"register_message"|xv_lang}</div>
 		{/if}
 		
 		

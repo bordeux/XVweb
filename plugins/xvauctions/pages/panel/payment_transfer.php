@@ -9,7 +9,7 @@
 ***************************************************************************/
 
 if(!xv_perm("xva_payments")){
-	header("location: ".$URLS['Script'].'System/Auctions/Auction_permission_payments/');
+	header("location: ".$URLS['Script'].'Page/xvAuctions/Permission/Payments/');
 	exit;
 }
 
@@ -44,7 +44,7 @@ if(isset($_POST['transfer']['amount'])){
 }
 if(isset($_POST['finish_mode']) && $isset_user == true){
 	if($XVwebEngine->Session->GetSID() != $_POST['xv-sid']){
-		header('Location: '.$URLS['Script'].'System/Auctions/Bad_SID/');
+		header('Location: '.$URLS['Script'].'Page/xvAuctions/SID_Error/');
 		exit;
 	}
 	$user_amount = xvp()->get_user_amount(xvp()->InitClass($XVwebEngine,"xvpayments"), $XVwebEngine->Session->Session('Logged_User'));

@@ -9,7 +9,7 @@
 	| |_) | (_) | | | (_| |  __/ |_| |>  < _| | | |  __/ |_ 
 	|_.__/ \___/|_|  \__,_|\___|\__,_/_/\_(_)_| |_|\___|\__|
 -->                                                        					
-    <title>{$xv_title|default:$SiteTopic}:: {$xv_main_config->site_name} :.</title>
+    <title>{$xv_title|default:$SiteTopic} :: {$xv_main_config->site_name} :.</title>
 	{foreach from=$MetaTags item=content key=equiv}
 		<meta http-equiv="{$equiv}" content="{$content}" />
 	{/foreach}

@@ -36,7 +36,7 @@ if(!empty($IDFile)){
 			$XVwebEngine->FilesClass()->DeleteFile($IDFile);
 		} catch (XVwebException $e) {
 			if($e->getCode() == 1) 
-			header("location: ".$URLS['Script'].'System/AccessDenied/'); else
+			header("location: ".$URLS['Script'].'Page/System/Permissions/'); else
 			header("location: ".$URLS['Script'].'System/Error/');
 			exit;
 		}
@@ -63,7 +63,7 @@ if(!empty($IDFile)){
 	}
 	if(($XVwebEngine->GetFromURL($PathInfo, 3))){
 	if(!xv_perm("DownloadFile")){
-		header("location: ".$URLS['Script'].'System/AccessDenied/?flag=DownloadFile');
+		header("location: ".$URLS['Script'].'Page/System/Permissions/?flag=DownloadFile');
 		exit;
 	}
 		$FileInfo = $XVwebEngine->FilesClass()->GetFile($IDFile, true);
@@ -148,7 +148,7 @@ if(!empty($IDFile)){
 
 if(isset($_GET['SendFile']) && is_array($_FILES['UploadForm'])){
 		if(!(xv_perm('AddFile'))){
-			header("location: ".$URLS['Script'].'System/AccessDenied/');
+			header("location: ".$URLS['Script'].'Page/System/Permissions/');
 			exit;
 		}
 	$SaveFiles = array();

@@ -95,8 +95,8 @@ class xv_payments_method_paypal extends xv_payments_method {
 		$paypal->add('item_name','Doladowanie ID: |'.$user_info['ID'].'|');
 		$paypal->add('item_number',uniqid().' ID: |'.$user_info['ID'].'|');
 		$paypal->add('quantity',1);
-		$paypal->add('return', $GLOBALS['URLS']['Site'].'System/Auctions/Payment_success/?type=paypal');
-		$paypal->add('cancel_return', $GLOBALS['URLS']['Site'].'System/Auctions/Payment_error/?type=paypal');
+		$paypal->add('return', $GLOBALS['URLS']['Site'].'Page/xvAuctions/Payment_success/?type=paypal');
+		$paypal->add('cancel_return', $GLOBALS['URLS']['Site'].'Page/xvAuctions/Payment_error/?type=paypal');
 		$paypal->output_form();
 		exit;
 	}

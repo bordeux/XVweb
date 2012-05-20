@@ -9,7 +9,7 @@
 ***************************************************************************/
 
 if(!xv_perm("xva_Sell")){
-	header("location: ".$URLS['Script'].'System/Auctions/Auction_permission_sell/');
+	header("location: ".$URLS['Script'].'Page/xvAuctions/Permission/Sell/');
 	exit;
 }
 
@@ -128,8 +128,8 @@ class xva_add_class {
 		$user_amount = (int) $XVwebEngine->Session->Session('xv_payments_amount');
 		if($user_amount < $tmpvar['Options']['allowed_debt']*100){
 		echo $XVwebEngine->Session->Session('xv_payments_amount');
-		exit("kurwa");
-			header("location: ".$URLS['Script'].'System/Auctions/You_must_buy_credit/');
+		exit("toDo");
+			header("location: ".$URLS['Script'].'Page/xvAuctions/Buy_credit/');
 			exit;
 		}
 		unset($tmpvar);
@@ -374,12 +374,12 @@ class xva_add_class {
 			$auction_info = xvp()->get_auction($XVauctions, $edit_auction_id, true);
 			if(empty($auction_info)){
 			exit;
-				header("location: ".$URLS['Script'].'System/Auctions/Auction_does_not_exist/');
+				header("location: ".$URLS['Script'].'Page/xvAuctions/404/');
 				exit;
 			}
 			
 			if($auction_info['AuctionsCount'] > 0){
-				header("location: ".$URLS['Script'].'System/Auctions/You_cant_edit_auction/');
+				header("location: ".$URLS['Script'].'Page/xvAuctions/Blocked/');
 				exit;
 			}
 			
@@ -462,7 +462,7 @@ class xva_add_class {
 
 		$session_restore = xvp()->get_session($XVauctions, (int) $_GET['id']);
 		if(is_null($session_restore) || empty($session_restore) || $session_restore['Logged_User'] != $XVwebEngine->Session->Session('Logged_User')){
-			header("location: ".$URLS['Script'].'System/Auctions/Session_not_found/');
+			header("location: ".$URLS['Script'].'Page/xvAuctions/Session_not_found/');
 			exit;
 		}		
 		$XVwebEngine->Session->Session('xvauctions_add_category', $session_restore['xvauctions_add_category']);
@@ -477,7 +477,7 @@ class xva_add_class {
 
 		$session_restore = xvp()->get_session($XVauctions, (int) $_GET['id']);
 		if(is_null($session_restore) || empty($session_restore) || $session_restore['Logged_User'] != $XVwebEngine->Session->Session('Logged_User')){
-			header("location: ".$URLS['Script'].'System/Auctions/Session_not_found/');
+			header("location: ".$URLS['Script'].'Page/xvAuctions/Session_not_found/');
 			exit;
 		}		
 		$XVwebEngine->Session->Session('xvauctions_add_category', $session_restore['xvauctions_add_category']);

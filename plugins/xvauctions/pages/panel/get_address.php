@@ -9,7 +9,7 @@
 ***************************************************************************/
 
 if(!xv_perm("xva_Buy")){
-	header("location: ".$URLS['Script'].'System/Auctions/Auction_permission_sell/');
+	header("location: ".$URLS['Script'].'Page/xvAuctions/Permission/Sell/');
 	exit;
 }
 
@@ -21,13 +21,13 @@ $user_name = ($XVwebEngine->GetFromURL($PathInfo, 3));
 $check_perm = xvp()->check_perm_to_user_data($XVauctions, $XVwebEngine->Session->Session('Logged_User'), $user_name);
 
 if(!$check_perm){
-	header("location: ".$URLS['Script'].'System/Auctions/You_dont_have_perm_to_this/');
+	header("location: ".$URLS['Script'].'Page/xvAuctions/Permission/User_data/');
 	exit;
 }
 
 $user_data  = xvp()->get_user_data($XVauctions, $user_name);
 if(empty($user_data)){
-	header("location: ".$URLS['Script'].'System/Auctions/No_exsist_user/');
+	header("location: ".$URLS['Script'].'Page/xvAuctions/User_404/');
 	exit;
 }
 

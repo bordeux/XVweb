@@ -14,7 +14,7 @@ $auction_info = xvp()->get_auction($XVauctions, $auction_id);
 if(empty($auction_info)){
 	$auction_archive = xvp()->get_from_archive($XVauctions, $auction_id);
 	if($auction_archive == null){
-		header("location: ".$URLS['Script'].'System/Auctions/Auction_does_not_exist/');
+		header("location: ".$URLS['Script'].'Page/xvAuctions/404/');
 		exit;
 	}else{
 		$auction_info = &$auction_archive['auction'];
@@ -31,8 +31,7 @@ if(!isset($auction_description))
 	$auction_description = xvp()->get_auction_description($XVauctions, $auction_info['ID'], "description");
 	
 if(is_null($auction_description)){
-	header("location: ".$URLS['Script'].'System/Auctions/Error_with_description/');
-	exit;
+	exit("xvAuction: Error with description.");
 }
 
 $auction_selled = 0;

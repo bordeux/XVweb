@@ -9,25 +9,25 @@
 ***************************************************************************/
 
 if(!xv_perm("xva_payments")){
-	header("location: ".$URLS['Script'].'System/Auctions/Auction_permission_payments/');
+	header("location: ".$URLS['Script'].'Page/xvAuctions/Permission/Payments/');
 	exit;
 }
 $Smarty->assign('Title',  ("Kasa płatności"));
 
 $bought_id = strtolower($XVwebEngine->GetFromURL($PathInfo, 3));
 if(!is_numeric($bought_id)){
-	header("location: ".$URLS['Script'].'System/Auctions/Auction_commented/');
+	header("location: ".$URLS['Script'].'Page/xvAuctions/Comment_already_exist/');
 	exit;
 }
 $bought_info = xvp()->get_bought_item($XVauctions, $bought_id);
 
 if(empty($bought_info)){
-	header("location: ".$URLS['Script'].'System/Auctions/Auction_not_found/');
+	header("location: ".$URLS['Script'].'Page/xvAuctions/404/');
 	exit;
 }
 
 if(($bought_info['User'] != $XVwebEngine->Session->Session('Logged_User'))){
-	header("location: ".$URLS['Script'].'System/Auctions/Auction_permission_payments/');
+	header("location: ".$URLS['Script'].'Page/xvAuctions/Permission/Payments/');
 	exit;
 }
 
@@ -62,7 +62,7 @@ if(is_array($field_val)){
 }
 if(ifsetor($_GET['pay'], "false") == "true"){
 	if($XVwebEngine->Session->GetSID() != $_POST['xv-sid']){
-		header('Location: '.$URLS['Script'].'System/Auctions/Bad_SID/');
+		header('Location: '.$URLS['Script'].'Page/xvAuctions/SID_Error/');
 		exit;
 	}
 

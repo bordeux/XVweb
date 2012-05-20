@@ -9,7 +9,7 @@ $users_class = new xv_users($XVwebEngine);
 
 $activate_result = xvp()->user_activate($users_class, $activate_user, $activate_key);
 if($activate_result && $register_config->mail_activated){
-	xvp()->user_send_email($users_class, $activate_user, $register_config->mail_activated_topic, $register_config->mail_activated_message, array());
+	xvp()->user_send_email($users_class, $activate_user, xv_lang("mail_activated_topic"), xv_lang("mail_activated_message"), array());
 }
 
 $Smarty->assign('activate_result', $activate_result);

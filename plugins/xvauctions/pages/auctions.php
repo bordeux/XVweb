@@ -15,7 +15,7 @@ $auction_category =  substr($PathInfo, strlen($auction_prefix)+1);
 $category_tree = xvp()->get_category_tree($XVauctions, $auction_category);
 
 if(empty($category_tree) &&  $auction_category != '/'){
-	header("location: ".$URLS['Script'].'System/Auctions/Category_does_not_exist/');
+	header("location: ".$URLS['Script'].'Page/xvAuctions/Category_404/');
 	exit;
 }
 	include_once(ROOT_DIR.'plugins/xvauctions/fields/fields.php');

@@ -188,7 +188,7 @@ if(!empty($UserFromUrl)){
 			switch($e->getCode())
 			{
 			case 1:
-				header("location: ".$URLS['Script'].'System/AccessDenied/');
+				header("location: ".$URLS['Script'].'Page/System/Permissions/');
 				exit;		
 			default:
 				header("location: ".$URLS['Script'].'System/Error/?Code='.$e->getCode());

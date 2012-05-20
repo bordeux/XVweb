@@ -105,11 +105,11 @@ if(isset($_GET['settings']) && is_numeric($_GET['settings'])){
 //Modyfication save
 if(isset($_GET['save']) && isset($_POST['xv-description'])){
 	if(!(xv_perm('EditArticle'))){ // przekierowanie, jak nie zalogowany
-		header("location: ".$URLS['Script'].'System/AccessDenied/');
+		header("location: ".$URLS['Script'].'Page/System/Permissions/');
 		exit;
 		}
 	if(!is_numeric($_GET['save'])){
-		header("location: ".$URLS['Script'].'System/AccessDenied/');
+		header("location: ".$URLS['Script'].'Page/System/Permissions/');
 		exit;
 	}
 	if(trim(ifsetor($_POST['xv-captcha'], "")) != substr($XVwebEngine->Session->GetSID(), 0, 5)){
@@ -145,7 +145,7 @@ if(isset($_GET['save']) && isset($_POST['xv-description'])){
 }
 if(isset($_GET['save']) && isset($_POST['xv-path'])){
 	if(!(xv_perm('WriteArticle'))) {// Brak dostepu
-		header("location: ".$URLS['Script'].'System/AccessDenied/');
+		header("location: ".$URLS['Script'].'Page/System/Permissions/');
 		exit;
 		}
 	if(trim(ifsetor($_POST['xv-captcha'], "")) != substr($XVwebEngine->Session->GetSID(), 0, 5)){
@@ -211,7 +211,7 @@ if(isset($_GET['save']) && isset($_POST['xv-path'])){
 if(isset($_GET['Edit']) && is_numeric($_GET['id'])){
 
 	if(!(xv_perm('EditArticle'))){ // przekierowanie, jak nie zalogowany
-			header("location: ".$URLS['Script'].'System/AccessDenied/');
+			header("location: ".$URLS['Script'].'Page/System/Permissions/');
 			exit;
 		}
 
@@ -273,7 +273,7 @@ if(isset($_GET['Edit']) && is_numeric($_GET['id'])){
 }else{
 	$Smarty->assign('WriteUrlArticle', true);
 		if(!(xv_perm('WriteArticle'))){ // Brak dostepu
-			header("location: ".$URLS['Script'].'System/AccessDenied/');
+			header("location: ".$URLS['Script'].'Page/System/Permissions/');
 			exit;
 			}
 }

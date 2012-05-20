@@ -81,10 +81,10 @@ class xv_payments_method_przelewy24 extends xv_payments_method{
 			if($result[0] == "TRUE") {
 				xvp()->add_transaction(xvp()->InitClass($this->Data['XVweb'], "xvpayments"), $user_info['User'], $_GET['amount']*$config_provision, "przelewy24", "Wpłata poprzez przelewy24.pl" , $_POST, "p24-".$session_id);
 			
-				header('Location: '.$GLOBALS['URLS']['Site'].'System/Auctions/Payment_success/?type=przelewy24');
+				header('Location: '.$GLOBALS['URLS']['Site'].'Page/xvAuctions/Payment_success/?type=przelewy24');
 				exit;
 			}else {
-				header('Location: '.$GLOBALS['URLS']['Site'].'System/Auctions/Payment_error/?type=przelewy24');
+				header('Location: '.$GLOBALS['URLS']['Site'].'Page/xvAuctions/Payment_error/?type=przelewy24');
 				exit;
 			}
 			exit("OK");

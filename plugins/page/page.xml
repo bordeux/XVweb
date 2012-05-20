@@ -1,0 +1,16 @@
+<plugin>
+	<info>
+		<name>Page</name>
+		<version>1.0</version>
+		<author>Krzysztof Bednarczyk</author>
+		<url>http://www.bordeux.net</url>
+		<description>Pages for plugins etc.</description>
+	</info>
+	<config>
+		<prefix prefix="page" include="plugins/page/page.php" />
+	</config>
+	<load>
+	</load>
+	<ranks>
+	</ranks>
+</plugin>

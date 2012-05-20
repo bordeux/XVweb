@@ -12,11 +12,11 @@ $auction_id =  strtolower($XVwebEngine->GetFromURL($PathInfo, 2));
 
 $auction_info = xvp()->get_auction($XVauctions, $auction_id, true);
 if(empty($auction_info)){
-	header("location: ".$URLS['Script'].'System/Auctions/Auction_does_not_exist/');
+	header("location: ".$URLS['Script'].'Page/xvAuctions/404/');
 	exit;
 }
 if($XVwebEngine->Session->GetSID() != $_POST['xv-sid']){
-	header("location: ".$URLS['Script'].'System/Auctions/Bad_SID/');
+	header("location: ".$URLS['Script'].'Page/xvAuctions/SID_error/');
 	exit;
 }
 $user_data = xvp()->get_user_data($XVauctions, $XVwebEngine->Session->Session('Logged_User'));
@@ -41,17 +41,17 @@ if(in_array($auction_info['Type'], array("buynow", "both", "dutch")) && ifsetor(
 	}
 	if( $auction_selled  >=  $auction_info['Pieces']){
 		xvp()->end_auction($XVauctions,$auction_info['ID']);
-		header("location: ".$URLS['Script'].'System/Auctions/Auction_does_not_exist/');
+		header("location: ".$URLS['Script'].'Page/xvAuctions/404/');
 		exit;
 	}
 	if( ($auction_selled + $buy_pieces ) >  $auction_info['Pieces']){
-		header("location: ".$URLS['Script'].'System/Auctions/Auction_too_much_pieces/');
+		header("location: ".$URLS['Script'].'Page/xvAuctions/To_many_pieces/');
 		exit;
 	}
 	$to_pay = $auction_info['BuyNow']; // tutaj zmiana jak licytacja
 	if(isset($_POST['confirm_buy']) && $_POST['confirm_buy'] == "1"){
 		if(!xv_perm("xva_Buy")){
-			header("location: ".$URLS['Script'].'System/Auctions/Auction_permission_buy/');
+			header("location: ".$URLS['Script'].'Page/xvAuctions/Permission/Buy/');
 			exit;
 		}
 		xvp()->create_offer($XVauctions, $auction_info['ID'], $XVwebEngine->Session->Session('Logged_User'), "buynow" , $to_pay, $buy_pieces);
@@ -79,13 +79,13 @@ if(in_array($auction_info['Type'], array("buynow", "both", "dutch")) && ifsetor(
 	$actual_cost = floatval($auction_info['Auction']);
 
 	if($actual_cost > $to_pay){
-		header("location: ".$URLS['Script'].'System/Auctions/Minimal_cost/?cost='.$actual_cost.'&auction='.$auction_info['ID']);
+		header("location: ".$URLS['Script'].'Page/xvAuctions/Min_cost/?cost='.$actual_cost.'&auction='.$auction_info['ID']);
 		exit;
 	}
 
 	if(isset($_POST['confirm_buy']) && $_POST['confirm_buy'] == "1"){
 		if(!xv_perm("xva_Buy")){
-			header("location: ".$URLS['Script'].'System/Auctions/Auction_permission_buy/');
+			header("location: ".$URLS['Script'].'Page/xvAuctions/Permission/Buy/');
 			exit;
 		}
 		$auction_offers = xvp()->get_offers($XVauctions, $auction_info['ID']);

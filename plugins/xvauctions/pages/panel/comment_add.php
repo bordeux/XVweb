@@ -9,7 +9,7 @@
 ***************************************************************************/
 
 if(!xv_perm("xva_Buy") || !xv_perm("xva_Sell")){
-	header("location: ".$URLS['Script'].'System/Auctions/Auction_permission_buy/');
+	header("location: ".$URLS['Script'].'Page/xvAuctions/Permission/Buy/');
 	exit;
 }
 
@@ -18,12 +18,12 @@ $Smarty->assign('Title',  "Dodawanie komentarza");
 
 $auction_id = strtolower($XVwebEngine->GetFromURL($PathInfo, 3));
 if(!is_numeric($auction_id)){
-	header("location: ".$URLS['Script'].'System/Auctions/Auction_commented/');
+	header("location: ".$URLS['Script'].'Page/xvAuctions/Comment_already_exist/');
 	exit;
 }
 $bought_info = xvp()->get_bought_item($XVauctions, $auction_id);
 if(empty($bought_info)){
-	header("location: ".$URLS['Script'].'System/Auctions/Auction_commented/');
+	header("location: ".$URLS['Script'].'Page/xvAuctions/Comment_already_exist/');
 	exit;
 }
 $comment_mode = "none";
@@ -35,13 +35,13 @@ if(($bought_info['User'] == $XVwebEngine->Session->Session('Logged_User') && $bo
 }
 
 if($comment_mode == "none"){
-	header("location: ".$URLS['Script'].'System/Auctions/Auction_commented/');
+	header("location: ".$URLS['Script'].'Page/xvAuctions/Comment_already_exist/');
 	exit;
 }
 
 if(ifsetor($_GET['add'], '') == "true"){
 	if($XVwebEngine->Session->GetSID() != $_POST['xv-sid']){
-		header('Location: '.$URLS['Script'].'System/Auctions/Bad_SID/');
+		header('Location: '.$URLS['Script'].'Page/xvAuctions/SID_Error/');
 		exit;
 	}
 	function valid_rate(&$rate){

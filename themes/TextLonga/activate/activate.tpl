@@ -17,9 +17,9 @@
 
 <div class="xv-text-wrapper">
 {if $activate_result}
-	<div class="success">{$register_config->activate_success}</div>
+	<div class="success">{"activate_success"|xv_lang}</div>
 {else}
-	<div class="error">{$register_config->activate_failed}</div>
+	<div class="error">{"activate_failed"|xv_lang}</div>
 {/if}
 </div>
 		

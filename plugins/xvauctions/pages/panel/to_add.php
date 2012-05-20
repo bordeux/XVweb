@@ -8,7 +8,7 @@
 ****************   All rights reserved             *************************
 ***************************************************************************/
 if(!xv_perm("xva_Sell")){
-	header("location: ".$URLS['Script'].'System/Auctions/Auction_permission_sell/');
+	header("location: ".$URLS['Script'].'Page/xvAuctions/Permission/Sell/');
 	exit;
 }
 $Smarty->assign('Title',  "Do wystawienia");

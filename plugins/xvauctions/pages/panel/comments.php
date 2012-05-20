@@ -9,7 +9,7 @@
 ***************************************************************************/
 
 if(!xv_perm("xva_Buy") || !xv_perm("xva_Sell")){
-	header("location: ".$URLS['Script'].'System/Auctions/Auction_permission_buy/');
+	header("location: ".$URLS['Script'].'Page/xvAuctions/Permission/Buy/');
 	exit;
 }
 $Smarty->assign('Title',  "Otrzymane komentarze");

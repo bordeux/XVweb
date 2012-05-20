@@ -20,7 +20,7 @@ if(!isset($XVwebEngine)){
 	exit;
 }
 if(!$XVwebEngine->permissions('AdminPanel')){ // Brak dostepu
-	header("location: ".$URLS['Script'].'System/AccessDenied/');
+	header("location: ".$URLS['Script'].'Page/System/Permissions/');
 	exit;
 }
 /*

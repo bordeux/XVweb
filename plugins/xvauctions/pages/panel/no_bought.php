@@ -9,7 +9,7 @@
 ***************************************************************************/
 
 if(!xv_perm("xva_Buy")){
-	header("location: ".$URLS['Script'].'System/Auctions/Auction_permission_buy/');
+	header("location: ".$URLS['Script'].'Page/xvAuctions/Permission/Buy/');
 	exit;
 }
 $Smarty->assign('Title',  xv_lang("xca_no_bought"));

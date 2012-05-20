@@ -19,12 +19,12 @@ if(isset($_POST['xv_register']) && $register_config->register_enabled){
 			
 			if($add_user_result === true){
 				
-				xvp()->user_send_email($users_class, $_POST['xv_register']['nick'], $register_config->mail_activation_topic, $register_config->mail_activation_message, array(
+				xvp()->user_send_email($users_class, $_POST['xv_register']['nick'], xv_lang("mail_activation_topic"), xv_lang("mail_activation_message"), array(
 					"--xv-activate-link--" => $URLS['Script'].'Register/Activate/'.$_POST['xv_register']['nick'].'/'.$random_key.'/'
 				));
 				
 				$Smarty->assign('register_error', false);
-				$Smarty->assign('register_success_mgs', $register_config->register_success_message);
+				$Smarty->assign('register_success_mgs', xv_lang("register_success_message"));
 				$Smarty->assign('register_success', true);
 			}else{
 				$Smarty->assign('register_error', true);

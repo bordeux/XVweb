@@ -14,7 +14,7 @@ class xv_config {
 		$class_name = get_class($this);
 		$actual_config = array();
 		if (file_exists($this->__config_dir.$class_name.$this->__extension)) {
-			$actual_config = file_get_contents($this->__config_dir.$class_name.$this->__extension);
+			$actual_config = @file_get_contents($this->__config_dir.$class_name.$this->__extension);
 			$actual_config = json_decode($actual_config, true);
 			if(json_last_error() != JSON_ERROR_NONE) {
 				$actual_config = array();
@@ -60,7 +60,7 @@ class xv_config {
 	function __destruct() {
 		if($this->__changed_value){
 			$class_name = get_class($this);
-			file_put_contents($this->__config_dir.$class_name.$this->__extension, json_encode($this->__data, (defined('JSON_PRETTY_PRINT') ? JSON_PRETTY_PRINT : 0 ))); // HSON_PRETTY_PRINT for PHP5.4
+			@file_put_contents($this->__config_dir.$class_name.$this->__extension, json_encode($this->__data, (defined('JSON_PRETTY_PRINT') ? JSON_PRETTY_PRINT : 0 ))); // HSON_PRETTY_PRINT for PHP5.4
 		}
 	}
 }

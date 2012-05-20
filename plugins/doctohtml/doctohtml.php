@@ -5,7 +5,7 @@ include_once($XVwebDir.'libraries'.DIRECTORY_SEPARATOR.'phpQuery'.DIRECTORY_SEPA
 
 	$Smarty->assign('WriteUrlArticle', true);
 		if(!(xv_perm('WriteArticle'))){ // Brak dostepu
-			header("location: ".$URLS['Script'].'System/AccessDenied/');
+			header("location: ".$URLS['Script'].'Page/System/Permissions/');
 			exit;
 			}
 if(!isset($_GET['converted'])){

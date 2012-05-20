@@ -91,7 +91,7 @@ class xv_payments_method_dotpay extends xv_payments_method{
 
 	$result .= '<label for="amount">Kwota :</label> <input id="amonut-dotpay" type="text" pattern="((([0-9]){0,10})|(([0-9]){0,10}(\.)([0-9]){2}))" name="amount" value="20.00">';
 	$result .= '<input type="hidden" name="URLC" value="'.$GLOBALS['URLS']['AuctionPanel'].'/payment_add/dotpay/worker/?type=notify">';
-	$result .= '<input type="hidden" name="URL" value="'.$GLOBALS['URLS']['Site'].'System/Auctions/Payment_success/?type=dotpay">';
+	$result .= '<input type="hidden" name="URL" value="'.$GLOBALS['URLS']['Site'].'Page/xvAuctions/Payment_success/?type=dotpay">';
 	$result .= '<input type="submit" name="dalej" value="Dalej" />';
 	$result .= '<br />Prowizja: '.((1-$config_provision)*100).'%';
 	$result .= '<br />Otrzymana kwota: <span id="result-amount">0.00</span> zł';

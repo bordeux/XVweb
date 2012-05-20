@@ -34,7 +34,7 @@ if((xvp()->ReadArticle($XVwebEngine ,$PathInfo))){
 	if(!empty($XVwebEngine->ReadArticleIndexOut['Options']['AccessFlags'])){
 		foreach($XVwebEngine->ReadArticleIndexOut['Options']['AccessFlags'] as $flag){
 			if(!xv_perm($flag)){
-				header("location: ".$URLS['Script'].'System/AccessDenied/?Flag='.$flag);
+				header("location: ".$URLS['Script'].'Page/System/Permissions/?Flag='.$flag);
 				exit;
 			}
 		}

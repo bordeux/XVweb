@@ -87,7 +87,7 @@ class xv_payments_method_platnoscionline extends xv_payments_method {
 			$amount = (intval($_POST['amount']*100));
 			$URLC =  urlencode($GLOBALS['URLS']['AuctionPanel'].'/payment_add/platnoscionline/worker/?type=notify');
 			$mail =  urlencode($user_info['Mail']);
-			$url_return =  urlencode($GLOBALS['URLS']['Site'].'System/Auctions/Payment_success/?type=platnoscionline');
+			$url_return =  urlencode($GLOBALS['URLS']['Site'].'Page/xvAuctions/Payment_success/?type=platnoscionline');
 			$control = urlencode(uniqid()."|".$user_info['ID']."|");
 			$bkey = pack('H*' , $config_key);
 			

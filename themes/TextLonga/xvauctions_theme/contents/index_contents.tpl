@@ -14,7 +14,7 @@
 		<div class="xvauction-sidebar-item-title">{"xca_search"|xv_lang}</div>
 		<div class="xvauction-sidebar-item-content">
 			<form action="{$URLS.Auctions}" method="get" class="xvauction-sidebar-search">
-				<input type="search" name="auction_search" value="{$smarty.get.auction_search|escape}" />
+				<input type="search" name="auction_search" value="{$smarty.get.auction_search|escape}" speech x-webkit-speech />
 				<input type="submit" value='{"xca_search"|xv_lang}'>
 			</form>
 		</div>
