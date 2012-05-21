@@ -31,7 +31,7 @@ if(!empty($IDFile)){
 	}
 	
 	
-	if(isset($_GET['Delete']) && $_GET['SIDCheck'] == $GLOBALS['XVwebEngine']->Session->GetSID()){
+	if(isset($_GET['Delete']) && $_GET['SIDCheck'] == $GLOBALS['XVwebEngine']->Session->get_sid()){
 		try {
 			$XVwebEngine->FilesClass()->DeleteFile($IDFile);
 		} catch (XVwebException $e) {

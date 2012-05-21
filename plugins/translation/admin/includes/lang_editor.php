@@ -43,7 +43,7 @@ $uniq_id = uniqid();
 	<legend><?=$key?></legend>
 	<input type="hidden" name="key" value="<?=$key?>" />
 	<input type="hidden" name="lang" value="<?=$_GET['lang']?>" />
-	<input type="hidden" value="<?=$XVwebEngine->Session->GetSID()?>" name="xv-sid" />
+	<input type="hidden" value="<?=$XVwebEngine->Session->get_sid()?>" name="xv-sid" />
 	<table>
 		<tr>
 			<td style="width: 400px;"><?php echo htmlspecialchars($val);?></td>

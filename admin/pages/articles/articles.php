@@ -255,7 +255,7 @@ class xv_admin_articles_ia{
 		$form->set("submitMessage", "Zapisano");
 
 		$form->set("showAfterSuccess", true);
-		$form->JSprotection($XVweb->Session->GetSID());
+		$form->JSprotection($XVweb->Session->get_sid());
 		;
 		$tbl_flip_fields = array_flip($XVweb->DataBase->get_fields("Text_Index"));
 		
@@ -468,7 +468,7 @@ class xv_admin_articles_dc {
 			if(!is_numeric($_POST['xv-comment']))
 			exit("<div class='failed'>Błąd : ID nie jest INT</div>");
 			
-			if($XVweb->Session->GetSID() != $_POST['xv-sid'])
+			if($XVweb->Session->get_sid() != $_POST['xv-sid'])
 			exit("<div class='failed'>Błąd : Zły SID</div>");
 			
 			$DeleteCommentSQL = $XVweb->DataBase->prepare('DELETE FROM {Comments} WHERE {Comments:ID} = :IDComment LIMIT 1');
@@ -486,7 +486,7 @@ class xv_admin_articles_dc {
 		$this->content = '
 				<form action="'.$GLOBALS['URLS']['Script'].'Administration/Get/Articles/DC/" method="post" class="xv-form" data-xv-result=".content">
 						<input type="hidden" value="'.htmlspecialchars($_GET['id']).'" name="xv-comment" />
-						<input type="hidden" value="'.htmlspecialchars($XVweb->Session->GetSID()).'" name="xv-sid" />
+						<input type="hidden" value="'.htmlspecialchars($XVweb->Session->get_sid()).'" name="xv-sid" />
 					<div style="text-align:center;">Do you want delete comment ID : '.htmlspecialchars($_GET['id']).' ?</div>
 					<table style="border:none; width:200px; margin:auto;">
 						<tr>

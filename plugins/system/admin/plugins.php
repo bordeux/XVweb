@@ -43,7 +43,7 @@ class xv_admin_plugins {
 				$.getJSON(URLS.Script+"Administration/Get/Plugins/Set/", {
 					"plugin" : org.attr("name"),
 					"enabled" : org.is(":checked"),
-					"xv-sid" : "'.htmlspecialchars($XVweb->Session->GetSID()).'"
+					"xv-sid" : "'.htmlspecialchars($XVweb->Session->get_sid()).'"
 				},  function(data) {
 					$(".xv-plg-result").html(data.msg);
 				});
@@ -116,7 +116,7 @@ class xv_admin_plugins {
 				<div class="portlet-header ui-widget-header ui-corner-all" style="padding: 5px;">Upload plugin by URL</div>
 				<div class="portlet-content" style="display: block; padding: 10px; ">
 					<div class="xv-plugin-upload-url-result">
-						<form method="post" action="'.$GLOBALS['URLS']['Site'].'Administration/get/Plugins/UURL/?xv-sid='.$XVweb->Session->GetSID().'" class="xv-form" data-xv-result=".xv-plugin-upload-url-result">
+						<form method="post" action="'.$GLOBALS['URLS']['Site'].'Administration/get/Plugins/UURL/?xv-sid='.$XVweb->Session->get_sid().'" class="xv-form" data-xv-result=".xv-plugin-upload-url-result">
 							<label for="xv-plugin-upload">URL to *.xvweb file:<label><input type="url" placeholder="http://" style="width: 200px; margin-left: 10px;" id="xv-plugin-upload" name="xv_plugin_upload_url" /> <input type="submit" value="Install" />
 						</form>
 					</div>
@@ -183,7 +183,7 @@ class xv_admin_plugins {
 
 	class xv_admin_plugins_set {
 		public function __construct(&$XVweb){
-		if($XVweb->Session->GetSID() != ifsetor($_GET['xv-sid'], "")){
+		if($XVweb->Session->get_sid() != ifsetor($_GET['xv-sid'], "")){
 			exit(json_encode( array(
 				"result" => true,
 				"msg"=> "<div class='failed'>Error: Wrong SID key</div>"
@@ -227,7 +227,7 @@ class xv_admin_plugins {
 	}	
 	class xv_admin_plugins_upload {
 		public function __construct(&$XVweb){
-			if($XVweb->Session->GetSID() != ifsetor($_GET['xv-sid'], "")){
+			if($XVweb->Session->get_sid() != ifsetor($_GET['xv-sid'], "")){
 				exit("<div class='error'>Error: Wrong SID</div>");
 			}
 			$zip = new ZipArchive;
@@ -243,7 +243,7 @@ class xv_admin_plugins {
 	}	
 	class xv_admin_plugins_uurl {
 		public function __construct(&$XVweb){
-			if($XVweb->Session->GetSID() != ifsetor($_GET['xv-sid'], "")){
+			if($XVweb->Session->get_sid() != ifsetor($_GET['xv-sid'], "")){
 				exit("<div class='error'>Error: Wrong SID</div>");
 			}
 				$uniq_id = uniqid();

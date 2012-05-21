@@ -92,7 +92,7 @@ if(!isset($XVwebEngine)){
 			"name" => $_GET['widget'],
 			"wid"=> $_GET['wid'],
 		);
-			if(isset( $_GET['xv-sid']) && $XVweb->Session->GetSID() == $_GET['xv-sid']){
+			if(isset( $_GET['xv-sid']) && $XVweb->Session->get_sid() == $_GET['xv-sid']){
 				$this->result = $XVweb->user_config( $XVweb->Session->Session('Logged_User'), $Widgets);
 			}else{
 				header("HTTP/1.0 403 Not allowed");

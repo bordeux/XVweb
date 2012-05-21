@@ -1,6 +1,6 @@
 <?php
 /***************************************************************************
-****************   Bordeux.NET Project             *************************
+****************   xvAuctions Project              *************************
 ****************   LICENSE IS HERE                 *************************
 ****************   http://xvauctions.bordeux.net/  *************************
 ****************   THIS IS NON-FREE aplication!    *************************
@@ -43,7 +43,7 @@ if(isset($_POST['transfer']['amount'])){
 	$_POST['transfer']['amount'] = preg_replace('/[^0-9\.]/i', '', $_POST['transfer']['amount']); 
 }
 if(isset($_POST['finish_mode']) && $isset_user == true){
-	if($XVwebEngine->Session->GetSID() != $_POST['xv-sid']){
+	if($XVwebEngine->Session->get_sid() != $_POST['xv-sid']){
 		header('Location: '.$URLS['Script'].'Page/xvAuctions/SID_Error/');
 		exit;
 	}

@@ -1,28 +1,15 @@
 <!-- Content -->
  <div id="Content">
 <div id="ContentDiv">
-	{if $smarty.get.msg}
-		<div class="{if $smarty.get.success}success{else}failed{/if}">
-		{if $smarty.get.title}<h2>{$smarty.get.title|escape:"html"}</h2>{/if}
-			{$smarty.get.msg|escape:"html"}
-			{if $smarty.get.list}
-			<ul>
-				{foreach from=$smarty.get.list item=Value name=minimap}
-				<li>{$Value|escape:"html"}</li>
-				{/foreach}
-			</ul>
-			{/if}
-		</div>
-	{/if}
 
 <div class="xv-text-wrapper">
 {if $forgot_success}
-	<div class="success">{$forgot_config->forgot_success_message}</div>
+	<div class="success">{"forgot_success_message"|xv_lang}</div>
 {else}
 	<form action="{$URLS.Script}forgot/" method="post">
 	<div class="xv-forgot-content">
-		{if $forgot_config->forgot_message}
-			<div class="xv-info">{$forgot_config->forgot_message}</div>
+		{if "forgot_message"|xv_lang}
+			<div class="xv-info">{"forgot_message"|xv_lang}</div>
 		{/if}
 		
 		
@@ -47,7 +34,7 @@
 			{/if}
 			<tr>
 				<td><input type="hidden"  name="xv_sid" value="{$JSVars.SIDUser}" /></td>
-				<td><input type="submit" name="xv_forgot[submit]" value="{$language.Send}" /></td>
+				<td><input type="submit" name="xv_forgot[submit]" value="{'Send'|xv_lang}" /></td>
 			</tr>
 		</table>
 		{/if}
@@ -63,6 +50,5 @@
 
 </div>
 <div style="clear:both;"></div>
-<script type="text/javascript" src="{$URLS.Theme}forgot/js/jquery.pwdstr-1.0.source.js" charset="UTF-8"> </script>
 <script type="text/javascript" src="{$URLS.Theme}forgot/js/forgot.js" charset="UTF-8"> </script>
  <!-- /Content -->

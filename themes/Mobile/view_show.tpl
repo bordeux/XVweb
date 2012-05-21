@@ -1,1 +1,0 @@
-{include file="header.tpl"}{include file="menu.tpl"}{if $NotFoundArticle}{include file="contents/NotFoundArticle_contents.tpl"}{else}{include file="contents/article_contents.tpl"}{/if}{include file="footer.tpl"}

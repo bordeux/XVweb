@@ -54,7 +54,7 @@ class xv_users_fields_avatar  extends xv_users_fields {
 			';
 			
 		if(isset($_POST['xv_user_avatar_data'])){	
-			if($XVwebEngine->Session->GetSID() == $_POST['xv_sid']){
+			if($XVwebEngine->Session->get_sid() == $_POST['xv_sid']){
 			
 			
 			$image_b64 = substr($_POST['xv_user_avatar_data'], strlen('data:image/png;base64,'));
@@ -79,7 +79,7 @@ class xv_users_fields_avatar  extends xv_users_fields {
 		
 		$result .='
 			
-			<input type="hidden" name="xv_sid" value="'.$XVwebEngine->Session->GetSID().'" />
+			<input type="hidden" name="xv_sid" value="'.$XVwebEngine->Session->get_sid().'" />
 				<div class="xv-user-avatar-worker">
 					<table>
 						<tr>

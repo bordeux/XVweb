@@ -108,11 +108,11 @@ if(!isset($XVwebEngine)){
 				$form->addField("text", "language[".$key."]",$key, false, $val);
 				
 			$form->addField("textarea", "newlang","Dodaj nowe KEY=VAL", false);
-			$form->addField("hidden", "xv-sid",false, false, htmlspecialchars($XVweb->Session->GetSID()));
+			$form->addField("hidden", "xv-sid",false, false, htmlspecialchars($XVweb->Session->get_sid()));
 			$Content .= $form->display($GLOBALS['Language']['Save'], "lang_submit", false);  
 			 if(isset($_POST['language']) && is_array($_POST['language'])){
 			 
-			 if($XVweb->Session->GetSID() != ifsetor($_POST['xv-sid'], "")){
+			 if($XVweb->Session->get_sid() != ifsetor($_POST['xv-sid'], "")){
 				exit("<div class='failed'>Błąd: Zły SID</div>");
 			 }
 		

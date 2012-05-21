@@ -43,7 +43,7 @@ $URLS['JSCatalog']		= $URLS['JSCatalog'].$xv_theme_name."/";
 $Smarty->assignByRef('URLS', $URLS);
 $Smarty->assignByRef('UserConfig', $XVwebEngine->user_config($XVwebEngine->Session->Session('Logged_User')));
 $Smarty->assign('UrlTheme', $URLS['Theme']);
-$Smarty->assign('JSVars', (array('SIDUser'=>$XVwebEngine->Session->GetSID(), 'rootDir'=>$URLS['Site'],  "UrlScript"=>$URLS['Script'], "JSCatalog"=>$URLS['JSCatalog'])	));
+$Smarty->assign('JSVars', (array('SIDUser'=>$XVwebEngine->Session->get_sid(), 'rootDir'=>$URLS['Site'],  "UrlScript"=>$URLS['Script'], "JSCatalog"=>$URLS['JSCatalog'])	));
 
 
 try {

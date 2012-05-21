@@ -111,7 +111,7 @@ $(function(){
 <div class="xv-users-groups-perms" style="max-height: 500px; overflow-y: scroll; padding-top: 15px;">
 <div class="xv-users-groups-result"></div>
 <form method="post" action="'.$GLOBALS['URLS']['Script'].'Administration/get/Users/Groups_Save/" class="xv-form" data-xv-result=".xv-users-groups-result" style="padding: 10px;">
-<input type="hidden" value="'.htmlspecialchars($XVweb->Session->GetSID()).'" name="xv-sid" />
+<input type="hidden" value="'.htmlspecialchars($XVweb->Session->get_sid()).'" name="xv-sid" />
 	<div><label for="group">Group: </label> <input type="text" name="group" value="'.$_GET['group'].'" /> <input type="submit" value="Save" /></div>
 	<div class="xv-users-groups-form-fields" style="display:none;"></div>
 </form>
@@ -199,7 +199,7 @@ onUpdatePerms();
 class xv_admin_users_groups_save{
 	var $XVweb;
 	public function __construct(&$XVweb){
-		if($XVweb->Session->GetSID() != $_POST['xv-sid']){
+		if($XVweb->Session->get_sid() != $_POST['xv-sid']){
 			exit("<div class='failed'>Error: Bad SID!</div>");
 		}
 	if(!isset($_POST['group']) || strlen($_POST['group']) < 2){
@@ -226,6 +226,153 @@ class xv_admin_users_groups_save{
 	exit("<div class='success'>Done</div>");
 	}
 }
+class xv_admin_users_list {
+	var $style = "width: 60%; height: 500px; ";
+	var $title = "Users List";
+	var $contentStyle = "overflow-y:scroll; overflow-x: hidden; padding-bottom:10px;";
+	var $URL = "Users/List/";
+	var $content = "";
+	var $id = "xv-users-list-main";
+	public function __construct(&$XVweb){
+	global $URLS;
+		$this->icon = $GLOBALS['URLS']['Site'].'plugins/users/admin/icons/users.png';
+		
+			$this->URL = "Users/List/".(empty($_SERVER['QUERY_STRING']) ? "" : "?".$XVweb->add_get_var(array(), true));
+
+			$users_list = $this->get_records($XVweb, ((int) ifsetor($_GET['page'], 0)), 30);
+			include_once(ROOT_DIR.'core'.DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'Pager.php');
+			$pager = pager(30, (int) $users_list->list_count,  "?".$XVweb->add_get_var(array("page"=>"-npage-id-"), true), $actual_page);
+			
+			$this->content =  '<div class="xv-users-list-table-div xv-table">
+			<table style="width : 100%; text-align: center;">
+			<caption>'.$pager[0].'</caption>
+				<thead> 
+					<tr class="xv-pager">
+						<th><a>ID</a></th>
+						<th><a>Username</a></th>
+						<th><a>Mail</a></th>
+						<th><a>Creation</a></th>
+						<th><a>Group</a></th>
+					</tr>
+				</thead> 
+				<tbody>';
+				foreach($users_list->list as $user_item){
+					$this->content .= '<tr>
+							<td><a href="'.$URLS['Script'].'Administration/Users/Get/'.$user_item['User'].'/" class="xv-get-window" >'.$user_item['ID'].'</a></td>
+							<td><a href="'.$URLS['Script'].'Administration/Users/Get/'.$user_item['User'].'/" class="xv-get-window" >'.$user_item['User'].'</a> [<a href="'.$URLS['Script'].'Users/'.$user_item['User'].'" target="_blank" >preview</a>]</td>
+							<td><a href="mailto:'.$user_item['Mail'].'" target="_blank">'.$user_item['Mail'].'</a></td>
+							<td>'.$user_item['Creation'].'</td>
+							<td>'.$user_item['Group'].'</td>
+						</tr>';
+				}
+				$this->content .= '</tbody>
+				</table>
+				<div class="xv-table-pager">
+				'.$pager[1].'
+				</div>
+		</div>';
+		
+		$this->content .=  '<div class="xv-users-list-search">
+				<a href="#" class="xv-toggle" data-xv-toggle=".xv-users-list-search-form" action="?'.$XVweb->add_get_var(array(), true).'" > Search... </a>
+					<form style="display:none" class="xv-users-list-search-form xv-form" method="get" data-xv-result=".content" action="'.$GLOBALS['URLS']['Script'].'Administration/get/Users/List/?'.$XVweb->add_get_var(array(), true).'">
+						<table>
+						<tbody>';
+				foreach($XVweb->DataBase->get_fields("Users") as $keyf=>$field){		
+					$this->content .=	'
+						<tr>
+							<td style="font-weight:bold;">'.$keyf.'</td>
+							<td>
+								<select name="xv-func['.$keyf.']">
+									<option value="none">----</option>
+									<option value="LIKE">LIKE</option>
+									<option value="NOT LIKE">NOT LIKE</option>
+									<option value="=">=</option>
+									<option value="!=">!=</option>
+									<option value="REGEXP">REGEXP</option>
+									<option value="NOT REGEXP">NOT REGEXP</option>
+									<option value="&lt;">&lt;</option>
+									<option value="&gt;">&gt;</option>
+								</select>
+							</td>
+							<td><input type="text" name="xv-value['.$keyf.']" /></td>
+						</tr>';
+						}
+						$this->content .= '<tr>
+						<td><input type="hidden" value="true" name="search_mode" /> <input type="submit" value="Search..." /></td>
+							</tr>
+							</tbody>
+						</table>
+					</form>
+					
+			</div>';
+		if(isset($_GET['search_mode']))
+				exit($this->content);
+	}
+	public function get_records(&$XVweb, $actual_page = 0, $every_page =30){
+			$table = "Users";
+			$l_limit = ($actual_page*$every_page);
+			$r_limit = $every_page;
+
+			$search_add_query = array();
+			$exec_vars = array();
+			if(isset($_GET["xv-value"]) && isset($_GET["xv-func"]) && is_array($_GET["xv-func"]) && is_array($_GET["xv-value"])){
+				foreach($_GET["xv-func"] as $funckey=>$funcN){
+					if($funcN !="none"){
+					$UniqVar = ':'.uniqid();
+						$search_add_query[] = ' {'.$table.':'.$funckey.'} '.$funcN.' '.$UniqVar.' ';
+						$exec_vars[$UniqVar] = ifsetor($_GET["xv-value"][$funckey], "");
+					}
+				}
+			
+			}
+			$select_query = 'SELECT SQL_CALC_FOUND_ROWS
+			{'.$table.':*}
+				FROM {'.$table.'} '.(empty($search_add_query) ? '' : 'WHERE '.implode(" AND ", $search_add_query)).' ORDER BY {'.$table.':ID} DESC LIMIT '.$l_limit.', '.$r_limit.';
+	';
+	
+			$select_users_sql = $XVweb->DataBase->prepare($select_query);
+			$select_users_sql->execute($exec_vars);
+			$result_list = $select_users_sql->fetchAll();
+			$result_count = $XVweb->DataBase->pquery('SELECT FOUND_ROWS() AS `count_list`;')->fetch(PDO::FETCH_OBJ)->count_list;
+			return (object)  array('list'=>$result_list, 'list_count'=>$result_count );
+	}
+}
+
+	class xv_admin_users_get{
+		var $style = "height: 400px; width: 30%;";
+		var $title = "";
+		var $URL = "";
+		var $content = "";
+		var $id = "";
+		public function __construct(&$XVweb){
+		global $PathInfo;
+			$user_from_url = $XVweb->GetFromURL($PathInfo, 5);
+			$this->URL = "Users/Get/".$user_from_url.'/';
+			$this->id = "xv-users-get-".$user_from_url;
+			$this->title = "User edit: ".$user_from_url;
+			$this->content = '
+				<div class="success">ToDo</div>
+				<fieldset>
+					<legend>Change password</legend>
+					<form method="post" action="?">
+						<input type="hidden" name="user" value="'.$user_from_url.'" />
+						<input type="text" value="" placeholder="New password..." />
+						<input type="submit" value="Change password" />
+					</form>
+				</fieldset>		
+				<fieldset>
+					<legend>Change activation key</legend>
+					IF you want disable this account, please fill this value other than "1"
+					<form method="post" action="?">
+						<input type="hidden" name="user" value="'.$user_from_url.'" />
+						<input type="text" value="" placeholder="New key..." />
+						<input type="submit" value="Change key" />
+					</form>
+				</fieldset>
+			';
+			$this->icon = $GLOBALS['URLS']['Site'].'plugins/users/admin/icons/user.png';
+		}
+	}
 	
 	//Groups_Save
 	$CommandSecond = strtolower($XVwebEngine->GetFromURL($PathInfo, 4));

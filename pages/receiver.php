@@ -106,7 +106,7 @@ function AddComment(){
 	try {
 	if( !xv_perm('AdminPanel'))
 		exit($Language['Disabled']);
-	if(trim(ifsetor($_POST['xv-captcha'], "")) != substr($XVwebEngine->Session->GetSID(), 0, 5))
+	if(trim(ifsetor($_POST['xv-captcha'], "")) != substr($XVwebEngine->Session->get_sid(), 0, 5))
 		exit("You are spambot!");
 		
 		$XVwebEngine->EditArticle()->SaveComment($_POST['CommentContent'], $_POST['ArticleID']);
@@ -132,7 +132,7 @@ function EditComment(){
 
 function DeleteComment(){
 	global $Smarty,$Language;
-	if($_GET['SIDCheck'] != ($GLOBALS['XVwebEngine']->Session->GetSID()))
+	if($_GET['SIDCheck'] != ($GLOBALS['XVwebEngine']->Session->get_sid()))
 	exit($Language['SIDCheckFailed']);
 	$Smarty->assign('IDComment', $_GET['CommentID']);
 	$Smarty->assign('DeleteComment', true);
@@ -142,7 +142,7 @@ function DeleteComment(){
 
 function DeleteArticle(){
 global $Smarty, $XVwebEngine;
-	if($_GET['SIDCheck'] != $XVwebEngine->Session->GetSID())
+	if($_GET['SIDCheck'] != $XVwebEngine->Session->get_sid())
 	$Smarty->assign('result', false); else
 	$Smarty->assign('result', $XVwebEngine->EditArticle()->DeleteArticle($_GET['ArticleID']));
 	$Smarty->display('deltearticle_show.tpl');
@@ -150,7 +150,7 @@ global $Smarty, $XVwebEngine;
 
 function  DeleteLastVerArticle(){
 global $Smarty, $XVwebEngine;
-	if($_GET['SIDCheck'] != $XVwebEngine->Session->GetSID())
+	if($_GET['SIDCheck'] != $XVwebEngine->Session->get_sid())
 	$Smarty->assign('result', false); else
 		$Smarty->assign('result', $XVwebEngine->DelArtVer()->DeleteLastVersion($_GET['ArticleID']));
 
@@ -169,7 +169,7 @@ function DeleteUser(){
 
 function DeleteVerArticle(){
 global $Smarty, $XVwebEngine;
-	if($_GET['SIDCheck'] != $GLOBALS['XVwebEngine']->Session->GetSID())
+	if($_GET['SIDCheck'] != $GLOBALS['XVwebEngine']->Session->get_sid())
 	exit; 
 	$XVwebEngine->DelArtVer()->DLVwithID($_GET['ArticleID'], $_GET['Version']);
 	$Smarty->display('deltearticle_show.tpl');

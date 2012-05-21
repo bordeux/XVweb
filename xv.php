@@ -247,7 +247,7 @@ $Smarty->assign('PathInfo', htmlspecialchars($PathInfo, ENT_QUOTES ));
 $Smarty->assign('LogedUser', $XVwebEngine->Session->Session("Logged_Logged"));
 $Smarty->assign('UrlTheme', $URLS['Theme']);
 $Smarty->assign('AvantsURL', $URLS['Avats']);
-$Smarty->assign('JSVars', (array('SIDUser'=>$XVwebEngine->Session->GetSID(), 'rootDir'=>$URLS['Site'], "UrlScript"=>$URLS['Script'], "JSCatalog"=>$URLS['JSCatalog'])	));
+$Smarty->assign('JSVars', (array('SIDUser'=>$XVwebEngine->Session->get_sid(), 'rootDir'=>$URLS['Site'], "UrlScript"=>$URLS['Script'], "JSCatalog"=>$URLS['JSCatalog'])	));
 xv_trigger("xvweb.smarty.loaded");
 
 

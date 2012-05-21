@@ -53,7 +53,7 @@ if((xvp()->ReadArticle($XVwebEngine ,$PathInfo))){
 
 	if(isset($_GET['id']) && isset($_GET['vote']) && is_numeric($_GET['id']) && isset($_GET['t'])){
 		$Failed = false;
-		if(!isset($_GET['SIDCheck']) or (isset($_GET['SIDCheck']) && $_GET['SIDCheck']!= ($XVwebEngine->Session->GetSID())))
+		if(!isset($_GET['SIDCheck']) or (isset($_GET['SIDCheck']) && $_GET['SIDCheck']!= ($XVwebEngine->Session->get_sid())))
 		$Failed = "SIDFailed";
 		if(!xv_perm('Voting'))
 		$Failed =  "AccessDenied";
@@ -89,7 +89,7 @@ if((xvp()->ReadArticle($XVwebEngine ,$PathInfo))){
 		header("location: ".$URLS['Script'].'Write/?Edit&id='.$XVwebEngine->ReadArticleIndexOut['ID']);
 		exit;
 	}
-	if((isset($_GET['Watch']) or isset($_GET['Bookmark'])) && $XVwebEngine->Session->Session('Logged_Logged') && $_GET['SIDCheck'] == ($XVwebEngine->Session->GetSID())){
+	if((isset($_GET['Watch']) or isset($_GET['Bookmark'])) && $XVwebEngine->Session->Session('Logged_Logged') && $_GET['SIDCheck'] == ($XVwebEngine->Session->get_sid())){
 		xvp()->bokmarks(xvp()->EditArticle($XVwebEngine), $XVwebEngine->ReadArticleIndexOut['ID'], (isset($_GET['Watch']) ? $_GET['Watch'] : $_GET['Bookmark']), (isset($_GET['Watch']) ? 'Observed' : 'Bookmark'));
 		if(isset($_GET['Watch']))
 		$XVwebEngine->ReadArticleIndexOut['Observed'] = ($_GET['Watch'] ? 1 : 0); else

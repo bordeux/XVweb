@@ -1,4 +1,5 @@
 <?php
+xv_load_lang("forgot");
 xv_trigger("forgot.reset.start");
 
 $forgot_config = new forgot_config();
@@ -34,7 +35,7 @@ xvp()->user_edit($users_class, $user_data->User, array(
 ));
 
 
-xvp()->user_send_email($users_class, $user_data->User , $forgot_config->mail_new_password_topic, $forgot_config->mail_new_password_message, array(
+xvp()->user_send_email($users_class, $user_data->User , xv_lang("mail_new_password_topic"), xv_lang("mail_new_password_message"), array(
 	"--xv-forgot-new-password--" => $new_password
 ));
 

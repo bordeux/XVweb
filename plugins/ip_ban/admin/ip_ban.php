@@ -48,7 +48,7 @@ class xv_admin_ip_ban {
 						<th><a>Filter type</a></th>
 						<th><a>Message</a></th>
 						<th><a>Admin</a></th>
-						<th></th>
+					
 					</tr>
 				</thead> 
 				<tbody>';
@@ -58,7 +58,7 @@ class xv_admin_ip_ban {
 							<td><a href="'.$URLS['Script'].'Administration/IP_Ban/Edit/?id='.$ban_item['ID'].'" class="xv-get-window" >'.$ban_item['IP'].'</a></td>
 							<td>'.($ban_item['FilterType'] ? 'LIKE' : 'NOT LIKE').'</td>
 							<td>'.substr(strip_tags($ban_item['Message']), 0, 50).'...</td>
-							<td>'.$ban_item['By'].'</td>
+							<td><a href="'.$URLS['Script'].'Administration/Users/Get/'.$ban_item['By'].'/" class="xv-get-window" >'.$ban_item['By'].'</a></td>
 						</tr>';
 				}
 				$this->content .= '</tbody>
@@ -144,7 +144,7 @@ class xv_admin_ip_ban_add {
 	public function __construct(&$XVweb){
 	global $URLS;
 	if(isset($_POST['ip_ban'])){
-		if($XVweb->Session->GetSID() != $_POST['xv_sid']){
+		if($XVweb->Session->get_sid() != $_POST['xv_sid']){
 			exit("<div class='failed'>Error: Bad SID!</div>");
 		}
 		$insert_ban = $XVweb->DataBase->prepare('INSERT INTO {Bans} ({Bans:IP}, {Bans:FilterType}, {Bans:Expire}, {Bans:Message}, {Bans:By}) VALUES (:ip, :filter_type, :expire, :message, :by)  ON DUPLICATE KEY UPDATE {Bans:FilterType} = {Bans:FilterType};');
@@ -164,7 +164,7 @@ class xv_admin_ip_ban_add {
 		$this->icon = $URLS['Site'].'plugins/ip_ban/admin/icons/ban.png';
 		$this->content = '<div class="xv-ip-ban-add-div xv-table">
 			<form action="'.$URLS['Script'].'Administration/get/IP_Ban/Add/" method="post" class="xv-form" data-xv-result=".xv-ip-ban-add-div">
-			<input type="hidden" value="'.htmlspecialchars($XVweb->Session->GetSID()).'" name="xv_sid" />
+			<input type="hidden" value="'.htmlspecialchars($XVweb->Session->get_sid()).'" name="xv_sid" />
 			<table style="width : 100%; text-align: center;">
 				<tr>
 					<td>Filter type</td>
@@ -216,7 +216,7 @@ class xv_admin_ip_ban_edit {
 	public function __construct(&$XVweb){
 	global $URLS;
 	if(isset($_POST['ip_ban'])){
-		if($XVweb->Session->GetSID() != $_POST['xv_sid']){
+		if($XVweb->Session->get_sid() != $_POST['xv_sid']){
 			exit("<div class='failed'>Error: Bad SID!</div>");
 		}
 		$update_ban = $XVweb->DataBase->prepare('UPDATE {Bans} SET {Bans:IP} = :ip, {Bans:FilterType} = :filter_type, {Bans:Expire} = :expire, {Bans:Message} = :message WHERE {Bans:ID} = :id');
@@ -234,7 +234,7 @@ class xv_admin_ip_ban_edit {
 		exit("<div class='success'>Ban edited!</div>");
 	}
 	if(isset($_POST['delete_ban'])){
-		if($XVweb->Session->GetSID() != $_POST['xv_sid']){
+		if($XVweb->Session->get_sid() != $_POST['xv_sid']){
 			exit("<div class='failed'>Error: Bad SID!</div>");
 		}
 		$delete_ban = $XVweb->DataBase->prepare('DELETE FROM {Bans} WHERE {Bans:ID} = :id');
@@ -259,7 +259,7 @@ class xv_admin_ip_ban_edit {
 		<fieldset>
 			<legend>Edit</legend>
 			<form action="'.$URLS['Script'].'Administration/get/IP_Ban/Edit/?id='.((int) $_GET['id']).'" method="post" class="xv-form" data-xv-result=".xv-ip-ban-edit-div">
-			<input type="hidden" value="'.htmlspecialchars($XVweb->Session->GetSID()).'" name="xv_sid" />
+			<input type="hidden" value="'.htmlspecialchars($XVweb->Session->get_sid()).'" name="xv_sid" />
 			<table style="width : 100%; text-align: center;">
 				<tr>
 					<td>Filter type</td>
@@ -292,7 +292,7 @@ class xv_admin_ip_ban_edit {
 			<fieldset>
 				<legend>Delete ban</legend>
 				<form action="'.$URLS['Script'].'Administration/get/IP_Ban/Edit/?id='.((int) $_GET['id']).'" method="post" class="xv-form" data-xv-result=".xv-ip-ban-edit-div" style="text-align:center;">
-					<input type="hidden" value="'.htmlspecialchars($XVweb->Session->GetSID()).'" name="xv_sid" />
+					<input type="hidden" value="'.htmlspecialchars($XVweb->Session->get_sid()).'" name="xv_sid" />
 					<input type="hidden" value="'.((int) $_GET['id']).'" name="delete_ban" />
 						
 								<input type="submit" value="Delete ban" />

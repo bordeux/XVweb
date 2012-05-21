@@ -26,7 +26,7 @@ if(!empty($UserFromUrl)){
 		exit;
 	}
 	if(isset($_GET['delete'])){
-		if($_GET['SIDCheck'] == $XVwebEngine->Session->GetSID() && $XVwebEngine->ReadUser['ID']!=1)
+		if($_GET['SIDCheck'] == $XVwebEngine->Session->get_sid() && $XVwebEngine->ReadUser['ID']!=1)
 		$XVwebEngine->DeleteUser()->DeletUserByNick($XVwebEngine->ReadUser['User']);
 		header("location: ?");
 		exit;
@@ -34,7 +34,7 @@ if(!empty($UserFromUrl)){
 	if(!empty($Command) && strtolower($Command) == "edit"){
 		if(isset($_GET['Save'])){
 		try {
-			if(!((isset($_POST['SIDCheck']) && $_POST['SIDCheck'] == $XVwebEngine->Session->GetSID()) OR  (isset($_GET['SIDCheck']) && $_GET['SIDCheck'] == $XVwebEngine->Session->GetSID()))){
+			if(!((isset($_POST['SIDCheck']) && $_POST['SIDCheck'] == $XVwebEngine->Session->get_sid()) OR  (isset($_GET['SIDCheck']) && $_GET['SIDCheck'] == $XVwebEngine->Session->get_sid()))){
 			header('location: ?');
 			exit;
 			}

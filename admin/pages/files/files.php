@@ -72,7 +72,7 @@ if(!isset($XVwebEngine)){
 			$this->icon = $GLOBALS['URLS']['Site'].'admin/data/icons/trash.png';
 			$this->style = "left: 40%; top: 100px; ";
 			
-			if(isset( $_POST['xv-sid']) && $XVweb->Session->GetSID() == $_POST['xv-sid']){
+			if(isset( $_POST['xv-sid']) && $XVweb->Session->get_sid() == $_POST['xv-sid']){
 				if(@rename ($_POST['xv-file'], $_POST['xv-new-name'])){
 					echo("<div class='success'>File name changed</div>");
 				}else{
@@ -86,7 +86,7 @@ if(!isset($XVwebEngine)){
 			$this->content = '
 				<form action="'.$GLOBALS['URLS']['Script'].'Administration/Get/Files/Rename/" method="post" class="xv-form" data-xv-result=".content">
 						<input type="hidden" value="'.htmlspecialchars($_GET['file']).'" name="xv-file" />
-						<input type="hidden" value="'.htmlspecialchars($XVweb->Session->GetSID()).'" name="xv-sid" />
+						<input type="hidden" value="'.htmlspecialchars($XVweb->Session->get_sid()).'" name="xv-sid" />
 					<div style="text-align:center;">
 					<input type="text" name="xv-new-name" value="'.htmlspecialchars(basename($_GET['file'])).'" /></div>
 					<table style="border:none; width:200px; margin:auto;">
@@ -107,7 +107,7 @@ if(!isset($XVwebEngine)){
 			$this->title = "NewDir";
 			$this->icon = $GLOBALS['URLS']['Site'].'admin/data/icons/files.png';
 			$this->style = "left: 40%; top: 100px; ";
-			if(isset( $_POST['xv-sid']) && $XVweb->Session->GetSID() == $_POST['xv-sid']){
+			if(isset( $_POST['xv-sid']) && $XVweb->Session->get_sid() == $_POST['xv-sid']){
 				if(@mkdir(dirname($_POST['xv-file']).'/'.$_POST['xv-dir-name'])){
 					echo("<div class='success'>Created dir</div>");
 				}else{
@@ -121,7 +121,7 @@ if(!isset($XVwebEngine)){
 			$this->content = '
 				<form action="'.$GLOBALS['URLS']['Script'].'Administration/Get/Files/NewDir/" method="post" class="xv-form" data-xv-result=".content">
 						<input type="hidden" value="'.htmlspecialchars($_GET['file']).'" name="xv-file" />
-						<input type="hidden" value="'.htmlspecialchars($XVweb->Session->GetSID()).'" name="xv-sid" />
+						<input type="hidden" value="'.htmlspecialchars($XVweb->Session->get_sid()).'" name="xv-sid" />
 					<div style="text-align:center;">
 					<input type="text" name="xv-dir-name" value="FolderName" /></div>
 					<table style="border:none; width:200px; margin:auto;">
@@ -144,7 +144,7 @@ if(!isset($XVwebEngine)){
 			$this->title = "Chmod ".basename($_GET['file']);
 			$this->icon = $GLOBALS['URLS']['Site'].'admin/data/icons/files.png';
 			$this->style = "left: 40%; top: 100px; ";
-			if(isset( $_POST['xv-sid']) && $XVweb->Session->GetSID() == $_POST['xv-sid']){
+			if(isset( $_POST['xv-sid']) && $XVweb->Session->get_sid() == $_POST['xv-sid']){
 				if(@chmod($_POST['xv-file'], $_POST['xv-chmod'])){
 					echo("<div class='success'>CHMOD changed</div>");
 				}else{
@@ -158,7 +158,7 @@ if(!isset($XVwebEngine)){
 			$this->content = '
 				<form action="'.$GLOBALS['URLS']['Script'].'Administration/Get/Files/Chmod/" method="post" class="xv-form" data-xv-result=".content">
 						<input type="hidden" value="'.htmlspecialchars($_GET['file']).'" name="xv-file" />
-						<input type="hidden" value="'.htmlspecialchars($XVweb->Session->GetSID()).'" name="xv-sid" />
+						<input type="hidden" value="'.htmlspecialchars($XVweb->Session->get_sid()).'" name="xv-sid" />
 					<div style="text-align:center;">
 					<input type="text" name="xv-chmod" value="'.@fileperms($_GET['file']).'" /></div>
 					<table style="border:none; width:200px; margin:auto;">
@@ -185,7 +185,7 @@ if(!isset($XVwebEngine)){
 			$this->content = '
 				<form action="'.$GLOBALS['URLS']['Script'].'Administration/Get/Files/ConfirmDelete/" method="post" class="xv-form" data-xv-result=".content">
 						<input type="hidden" value="'.htmlspecialchars($_GET['file']).'" name="xv-file" />
-						<input type="hidden" value="'.htmlspecialchars($XVweb->Session->GetSID()).'" name="xv-sid" />
+						<input type="hidden" value="'.htmlspecialchars($XVweb->Session->get_sid()).'" name="xv-sid" />
 					<div style="text-align:center;">Do you want delete <span style="color: #BA0000;">'.basename($_GET['file']).'</span> ?</div>
 					<table style="border:none; width:200px; margin:auto;">
 						<tr>
@@ -211,7 +211,7 @@ if(!isset($XVwebEngine)){
 						<input type="hidden" value="'.htmlspecialchars($_GET['file']).'" name="xv-file" />
 						<input type="hidden" value="'.htmlspecialchars($_GET['destination']).'" name="xv-destination" />
 						<input type="hidden" value="'.htmlspecialchars($_GET['operation']).'" name="xv-operation" />
-						<input type="hidden" value="'.htmlspecialchars($XVweb->Session->GetSID()).'" name="xv-sid" />
+						<input type="hidden" value="'.htmlspecialchars($XVweb->Session->get_sid()).'" name="xv-sid" />
 					<div style="text-align:center;">Do you want '.htmlspecialchars($_GET['operation']).' <span style="font-weight:bold;">'.basename($_GET['file']).'</span>  to <span style="font-weight:bold;">'.htmlspecialchars($_GET['destination']).'</span> dir ?</div>
 					<table style="border:none; width:200px; margin:auto;">
 						<tr>
@@ -233,7 +233,7 @@ if(!isset($XVwebEngine)){
 			if(is_dir($FileLoc))
 				$FileLoc = substr($FileLoc, 0, -1);
 		
-			if($XVweb->Session->GetSID() == $_POST['xv-sid']){
+			if($XVweb->Session->get_sid() == $_POST['xv-sid']){
 				if(file_exists($FileLoc) && file_exists($FileDest)){
 					if(isset($_POST['xv-operation']) && (($_POST['xv-operation'] == "copy" && $this->smartCopy(($FileLoc), ($FileDest.'/'))) OR ($_POST['xv-operation'] == "cut" && rename(($FileLoc), ($FileDest.'/').basename($FileLoc)))))
 					echo "<div class='success'>File/dir moved/copied.</div>
@@ -351,7 +351,7 @@ if(!isset($XVwebEngine)){
 			return true;
 		}
 		
-			if($XVweb->Session->GetSID() == $_POST['xv-sid']){
+			if($XVweb->Session->get_sid() == $_POST['xv-sid']){
 				if(file_exists($FileLoc)){
 					if(( is_file($FileLoc) && @unlink($FileLoc)) or (is_dir($FileLoc) && SureRemoveDir($FileLoc, true)))
 					echo "<div class='success'>File/Dir deleted</div>
@@ -587,7 +587,7 @@ $info .= (($perms & 0x0001) ?
 			$this->id = "xv-file-vw-".substr(md5($_GET['file']), 28);
 			$this->title = "View ".basename($_GET['file']);
 			$this->icon = $GLOBALS['URLS']['Site'].'admin/data/icons/trash.png';
-		if(isset( $_POST['xv-sid']) && $XVweb->Session->GetSID() == $_POST['xv-sid']){
+		if(isset( $_POST['xv-sid']) && $XVweb->Session->get_sid() == $_POST['xv-sid']){
 				if(file_put_contents($_POST['xv-file'], $_POST['xv-content'])){
 					echo "<div class='success'>File was saved</div>";
 				
@@ -606,7 +606,7 @@ $info .= (($perms & 0x0001) ?
 						<div class="xv-edit-result"></div>
 						<form action="'.$GLOBALS['URLS']['Script'].'Administration/Get/Files/View/" method="post" class="xv-form" data-xv-result=".xv-edit-result" >
 							<input type="hidden" value="'.htmlspecialchars($_GET['file']).'" name="xv-file" />
-							<input type="hidden" value="'.htmlspecialchars($XVweb->Session->GetSID()).'" name="xv-sid" />
+							<input type="hidden" value="'.htmlspecialchars($XVweb->Session->get_sid()).'" name="xv-sid" />
 							<textarea id="CodeEditorJS" style="width:100%; height:100%;" name="xv-content" class="xv-editor">'.htmlspecialchars( file_get_contents($_GET['file']) ).'</textarea>
 							<input type="submit" value="'.$GLOBALS['Language']['Save'].'" />
 						</form>

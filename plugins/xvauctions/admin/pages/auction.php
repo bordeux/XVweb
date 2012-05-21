@@ -1,19 +1,13 @@
 <?php
 /***************************************************************************
-****************   Bordeux.NET Project             *************************
-****************   File name :   default.php       *************************
-****************   Start     :   22.05.2007 r.     *************************
-****************   License   :   LGPL              *************************
-****************   Version   :   1.0               *************************
-****************   Authors   :   XVweb team        *************************
-*************************XVweb Team*****************************************
-				Krzyszof Bednarczyk, meybe you
-/////////////////////////////////////////////////////////////////////////////
- Klasa XVweb jest na licencji LGPL v3.0 ( GNU LESSER GENERAL PUBLIC LICENSE)
-****************http://www.gnu.org/licenses/lgpl-3.0.txt********************
-		Pełna dokumentacja znajduje się na stronie domowej projektu: 
-*********************http://www.bordeux.NET/Xvweb***************************
+****************   xvAuctions Project              *************************
+****************   LICENSE IS HERE                 *************************
+****************   http://xvauctions.bordeux.net/  *************************
+****************   THIS IS NON-FREE application!   *************************
+****************   Author  : Krzysztof Bednarczyk  *************************
+****************   All rights reserved             *************************
 ***************************************************************************/
+
 if(!isset($XVwebEngine)){
 	header("location: http://".$_SERVER['HTTP_HOST']."/");
 	exit;
@@ -59,7 +53,7 @@ class xv_admin_xvauctions_auction{
 		return '<fieldset>
 						<legend>Delete from database [<a href="'.$xva_wiki_page.'Delete_from_database" target="_blank">?</a>]</legend>
 						<form action="'.$URLS['Script'].'Administration/Get/XVauctions/Auction/'.$auction_id.'/?mode=delete" method="post" class="xv-form" data-xv-result=".xva-auction-edit-result">
-							<input type="hidden" value="'.htmlspecialchars($XVweb->Session->GetSID()).'" name="xv-sid" />
+							<input type="hidden" value="'.htmlspecialchars($XVweb->Session->get_sid()).'" name="xv-sid" />
 							<input type="submit" value="Delete from database" />
 						</form>
 					</fieldset>';
@@ -82,7 +76,7 @@ class xv_admin_xvauctions_auction{
 						<legend>Move to archive [<a href="'.$xva_wiki_page.'Move_to_archive" target="_blank">?</a>]</legend>
 						'.$result.'
 						<form action="'.$URLS['Script'].'Administration/Get/XVauctions/Auction/'.$auction_id.'/?mode=move_to_archive" method="post" class="xv-form" data-xv-result=".xva-auction-edit-result">
-							<input type="hidden" value="'.htmlspecialchars($XVweb->Session->GetSID()).'" name="xv-sid" />
+							<input type="hidden" value="'.htmlspecialchars($XVweb->Session->get_sid()).'" name="xv-sid" />
 							<input type="submit" value="Move to archive" />
 						</form>
 					</fieldset>';
@@ -104,7 +98,7 @@ class xv_admin_xvauctions_auction{
 						<legend>Finish auction [<a href="'.$xva_wiki_page.'Finish_auction" target="_blank">?</a>]</legend>
 							'.$result.'
 						<form action="'.$URLS['Script'].'Administration/Get/XVauctions/Auction/'.$auction_id.'/?mode=end_auction" method="post" class="xv-form" data-xv-result=".xva-auction-edit-result" >
-							<input type="hidden" value="'.htmlspecialchars($XVweb->Session->GetSID()).'" name="xv-sid" />
+							<input type="hidden" value="'.htmlspecialchars($XVweb->Session->get_sid()).'" name="xv-sid" />
 							<input type="submit" value="Finish auction now!" />
 						</form>
 					</fieldset>';
@@ -143,7 +137,7 @@ class xv_admin_xvauctions_auction{
 		
 				
 				
-		$form->JSprotection($XVweb->Session->GetSID());
+		$form->JSprotection($XVweb->Session->get_sid());
 		$form_html = $form->display(xv_lang("Save"), "xva_auction_submit", false);
 		$result=($form->getData());
 		

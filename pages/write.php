@@ -112,7 +112,7 @@ if(isset($_GET['save']) && isset($_POST['xv-description'])){
 		header("location: ".$URLS['Script'].'Page/System/Permissions/');
 		exit;
 	}
-	if(trim(ifsetor($_POST['xv-captcha'], "")) != substr($XVwebEngine->Session->GetSID(), 0, 5)){
+	if(trim(ifsetor($_POST['xv-captcha'], "")) != substr($XVwebEngine->Session->get_sid(), 0, 5)){
 			header("location: ".$URLS['Script'].'System/SpamBot/');
 		exit;
 	
@@ -148,7 +148,7 @@ if(isset($_GET['save']) && isset($_POST['xv-path'])){
 		header("location: ".$URLS['Script'].'Page/System/Permissions/');
 		exit;
 		}
-	if(trim(ifsetor($_POST['xv-captcha'], "")) != substr($XVwebEngine->Session->GetSID(), 0, 5)){
+	if(trim(ifsetor($_POST['xv-captcha'], "")) != substr($XVwebEngine->Session->get_sid(), 0, 5)){
 			header("location: ".$URLS['Script'].'System/SpamBot/');
 		exit;
 		}

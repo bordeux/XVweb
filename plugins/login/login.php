@@ -15,7 +15,7 @@ if(isset($_POST['xv_login'])){
 	include_once(ROOT_DIR.'plugins/users/libs/users.class.php');
 	$users_class = new xv_users($XVwebEngine);
 	
-	if($XVwebEngine->Session->GetSID() != ifsetor($_POST['xv_sid'], "")){
+	if($XVwebEngine->Session->get_sid() != ifsetor($_POST['xv_sid'], "")){
 		$Smarty->assign('login_error', true);
 		$Smarty->assign('login_error_msg', "invalid_sid");
 	}else{

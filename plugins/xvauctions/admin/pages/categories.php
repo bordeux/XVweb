@@ -1,17 +1,11 @@
 <?php
 /***************************************************************************
-****************   Bordeux.NET Project             *************************
-****************   Start     :   22.05.2007 r.     *************************
-****************   License   :   LGPL              *************************
-****************   Version   :   1.0               *************************
-****************   Authors   :   XVweb team        *************************
-*************************XVweb Team*****************************************
-				Krzyszof Bednarczyk, meybe you
-/////////////////////////////////////////////////////////////////////////////
-Klasa XVweb jest na licencji LGPL v3.0 ( GNU LESSER GENERAL PUBLIC LICENSE)
-****************http://www.gnu.org/licenses/lgpl-3.0.txt********************
-		Pełna dokumentacja znajduje się na stronie domowej projektu: 
-*********************http://www.bordeux.NET/Xvweb***************************
+****************   xvAuctions Project              *************************
+****************   LICENSE IS HERE                 *************************
+****************   http://xvauctions.bordeux.net/  *************************
+****************   THIS IS NON-FREE application!   *************************
+****************   Author  : Krzysztof Bednarczyk  *************************
+****************   All rights reserved             *************************
 ***************************************************************************/
 
 if(!isset($XVwebEngine)){
@@ -48,7 +42,7 @@ class xv_admin_xvauctions_categories{
 					<legend>Add category here</legend>
 						<div class="auction-newcat-result"></div>
 					<form method="post" action="'.$GLOBALS['URLS']['Script'].'Administration/get/XVauctions/NewCat/" class="xv-form" data-xv-result=".auction-newcat-result">
-					<input type="hidden" value="'.htmlspecialchars($XVweb->Session->GetSID()).'" name="xv-sid" />
+					<input type="hidden" value="'.htmlspecialchars($XVweb->Session->get_sid()).'" name="xv-sid" />
 							<div><label for="xvauction-newcat-loc">Parent Category:</label> <input type="text" id="xvauction-newcat-loc" class="auction-cur-dir" readonly="true" name="addcat[parent]" value="/" style="width: 300px;" /></div>
 							<div><label for="xvauction-newcat-name">Category Name:</label> <input id="xvauction-newcat-name" type="text" name="addcat[name]" /></div>
 							<div><input type="submit" value="Add" /></div>
@@ -59,7 +53,7 @@ class xv_admin_xvauctions_categories{
 					<legend>Delete Category</legend>
 					<div class="auction-delcat-result"></div>
 					<form method="post" action="'.$GLOBALS['URLS']['Script'].'Administration/get/XVauctions/DelCat/" class="xv-form" data-xv-result=".auction-delcat-result">
-					<input type="hidden" value="'.htmlspecialchars($XVweb->Session->GetSID()).'" name="xv-sid" />
+					<input type="hidden" value="'.htmlspecialchars($XVweb->Session->get_sid()).'" name="xv-sid" />
 						<div>
 							<label for="xvauction-delcat-loc">Do you want delete this category:</label> <input type="text" id="xvauction-delcat-loc" class="auction-cur-dir" readonly="true" name="delcat[category]" value="/" style="width: 300px;" />
 						</div>
@@ -71,7 +65,7 @@ class xv_admin_xvauctions_categories{
 					<legend>Edit Category</legend>
 					<div class="auction-editcat-result"></div>
 					<form method="post" action="'.$GLOBALS['URLS']['Script'].'Administration/get/XVauctions/EditCat/" class="xv-form" data-xv-result=".auction-editcat-result">
-					<input type="hidden" value="'.htmlspecialchars($XVweb->Session->GetSID()).'" name="xv-sid" />
+					<input type="hidden" value="'.htmlspecialchars($XVweb->Session->get_sid()).'" name="xv-sid" />
 						<div><label for="xvauction-editcat-loc">Category:</label> <input type="text" id="xvauction-editcat-loc" class="auction-current-Category" readonly="true" name="editcat[category]" value="/" style="width: 300px;" /></div>
 							<div><label for="xvauction-editcat-caturl">Category URL:</label> <input id="xvauction-editcat-caturl" type="text" name="editcat[caturl]" class="auction-current-CatURL" /></div>
 							<div><label for="xvauction-editcat-name">Category Name:</label> <input id="xvauction-editcat-name" type="text" name="editcat[name]" class="auction-current-Name" /></div>

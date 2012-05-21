@@ -45,7 +45,7 @@ class xv_admin_translation {
 }
 class xv_admin_translation_save{
 	public function __construct(&$XVweb){
-			if($XVweb->Session->GetSID() != $_POST['xv-sid']){
+			if($XVweb->Session->get_sid() != $_POST['xv-sid']){
 				exit("<div class='error'>Error: Wrong SID</div>");
 			}
 		$update_key = $XVweb->DataBase->prepare("INSERT INTO {Translation} ({Translation:Lang}, {Translation:Key}, {Translation:Val}) VALUES ( :lang, :key, :val) ON DUPLICATE KEY UPDATE {Translation:Val} = :val;");

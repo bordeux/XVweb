@@ -55,7 +55,7 @@ if(!isset($XVwebEngine)){
 	
 	class xv_admin_options_setconfig{
 		public function __construct(&$XVweb){
-			if((isset( $_POST['xv-sid']) && $XVweb->Session->GetSID() == $_POST['xv-sid']) || (isset( $_GET['xv-sid']) && $XVweb->Session->GetSID() == $_GET['xv-sid'])){
+			if((isset( $_POST['xv-sid']) && $XVweb->Session->get_sid() == $_POST['xv-sid']) || (isset( $_GET['xv-sid']) && $XVweb->Session->get_sid() == $_GET['xv-sid'])){
 				$this->result = $XVweb->user_config( $XVweb->Session->Session('Logged_User'), (isset($_POST) ? $_POST : null));
 			}else{
 				header("HTTP/1.0 403 Not allowed");

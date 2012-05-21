@@ -18,7 +18,7 @@ define('DownloadLink', "http://www.bordeux.net/xvweb/getlast/?version=1.0",  tru
 if(!defined('Cache_dir'))
 define('Cache_dir', dirname(__FILE__).DIRECTORY_SEPARATOR.'cache'.DIRECTORY_SEPARATOR);
 include_once(dirname(__FILE__).DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'xv_config'.DIRECTORY_SEPARATOR.'xv_config.class.php');
-include_once(dirname(__FILE__).DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'Session.XVWeb.class.php');
+include_once(dirname(__FILE__).DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'session.XVWeb.class.php');
 include_once(dirname(__FILE__).DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'operation.XVWeb.class.php');
 include_once(dirname(__FILE__).DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'db.XVWeb.class.php');
 
@@ -94,7 +94,7 @@ class XVWeb extends OperationXVWeb
 	/************************************************************************************************/
 	public function &PreWork(){
 		$this->Cache = new xv_cache($this);
-		$this->Session = new SessionClass($this);
+		$this->Session = new xv_session($this);
 		if(is_null($this->Session->Session('user_permissions'))){
 			$this->Session->Session('Logged_ID', 2);
 			$this->Session->Session('Logged_User', "Anonymous");

@@ -1,6 +1,6 @@
 <?php
 /***************************************************************************
-****************   Bordeux.NET Project             *************************
+****************   xvAuctions Project              *************************
 ****************   LICENSE IS HERE                 *************************
 ****************   http://xvauctions.bordeux.net/  *************************
 ****************   THIS IS NON-FREE aplication!    *************************
@@ -61,7 +61,7 @@ if(is_array($field_val)){
 
 }
 if(ifsetor($_GET['pay'], "false") == "true"){
-	if($XVwebEngine->Session->GetSID() != $_POST['xv-sid']){
+	if($XVwebEngine->Session->get_sid() != $_POST['xv-sid']){
 		header('Location: '.$URLS['Script'].'Page/xvAuctions/SID_Error/');
 		exit;
 	}

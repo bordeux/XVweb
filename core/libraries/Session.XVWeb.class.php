@@ -1,6 +1,6 @@
 <?php
 
-class SessionClass
+class xv_session
 {
 	var $CookieName = "xv_session";
 	var $Cookie = array();
@@ -106,7 +106,7 @@ class SessionClass
 		}
 
 	}
-	public function GetSID(){
+	public function get_sid(){
 		return $this->SID;
 	}	
 	

@@ -1,19 +1,13 @@
 <?php
 /***************************************************************************
-****************   Bordeux.NET Project             *************************
-****************   File name :   default.php       *************************
-****************   Start     :   22.05.2007 r.     *************************
-****************   License   :   LGPL              *************************
-****************   Version   :   1.0               *************************
-****************   Authors   :   XVweb team        *************************
-*************************XVweb Team*****************************************
-				Krzyszof Bednarczyk, meybe you
-/////////////////////////////////////////////////////////////////////////////
- Klasa XVweb jest na licencji LGPL v3.0 ( GNU LESSER GENERAL PUBLIC LICENSE)
-****************http://www.gnu.org/licenses/lgpl-3.0.txt********************
-		Pełna dokumentacja znajduje się na stronie domowej projektu: 
-*********************http://www.bordeux.NET/Xvweb***************************
+****************   xvAuctions Project              *************************
+****************   LICENSE IS HERE                 *************************
+****************   http://xvauctions.bordeux.net/  *************************
+****************   THIS IS NON-FREE application!   *************************
+****************   Author  : Krzysztof Bednarczyk  *************************
+****************   All rights reserved             *************************
 ***************************************************************************/
+
 if(!isset($XVwebEngine)){
 	header("location: http://".$_SERVER['HTTP_HOST']."/");
 	exit;
@@ -72,7 +66,8 @@ if(!isset($XVwebEngine)){
 					<td>'.$auction_item['Type'].'</td>
 					<td>'.$auction_item['Start'].'</td>
 					<td>'.$auction_item['End'].'</td>
-					<td><a target="_blank" href="'.$GLOBALS['URLS']['Script'].'Users/'.rawurlencode($auction_item['Seller']).'">'.$auction_item['Seller'].'</a></td>
+					<td><a href="'.$URLS['Script'].'Administration/Users/Get/'.$auction_item['Seller'].'/" class="xv-get-window" >'.$auction_item['Seller'].'</a>
+					[<a target="_blank" href="'.$GLOBALS['URLS']['Script'].'Users/'.rawurlencode($auction_item['Seller']).'">preview</a>]</td>
 				</tr>';
 			}
 			

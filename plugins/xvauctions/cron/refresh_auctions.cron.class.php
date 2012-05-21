@@ -1,4 +1,13 @@
 <?php
+/***************************************************************************
+****************   xvAuctions Project              *************************
+****************   LICENSE IS HERE                 *************************
+****************   http://xvauctions.bordeux.net/  *************************
+****************   THIS IS NON-FREE application!   *************************
+****************   Author  : Krzysztof Bednarczyk  *************************
+****************   All rights reserved             *************************
+***************************************************************************/
+
 class xv_cron_refresh_auctions extends xv_cron{
 	public function run(){
 			include_once(dirname(__FILE__).'/../libs/class.xvauctions.php');

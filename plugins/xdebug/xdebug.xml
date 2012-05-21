@@ -32,7 +32,8 @@
     <event name="xvweb.preload_module">
       <script language="PHP">
 	<![CDATA[
-	xv_append_js($URLS['Site']."plugins/xdebug/debug.js");
+		global $URLS;
+	xv_append_js($URLS['Site']."/plugins/xdebug/debug.js");
 	]]>	
 	</script>
     </event>

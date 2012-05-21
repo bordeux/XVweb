@@ -12,7 +12,7 @@ if(empty($check_ip) || xv_perm("AdminPanel")){
 	global $Smarty;
 	if(isset($_POST['ip_ban_login']) && isset($_POST['login'])){
 	sleep(rand(10, 18));
-		if($XVwebEngine->Session->GetSID() === ifsetor($_POST['xv_sid'], "")){
+		if($XVwebEngine->Session->get_sid() === ifsetor($_POST['xv_sid'], "")){
 			include_once(ROOT_DIR.'plugins/users/libs/users.class.php');
 			$users_class = new xv_users($XVwebEngine);
 			$password_hash = xvp()->hash_password($users_class, $_POST['password']);

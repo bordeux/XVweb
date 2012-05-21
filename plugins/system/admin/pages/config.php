@@ -83,7 +83,7 @@ class xv_admin_system_config {
 		include_once(ROOT_DIR.'core'.DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'xv_config'.DIRECTORY_SEPARATOR.'editor.xv_config.class.php');
 		include_once($file_to_include);
 
-		$config->set_csrf($XVweb->Session->GetSID());
+		$config->set_csrf($XVweb->Session->get_sid());
 		$config->set_url($URLS['Script'].'Administration/get/System/Config/'.$config_name.'/');
 		$config->set_form_attr(" data-xv-result='.content ' ");
 		$config->add_form_class("xv-form");

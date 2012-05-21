@@ -274,6 +274,8 @@ class OperationXVWeb
 	
 	
 	public function genMenu(){
+		if($this->Cache->exist("menu","menu"))
+			return  $this->Cache->get();
 		$MenuResult = array();
 		foreach($this->Config('menu')->find("menu > *") as $item){
 			$MenuName = $item->tagName;
@@ -318,7 +320,8 @@ class OperationXVWeb
 				
 			}
 		}
-		return $MenuResult;
+		return $this->Cache->put("menu", "menu", $MenuResult);
+		
 	}
 
 	public function array_merge_recursive_distinct () {

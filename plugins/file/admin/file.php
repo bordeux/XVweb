@@ -258,7 +258,7 @@ include_once(ROOT_DIR.'config'.DIRECTORY_SEPARATOR.'files.config.php');
 			$this->content = '
 				<form action="'.$GLOBALS['URLS']['Script'].'Administration/Get/File/ConfirmDelete/" method="post" class="xv-form" data-xv-result=".content">
 						<input type="hidden" value="'.htmlspecialchars($_GET['file']).'" name="xv-file" />
-						<input type="hidden" value="'.htmlspecialchars($XVweb->Session->GetSID()).'" name="xv-sid" />
+						<input type="hidden" value="'.htmlspecialchars($XVweb->Session->get_sid()).'" name="xv-sid" />
 					<div style="text-align:center;">Do you want delete <span style="color: #BA0000;">'.basename($_GET['name']).'</span> ?</div>
 					<table style="border:none; width:200px; margin:auto;">
 						<tr>
@@ -275,7 +275,7 @@ include_once(ROOT_DIR.'config'.DIRECTORY_SEPARATOR.'files.config.php');
 	class xv_admin_file_confirmdelete{
 		public function __construct(&$XVweb){
 
-			if($XVweb->Session->GetSID() == $_POST['xv-sid']){
+			if($XVweb->Session->get_sid() == $_POST['xv-sid']){
 				$XVweb->FilesClass()->DeleteFile($_POST['xv-file']);
 				echo "<div class='success'>Plik/Folder usunięto</div>
 					<script type='text/javascript'>

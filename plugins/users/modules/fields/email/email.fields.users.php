@@ -37,7 +37,7 @@ class xv_users_fields_email  extends xv_users_fields {
 		<form action="?save=true&amp;email_change=true" method="post">';
 		
 		if(isset($_POST['xv_user_email'])){
-			if($XVwebEngine->Session->GetSID() == $_POST['xv_sid']){
+			if($XVwebEngine->Session->get_sid() == $_POST['xv_sid']){
 			$password_hashed = xvp()->hash_password($user_class, $_POST['xv_user_email']['password']);
 			
 			if($password_hashed == $user_data->Password){
@@ -62,7 +62,7 @@ class xv_users_fields_email  extends xv_users_fields {
 
 		
 		$result .='
-		<input type="hidden" name="xv_sid" value="'.$XVwebEngine->Session->GetSID().'" />
+		<input type="hidden" name="xv_sid" value="'.$XVwebEngine->Session->get_sid().'" />
 			<table>
 				<tr>
 					<td>'.xv_lang("current_email").': </td>

@@ -1,17 +1,11 @@
 <?php
 /***************************************************************************
-****************   Bordeux.NET Project             *************************
-****************   Start     :   22.05.2007 r.     *************************
-****************   License   :   LGPL              *************************
-****************   Version   :   1.0               *************************
-****************   Authors   :   XVweb team        *************************
-*************************XVweb Team*****************************************
-				Krzyszof Bednarczyk, meybe you
-/////////////////////////////////////////////////////////////////////////////
-Klasa XVweb jest na licencji LGPL v3.0 ( GNU LESSER GENERAL PUBLIC LICENSE)
-****************http://www.gnu.org/licenses/lgpl-3.0.txt********************
-		Pełna dokumentacja znajduje się na stronie domowej projektu: 
-*********************http://www.bordeux.NET/Xvweb***************************
+****************   xvAuctions Project              *************************
+****************   LICENSE IS HERE                 *************************
+****************   http://xvauctions.bordeux.net/  *************************
+****************   THIS IS NON-FREE application!   *************************
+****************   Author  : Krzysztof Bednarczyk  *************************
+****************   All rights reserved             *************************
 ***************************************************************************/
 
 if(!isset($XVwebEngine)){
@@ -85,7 +79,7 @@ class xv_admin_xvauctions_editfields{
 				<div class='auction-deletefield-{$fieldItem['Name']}-{$CatUNIQ}'>
 					<div class='auction-editfield-{$fieldItem['Name']}-{$CatUNIQ}'></div>
 					<form method='post'	action='{$GLOBALS['URLS']['Script']}Administration/get/XVauctions/SaveField/' class='xv-form' data-xv-result='.auction-editfield-{$fieldItem['Name']}-{$CatUNIQ}'>
-					<input type='hidden' value='".htmlspecialchars($XVweb->Session->GetSID())."' name='xv-sid' />
+					<input type='hidden' value='".htmlspecialchars($XVweb->Session->get_sid())."' name='xv-sid' />
 					<input type='hidden' value='{$fieldItem['ID']}' name='field-id' />
 					
 					";
@@ -104,7 +98,7 @@ class xv_admin_xvauctions_editfields{
 					</form>
 					
 					<form method='post'	action='{$GLOBALS['URLS']['Script']}Administration/get/XVauctions/DeleteField/' class='xv-form' data-xv-result='.auction-deletefield-{$fieldItem['Name']}-{$CatUNIQ}'>
-						<input type='hidden' value='".htmlspecialchars($XVweb->Session->GetSID())."' name='xv-sid' />
+						<input type='hidden' value='".htmlspecialchars($XVweb->Session->get_sid())."' name='xv-sid' />
 						<input type='hidden' value='{$fieldItem['ID']}' name='field-id' />
 						<input type='submit' onclick='return confirm(\"Do you want to delete this field?\");' value='Delete field' />
 					</form>	
@@ -134,7 +128,7 @@ class xv_admin_xvauctions_editfields{
 							</tr>
 						</table>
 						<input type='hidden' value='{$fieldItem['ID']}' name='edit[ID]' />
-						<input type='hidden' value='".htmlspecialchars($XVweb->Session->GetSID())."' name='xv-sid' />
+						<input type='hidden' value='".htmlspecialchars($XVweb->Session->get_sid())."' name='xv-sid' />
 						
 						<input type='submit' value='Save' />
 						
@@ -162,7 +156,7 @@ class xv_admin_xvauctions_editfields{
 					<legend>Add new field</legend>
 						<div class='auction-newfield-result'></div>
 					<form method='post'	action='{$GLOBALS['URLS']['Script']}Administration/get/XVauctions/NewField/' class='xv-form' data-xv-result='.auction-newfield-result'>
-					<input type='hidden' value='".htmlspecialchars($XVweb->Session->GetSID())."' name='xv-sid' />
+					<input type='hidden' value='".htmlspecialchars($XVweb->Session->get_sid())."' name='xv-sid' />
 					<input type='hidden' value='".htmlspecialchars($_GET['cat'])."' name='newfield[category]' />
 						<div>
 							<label for='auction-newfield-name'>Field name (ascii chart): </label><input type='text' name='newfield[name]' id='auction-newfield-name' />

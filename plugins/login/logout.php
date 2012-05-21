@@ -14,7 +14,7 @@ xv_set_title(xv_lang("logout_title"));
 $logout_sid = ($XVwebEngine->GetFromURL($PathInfo, 2));
 $Smarty->assign('logout_success', false);
 
-if($logout_sid === $XVwebEngine->Session->GetSID()){
+if($logout_sid === $XVwebEngine->Session->get_sid()){
 	foreach ($_COOKIE as $c_id => $c_value){
 		@setcookie($c_id, 'delete', time()-10000, "/");
 	}

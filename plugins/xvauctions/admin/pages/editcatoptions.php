@@ -1,17 +1,11 @@
 <?php
 /***************************************************************************
-****************   Bordeux.NET Project             *************************
-****************   Start     :   22.05.2007 r.     *************************
-****************   License   :   LGPL              *************************
-****************   Version   :   1.0               *************************
-****************   Authors   :   XVweb team        *************************
-*************************XVweb Team*****************************************
-				Krzyszof Bednarczyk, meybe you
-/////////////////////////////////////////////////////////////////////////////
-Klasa XVweb jest na licencji LGPL v3.0 ( GNU LESSER GENERAL PUBLIC LICENSE)
-****************http://www.gnu.org/licenses/lgpl-3.0.txt********************
-		Pełna dokumentacja znajduje się na stronie domowej projektu: 
-*********************http://www.bordeux.NET/Xvweb***************************
+****************   xvAuctions Project              *************************
+****************   LICENSE IS HERE                 *************************
+****************   http://xvauctions.bordeux.net/  *************************
+****************   THIS IS NON-FREE application!   *************************
+****************   Author  : Krzysztof Bednarczyk  *************************
+****************   All rights reserved             *************************
 ***************************************************************************/
 
 if(!isset($XVwebEngine)){
@@ -39,7 +33,7 @@ class xv_admin_xvauctions_editcatoptions{
 <div class='auction-editoptions-{$CatUNIQ}'> </div>
 	<div style='text-align:center; font-size: 16px; height: 20px;'> Now edit: <b>{$_GET['cat']}</b></div>
 		<form method='post'	action='{$GLOBALS['URLS']['Script']}Administration/get/XVauctions/SaveOptions/' class='xv-form' data-xv-result='.auction-editoptions-{$CatUNIQ}'>
-		<input type='hidden' value='{$XVweb->Session->GetSID()}' name='xv-sid' />";
+		<input type='hidden' value='{$XVweb->Session->get_sid()}' name='xv-sid' />";
 		if($_GET['cat'] == "/"){
 			include(ROOT_DIR.'plugins/xvauctions/config/default.php');
 			$category_url = '/';

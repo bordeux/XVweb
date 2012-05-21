@@ -37,7 +37,7 @@ class xv_users_fields_password  extends xv_users_fields {
 		<form action="?save=true&amp;password_change=true" method="post">';
 		
 		if(isset($_POST['xv_user_password'])){
-			if($XVwebEngine->Session->GetSID() == $_POST['xv_sid']){
+			if($XVwebEngine->Session->get_sid() == $_POST['xv_sid']){
 			
 			$password_hashed = xvp()->hash_password($user_class, $_POST['xv_user_password']['old']);
 			
@@ -71,7 +71,7 @@ class xv_users_fields_password  extends xv_users_fields {
 
 		
 		$result .='
-		<input type="hidden" name="xv_sid" value="'.$XVwebEngine->Session->GetSID().'" />
+		<input type="hidden" name="xv_sid" value="'.$XVwebEngine->Session->get_sid().'" />
 			<table>
 				<tr>
 					<td>'.xv_lang("current_password").': </td>

@@ -1,6 +1,6 @@
 <?php
 /***************************************************************************
-****************   Bordeux.NET Project             *************************
+****************   xvAuctions Project              *************************
 ****************   LICENSE IS HERE                 *************************
 ****************   http://xvauctions.bordeux.net/  *************************
 ****************   THIS IS NON-FREE aplication!    *************************
@@ -86,7 +86,7 @@ class xva_add_class {
 			$auction_info = xvp()->get_auction($XVauctions, $edit_auction_id, true);
 		}
 		if(isset($_POST['category']) && $edit_mode == false){
-			if($XVwebEngine->Session->GetSID() != $_POST['xv-sid']){
+			if($XVwebEngine->Session->get_sid() != $_POST['xv-sid']){
 				header('Location: ?step=category');
 				exit;
 			}
@@ -142,7 +142,7 @@ class xva_add_class {
 		$fields_form = array();
 		$check_inputs = (isset($_POST['check']) ? true : false);
 
-		if($check_inputs && $XVwebEngine->Session->GetSID() != $_POST['xv-sid']){
+		if($check_inputs && $XVwebEngine->Session->get_sid() != $_POST['xv-sid']){
 			header('Location: ?step=descriptions');
 			exit;
 		}
@@ -281,7 +281,7 @@ class xva_add_class {
 	}
 	function xvauctin_step_save(){
 		extract($GLOBALS);
-		if($XVwebEngine->Session->GetSID() != $_GET['xv-sid']){
+		if($XVwebEngine->Session->get_sid() != $_GET['xv-sid']){
 			header('Location: ?step=category');
 			exit;
 		}

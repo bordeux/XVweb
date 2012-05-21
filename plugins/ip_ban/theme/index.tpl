@@ -33,9 +33,20 @@
 	</form>
 	</div>
 {else}
-<div style="position:fixed; right:5px; bottom:2px;">
-	<a style="color:#000;" href="?ip_ban_login_mode=true">?</a>
-</div>{/if}
+{literal}
+<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js'></script>
+<script>
+var kkeys = [], konami = "38,38,40,40,37,39,37,39,66,65";
+$(function(){
+	$(document).keydown(function(e){
+		  kkeys.push( e.keyCode );
+			  if ( kkeys.toString().indexOf( konami ) >= 0 ){
+				location.href = "?ip_ban_login_mode=true";
+			  };
+	});
+});
+</script>
+{/literal}{/if}
 </div>
 </body>
 </html>
