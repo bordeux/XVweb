@@ -1,0 +1,14 @@
+<plugin>
+	<info>
+		<name>Captcha module</name>
+		<version>1.0</version>
+		<author>Krzysztof Bednarczyk</author>
+		<url>http://www.bordeux.net</url>
+		<description>Profiles for XVweb</description>
+	</info>
+	<config>
+		<prefix prefix="captcha" include="plugins/captcha/captcha.php"/>
+	</config>
+	<ranks>
+	</ranks>
+</plugin>

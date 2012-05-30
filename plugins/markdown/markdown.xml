@@ -11,7 +11,7 @@
     <parser>
       <function tag="markdown">	
 	  <![CDATA[
-	include_once($GLOBALS['$RootDir'].'plugins/markdown/markdown.php');
+	include_once(ROOT_DIR.'plugins/markdown/markdown.php');
 	pq($element)->replaceWith(Markdown(pq($element)->html()));
 	]]>
 	</function>

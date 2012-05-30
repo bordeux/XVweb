@@ -22,6 +22,6 @@ $xva_index_page_config = new xva_index_page();
 
 $Smarty->assignByRef('xva_index_page_categories', $xva_index_page_config->categories);
 $Smarty->assignByRef('auctions_categories', $categories);
-$Smarty->display('xvauctions_theme/auction_index_show.tpl');
+$Smarty->display('xvauctions/auction_index_show.tpl');
 
 ?>

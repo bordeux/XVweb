@@ -8,7 +8,7 @@
 ****************   All rights reserved             *************************
 ***************************************************************************/
 
-if(!xv_perm("xva_Sell")){
+if(!xv_perm("xva_sell")){
 	header("location: ".$URLS['Script'].'Page/xvAuctions/Permission/Sell/');
 	exit;
 }
@@ -28,7 +28,7 @@ if(empty($auction_info)){
 	exit;
 }
 
-if($auction_info['Seller'] != $XVwebEngine->Session->Session('Logged_User')){
+if($auction_info['Seller'] != $XVwebEngine->Session->Session('user_name')){
 	header("location: ".$URLS['Script'].'Page/xvAuctions/404/');
 	exit;
 }
@@ -46,6 +46,6 @@ if(ifsetor($_POST['finish'], '') == "true"){
 
 $Smarty->assignByRef('auction_info', $auction_info);
 
-$Smarty->display('xvauctions_theme/panel_show.tpl');
+$Smarty->display('xvauctions/panel_show.tpl');
 
 ?>

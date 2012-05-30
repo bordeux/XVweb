@@ -76,7 +76,7 @@ $_POST['md5sum'];
 			$this->Data['XVweb']->Log("transferuj.pl", $_POST);
 			exit("user does't exist");
 		}
-		xvp()->add_transaction(xvp()->InitClass($this->Data['XVweb'], "xvpayments"), $user_info['User'], ($_POST['tr_amount']*100*$config_provision), "transfeujpl", "Wpłata poprzez transferuj.pl" , $_POST, "trns-".$_POST['tr_id']);
+		xvp()->add_transaction(xvp()->load_class($this->Data['XVweb'], "xvpayments"), $user_info['User'], ($_POST['tr_amount']*100*$config_provision), "transfeujpl", "Wpłata poprzez transferuj.pl" , $_POST, "trns-".$_POST['tr_id']);
 		
 		exit('TRUE');
 	}
@@ -86,7 +86,7 @@ $_POST['md5sum'];
 		$config_secruity_code = $this->config->secruity_code;
 		$config_provision = $this->config->provision;
 		
-	$user_info = $this->Data['XVweb']->DataBase->pquery('SELECT {Users:*} FROM {Users} WHERE {Users:ID} = '.$this->Data['XVweb']->Session->Session("Logged_ID").' LIMIT 1')->fetch(PDO::FETCH_ASSOC);
+	$user_info = $this->Data['XVweb']->DataBase->pquery('SELECT {Users:*} FROM {Users} WHERE {Users:ID} = '.$this->Data['XVweb']->Session->Session("user_ID").' LIMIT 1')->fetch(PDO::FETCH_ASSOC);
 		if(empty($user_info)){
 			exit("Ty nie istniejsz w naszej bazie? Skontaktuj się jak najszybciej z adminem, podaj mu te dane: ". __FILE__ .' oraz id lini '.__LINE__);
 		}

@@ -96,8 +96,8 @@ class XVWeb extends OperationXVWeb
 		$this->Cache = new xv_cache($this);
 		$this->Session = new xv_session($this);
 		if(is_null($this->Session->Session('user_permissions'))){
-			$this->Session->Session('Logged_ID', 2);
-			$this->Session->Session('Logged_User', "Anonymous");
+			$this->Session->Session('user_ID', 2);
+			$this->Session->Session('user_name', "Anonymous");
 			$this->Session->Session('user_group', "anonymous");
 			$this->Session->Session('user_permissions', $this->get_group_permissions("anonymous"));
 		}
@@ -142,19 +142,7 @@ class XVWeb extends OperationXVWeb
 		}
 		return $this->Date['Classes']['TextParser'];
 	}
-	/************************************************************************************************/
-	function &AntyFlood() {
-		if(empty($this->Date['Classes']['AntyFlood'])){
-			include_once(dirname(__FILE__).DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'AntyFlood.XVWeb.class.php');
-			$this->Date['Classes']['AntyFlood'] = new AntyFlood($this);
-		}
-		return $this->Date['Classes']['AntyFlood'];
-	}
 
-	/************************************************************************************************/
-	public function ActivateUser($User, $temppass){
-		return $this->Users()->ActivateUser($User, $temppass);
-	}
 	/************************************************************************************************/
 	public function GetDivisions($URLArticle = null){
 			if(is_null($URLArticle)){
@@ -191,9 +179,9 @@ class XVWeb extends OperationXVWeb
 
                         $Select .= '{Text_Index:*:prepend:IA.} , ((SELECT CONCAT(COALESCE( SUM({Votes:Vote}), 0),"|", COUNT(*)) FROM {Votes} WHERE {Votes:Type} = :TypeVote AND  {Votes:SID} =  IA.{Text_Index:ID} )) AS `Votes` ';
 
-                        if($this->Session->Session('Logged_Logged') == true){
+                        if($this->Session->Session('user_logged_in') == true){
                                 $Select .= ', ((SELECT CONCAT(COALESCE({Bookmarks:Observed} , 0),"|", COALESCE({Bookmarks:Bookmark}, 0)) FROM {Bookmarks} WHERE {Bookmarks:Type} = :TypeVote AND  {Bookmarks:IDS} =  IA.{Text_Index:ID}  AND {Bookmarks:User} = :UserExec)) AS `Bookmarks` ';
-                                $ExecArgs[':UserExec'] = $this->Session->Session('Logged_User');
+                                $ExecArgs[':UserExec'] = $this->Session->Session('user_name');
                         }
 
                         if(!empty($this->ArticleFooIDinArticleIndex)){
@@ -313,70 +301,8 @@ class XVWeb extends OperationXVWeb
 					}
 			return ($Result);
 	}
-	/************************************************************************************************/
-	function CheckAdmin($User= null, $Bit= 1){
-			if(!is_numeric($Bit) or !($Bit)){
-				return false;
-			}
-			$WildCard = str_repeat("_", ($Bit - 1));
-			$WildCard .= "1%";
-			$CheckAdminSql = $this->DataBase->prepare('SELECT * FROM {Users} WHERE {Users:User} = :UserExecute AND {Users:Admin} LIKE "'.$WildCard.'" LIMIT 1');
-			$CheckAdminSql->execute(array(':UserExecute' => ($User)));
-			if(($CheckAdminSql->rowCount())){
-				return true;
-			}else{
-				return false;
-			}
-	}
-	/************************************************************************************************/
-	function ReadUser($User = null){
-			if(!is_null($User)){
-				$this->ReadUser['User'] = $User;
-			}
-			$ReadSQLUser = $this->DataBase->prepare('SELECT {Users:*} FROM {Users} WHERE  {Users:User} = :UserExecute LIMIT 1');
-			$ReadSQLUser->execute(array(':UserExecute' => $this->ReadUser['User']));
-			if(!($ReadSQLUser->rowCount())){
-				return false;
-			}
-			$this->ReadUser = $ReadSQLUser->fetch();
-			$this->ReadUser['Nick'] = $this->ReadUser['User'];
-			$this->ReadUser['GG'] = $this->ReadUser['GaduGadu'];
-			
-			$this->EditUserInit();
-				$this->Date['EditUser']->Date['Log'] = false;
-				$this->Date['EditUser']->Date['OffSecure']=true;
-				$this->Date['EditUser']->Init($this->ReadUser['User']);
-				$this->Date['EditUser']->set("Views", $this->ReadUser['Views']+1);
-			$this->Date['EditUser']->execute();
-			unset($this->Date['EditUser']);
-			
-			return true;
-	}
-	/************************************************************************************************/
-	function SaveComment($Comment=null, $Author = null, $LocationCommentID = null){
-		include_once(dirname(__FILE__).DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'CommentSave.XVWeb.class.php');
-		$CommentSave =  new CommentSave($this);
-		return $CommentSave->SaveComment($Comment, $Author, $LocationCommentID);
-	}
-	/************************************************************************************************/
-	var $CommentRead;
-	function CommentRead($ID=null){
-		include_once(dirname(__FILE__).DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'ReadComment.XVWeb.class.php');
-		$ReadComment =  new ReadComment($this);
-		return $ReadComment->CommentRead($ID);
-	}
-	
-	var $SaveModification = array(
-	"IDComment"=>"",
-	"Comment"=>"",
-	"Error"=>""
-	);
-	/************************************************************************************************/
-	function SaveModificationComment($ID = null, $Comment=null){
-		include_once(dirname(__FILE__).DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'ModComment.XVWeb.class.php');
-		$SaveModComment =  new SaveModComment($this);
-		return $SaveModComment->SaveModificationComment($ID, $Comment);
-	}
+
+
 	/************************************************************************************************/
 	public function ReadArticleToDOC($URL= null){
 		if(!is_null($URLS['Site'])){
@@ -394,132 +320,14 @@ class XVWeb extends OperationXVWeb
 		$this->HTMLtoDoc->createDoc($this->ParseArticleContents(), $this->ReadArticleIndexOut['Topic'], true);
 	}
 	/************************************************************************************************/
-	var $LogginWithOpenIDVar;
-	public function LogginWithOpenID(&$OpenIDGet){
-		include_once(dirname(__FILE__).DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'LoginOpenID.XVWeb.class.php');
-		$OpenIDLogin =  new OpenIDLogin($this);
-		return $OpenIDLogin->LogginWithOpenID($OpenIDGet);
-	}
-	/************************************************************************************************/
-	var $OpenID;
-	public function LoadOpenIDClass(){
-			include_once(dirname(__FILE__).DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'class.openid.php');
-			if(empty($this->OpenID))
-			$this->OpenID   = new SimpleOpenID;
-	}
-	/************************************************************************************************/
-	public function LoadGOpenID(){
-			include_once(dirname(__FILE__).DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'GOpenID.class.php');
-			if(empty($this->Date['GOpenID']))
-			$this->Date['GOpenID']   = new GOpenID;
-	}
-	/************************************************************************************************/
-	public function LogOut(){
-		$this->Session->Clear();
-	}
-	/************************************************************************************************/
 	function ParseArticlecontents($text = null){
 			$MD5Hash = md5(MD5Key.(is_null($text)?$this->ReadArticleOut['ID']:$text)); // zmien na url i id versji
 			if($this->Cache->exist("ArticleParse",$MD5Hash))
-			return (ifsetor($this->ReadArticleIndexOut['Options']['EnablePHP'], 0) ? $this->EvalHTML($this->Cache->get()): $this->Cache->get());
+			return (ifsetor($this->ReadArticleIndexOut['Options']['EnablePHP'], 0) ? $this->eval_html($this->Cache->get()): $this->Cache->get());
 			$this->IncludeParseHTML();
 			$Result = $this->Cache->put("ArticleParse",$MD5Hash, (is_null($text) ? $this->ParserMyBBcode->set("Options", $this->ReadArticleIndexOut['Options'])->set("Blocked", ($this->ReadArticleIndexOut['Blocked'] == "yes" ? 1 : 0))->SetText($this->ReadArticleOut['Contents'])->Parse()->ToHTML() : $this->ParserMyBBcode->set("Blocked", ($this->ReadArticleIndexOut['Blocked'] == "yes" ? 1 : 0))->SetText($text)->Parse()->ToHTML()));
 
-			return (ifsetor($this->ReadArticleIndexOut['Options']['EnablePHP'], 0) ? $this->EvalHTML($Result) : $Result);
-	}
-	/************************************************************************************************/
-	function CommentArticle($IDArticle = null, $Parse = true){
-			$localID = $this->ReadArticleIndexOut['AdressInSQL'];
-			if(!is_null($IDArticle)){
-				$localID = $IDArticle; //tu
-			}
-			if(empty($localID))
-			return array();
-			
-			if($this->Cache->exist("Comment",$localID)){
-				return $this->Cache->get();
-			}
-			if($Parse){
-				$this->IncludeParseHTML();
-			}
-			
-			$SQLComment = $this->DataBase->prepare('SELECT 
-			{Comments:*:prepend:CT.} ,
-			UT.{Users:Avant} AS `Avant` ,
-			(SELECT COALESCE( SUM({Votes:Vote}), 0) FROM {Votes} WHERE {Votes:Type} = :TypeVote AND {Votes:SID} =  CT.{Comments:ID} ) AS `Votes`
-			FROM 
-				{Comments} AS `CT`,
-				{Users} AS `UT`
-		WHERE   
-			CT.{Comments:IDArticleInSQL} = :URLExecute AND UT.{Users:User} =   CT.{Comments:Author}  ORDER BY {Comments:ID} DESC');
-			$SQLComment->execute(array(':URLExecute' => $localID, ":TypeVote"=>"comment"));
-			$ArrayComment = $SQLComment->fetchAll();
-			return $this->Cache->put("Comment",$localID, $ArrayComment);
-	}
-
-	/************************************************************************************************/
-	function EditTagArticle($ArticleID, $Tags){
-		include_once(dirname(__FILE__).DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'EditTag.XVWeb.class.php');
-		$EditArticle =  new EditArticle($this);
-		return $EditArticle->EditTagArticle($ArticleID, $Tags);
-	}
-	/************************************************************************************************/
-	public function ConfigSystem($id, $Mod = null){
-			if(is_null($Mod)){
-				$ConfigCache = $this->Cache("Config", $id);
-				if(!is_null($ConfigCache))
-				return $ConfigCache;
-				$ConfigSQL = $this->DataBase->prepare('SELECT * FROM `'.($this->DataBasePrefix).($this->DataBaseSystem['DataBaseSystem']).'` WHERE  `'.($this->DataBaseSystem['Name']).'` = :NameExecute LIMIT 1');
-				$ConfigSQL->execute(array(':NameExecute' => $id));
-				while ($SQlRowConfig = $ConfigSQL->fetch()) {
-					$return = $SQlRowConfig;
-				}
-				$TMPRetrun = (isset($return) ? $return[($this->DataBaseSystem['Value'])] : null);
-				$this->Cache("Config",$id, $TMPRetrun, 900);
-				return $TMPRetrun;
-			}else{
-				if(is_null($this->ConfigSystem($id))){
-					$SystemInfoSQL = $this->DataBase->prepare('INSERT INTO `'.($this->DataBasePrefix).($this->DataBaseSystem['DataBaseSystem']).'`  (`'.($this->DataBaseSystem['Name']).'`, `'.($this->DataBaseSystem['Value']).'`) VALUES ( :IDExecute , :ModExecute )');
-					$SystemInfoSQL->execute(
-					array(':IDExecute' => $id ,
-					':ModExecute' => $Mod
-					)
-					);
-					if($SystemInfoSQL){
-						return $Mod;
-					}else{
-						return false;
-					}
-				}else{
-					$SystemInfoSQL = $this->DataBase->prepare('UPDATE `'.($this->DataBasePrefix).($this->DataBaseSystem['DataBaseSystem']).'` SET `'.($this->DataBaseSystem['Value']).'` = :ModExecute WHERE `'.($this->DataBaseSystem['Name']).'` = :IDExecute');
-					$SystemInfoSQL = $SystemInfoSQL->execute(
-					array(':IDExecute' => $id ,
-					':ModExecute' => $Mod
-					)
-					);
-					if($SystemInfoSQL){
-						return $Mod;
-					}else{
-						return false;
-					}
-				}
-			}
-	}
-	/************************************************************************************************/
-	public function DeleteComment($ID){
-			if(!is_numeric($ID)){
-				return false;
-			}
-			$this->CommentRead($ID);
-			if(($this->Admin['DeleteComment'] && $this->CommentRead['Author']==$this->Session->Session('Logged_User')) or $this->Admin['DeleteCommentOther']){
-				$DeleteCommentSQL = $this->DataBase->prepare('DELETE FROM {Comments} WHERE {Comments:ID} = :IDComment LIMIT 1');
-				$DeleteCommentSQL->execute(array(':IDComment' => ($ID)));
-				$this->Cache->clear("Comment", $this->CommentRead['IDArticleInSQL']);
-				$this->Log("DeleteComment", array("CommentID"=> $ID));
-				return true;
-			}else{
-				return false;
-			}
+			return (ifsetor($this->ReadArticleIndexOut['Options']['EnablePHP'], 0) ? $this->eval_html($Result) : $Result);
 	}
 	/************************************************************************************************/
 	public function IDtoURL($id){
@@ -569,7 +377,7 @@ class XVWeb extends OperationXVWeb
 	public function Log($type, $data,  $who=null, $ip =null){
 		if(is_null($who)){
 		if (is_object($this->Session)) 
-			$who = $this->Session->Session('Logged_User');
+			$who = $this->Session->Session('user_name');
 		}else{
 			$who = "Error";
 		}
@@ -600,11 +408,11 @@ class XVWeb extends OperationXVWeb
 	}
 	/************************************************************************************************/
 	public function ErrorClass($Exception){
-		include_once(dirname(__FILE__).DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'PDOError.XVWeb.class.php');
-		$PDOError = new PDOError($Exception);
+		include_once(dirname(__FILE__).DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'xv_db_error.XVWeb.class.php');
+		$xv_db_error = new xv_db_error($Exception);
 		$this->Log("Exception", $Exception);
 		ob_start();
-		($PDOError->show($this));
+		($xv_db_error->show($this));
 	}
 	/************************************************************************************************/
 	function GetOnlyContextArticle($URL){
@@ -629,22 +437,6 @@ class XVWeb extends OperationXVWeb
 		return $HistoryArticle->GetHisotryAricle($ID);
 	}
 	/************************************************************************************************/
-	public function UserList($Date = array()){
-		include_once(dirname(__FILE__).DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'UserList.XVWeb.class.php');
-		$UserList =  new UserListClass($this);
-		return $UserList->UserList($Date);
-	}
-	/************************************************************************************************/
-	public function OnlineList(){
-		include_once(dirname(__FILE__).DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'OnlineList.XVWeb.class.php');
-		return  new OnlineListClass($this);
-	}
-	/************************************************************************************************/
-	public function PluginInt($Date = array(), $PHPLocation, $ClassName){
-		include_once($PHPLocation);
-		return  new $ClassName($this);
-	}
-	/************************************************************************************************/
 	public function &Users(){
 		if(empty($this->Date['UserClass'])){
 			include_once(dirname(__FILE__).DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'User.XVWeb.class.php');
@@ -660,29 +452,7 @@ class XVWeb extends OperationXVWeb
 		}
 		return $this->Date['MailClass'];
 	}
-	/************************************************************************************************/
-	public function &DeleteUser(){
-		if(empty($this->Date['DeleteUser'])){
-			include_once(dirname(__FILE__).DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'DeleteUser.XVWeb.class.php');
-			$this->Date['DeleteUser'] = new DeletUserClass($this);
-		}
-		return$this->Date['DeleteUser'];
-	}
-	/************************************************************************************************/
-	public function OnlineInit($UrlLocation){
-		if(empty($this->Date['Online'])){
-			include_once(dirname(__FILE__).DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'Online.XVWeb.class.php');
-			$this->Date['Online'] = new OnlineClass($this, $UrlLocation);
-		}
-	}
-	/************************************************************************************************/
-	public function &EditUserInit(){
-		if(empty($this->Date['EditUser'])){
-			include_once(dirname(__FILE__).DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'EditUser.XVWeb.class.php');
-			$this->Date['EditUser'] = new EditUserClass($this);
-		}
-		return $this->Date['EditUser'];
-	}
+
 	/************************************************************************************************/
 	public function &DelArtVer(){
 		if(empty($this->Date['DeleteArtVer'])){
@@ -708,22 +478,6 @@ class XVWeb extends OperationXVWeb
 		return $this->Date['DiffClass'];
 	}
 	/************************************************************************************************/
-	public function &Votes(){
-		if(empty($this->Date['VotesClass'])){
-			include_once(dirname(__FILE__).DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'Votes.XVWeb.class.php');
-			$this->Date['Votes'] = new VotesClass($this);
-		}
-		return $this->Date['Votes'];
-	}
-	/************************************************************************************************/
-	public function &XMLParser(){
-		if(empty($this->Date['XMLParser'])){
-			include_once(dirname(__FILE__).DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'XmlParser.XVWeb.class.php');
-			$this->Date['XMLParser'] = new XMLParser($this);
-		}
-		return $this->Date['XMLParser'];
-	}
-	/************************************************************************************************/
 	public function &Config($var){
 		if(empty($this->Date['Config'][$var])){
 		$File = $this->Date['ConfigDir'].$var.'.xml';
@@ -745,33 +499,18 @@ class XVWeb extends OperationXVWeb
 		}
 		return $this->Date['Config'][$var];
 	}
-	/************************************************************************************************/
-	public function &XML($File){
-		if(empty($this->Date['XML'][$File])){
-			$this->Date['XML'][$File] = new DOMDocument('1.0', 'UTF-8');
-			//$this->Date['XML'][$File]->encoding= "utf-8";
-			$this->Date['XML'][$File]->load($File);
-		}
-		return $this->Date['XML'][$File];
-	}
+
 	/************************************************************************************************/
 	public function &Plugins(){
 		if(empty($this->Date['PluginsClass'])){
-			include_once(dirname(__FILE__).DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'Plugins.XVWeb.class.php');
+			include_once(dirname(__FILE__).DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'plugins.XVWeb.class.php');
 			$this->Date['PluginsClass'] = new Plugins($this);
 		}
 		return $this->Date['PluginsClass'];
 	}
+
 	/************************************************************************************************/
-	public function &LostPassword(){
-		if(empty($this->Date['LostPassword'])){
-			include_once(dirname(__FILE__).DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'LostPassword.XVWeb.class.php');
-			$this->Date['LostPassword'] = new LostPassword($this);
-		}
-		return $this->Date['LostPassword'];
-	}
-	/************************************************************************************************/
-	public function &InitClass($ClassName){
+	public function &load_class($ClassName){
 		if(empty($this->Date['Classes'][$ClassName])){
 			$this->Date['Classes'][$ClassName] = new $ClassName($this);
 		}
@@ -784,14 +523,6 @@ class XVWeb extends OperationXVWeb
 			$this->Date['EditArticle'] =  new XVArticle($this);
 		}
 		return $this->Date['EditArticle'];
-	}
-	/************************************************************************************************/
-	public function &Messages(){
-		if(empty($this->Date['Messages'])){
-			include_once(dirname(__FILE__).DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'Messages.XVWeb.class.php');
-			$this->Date['Messages'] =  new Messages($this);
-		}
-		return $this->Date['Messages'];
 	}
 	/************************************************************************************************/
 	public function SendMail($mail, $url, $vars){
@@ -843,7 +574,7 @@ class XVWeb extends OperationXVWeb
 			exit;
 	}
 	/************************************************************************************************/
-	public function get_group_permissions($group){
+	public function get_group_permissions($group){ // do usuniecia
 			$permissions = array();
 			$permissions_sql = $this->DataBase->prepare('SELECT {Groups:Permission} AS `Permission`  FROM  {Groups} WHERE {Groups:Name} = :name ;');
 			$permissions_sql->execute(array(
@@ -857,7 +588,7 @@ class XVWeb extends OperationXVWeb
 		return $permissions;
 	}
 	/************************************************************************************************/
-	public function permissions(){
+	public function permissions(){ 
 		 $perms = &$this->Session->Session('user_permissions');
 		 if(!is_array($perms))
 			return false;

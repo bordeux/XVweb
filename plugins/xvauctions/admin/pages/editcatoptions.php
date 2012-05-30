@@ -26,7 +26,7 @@ class xv_admin_xvauctions_editcatoptions{
 		$this->URL = "XVauctions/EditOptions/?cat=".urlencode($_GET['cat']);
 		$this->icon = $GLOBALS['URLS']['Site'].'plugins/xvauctions/admin/xvauctions/icons/main.png';
 		include_once(ROOT_DIR.'plugins/xvauctions/libs/class.xvauctions.php');
-		$XVauctions = &$XVweb->InitClass("xvauctions");
+		$XVauctions = &$XVweb->load_class("xvauctions");
 
 		$this->content = "
 <div  style='overflow-y:scroll; max-height: 600px;'>

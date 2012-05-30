@@ -20,28 +20,6 @@ class xv_api_ajax {
 			return ($GetArticles->fetchAll(PDO::FETCH_ASSOC));
 	}	
 
-	/**
-	 * Read comment
-	 * Usage : get_comment(10)
-	 * Example : <a href='json/?get_comment=[1]'>json/?hello=[10]</a>
-	 * Example : <a href='xml/?get_comment=[1]'>xml/?hello=[10]</a>
-	 * Example : <a href='serialize/?get_comment=[1]'>serialize/?hello=[10]</a>
-	 * 
-	 * @param int $id
-	 * @return array
-	 */	
-	public function get_comment($id){
-		global $XVwebEngine;
-			$comment = $XVwebEngine->CommentRead((int) $id);
-			return array(
-					'Result' => $comment ,
-					'ID'	=> $XVwebEngine->CommentRead['ID'],
-					'Author'	=> $XVwebEngine->CommentRead['Author'],
-					'Comment'	=> $XVwebEngine->CommentRead['Date'],
-					'Comment'	=> $XVwebEngine->CommentRead['Comment'],
-					'Parsed'	=> $XVwebEngine->CommentRead['Parsed'],
-				);
-	}
 	
 	/**
 	 * Search function
@@ -64,16 +42,6 @@ class xv_api_ajax {
 		return $SearchResult;
 	}	
 	
-	/**
-	 * Get tags
-	 * 
-	 * @param string $ids
-	 * @return array
-	 */	
-
-	public function get_tags($ids){
-		return array("ids"=> htmlspecialchars($ids), "tags"=>$XVwebEngine->EditArticle()->GetTags($ids));
-	}
     
     public function __wakeup(){
        

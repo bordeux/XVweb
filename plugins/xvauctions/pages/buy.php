@@ -19,9 +19,14 @@ if($XVwebEngine->Session->get_sid() != $_POST['xv-sid']){
 	header("location: ".$URLS['Script'].'Page/xvAuctions/SID_error/');
 	exit;
 }
-$user_data = xvp()->get_user_data($XVauctions, $XVwebEngine->Session->Session('Logged_User'));
+if(!xv_perm("xva_buy")){
+	$XVwebEngine->Session->Session("login_redirect", $URLS['Auction'].'/'.$auction_id.'/');
+	header("location: ".$URLS['Script'].'Login/');
+	exit;
+}
+$user_data = xvp()->get_user_data($XVauctions, $XVwebEngine->Session->Session('user_name'));
 if(empty($user_data)){
-	header("location: ".$URLS['Script'].'Users/'.$XVwebEngine->Session->Session('Logged_User').'/edit/?xva_set_data=true#xvauction-user-data');
+	header("location: ".$URLS['Script'].'Users/'.$XVwebEngine->Session->Session('user_name').'/edit/?xva_set_data=true#xvauction-user-data');
 	exit;
 }
 $buy_pieces = 1;
@@ -50,12 +55,12 @@ if(in_array($auction_info['Type'], array("buynow", "both", "dutch")) && ifsetor(
 	}
 	$to_pay = $auction_info['BuyNow']; // tutaj zmiana jak licytacja
 	if(isset($_POST['confirm_buy']) && $_POST['confirm_buy'] == "1"){
-		if(!xv_perm("xva_Buy")){
+		if(!xv_perm("xva_buy")){
 			header("location: ".$URLS['Script'].'Page/xvAuctions/Permission/Buy/');
 			exit;
 		}
-		xvp()->create_offer($XVauctions, $auction_info['ID'], $XVwebEngine->Session->Session('Logged_User'), "buynow" , $to_pay, $buy_pieces);
-		$bought_id = xvp()->create_bought($XVauctions, $auction_info['ID'], $XVwebEngine->Session->Session('Logged_User'), $auction_info['Seller'], $auction_info['Type'], $to_pay, $buy_pieces, $auction_info['Title'], $auction_info['Thumbnail']);
+		xvp()->create_offer($XVauctions, $auction_info['ID'], $XVwebEngine->Session->Session('user_name'), "buynow" , $to_pay, $buy_pieces);
+		$bought_id = xvp()->create_bought($XVauctions, $auction_info['ID'], $XVwebEngine->Session->Session('user_name'), $auction_info['Seller'], $auction_info['Type'], $to_pay, $buy_pieces, $auction_info['Title'], $auction_info['Thumbnail']);
 		
 		xvp()->edit_auction($XVauctions, $auction_info['ID'], array(
 			"AuctionsCount" => $count_auctions+1,
@@ -84,13 +89,13 @@ if(in_array($auction_info['Type'], array("buynow", "both", "dutch")) && ifsetor(
 	}
 
 	if(isset($_POST['confirm_buy']) && $_POST['confirm_buy'] == "1"){
-		if(!xv_perm("xva_Buy")){
+		if(!xv_perm("xva_buy")){
 			header("location: ".$URLS['Script'].'Page/xvAuctions/Permission/Buy/');
 			exit;
 		}
 		$auction_offers = xvp()->get_offers($XVauctions, $auction_info['ID']);
 		$count_auctions = count($auction_offers);
-		xvp()->create_offer($XVauctions, $auction_info['ID'], $XVwebEngine->Session->Session('Logged_User'), "auction" , $to_pay, $buy_pieces);
+		xvp()->create_offer($XVauctions, $auction_info['ID'], $XVwebEngine->Session->Session('user_name'), "auction" , $to_pay, $buy_pieces);
 		$to_update = array(
 			"Auction" => $to_pay,
 			"AuctionsCount" => $count_auctions+1,
@@ -111,7 +116,7 @@ $Smarty->assignByRef('buy_pieces', $buy_pieces);
 $Smarty->assign('buy_sum', ($to_pay*$buy_pieces));
 $Smarty->assignByRef('buy_cost', $to_pay);
 $Smarty->assignByRef('auction_info', $auction_info);
-$Smarty->display('xvauctions_theme/buy_show.tpl');
+$Smarty->display('xvauctions/buy_show.tpl');
 
 
 ?>

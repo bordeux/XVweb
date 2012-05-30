@@ -26,12 +26,12 @@ $display_options = array(
 	);
 $record_limit = 30;
 
-$payments_list = xvp()->get_payments(xvp()->InitClass($XVwebEngine,"xvpayments"), $XVwebEngine->Session->Session('Logged_User'), $display_options, (int) $_GET['page'], $record_limit);
+$payments_list = xvp()->get_payments(xvp()->load_class($XVwebEngine,"xvpayments"), $XVwebEngine->Session->Session('user_name'), $display_options, (int) $_GET['page'], $record_limit);
 
 $_GET = array_filter($_GET);
 $isset_user = false;
 if(isset($_POST['transfer']['user'])){
-	if($XVwebEngine->isset_user($_POST['transfer']['user']) && ($_POST['transfer']['user'] != $XVwebEngine->Session->Session('Logged_User'))){
+	if($XVwebEngine->isset_user($_POST['transfer']['user']) && ($_POST['transfer']['user'] != $XVwebEngine->Session->Session('user_name'))){
 		$isset_user = true;
 		$Smarty->assign('isset_user', true);
 	}else{
@@ -47,16 +47,16 @@ if(isset($_POST['finish_mode']) && $isset_user == true){
 		header('Location: '.$URLS['Script'].'Page/xvAuctions/SID_Error/');
 		exit;
 	}
-	$user_amount = xvp()->get_user_amount(xvp()->InitClass($XVwebEngine,"xvpayments"), $XVwebEngine->Session->Session('Logged_User'));
+	$user_amount = xvp()->get_user_amount(xvp()->load_class($XVwebEngine,"xvpayments"), $XVwebEngine->Session->Session('user_name'));
 	
 	if($user_amount >= (($_POST['transfer']['amount'])*(100))){
-		xvp()->add_transaction(xvp()->InitClass($XVwebEngine,"xvpayments"),$XVwebEngine->Session->Session('Logged_User'), ($_POST['transfer']['amount'])*(-100) , "transfer_to", "Przelew dla użytkownika ".$_POST['transfer']['user'] , array(
+		xvp()->add_transaction(xvp()->load_class($XVwebEngine,"xvpayments"),$XVwebEngine->Session->Session('user_name'), ($_POST['transfer']['amount'])*(-100) , "transfer_to", "Przelew dla użytkownika ".$_POST['transfer']['user'] , array(
 			"to_user" => $_POST['transfer']['user'],
 			"amount_commission" => $amount_commission
 		));	
 		
-		xvp()->add_transaction(xvp()->InitClass($XVwebEngine,"xvpayments"), $_POST['transfer']['user'], floor(($_POST['transfer']['amount'])*100*(1-$amount_commission)) , "transfer_from", "Przelew od użytkownika ".$XVwebEngine->Session->Session('Logged_User'), array(
-			"from_user" => $XVwebEngine->Session->Session('Logged_User'),
+		xvp()->add_transaction(xvp()->load_class($XVwebEngine,"xvpayments"), $_POST['transfer']['user'], floor(($_POST['transfer']['amount'])*100*(1-$amount_commission)) , "transfer_from", "Przelew od użytkownika ".$XVwebEngine->Session->Session('user_name'), array(
+			"from_user" => $XVwebEngine->Session->Session('user_name'),
 			"amount_commission" => $amount_commission
 		));
 		$Smarty->assign('send_mode', true);
@@ -66,6 +66,6 @@ if(isset($_POST['finish_mode']) && $isset_user == true){
 }
 $Smarty->assign('amount_commission', $amount_commission);
 
-$Smarty->display('xvauctions_theme/panel_show.tpl');
+$Smarty->display('xvauctions/panel_show.tpl');
 
 ?>

@@ -112,7 +112,7 @@ class xvauction_fields_gallery extends xvauction_fields {
 						<div class="xvauction-gallery-list-template">
 							<div class="xvauction-gallery-file">
 								<div class="xvauction-gallery-file-img">
-									<img src="'.$URLS['Theme'].'xvauctions_theme/img/no_picture.png" />
+									<img src="'.$URLS['Theme'].'xvauctions/img/no_picture.png" />
 								</div>
 								<div class="xvauction-gallery-file-details">
 									<h1></h1>

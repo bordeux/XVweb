@@ -73,20 +73,24 @@ if($class_mode == "soap"){
 	echo $wsdlgen->toXML();
 	exit;
 }elseif($class_mode == "json" || $class_mode == "serialize" || $class_mode == "xml" || $class_mode == "yaml"){
+	$api_input_data = (empty($_POST) ? $_GET : $_POST);
 	$class_api_real_name = "xv_api_".$class_name;
 	include_once($class_file);
 	$class_api_values = $XVwebEngine->Session->Session($class_api_real_name);
 	$class_api = new $class_api_real_name();
-	if(!empty($class_api_values) && !isset($_GET['new_session'])){
-		unset($_GET['new_session']);
+	if(!empty($class_api_values) && !isset($api_input_data['new_session'])){
+		unset($api_input_data['new_session']);
 		foreach($class_api_values as $key=>$val){
-			$class_api->{$key} = $val;
+			if(isset($class_api->{$key}))
+				$class_api->{$key} = $val;
 		}
 	}
 	
 	$result = array();
-	foreach($_GET as $function=>$parms){
-	$parms = json_decode($parms);
+	foreach($api_input_data as $function=>$parms){
+	if(!is_array($parms)){
+		$parms = json_decode($parms);
+	}
 	if(!is_array($parms))
 		$parms = array();
 		
@@ -113,6 +117,7 @@ if($class_mode == "soap"){
 		header("Content-Type: application/json");
 		echo json_encode($result);	
 		}elseif($class_mode == "serialize"){
+		header('Content-Type: text/plain; charset=utf-8');
 		echo serialize($result);	
 	}elseif($class_mode == "xml"){
 	header("Content-Type: text/xml");
@@ -132,6 +137,7 @@ if($class_mode == "soap"){
 		} 
 		echo assocArrayToXML("result", $result);
 	}elseif($class_mode == "yaml"){
+		header('Content-Type: text/plain; charset=utf-8');
 		include_once(dirname(__FILE__).'/apis_servers/spyc.php');
 		echo Spyc::YAMLDump($result);
 	}

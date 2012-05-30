@@ -11,7 +11,7 @@
     <parser>
       <function tag="textile">	
 	  <![CDATA[
-	include_once($GLOBALS['$RootDir'].'plugins/textile/classTextile.php');
+	include_once(ROOT_DIR.'plugins/textile/classTextile.php');
 	$textile = new Textile();
 	pq($element)->replaceWith($textile->TextileThis(pq($element)->html())) ;
 	]]>

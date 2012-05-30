@@ -16,7 +16,7 @@ $XVwebLang[100] = 'Nieprawidłowe argumenty!';
 
 $XVwebLang[1] = 'Brak dostępu!';
 
-$XVwebLang[10] = 'AntyFlood!';
+
 
 $XVwebLang[40] = 'Brak danego artykułu!';
 $XVwebLang[41] = 'Artykuł zablokowany!';

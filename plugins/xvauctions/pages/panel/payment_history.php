@@ -25,7 +25,7 @@ $display_options = array(
 	);
 $record_limit = 30;
 
-$payments_list = xvp()->get_payments(xvp()->InitClass($XVwebEngine, "xvpayments"), $XVwebEngine->Session->Session('Logged_User'), $display_options, (int) $_GET['page'], $record_limit);
+$payments_list = xvp()->get_payments(xvp()->load_class($XVwebEngine, "xvpayments"), $XVwebEngine->Session->Session('user_name'), $display_options, (int) $_GET['page'], $record_limit);
 
 $_GET = array_filter($_GET);
 
@@ -35,6 +35,6 @@ $pager = pager($record_limit, (int) $payments_list[1],  "?".$XVwebEngine->add_ge
 $Smarty->assignByRef('pager', $pager);
 $Smarty->assignByRef('payments_list', $payments_list[0] );
 
-$Smarty->display('xvauctions_theme/panel_show.tpl');
+$Smarty->display('xvauctions/panel_show.tpl');
 
 ?>

@@ -59,7 +59,7 @@ class xv_payments_method_paypal extends xv_payments_method {
 						$this->Data['XVweb']->Log("paypal.com", $_POST);
 						exit("user does't exist");
 					}
-					xvp()->add_transaction(xvp()->InitClass($this->Data['XVweb'], "xvpayments"), $user_info['User'], ($paypal->posted_data['payment_gross']*100*$config_provision), "paypal", "Wpłata poprzez paypal.com" , $_POST, "paypal-".$paypal->posted_data['item_number']);
+					xvp()->add_transaction(xvp()->load_class($this->Data['XVweb'], "xvpayments"), $user_info['User'], ($paypal->posted_data['payment_gross']*100*$config_provision), "paypal", "Wpłata poprzez paypal.com" , $_POST, "paypal-".$paypal->posted_data['item_number']);
 					
 				}else{
 					
@@ -78,7 +78,7 @@ class xv_payments_method_paypal extends xv_payments_method {
 	$config_testmode = (int) $this->config->test_mode;
 	$config_provision =  $this->config->provision;
 	if(isset($_POST['amount'])){
-		$user_info = $this->Data['XVweb']->DataBase->pquery('SELECT {Users:*} FROM {Users} WHERE {Users:ID} = '.$this->Data['XVweb']->Session->Session("Logged_ID").' LIMIT 1')->fetch(PDO::FETCH_ASSOC);
+		$user_info = $this->Data['XVweb']->DataBase->pquery('SELECT {Users:*} FROM {Users} WHERE {Users:ID} = '.$this->Data['XVweb']->Session->Session("user_ID").' LIMIT 1')->fetch(PDO::FETCH_ASSOC);
 			if(empty($user_info)){
 				exit("Ty nie istniejsz w naszej bazie? Skontaktuj się jak najszybciej z adminem, podaj mu te dane: ". __FILE__ .' oraz id lini '.__LINE__);
 			}

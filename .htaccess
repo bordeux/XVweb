@@ -47,7 +47,7 @@ FileETag None
 	RewriteRule ^(.+) xv.php/$1 [L,QSA]
 </IfModule>
 
-ErrorDocument 404 /404.php
+ErrorDocument 404 /Page/System/404/
 ErrorDocument 403 /403/
 ErrorDocument 503 /503/
 DirectoryIndex index.php

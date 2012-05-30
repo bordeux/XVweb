@@ -3,9 +3,6 @@
 	</div>
 	
 <div class="xv-article-info">
-	<div class="xv-vote-warpper">
-		{if "Voting"|perm && ($ReadArticleOut.Author != $Session.Logged_User)}Głosuj: <a href="?vote=1&amp;t=article&amp;id={$ReadArticleIndexOut.ID}&amp;SIDCheck={$JSVars.SIDUser}" class="vote voteup"><img src="{$URLS.Theme}img/blank.png" alt="Vote UP" /></a>	&middot;  <a href="?vote=0&amp;t=article&amp;id={$ReadArticleIndexOut.ID}&amp;SIDCheck={$JSVars.SIDUser}" class="vote votedown"><img src="{$URLS.Theme}img/blank.png" alt="Vote Down" /></a> | {/if}<span id="VoteStatus">Ocena: <span class="Votes">{if $ReadArticleIndexOut.Votes > 0}+{/if}{$ReadArticleIndexOut.Votes}</span> (Liczba głosów: {$ReadArticleIndexOut.AllVotes}) </span>
-	</div>
 	<div class="xv-article-details">
 		<div class="tablediv">
 			<div class="rowdiv">

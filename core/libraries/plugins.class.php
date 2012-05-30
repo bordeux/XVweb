@@ -7,8 +7,8 @@ class xv_plugins {
 		$this->plugins_dir = $dir;
 	}
 	
-	public function load_plugin($name){
-		$file_loc = $this->plugins_dir.$name.'.xv_plugin.php';
+	public function load_plugin($plg_name, $name){
+		$file_loc = $this->plugins_dir.$plg_name.'/xvp/'.$name.'.xv_plugin.php';
 		$name_class = "xv_plugin_".$name;
 		if(file_exists($file_loc)){
 			include_once($file_loc);

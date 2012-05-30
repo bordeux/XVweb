@@ -40,10 +40,26 @@ if(!isset($XVwebEngine)){
 	}
 	}
 		class xv_admin_files_upload{
+			function fixFilesArray(&$files){
+				$names = array( 'name' => 1, 'type' => 1, 'tmp_name' => 1, 'error' => 1, 'size' => 1);
+
+				foreach ($files as $key => $part) {
+					// only deal with valid keys and multiple files
+					$key = (string) $key;
+					if (isset($names[$key]) && is_array($part)) {
+						foreach ($part as $position => $value) {
+							$files[$position][$key] = $value;
+						}
+						// remove old key reference
+						unset($files[$key]);
+					}
+				}
+			}
+
 			public function __construct(&$XVweb){
 
-			$XVweb->fixFilesArray($_FILES['filemenager']);
-					 $root = $GLOBALS['RootDir'];
+			$this->fixFilesArray($_FILES['filemenager']);
+					 $root = ROOT_DIR;
 					 $_GET['dir'] = preg_replace('/\w+\/\.\.\//', '', $_GET['dir']);
 					$_GET['dir'] = urldecode($_GET['dir']);
 					$RealPath = realpath($root . $_GET['dir']);
@@ -228,8 +244,8 @@ if(!isset($XVwebEngine)){
 	class xv_admin_files_confirmpaste{
 		public function __construct(&$XVweb){
 		
-		$FileLoc = $GLOBALS['RootDir'].$_POST['xv-file'];
-		$FileDest = $GLOBALS['RootDir'].$_POST['xv-destination'];
+		$FileLoc = ROOT_DIR.$_POST['xv-file'];
+		$FileDest = ROOT_DIR.$_POST['xv-destination'];
 			if(is_dir($FileLoc))
 				$FileLoc = substr($FileLoc, 0, -1);
 		
@@ -337,7 +353,7 @@ if(!isset($XVwebEngine)){
 	class xv_admin_files_confirmdelete{
 		public function __construct(&$XVweb){
 		
-		$FileLoc = $GLOBALS['RootDir'].$_POST['xv-file'];
+		$FileLoc = ROOT_DIR.$_POST['xv-file'];
 		function SureRemoveDir($dir, $DeleteMe) {
 			if(!$dh = @opendir($dir)) return;
 			while (($obj = readdir($dh))) {
@@ -373,7 +389,7 @@ if(!isset($XVwebEngine)){
 	// Delete Files //
 	class xv_admin_files_info{
 		public function __construct(&$XVweb){
-		$FileDir = $GLOBALS['RootDir'].$_POST['filedir'];
+		$FileDir = ROOT_DIR.$_POST['filedir'];
 		$TableInfo = array();
 		
 					$prems = @fileperms($FileDir);
@@ -514,7 +530,7 @@ $info .= (($perms & 0x0001) ?
 	class xv_admin_files_download{
 		var $style = "max-height: 200px; width: 250px";
 		public function __construct(&$XVweb){
-		$FileLoc = $GLOBALS['RootDir'].$_GET['file'];
+		$FileLoc = ROOT_DIR.$_GET['file'];
 			$this->dl_file($FileLoc);
 		}
 		public function dl_file($file){

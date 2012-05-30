@@ -11,7 +11,7 @@
     <parser>
       <function tag="digg">	
 	  <![CDATA[
-include_once($RootDir.'plugins/digg/digg.plugin.xvweb.php');
+include_once(ROOT_DIR.'plugins/digg/digg.plugin.xvweb.php');
 	]]>
 	</function>
     </parser>

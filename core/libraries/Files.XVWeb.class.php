@@ -38,7 +38,7 @@ class FilesClass
 	}
 
 	public function AddFile($FileLocation){
-			$File['UserFile'] = $this->Date['XVweb']->Session->Session('Logged_User');
+			$File['UserFile'] = $this->Date['XVweb']->Session->Session('user_name');
 			$File['IP'] = $_SERVER['REMOTE_ADDR'];
 			$File['MD5File'] = md5(MD5Key.$FileLocation);
 			$File['SHA1File'] = sha1_file($FileLocation);
@@ -129,7 +129,7 @@ VALUES  (NOW() , :UserFileExec, :FileNameExec , :ExtensionExec, :IPExec , :MD5Fi
 	}
 	public function DeleteFile($IDFile){
 	$FileInfo = $this->GetFile($IDFile);
-			if(( (!$this->Date['XVweb']->permissions('DeleteFile') && $FileInfo['UserFile'] != $this->Date['XVweb']->Session->Session('Logged_User')) or !$this->Date['XVweb']->permissions('DeleteOtherFile'))){
+			if(( (!$this->Date['XVweb']->permissions('DeleteFile') && $FileInfo['UserFile'] != $this->Date['XVweb']->Session->Session('user_name')) or !$this->Date['XVweb']->permissions('DeleteOtherFile'))){
 			$this->Date['XVweb']->LoadException();
 			throw new XVwebException(1);
 			return false;

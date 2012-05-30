@@ -10,7 +10,7 @@ class xv_users_modules_xvauctions_comments extends xv_users_modules {
 	global $LocationXVWeb, $XVwebEngine, $URLS, $user_data;
 	include_once(ROOT_DIR.'plugins/xvauctions/includes/functions.xvauctions.php');
 	include_once(ROOT_DIR.'plugins/xvauctions/libs/class.xvauctions.php');
-	$XVauctions = &$XVwebEngine->InitClass("xvauctions");
+	$XVauctions = &$XVwebEngine->load_class("xvauctions");
 	include_once(ROOT_DIR.'core'.DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'Pager.php');
 
 

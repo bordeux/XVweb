@@ -12,9 +12,11 @@
 									</li>
 								{/foreach}
 					</ul>
+					<!--
 					<div class="xvAddText">
 							<a href="{$URLS.Script}Write/">Dodaj tekst!</a>
 					</div>
+					-->
 				</nav>
 				
 				{if $Advertisement}

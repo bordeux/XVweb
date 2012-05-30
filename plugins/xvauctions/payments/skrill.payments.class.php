@@ -64,7 +64,7 @@ class xv_payments_method_skrill extends xv_payments_method{
 				$this->Data['XVweb']->Log("skrill.com", $_POST);
 				exit("user does't exist");
 			}
-			xvp()->add_transaction(xvp()->InitClass($this->Data['XVweb'], "xvpayments"), $user_info['User'], ($_POST['tr_amount']*100*$config_provision), "transfeujpl", "Wpłata poprzez skrill.com" , $_POST, "trns-".$_POST['tr_id']);
+			xvp()->add_transaction(xvp()->load_class($this->Data['XVweb'], "xvpayments"), $user_info['User'], ($_POST['tr_amount']*100*$config_provision), "transfeujpl", "Wpłata poprzez skrill.com" , $_POST, "trns-".$_POST['tr_id']);
 			
 			}
 			else
@@ -83,7 +83,7 @@ class xv_payments_method_skrill extends xv_payments_method{
 		$config_currency = $this->config->currency;
 		$config_logo = $this->config->logo;
 		
-	$user_info = $this->Data['XVweb']->DataBase->pquery('SELECT {Users:*} FROM {Users} WHERE {Users:ID} = '.$this->Data['XVweb']->Session->Session("Logged_ID").' LIMIT 1')->fetch(PDO::FETCH_ASSOC);
+	$user_info = $this->Data['XVweb']->DataBase->pquery('SELECT {Users:*} FROM {Users} WHERE {Users:ID} = '.$this->Data['XVweb']->Session->Session("user_ID").' LIMIT 1')->fetch(PDO::FETCH_ASSOC);
 		if(empty($user_info)){
 			exit("Ty nie istniejsz w naszej bazie? Skontaktuj się jak najszybciej z adminem, podaj mu te dane: ". __FILE__ .' oraz id lini '.__LINE__);
 		}

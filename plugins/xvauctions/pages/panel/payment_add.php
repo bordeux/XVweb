@@ -67,6 +67,6 @@ if(!xv_perm("xva_payments")){
 //$Smarty->assignByRef('pager', $pager);
 //$Smarty->assignByRef('payments_list', $payments_list[0] );
 
-$Smarty->display('xvauctions_theme/panel_show.tpl');
+$Smarty->display('xvauctions/panel_show.tpl');
 
 ?>

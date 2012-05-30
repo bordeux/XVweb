@@ -8,7 +8,7 @@
 ****************   All rights reserved             *************************
 ***************************************************************************/
 
-if(!xv_perm("xva_Buy") || !xv_perm("xva_Sell")){
+if(!xv_perm("xva_buy") || !xv_perm("xva_sell")){
 	header("location: ".$URLS['Script'].'Page/xvAuctions/Permission/Buy/');
 	exit;
 }
@@ -20,7 +20,7 @@ $display_options = array(
 	);
 $record_limit = 30;
 
-$comments_list = xvp()->get_comments($XVauctions, $XVwebEngine->Session->Session('Logged_User'), $display_options, (int) $_GET['page'], $record_limit);
+$comments_list = xvp()->get_comments($XVauctions, $XVwebEngine->Session->Session('user_name'), $display_options, (int) $_GET['page'], $record_limit);
 
 $_GET = array_filter($_GET);
 
@@ -31,6 +31,6 @@ $Smarty->assignByRef('pager', $pager);
 $Smarty->assignByRef('comments_list', $comments_list[0] );
 
 
-$Smarty->display('xvauctions_theme/panel_show.tpl');
+$Smarty->display('xvauctions/panel_show.tpl');
 
 ?>

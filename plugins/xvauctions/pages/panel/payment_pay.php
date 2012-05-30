@@ -26,7 +26,7 @@ if(empty($bought_info)){
 	exit;
 }
 
-if(($bought_info['User'] != $XVwebEngine->Session->Session('Logged_User'))){
+if(($bought_info['User'] != $XVwebEngine->Session->Session('user_name'))){
 	header("location: ".$URLS['Script'].'Page/xvAuctions/Permission/Payments/');
 	exit;
 }
@@ -80,14 +80,14 @@ if(ifsetor($_GET['pay'], "false") == "true"){
 	
 	$to_pay = $to_pay_auction+$to_pay_shipment;
 	
-	$user_amount = xvp()->get_user_amount(xvp()->InitClass($XVwebEngine, "xvpayments"), $XVwebEngine->Session->Session('Logged_User'));
+	$user_amount = xvp()->get_user_amount(xvp()->load_class($XVwebEngine, "xvpayments"), $XVwebEngine->Session->Session('user_name'));
 	
 	if($user_amount < ($to_pay*100)){
 		header('Location: ?error=amount');
 		exit;
 	}
-	$logged_user = $XVwebEngine->Session->Session('Logged_User');
-	$trans_id = xvp()->add_transaction(xvp()->InitClass($XVwebEngine,"xvpayments"), $logged_user, ($to_pay * (-100)) , "bought", "Zapłata za przedmiot od ".htmlspecialchars($logged_user) , array(
+	$logged_user = $XVwebEngine->Session->Session('user_name');
+	$trans_id = xvp()->add_transaction(xvp()->load_class($XVwebEngine,"xvpayments"), $logged_user, ($to_pay * (-100)) , "bought", "Zapłata za przedmiot od ".htmlspecialchars($logged_user) , array(
 			"user" => $logged_user,
 			"shipment" => $selected_method,
 			"shipment_cost" => $to_pay_shipment*100,
@@ -104,6 +104,6 @@ if(ifsetor($_GET['pay'], "false") == "true"){
 $Smarty->assign('shipment_available_methods', $shipment_available_methods);
 $Smarty->assign('amount_commission', $amount_commission);
 
-$Smarty->display('xvauctions_theme/panel_show.tpl');
+$Smarty->display('xvauctions/panel_show.tpl');
 
 ?>

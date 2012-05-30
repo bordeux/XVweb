@@ -10,7 +10,7 @@
 		<event name="login.start">
 			<script language="PHP">
 			  <![CDATA[
-					xvp()->load_plugin('xvauctions_login');
+					xvp()->load_plugin('xvauctions', 'xvauctions_login');
 				]]>
 			</script>
 		</event>		
@@ -34,19 +34,19 @@
 	</config>
 	<ranks>
 		<rank>
-			<name>xva_Buy</name>
+			<name>xva_buy</name>
 			<description>User can buy thinks</description>
 		</rank>
 		<rank>
-			<name>xva_ViewAuction</name>
+			<name>xva_view_auction</name>
 			<description>User can view auction</description>
 		</rank>	
 		<rank>
-			<name>xva_ViewAuctionItems</name>
+			<name>xva_view_auction_items</name>
 			<description>User can view auctions items</description>
 		</rank>	
 		<rank>
-			<name>xva_Sell</name>
+			<name>xva_sell</name>
 			<description>User can sell thinks</description>
 		</rank>
 		<rank>

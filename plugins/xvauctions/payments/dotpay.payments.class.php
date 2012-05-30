@@ -70,7 +70,7 @@ class xv_payments_method_dotpay extends xv_payments_method{
 			$this->Data['XVweb']->Log("dotpay.eu", $_POST);
 			exit("user does't exist");
 		}
-		xvp()->add_transaction(xvp()->InitClass($this->Data['XVweb'], "xvpayments"), $user_info['User'], ($_POST['amount']*100*$config_provision), "dotpay", "Wpłata poprzez dotpay.eu" , $_POST, "dp-".$_POST['t_id']);
+		xvp()->add_transaction(xvp()->load_class($this->Data['XVweb'], "xvpayments"), $user_info['User'], ($_POST['amount']*100*$config_provision), "dotpay", "Wpłata poprzez dotpay.eu" , $_POST, "dp-".$_POST['t_id']);
 		
 		exit('OK');
 	}
@@ -79,7 +79,7 @@ class xv_payments_method_dotpay extends xv_payments_method{
 		$config_seller_id = $this->config->seller_id;
 		$config_provision = $this->config->provision;
 		
-	$user_info = $this->Data['XVweb']->DataBase->pquery('SELECT {Users:*} FROM {Users} WHERE {Users:ID} = '.$this->Data['XVweb']->Session->Session("Logged_ID").' LIMIT 1')->fetch(PDO::FETCH_ASSOC);
+	$user_info = $this->Data['XVweb']->DataBase->pquery('SELECT {Users:*} FROM {Users} WHERE {Users:ID} = '.$this->Data['XVweb']->Session->Session("user_ID").' LIMIT 1')->fetch(PDO::FETCH_ASSOC);
 		if(empty($user_info)){
 			exit("Ty nie istniejsz w naszej bazie? Skontaktuj się jak najszybciej z adminem, podaj mu te dane: ". __FILE__ .' oraz id lini '.__LINE__);
 		}

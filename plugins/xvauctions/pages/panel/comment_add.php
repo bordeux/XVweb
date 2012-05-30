@@ -8,7 +8,7 @@
 ****************   All rights reserved             *************************
 ***************************************************************************/
 
-if(!xv_perm("xva_Buy") || !xv_perm("xva_Sell")){
+if(!xv_perm("xva_buy") || !xv_perm("xva_sell")){
 	header("location: ".$URLS['Script'].'Page/xvAuctions/Permission/Buy/');
 	exit;
 }
@@ -27,10 +27,10 @@ if(empty($bought_info)){
 	exit;
 }
 $comment_mode = "none";
-if(($bought_info['Seller'] == $XVwebEngine->Session->Session('Logged_User') && $bought_info['CommentedSeller'] == 0)){
+if(($bought_info['Seller'] == $XVwebEngine->Session->Session('user_name') && $bought_info['CommentedSeller'] == 0)){
 	$comment_mode = "seller";
 }
-if(($bought_info['User'] == $XVwebEngine->Session->Session('Logged_User') && $bought_info['CommentedBuyer'] == 0)){
+if(($bought_info['User'] == $XVwebEngine->Session->Session('user_name') && $bought_info['CommentedBuyer'] == 0)){
 	$comment_mode = "buyer";
 }
 
@@ -75,6 +75,6 @@ $Smarty->assignByRef('comment_mode', $comment_mode);
 $Smarty->assignByRef('bought_info', $bought_info);
 
 
-$Smarty->display('xvauctions_theme/panel_show.tpl');
+$Smarty->display('xvauctions/panel_show.tpl');
 
 ?>

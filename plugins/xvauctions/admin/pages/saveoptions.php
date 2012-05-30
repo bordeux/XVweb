@@ -20,7 +20,7 @@ class xv_admin_xvauctions_saveoptions{
 		}
 
 		include_once(ROOT_DIR.'plugins/xvauctions/libs/class.xvauctions.php');
-		$XVauctions = &$XVweb->InitClass("xvauctions");
+		$XVauctions = &$XVweb->load_class("xvauctions");
 		
 function convert_type( $var ){
 		

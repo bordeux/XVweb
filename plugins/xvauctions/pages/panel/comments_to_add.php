@@ -18,7 +18,7 @@ $display_options = array(
 $record_limit = 30;
 $Smarty->assign('Title',  xv_lang("xca_comments_to_add"));
 
-$comments_to_add_list = xvp()->get_comments_to_insert($XVauctions, $XVwebEngine->Session->Session('Logged_User'), $display_options, (int) $_GET['page'], $record_limit);
+$comments_to_add_list = xvp()->get_comments_to_insert($XVauctions, $XVwebEngine->Session->Session('user_name'), $display_options, (int) $_GET['page'], $record_limit);
 
 $_GET = array_filter($_GET);
 
@@ -27,6 +27,6 @@ $pager = pager($record_limit, (int) $comments_to_add_list[1],  "?".$XVwebEngine-
 $Smarty->assignByRef('pager', $pager);
 $Smarty->assignByRef('comments_to_add_list', $comments_to_add_list[0] );
 
-$Smarty->display('xvauctions_theme/panel_show.tpl');
+$Smarty->display('xvauctions/panel_show.tpl');
 
 ?>

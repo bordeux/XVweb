@@ -136,6 +136,6 @@ $Smarty->assignByRef('auctions_category', $auction_category);
 
 
 
-$Smarty->display('xvauctions_theme/items_show.tpl');
+$Smarty->display('xvauctions/items_show.tpl');
 
 ?>

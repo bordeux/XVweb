@@ -1,6 +1,6 @@
 {$JSBinder[19]='jquery.lazyload.mini'}
 {$JSBinder[22]='article'}
-{$CCSLoad[22]="`$UrlTheme`css/article.css"}
+{$CCSLoad[22]="`$URLS.Theme`css/article.css"}
 {$JSLoad[15]="http://apis.google.com/js/plusone.js"}
 {include file="header.tpl" inline}
 {if $NotFoundArticle}

@@ -26,7 +26,7 @@ class xv_api_xvauctions {
 		$copy_get = $_GET;
 		
 		include_once(ROOT_DIR.'plugins/xvauctions/libs/class.xvauctions.php');
-		$XVauctions = &$XVwebEngine->InitClass("xvauctions");
+		$XVauctions = &$XVwebEngine->load_class("xvauctions");
 		$category_tree = xvp()->get_category_tree($XVauctions, $URL_info['path']);
 		
 		if(empty($category_tree) &&  $auction_category != '/'){
@@ -111,8 +111,8 @@ class xv_api_xvauctions {
 				$item[$key] = $auction[$key];
 			if(isset($item['Thumbnail'])){
 				if(empty($item['Thumbnail'])){
-					$item['Thumbnail'] = $URLS['Theme'].'xvauctions_theme/img/no_picture.png';
-					$item['Thumbnail2'] = $URLS['Theme'].'xvauctions_theme/img/no_picture.png';
+					$item['Thumbnail'] = $URLS['Theme'].'xvauctions/img/no_picture.png';
+					$item['Thumbnail2'] = $URLS['Theme'].'xvauctions/img/no_picture.png';
 				}else{
 					$item['Thumbnail2'] = $URLS['Site'].'plugins/xvauctions/th/300x200_'.$item['Thumbnail'];
 					$item['Thumbnail'] = $URLS['Site'].'plugins/xvauctions/th/'.$item['Thumbnail'];

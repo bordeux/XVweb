@@ -10,13 +10,5 @@
 		<prefix prefix="users" include="plugins/users/users.php"/>
 	</config>
 	<ranks>
-		<rank>
-			<name>EditProfil</name>
-			<description>User can edit profile</description>
-		</rank>
-		<rank>
-			<name>EditOtherProfil</name>
-			<description>User can edit profiles (admin)</description>
-		</rank>	
 	</ranks>
 </plugin>

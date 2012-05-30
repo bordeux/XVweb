@@ -102,9 +102,8 @@ class xv_users {
 		if($user_data->RegisterCode != 1)
 			return "user_not_activated";
 			
-		$this->XVweb->Session->Session('Logged_Logged', true);
-		$this->XVweb->Session->Session('Logged_ID', $user_data->ID);
-		$this->XVweb->Session->Session('Logged_User', $user_data->User);
+		$this->XVweb->Session->Session('user_ID', $user_data->ID);
+		$this->XVweb->Session->Session('user_name', $user_data->User);
 		$this->XVweb->Session->Session('Logged_Avant', $user_data->Avant);
 		$this->XVweb->Session->Session('user_logged_in', true);
 		$this->XVweb->Session->Session('user_group', $user_data->Group);

@@ -21,7 +21,7 @@ class XVArticle
 		if(!is_null($Change))
 		$this->Date['XVweb']->SaveModificationArticle['Change'] = $Change;
 		if(empty($this->Date['XVweb']->SaveModificationArticle['Author']))
-		$this->Date['XVweb']->SaveModificationArticle['Author'] = $this->Date['XVweb']->Session->Session('Logged_User');
+		$this->Date['XVweb']->SaveModificationArticle['Author'] = $this->Date['XVweb']->Session->Session('user_name');
 
 		if(strlen(trim($Change)) < 6){
 			$this->Date['XVweb']->SaveModificationArticleError = "ToShortDescription"; //za krotki opis zmian
@@ -40,10 +40,7 @@ class XVArticle
 		if(!empty($IdInArticleIndex)){
 			$this->Date['XVweb']->SaveModificationArticle['ID'] = $IdInArticleIndex;
 		}
-		if($this->Date['XVweb']->AntyFlood()->check("article")){
-			$this->Date['XVweb']->SaveModificationArticleError = "Antyflood"; //antyflood
-			return false;
-		}
+
 		if(empty($this->Date['XVweb']->SaveModificationArticle['ID']) or !is_numeric($this->Date['XVweb']->SaveModificationArticle['ID'])){
 			$this->Date['XVweb']->SaveModificationArticleError = "BadIDArticle"; //blad przy przypisaniu ID 
 			return false;
@@ -95,7 +92,7 @@ class XVArticle
 		"{{link}}"=>$this->Date['XVweb']->ReadArticleIndexOut['URL'],
 		"{{topic}}"=>$this->Date['XVweb']->ReadArticleIndexOut['Topic'],
 		"{{id}}"=>$this->Date['XVweb']->ReadArticleIndexOut['ID'],
-		"{{by}}"=>  $this->Date['XVweb']->Session->Session('Logged_User'),
+		"{{by}}"=>  $this->Date['XVweb']->Session->Session('user_name'),
 		));
 		
 		return true;
@@ -169,7 +166,7 @@ UPDATE {Text_Index} SET {Text_Index:URL} = CONCAT(:PathTo, SUBSTRING({Text_Index
 		if(empty($AuthorArticle)){
 			$this->Date['XVweb']->SaveArticle['Author'] = $AuthorArticle;
 			if(empty($this->Date['XVweb']->SaveArticle['Author'])){
-				$this->Date['XVweb']->SaveArticle['Author'] = $this->Date['XVweb']->Session->Session('Logged_User');
+				$this->Date['XVweb']->SaveArticle['Author'] = $this->Date['XVweb']->Session->Session('user_name');
 			}
 
 		}
@@ -183,10 +180,6 @@ UPDATE {Text_Index} SET {Text_Index:URL} = CONCAT(:PathTo, SUBSTRING({Text_Index
 			return false; // nie dozwolone znakli
 		}
 
-		if($this->Date['XVweb']->AntyFlood()->check("article")){
-			$this->Date['XVweb']->SaveArticleError = "Antyflood";
-			return false;
-		}
 
 		$CheckIndexArticleSQL = $this->Date['XVweb']->DataBase->prepare('SELECT * FROM {Text_Index} WHERE  {Text_Index:URL} = :AddressInSQLExecute LIMIT 1');
 		$CheckIndexArticleSQL->execute(
@@ -245,8 +238,7 @@ INSERT INTO {Articles} ({Articles:AdressInSQL} , {Articles:Date}, {Articles:Topi
 		)
 		);
 		$this->Date['XVweb']->Cache->clear("GetDivisions",(empty($this->Date['XVweb']->SaveArticle['Category'])? null : $this->Date['XVweb']->SaveArticle['Category']));
-		$this->Date['XVweb']->AntyFlood()->add("article", 300); //AntyFloodCOnfig
-		//$this->Date['XVweb']->Log("NewArticle", serialize(array($this->Date['XVweb']->SaveArticle['Topic'],$this->Date['XVweb']->SaveArticle['URL']))); - crash!
+
 		return true;
 	}
 	public function AddAlias($url, $IDArticle){
@@ -279,7 +271,7 @@ INSERT INTO {Articles} ({Articles:AdressInSQL} , {Articles:Date}, {Articles:Topi
 		$this->Date['XVweb']->Log("AddAlias", array(
 		"URL"=>$url,
 		"SecondURL"=>$this->Date['XVweb']->ReadArticleOut['URL'],
-		"User"=> $this->Date['XVweb']->Session->Session('Logged_User'),
+		"User"=> $this->Date['XVweb']->Session->Session('user_name'),
 		"IP"=> $_SERVER['REMOTE_ADDR'],
 		));
 		return true;
@@ -327,7 +319,7 @@ INSERT INTO {Articles} ({Articles:AdressInSQL} , {Articles:Date}, {Articles:Topi
 		$this->ClearArticleCache(null, $this->Date['XVweb']->ReadArticleIndexOut['URL'], $this->Date['XVweb']->ReadArticleIndexOut['LocationInSQL']);
 		$this->Date['XVweb']->Log("Amendment", array(
 		"URL"=>$this->Date['XVweb']->ReadArticleIndexOut['URL'],
-		"User"=> $this->Date['XVweb']->Session->Session('Logged_User'),
+		"User"=> $this->Date['XVweb']->Session->Session('user_name'),
 		"IP"=> $_SERVER['REMOTE_ADDR'],
 		));
 		
@@ -335,7 +327,7 @@ INSERT INTO {Articles} ({Articles:AdressInSQL} , {Articles:Date}, {Articles:Topi
 		"{{link}}"=>$this->Date['XVweb']->ReadArticleIndexOut['URL'],
 		"{{topic}}"=>$this->Date['XVweb']->ReadArticleIndexOut['Topic'],
 		"{{id}}"=>$this->Date['XVweb']->ReadArticleIndexOut['ID'],
-		"{{by}}"=>  $this->Date['XVweb']->Session->Session('Logged_User'),
+		"{{by}}"=>  $this->Date['XVweb']->Session->Session('user_name'),
 		));
 		return true;
 	}
@@ -443,13 +435,13 @@ DELETE FROM {Articles} WHERE {Articles:AdressInSQL} = :AdressInSQLExecute ;');
 		"{{link}}"=>$this->Date['XVweb']->ReadArticleIndexOut['URL'],
 		"{{topic}}"=>$this->Date['XVweb']->ReadArticleIndexOut['Topic'],
 		"{{id}}"=>$this->Date['XVweb']->ReadArticleIndexOut['ID'],
-		"{{by}}"=>  $this->Date['XVweb']->Session->Session('Logged_User'),
+		"{{by}}"=>  $this->Date['XVweb']->Session->Session('user_name'),
 		));
 		return true;
 	}
 	public function bokmarks($id, $val = true, $type = "Observed", $cat = "article",  $user = null){
 		if(is_null($user))
-		$user = $this->Date['XVweb']->Session->Session('Logged_User');
+		$user = $this->Date['XVweb']->Session->Session('user_name');
 		
 		$AddBookMark = $this->Date['XVweb']->DataBase->prepare('INSERT INTO 
 		{Bookmarks} ({Bookmarks:Uniq}, {Bookmarks:IDS}, {Bookmarks:Type} , {Bookmarks:User}, {Bookmarks:'.$type.'}) 
@@ -490,7 +482,7 @@ ON DUPLICATE KEY UPDATE {Bookmarks:'.$type.'} = :ValExec ;');
 		$Query = $this->Date['XVweb']->DataBase->prepare('SELECT {Bookmarks:*:prepend:BT.} , UT.{Users:Mail} AS `Mail`   FROM {Bookmarks} AS `BT`, {Users} AS `UT`  WHERE BT.{Bookmarks:IDS} = :ID AND UT.{Users:User} = BT.{Bookmarks:User} AND BT.{Bookmarks:User} <> :User ;');
 		$Query->execute(array(
 		":ID" => $ID,
-		":User" => $this->Date['XVweb']->Session->Session('Logged_User')
+		":User" => $this->Date['XVweb']->Session->Session('user_name')
 		));
 		
 
@@ -514,18 +506,12 @@ ON DUPLICATE KEY UPDATE {Bookmarks:'.$type.'} = :ValExec ;');
 		if(!is_null($Comment))
 		$this->Date['XVweb']->Date['SaveComment'] =  $Comment;
 		
-		$this->Date['XVweb']->Date['SaveCommentAuthor'] =  $this->Date['XVweb']->Session->Session('Logged_User');
+		$this->Date['XVweb']->Date['SaveCommentAuthor'] =  $this->Date['XVweb']->Session->Session('user_name');
 		
 		if(is_numeric($LocationCommentID))
 		$this->Date['XVweb']->Date['SaveCommentIDArticle'] =  $LocationCommentID;
 		
 
-		if($this->Date['XVweb']->AntyFlood()->check("comment")){
-			$this->Date['XVweb']->LoadException();
-			throw new XVwebException(10); // antyflood
-			return false;
-		}
-		
 		$this->Date['XVweb']->ArticleFooIDinArticleIndex = $this->Date['XVweb']->Date['SaveCommentIDArticle'];
 		if(!($this->Date['XVweb']->ReadArticle())){
 			$this->Date['XVweb']->LoadException();
@@ -552,8 +538,7 @@ ON DUPLICATE KEY UPDATE {Bookmarks:'.$type.'} = :ValExec ;');
 
 		$this->Date['XVweb']->Cache->clear("Comment",$this->Date['XVweb']->ReadArticleIndexOut['AdressInSQL']);
 		$this->Date['XVweb']->SaveCommentError = 0;
-		$this->Date['XVweb']->AntyFlood()->add("comment",60);
-		
+
 		$this->Date['XVweb']->Log("NewComment", (array("CommentID" =>$this->Date['XVweb']->Date['SaveCommentID'], "ArticleID"=> $this->Date['XVweb']->Date['SaveCommentIDArticle'])));
 		$this->BookmarkEvent($this->Date['XVweb']->ReadArticleIndexOut['ID'], "article", '/System/Emails/OnArticleComment/', array(
 		"{{link}}"=>substr($this->Date['XVweb']->ReadArticleIndexOut['URL'],1),
@@ -561,7 +546,7 @@ ON DUPLICATE KEY UPDATE {Bookmarks:'.$type.'} = :ValExec ;');
 		"{{commentid}}"=>$this->Date['XVweb']->Date['SaveCommentID'],
 		"{{id}}"=>$this->Date['XVweb']->ReadArticleIndexOut['ID'],
 		"{{comment}}"=> htmlspecialchars($this->Date['XVweb']->Date['SaveComment']),
-		"{{by}}"=>  $this->Date['XVweb']->Session->Session('Logged_User'),
+		"{{by}}"=>  $this->Date['XVweb']->Session->Session('user_name'),
 		));
 		return true;
 	}
@@ -579,7 +564,7 @@ ON DUPLICATE KEY UPDATE {Bookmarks:'.$type.'} = :ValExec ;');
 	
 	public function AddTags($IDS, $Tags, $User = null){
 		if(is_null($User))
-		$User = $this->Date['XVweb']->Session->Session('Logged_User');
+		$User = $this->Date['XVweb']->Session->Session('user_name');
 		
 		$Tags = str_replace(" ", ",", $Tags);
 		$GetTags = $this->Date['XVweb']->DataBase->prepare('

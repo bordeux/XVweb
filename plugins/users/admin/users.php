@@ -216,13 +216,14 @@ class xv_admin_users_groups_save{
 	VALUES
 		(:name, :perm);
 	");
-	
+	if(is_array($_POST['perms'])){
 	foreach($_POST['perms'] as $perm_add){
 			$add_perm->execute(array(
 				":name" => $_POST['group'],
 				":perm" => $perm_add
 			));
 		}
+	}
 	exit("<div class='success'>Done</div>");
 	}
 }

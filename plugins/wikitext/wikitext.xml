@@ -11,7 +11,7 @@
     <parser>
       <function tag="wikitext">	
 	  <![CDATA[
-	include_once($GLOBALS['$RootDir'].'plugins/wikitext/wikitexttohtml.php');
+	include_once(ROOT_DIR.'plugins/wikitext/wikitexttohtml.php');
 	$input = explode("\n", pq($element)->html());
 	$output =  WikiTextToHTML::convertWikiTextToHTML($input);
 	pq($element)->replaceWith(implode("\n", $output));

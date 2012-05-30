@@ -64,7 +64,7 @@ class xv_admin_xvauctions_auction{
 	$result = '';
 	if(ifsetor($_GET['mode'], '') == "move_to_archive"){
 		include_once(ROOT_DIR.'/plugins/xvauctions/libs/class.xvauctions.php');
-		$XVauctions = &$XVweb->InitClass("xvauctions");
+		$XVauctions = &$XVweb->load_class("xvauctions");
 		$result = xvp()->move_auction_to_archive($XVauctions, $auction_id);
 		if($result){
 			$result = '<div class="success">Moved to the archive</div>';
@@ -86,7 +86,7 @@ class xv_admin_xvauctions_auction{
 	$result = '';
 	if(ifsetor($_GET['mode'], '') == "end_auction"){
 		include_once(ROOT_DIR.'/plugins/xvauctions/libs/class.xvauctions.php');
-		$XVauctions = &$XVweb->InitClass("xvauctions");
+		$XVauctions = &$XVweb->load_class("xvauctions");
 		$result = xvp()->end_auction($XVauctions, $auction_id, true);
 		if($result){
 			$result = '<div class="success">Auction finished</div>';
@@ -105,9 +105,9 @@ class xv_admin_xvauctions_auction{
 	}
 	public function edit_auction(&$XVweb, $auction_id){
 	
-		include_once($GLOBALS['XVwebDir'].'libraries/formgenerator/formgenerator.php');
-		include_once(ROOT_DIR.'/plugins/xvauctions/libs/class.xvauctions.php');
-		$XVauctions = &$XVweb->InitClass("xvauctions");
+		include_once(ROOT_DIR.'core/libraries/formgenerator/formgenerator.php');
+		include_once(ROOT_DIR.'plugins/xvauctions/libs/class.xvauctions.php');
+		$XVauctions = &$XVweb->load_class("xvauctions");
 		$auction_details = xvp()->get_auction($XVauctions, $auction_id);
 		
 		$form=new Form(); 

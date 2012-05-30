@@ -56,7 +56,7 @@
 		<a href="?digg=comments">{$language.Comments|strtolower}: (<b>{$Digg.Comments}</b>)</a>
 		<a href="{$Digg.Link}">źródło: {$Digg.Host|escape:"html"}</a>
 		<div id="EditPanel">
-				{if  $Session.Logged_Logged}
+				{if  $Session.user_logged_in}
 				
 					{if $ReadArticleIndexOut.Observed}<a href="?Watch=0&amp;SIDCheck={$JSVars.SIDUser}&amp;frame=true" title="{$language.UnWatch}">{$language.UnWatch}</a>{else}<a href="?Watch=1&amp;SIDCheck={$JSVars.SIDUser|md5}&amp;frame=true" title="{$language.Watch}">{$language.Watch}</a>{/if}
 					

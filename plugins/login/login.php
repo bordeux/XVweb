@@ -19,7 +19,7 @@ if(isset($_POST['xv_login'])){
 		$Smarty->assign('login_error', true);
 		$Smarty->assign('login_error_msg', "invalid_sid");
 	}else{
-		if($login_config->captcha_protection === false || ($login_config->captcha_protection === true && $_POST['xv_captcha'] == $XVwebEngine->Session->Session('Captcha_code')) ){
+		if($login_config->captcha_protection === false || ($login_config->captcha_protection === true && $_POST['xv_captcha'] == $XVwebEngine->Session->Session('captcha_key')) ){
 			$random_key = uniqid().rand(100, 999);
 			$password_hash = xvp()->hash_password($users_class, $_POST['xv_login']['password']);
 			$login_user_result =  xvp()->user_login($users_class, $_POST['xv_login']['nick'], $password_hash);
@@ -35,6 +35,14 @@ if(isset($_POST['xv_login'])){
 				@setcookie('xv_login_remember', $encrypted, time()+$login_config->login_cookie_time, "/");
 			}
 				$Smarty->assign('Session', $XVwebEngine->Session->Session());
+				
+				
+				if($XVwebEngine->Session->Session("login_redirect") != null){
+					header('Location: '.$XVwebEngine->Session->Session("login_redirect"));
+					$XVwebEngine->Session->Session("login_redirect", null);
+					exit;
+				}
+				
 				$Smarty->assign('login_error', false);
 				$Smarty->assign('login_success_mgs', $login_config->login_success_message);
 				$Smarty->assign('login_success', true);
@@ -48,7 +56,6 @@ if(isset($_POST['xv_login'])){
 		}
 	}
 }
-
 
 
 $Smarty->display('login/index.tpl');

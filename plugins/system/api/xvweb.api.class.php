@@ -18,25 +18,7 @@ class xv_api_xvweb {
 		return "Hello ".$user;
 	}	
 	
-	/**
-	 * 
-	 * If you want to use API, you must frist login via:
-	 * - ApiKey - login("username", "ApiKEY", true)
-	 * - Password - login("username", "password", false)
-	 *
-	 * @param string $username
-	 * @param string $key
-	 * @param boolean $type true
-	 * @return boolean
-	 */	
-	function login($username, $key, $type){
-	global $XVwebEngine;
-		if($XVwebEngine->Loggin($username, $key)){
-			return true;
-		}else{
-			return false;
-		}
-	}
+
 	
 	public function __sleep(){
         return array('counter');

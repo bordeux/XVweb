@@ -189,7 +189,7 @@ class xvauctions {
 			":end" =>  date("Y-m-d H:i:s", strtotime("+14 day")), // Czas zakończenia aukcji
 			":auctionmin" =>  number_format(0, 2, '.', ''), // Wartość minimalna dla typu dutch
 			":auctiondutch" =>  number_format(0, 2, '.', ''), // cena początkowa dla typu dutch
-			":seller" => $XVwebEngine->Session->Session('Logged_User'), //Sprzedający
+			":seller" => $XVwebEngine->Session->Session('user_name'), //Sprzedający
 			":premium" => 0, //czy ma byc na poczatku listy - premium
 		)
 	@endcode
@@ -284,6 +284,9 @@ class xvauctions {
 		if(!empty($display_options) && isset($display_options['sortby'])){
 			$Sort = ($display_options['sort'] == "asc" ? "ASC" : "DESC");
 			switch (strtolower($display_options['sortby'])) {
+			case "id":
+				$SortBy = ', {AuctionAuctions:ID} '.$Sort;
+				break;		
 			case "title":
 				$SortBy = ', {AuctionAuctions:Title} '.$Sort;
 				break;
@@ -1202,8 +1205,9 @@ LIMIT '.$formLimit.','.$PageLimit.'
 		
 		foreach($fields as $key=>$val){
 			if(substr($key, 0, 8) == "account_"){
+				$key = htmlspecialchars($key, ENT_QUOTES);
 				$sql_fields[] = " {AuctionUsers:".substr($key, 8)."}";
-				$sql_values[] = $this->Data['XVweb']->DataBase->quote($val);
+				$sql_values[] = htmlspecialchars($this->Data['XVweb']->DataBase->quote($val), ENT_QUOTES);
 			}
 		}
 		if(empty($sql_fields) || empty($sql_values) || empty($user))

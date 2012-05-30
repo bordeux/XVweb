@@ -6,7 +6,7 @@ var WriteClass = {
 var ColorPickerActual = "#000000";
 WriteClass.ColorPicker = function () {
 	
-	$.getScript(JSCatalog + "js/Colorpicker.js", function () {
+	$.getScript(URLS['JSCatalog'] + "js/Colorpicker.js", function () {
 			
 			$('#ColorPicker').ColorPicker({
 					color : '#0000ff', 
@@ -56,7 +56,7 @@ $(document).ready(function () {
 					height : "350px", 
 					parserfile : "parsecss.js", 
 					stylesheet : URLS.Theme + "js/CodeMirror/css/csscolors.css", 
-					path : JSCatalog + "js/CodeMirror/js/", 
+					path : URLS['JSCatalog'] + "js/CodeMirror/js/", 
 					onChange : function (n) {
 						$("#CSSeditor").text(editor.getCode());
 					}, 
@@ -80,19 +80,7 @@ $(function () {
 						CreateWindowLayer("SelectCategory", "<div id='SelectCatWindow'><label for='CategorySearch'>Szukaj kategorii: </label><input type='text' id='CategorySearch' style='width:250px;' /><div id='CategoryList' style='min-height:400px;'></div><div style='text-align:center'><input type='text' id='FinishedCategory' readonly='readonly' value='/' style='width:250px; border-color:#aaaaaa;' />  <input type='text' id='TitleSearch' style='width:150px;' value='" + $(toolid).val().split("/").reverse()[1] + "' /> / <br/><input type='button' value='Ustaw' id='CSetButton'/></div></div>", "#000");
 						
 						$("#CategorySearch, #CSetButton").unbind();
-						$("#CategorySearch").keyup(function () {
-								$.getJSON(URLS['Script'] + 'Ajax/Category_List/js.js', {
-										url : $("#CategorySearch").val() 
-									}, function (json) {
-										$("#CategoryList").html("");
-										for (var i in json) {
-											$("#CategoryList").append($("<div>").html(json[i].URL).click(function () {
-														$("#FinishedCategory").val($(this).html());
-														return false;
-													}));
-										}
-									});
-							});
+
 						$("#CSetButton").click(function () {
 								$(toolid).val($('#FinishedCategory').val() + $('#TitleSearch').val() + '/');
 								CancelWindowLayer("SelectCategory");

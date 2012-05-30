@@ -13,11 +13,10 @@ if(!isset($XVwebEngine)){
 	header("location: http://".$_SERVER['HTTP_HOST']."/");
 }
 include_once(dirname(__FILE__).'/libs/class.xvauctions.php');
-$XVauctions = &$XVwebEngine->InitClass("xvauctions");
+$XVauctions = &$XVwebEngine->load_class("xvauctions");
 $auction_prefix = strtolower($XVwebEngine->GetFromURL($PathInfo, 1));
 
-//xvp()->load_plugin('sms_notification');
-xvp()->load_plugin('email_notification');
+xvp()->load_plugin('xvauctions', 'email_notification');
 
 
 xv_load_lang('xvauctions');

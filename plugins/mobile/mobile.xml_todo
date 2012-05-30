@@ -34,13 +34,13 @@
 	   if(isset($_GET['mobile'])){
 			switch ($_GET['mobile']) {
 				case "true":
-					$XVwebEngine->Session->Session('Logged_Theme',  "Mobile"); 
+					//$XVwebEngine->Session->Session('Logged_Theme',  "Mobile"); 
 					break;
 				case "3g":
-					$XVwebEngine->Session->Session('Logged_Theme',  "Mobile3G"); 
+					//$XVwebEngine->Session->Session('Logged_Theme',  "Mobile3G"); 
 					break;
 				default:
-				   $XVwebEngine->Session->Session('Logged_Theme',  $XVwebEngine->Config("config")->find("config theme")->text() ); 
+				  // $XVwebEngine->Session->Session('Logged_Theme',  $XVwebEngine->Config("config")->find("config theme")->text() ); 
 			}
 		   header("location: ?");
 		   exit;

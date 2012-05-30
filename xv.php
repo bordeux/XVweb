@@ -25,70 +25,6 @@ if (get_magic_quotes_gpc()) {
 	$gpc = array(&$_GET, &$_POST, &$_COOKIE, &$_REQUEST);
 	array_walk_recursive($gpc, 'magicQuotes_awStripslashes');
 }
-//! Disable mafic quotes //
-function xv_append_js($file, $num = null){
-	global $Smarty;
-		$myVar = (array) $Smarty->getTemplateVars('JSLoad');
-		if(is_null($num))
-		$myVar[] = $file; else $myVar[$num] = $file;
-		$Smarty->assign('JSLoad', $myVar); 
-}
-function xv_append_footer($text, $num = null){
-	global $Smarty;
-		$myVar = (array) $Smarty->getTemplateVars('footer');
-		if(is_null($num))
-		$myVar[] = $text; else $myVar[$num] = $text;
-		$Smarty->assign('footer', $myVar); 
-}
-function xv_append_css($file, $num = null){
-	global $Smarty;
-		$myVar = (array) $Smarty->getTemplateVars('CCSLoad');
-		if(is_null($num))
-		$myVar[] = $file; else $myVar[$num] = $file;
-		$Smarty->assign('CCSLoad', $myVar); 
-}
-function xv_append_header($string, $num = null){
-	global $Smarty;
-		$myVar = (array) $Smarty->getTemplateVars('xv_append_header');
-		if(is_null($num))
-		$myVar[] = $string; else $myVar[$num] = $string;
-		$Smarty->assign('xv_append_header', $myVar); 
-}
-function xv_set_title($title){
-	global $Smarty;
-	$Smarty->assign('xv_title', $title);
-}
-function xv_trigger($event_name){
-global $XVwebEngine;
-	if(isset($XVwebEngine)){
-		$event_val = ($XVwebEngine->Plugins()->Menager()->event($event_name));
-		if(!empty($event_val)) eval($event_val);
-	}
-}
-
-function xv_lang($var, $var2 =null){
-	global $Language;
-return ifsetor($Language[$var],(is_null($var) ? $var : $var2));
-}
-function xv_perm($perm){
-	global $XVwebEngine;
-	return $XVwebEngine->permissions($perm);
-}
-function smarty_modifier_perm($perm){ //for smarty
-	global $XVwebEngine;
-	return $XVwebEngine->permissions($perm);
-}
-
-
-function xv_append_meta($name, $content){
-	global $Smarty;
-		$myVar = (array) $Smarty->getTemplateVars('MetaTags');
-		if(!is_array($myVar))
-			$myVar = array();
-		$myVar[$name] = $content;
-		$Smarty->assign('MetaTags', $myVar); 
-		return true;
-}
 
 // DEFINED
 DEFINE('SMARTY_DIR', getcwd().DIRECTORY_SEPARATOR.'core'.DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'smarty3'.DIRECTORY_SEPARATOR);
@@ -96,34 +32,27 @@ DEFINE('Cache_dir', getcwd().DIRECTORY_SEPARATOR.'tmp'.DIRECTORY_SEPARATOR);
 DEFINE('ROOT_DIR', getcwd().DIRECTORY_SEPARATOR);
 DEFINE('XV_CONFIG_DIR', getcwd().DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR);
 
+include_once(ROOT_DIR.'core/libraries/plugins_api.xv.php');
+
 if (!file_exists(ROOT_DIR.'config/db_config.config')){
 	header('Location: install/');
 	exit();
 }
+include_once(getcwd().DIRECTORY_SEPARATOR.'pages'.DIRECTORY_SEPARATOR.'config.php');
 
-
-$RootDir = dirname(__FILE__).DIRECTORY_SEPARATOR;
-$XVwebDir = ROOT_DIR.'core'.DIRECTORY_SEPARATOR;
-
-if(!@include_once(getcwd().DIRECTORY_SEPARATOR.'pages'.DIRECTORY_SEPARATOR.'config.php')){
-	if (file_exists(getcwd().DIRECTORY_SEPARATOR.'install/index.php')) 
-	header('Location: install/');
-	exit();
+function xv_caught_errors() {
+	global $XVwebEngine;
+	$ignore_errors = array(8, 2, 2048);
+	if(is_null($e = error_get_last()) === false && !in_array($e['type'], $ignore_errors))
+	$XVwebEngine->Log("system_error", array("informations"=>$e, "_SERVER"=>$_SERVER));
 }
-
-	function xv_caught_errors() { 
-		global $XVwebEngine;
-		$IgnoreErrors = array(8, 2, 2048);
-		if(is_null($e = error_get_last()) === false && !in_array($e['type'], $IgnoreErrors))
-		$XVwebEngine->Log("SystemError", array("ErrorInfo"=>$e, "_SERVER"=>$_SERVER));
-	}
-	register_shutdown_function('xv_caught_errors');
+register_shutdown_function('xv_caught_errors');
 
 
 require_once(SMARTY_DIR . 'Smarty.class.php');
-include_once('core'.DIRECTORY_SEPARATOR.'XVWeb.class.php');
+require_once('core'.DIRECTORY_SEPARATOR.'XVWeb.class.php');
 include_once('core'.DIRECTORY_SEPARATOR.'libraries/plugins.class.php');
-$xv_plugins = new xv_plugins((getcwd().DIRECTORY_SEPARATOR.'plugins'.DIRECTORY_SEPARATOR).'xv_plugin/');
+$xv_plugins = new xv_plugins(ROOT_DIR.'plugins'.DIRECTORY_SEPARATOR);
 function xvp(){global $xv_plugins; return $xv_plugins;}
 class main_config extends xv_config {};
 $xv_main_config = new main_config();
@@ -132,10 +61,6 @@ function xv_main_config(){global $xv_main_config; return $xv_main_config;}
 $XVwebEngine = new XVWeb(getcwd().DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR);
 xvp()->connect_db($XVwebEngine);
 
-
-/**Config File**/
-$XVwebEngine->Date['ConfigFile'] = getcwd().DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'config.xml';
-$XVwebEngine->Date['RootDir'] = ROOT_DIR;
 /**Config File**/
 
 xvp()->PreWork($XVwebEngine);
@@ -149,14 +74,13 @@ $xv_theme_name = xv_main_config()->theme;
 xv_trigger("xvweb.pre_set_urls");
 
 $URLS['Catalog'] = parse_url(substr(substr($_SERVER['PHP_SELF'], 0,  stripos($_SERVER['PHP_SELF'], basename(__FILE__))), 1),  PHP_URL_PATH); 
-
 if(empty($URLS['Site'])) 			$URLS['Site']			= 'http'.(isset($_SERVER['HTTPS'])?'s':'').'://'.$_SERVER['HTTP_HOST']."/".$URLS['Catalog'];
 if(empty($URLS['Path']))	        $URLS['Path']	        = (isset($_SERVER['ORIG_PATH_INFO']) ? $_SERVER['ORIG_PATH_INFO'] : $_SERVER['PATH_INFO']);
 if(empty($URLS['ThemeCatalog']))	$URLS['ThemeCatalog']	= $URLS['Site'].'themes/';
 if(empty($URLS['JSCatalog']))		$URLS['JSCatalog']		= $URLS['Site'].'themes/';
 if(empty($URLS['Script']))			$URLS['Script']			= $URLS['Site'].(xv_main_config()->mod_rewrite ? '' :"xv.php/");
 if(empty($URLS['Theme']))			$URLS['Theme']			= $URLS['ThemeCatalog'].$xv_theme_name."/";
-if(empty($URLS['Avats']))			$URLS['Avats']			= $URLS['Site'].'plugins/users/modules/fields/avatar/f/';
+if(empty($URLS['Avats']))			$URLS['Avats']			= $URLS['Site'].'plugins/users/modules/fields/avatar/f/'; //wtf bug?! avats?!
 if(empty($UploadDir))		       	$UploadDir		        = getcwd().DIRECTORY_SEPARATOR.'files'.DIRECTORY_SEPARATOR;
 if(empty($URLS['Path']))			$URLS['Path'] 			= xv_main_config()->index_page; //index page
 $URLS['PathInfo']					= $XVwebEngine->add_path_slashes($URLS['Path']);
@@ -169,7 +93,6 @@ $URLS['JSCatalog']		= $URLS['JSCatalog'].$xv_theme_name."/";
 @header('Access-Control-Allow-Origin: '.$URLS['Site']);
 //Plugin:onReady
 xv_trigger("xvweb.ready");
-if($XVwebEngine->Plugins()->Menager()->event("onready")) eval($XVwebEngine->Plugins()->Menager()->event("onready"));
 
 
 //!Plugin:onReady
@@ -185,16 +108,16 @@ if(!$XVwebEngine->Session->Session('xv_visit')){
 /**************************Lang*******************/
 function xv_load_lang($lang){
 	global $Language, $XVwebEngine;
-	
 	$user_lang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
 	if (file_exists(ROOT_DIR.'languages'.DIRECTORY_SEPARATOR.$user_lang.DIRECTORY_SEPARATOR.$lang.'.'.$user_lang.'.php')) {
 		@include_once(ROOT_DIR.'languages'.DIRECTORY_SEPARATOR.$user_lang.DIRECTORY_SEPARATOR.$lang.'.'.$user_lang.'.php');
 	} else {
 		$default_lang = xv_main_config()->lang;
-		if(!@include_once(ROOT_DIR.'languages'.DIRECTORY_SEPARATOR.$default_lang.DIRECTORY_SEPARATOR.$lang.'.'.$default_lang.'.php'))
-		die("XVweb Fatal Error. Don't isset language ".$lang.".".$default_lang);
+		if(!@include_once(ROOT_DIR.'languages'.DIRECTORY_SEPARATOR.$default_lang.DIRECTORY_SEPARATOR.$lang.'.'.$default_lang.'.php')){
+			exit("XVweb Fatal Error. Don't isset language ".$lang.".".$default_lang);
+		}
 	}
-	
+
 }
 xv_load_lang("general");
 /**************************Lang*******************/
@@ -219,6 +142,8 @@ try {
 } catch (Exception $e) { 
 			xvp()->ErrorClass($XVwebEngine, $e);
 } 
+xv_append_meta("Content-Language", "pl");
+xv_append_meta("Content-Type", "text/html; charset=utf-8");
 
 //AdminDetect - include admin lang
 if(xv_perm('AdminPanel'))
@@ -226,30 +151,19 @@ if(xv_perm('AdminPanel'))
 //End AdminDetect
 
 ////////Uzupełnianie stałymi szablonu
-$MetaTags = array(
-	"Content-Language"=> "pl",
-	"Content-Type"=>"text/html; charset=utf-8",
-	"Content-Script-Type"=>"text/javascript",
-	"Content-Style-Type"=>"text/css",
-);
 
 
-$Smarty->assign('MetaTags', $MetaTags); unset($MetaTags);
 $Smarty->assignByRef('Menu',   xvp()->genMenu($XVwebEngine));
 $Smarty->assignByRef('xv_main_config',   $xv_main_config);
 $Smarty->assign('Session', $XVwebEngine->Session->Session());
 $Smarty->assignByRef('language', $Language);
-$Smarty->assign('SiteName',  $XVwebEngine->SrvName);
 
 $Smarty->assignByRef('URLS', $URLS);
-$Smarty->assign('Url', $URLS['Site']);
 $Smarty->assign('PathInfo', htmlspecialchars($PathInfo, ENT_QUOTES ));
-$Smarty->assign('LogedUser', $XVwebEngine->Session->Session("Logged_Logged"));
-$Smarty->assign('UrlTheme', $URLS['Theme']);
+$Smarty->assign('LogedUser', $XVwebEngine->Session->Session("user_logged_in"));
 $Smarty->assign('AvantsURL', $URLS['Avats']);
-$Smarty->assign('JSVars', (array('SIDUser'=>$XVwebEngine->Session->get_sid(), 'rootDir'=>$URLS['Site'], "UrlScript"=>$URLS['Script'], "JSCatalog"=>$URLS['JSCatalog'])	));
+$Smarty->assign('JSVars', (array('SIDUser'=>$XVwebEngine->Session->get_sid(), 'rootDir'=>$URLS['Site'])	));
 xv_trigger("xvweb.smarty.loaded");
-
 
 $Prefix =$XVwebEngine->Plugins()->Menager()->prefix($URLS['Prefix']);
 

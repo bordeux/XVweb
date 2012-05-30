@@ -30,10 +30,10 @@ class xv_session
 				$this->Date['SessionIsset'] = true;
 			}
 		}else{
-			$SidRandomCookie = md5(uniqid().mt_rand(0, mt_getrandmax()));
-			setcookie(($this->CookieName), $SidRandomCookie, 0, "/");
-			$this->SID = $SidRandomCookie;
-			$this->Date['Mod'] = true;
+				$SidRandomCookie = md5(uniqid().mt_rand(0, mt_getrandmax()));
+				setcookie(($this->CookieName), $SidRandomCookie, 0, "/", '', false, true);
+				$this->SID = $SidRandomCookie;
+				$this->Date['Mod'] = true;
 		}
 
 		$GLOBALS['Debug']['Classes'][] = array("ClassName"=>get_class(), "File"=>__FILE__, "Time"=>microtime(true), "MemoryUsage"=>memory_get_usage());
@@ -111,7 +111,7 @@ class xv_session
 	}	
 	
 	public function update_user_session($user, $field, $val){
-		$string_to_search = '"Logged_User";'.serialize($user);
+		$string_to_search = '"user_name";'.serialize($user);
 		$select_sessions = $this->Date['XVweb']->DataBase->prepare('
 			SELECT {Sessions:*} FROM {Sessions} WHERE {Sessions:Value} LIKE :like
 		');
@@ -126,7 +126,7 @@ class xv_session
 		foreach($select_sessions as $session){
 		$updated_count = 0;
 			$session_val = unserialize($session['Value']);
-			if($session_val['Logged_User'] == $user){
+			if($session_val['user_name'] == $user){
 				$session_val[$field] = $val;
 				$update_session->execute(array(
 					":val" => serialize($session_val),

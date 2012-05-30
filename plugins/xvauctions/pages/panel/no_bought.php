@@ -8,7 +8,7 @@
 ****************   All rights reserved             *************************
 ***************************************************************************/
 
-if(!xv_perm("xva_Buy")){
+if(!xv_perm("xva_buy")){
 	header("location: ".$URLS['Script'].'Page/xvAuctions/Permission/Buy/');
 	exit;
 }
@@ -23,7 +23,7 @@ $display_options = array(
 	);
 $record_limit = 30;
 
-$no_boughts_list = xvp()->get_no_bought($XVauctions, $XVwebEngine->Session->Session('Logged_User'), $display_options, (int) $_GET['page'], $record_limit);
+$no_boughts_list = xvp()->get_no_bought($XVauctions, $XVwebEngine->Session->Session('user_name'), $display_options, (int) $_GET['page'], $record_limit);
 
 $_GET = array_filter($_GET);
 
@@ -33,6 +33,6 @@ $pager = pager($record_limit, (int) $no_boughts_list[1],  "?".$XVwebEngine->add_
 $Smarty->assignByRef('pager', $pager);
 $Smarty->assignByRef('bids_list', $no_boughts_list[0] );
 
-$Smarty->display('xvauctions_theme/panel_show.tpl');
+$Smarty->display('xvauctions/panel_show.tpl');
 
 ?>

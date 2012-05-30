@@ -8,7 +8,7 @@
 ****************   All rights reserved             *************************
 ***************************************************************************/
 
-if(!xv_perm("xva_Sell")){
+if(!xv_perm("xva_sell")){
 	header("location: ".$URLS['Script'].'Page/xvAuctions/Permission/Sell/');
 	exit;
 }
@@ -18,9 +18,9 @@ if(isset($_GET['cat'])){
 	echo json_encode($get_cats);
 	exit;
 }
-$user_data = xvp()->get_user_data($XVauctions, $XVwebEngine->Session->Session('Logged_User'));
+$user_data = xvp()->get_user_data($XVauctions, $XVwebEngine->Session->Session('user_name'));
 if(empty($user_data)){
-	header("location: ".$URLS['Script'].'Users/'.$XVwebEngine->Session->Session('Logged_User').'/edit/?xva_set_data=true#xvauction-user-data');
+	header("location: ".$URLS['Script'].'Users/'.$XVwebEngine->Session->Session('user_name').'/edit/?xva_set_data=true#xvauction-user-data');
 	exit;
 }
 
@@ -295,8 +295,14 @@ class xva_add_class {
 		$price_list = $XVwebEngine->Session->Session('xvauctions_price_list');
 		
 		$_POST['add'] = $XVwebEngine->Session->Session('xvauctions_add_fields');
-
+	
+		
 		$add_category = $XVwebEngine->Session->Session('xvauctions_add_category');
+		
+		$category_tree = $XVauctions->get_category_tree($add_category);
+		$category_info = end($category_tree);
+		$category_config = $category_info['Options'];
+		
 		include_once(ROOT_DIR.'plugins/xvauctions/fields/fields.php');
 		foreach (glob(ROOT_DIR.'plugins/xvauctions/fields/*.fields.php') as $filename) {
 			include_once($filename);
@@ -313,10 +319,10 @@ class xva_add_class {
 			":buynow" => number_format(0, 2, '.', ''),
 			":auction" => number_format($_POST['add']['auction_start'], 2, '.', ''),
 			":start" => date("Y-m-d H:i:s", time()),
-			":end" =>  date("Y-m-d H:i:s", strtotime("+14 day")),
+			":end" =>  date("Y-m-d H:i:s", strtotime($category_config['auction_expire'])),
 			":auctionmin" =>  number_format($_POST['add']['auction_min'], 2, '.', ''),
 			":auctiondutch" =>  number_format(0, 2, '.', ''),
-			":seller" => $XVwebEngine->Session->Session('Logged_User'),
+			":seller" => $XVwebEngine->Session->Session('user_name'),
 			":premium" => (isset($price_list["on_top"]) ?  1 : 0),
 			);
 			break;
@@ -329,10 +335,10 @@ class xva_add_class {
 			":buynow" => number_format($_POST['add']['buynow'], 2, '.', ''),
 			":auction" => number_format($_POST['add']['auction_start'], 2, '.', ''),
 			":start" => date("Y-m-d H:i:s", time()),
-			":end" =>  date("Y-m-d H:i:s", strtotime("+14 day")),
+			":end" =>  date("Y-m-d H:i:s", strtotime($category_config['auction_expire'])),
 			":auctionmin" =>  number_format($_POST['add']['auction_min'], 2, '.', ''),
 			":auctiondutch" =>  number_format(0, 2, '.', ''),
-			":seller" => $XVwebEngine->Session->Session('Logged_User'),
+			":seller" => $XVwebEngine->Session->Session('user_name'),
 			":premium" => (isset($price_list["on_top"]) ?  1 : 0),
 			);
 			break;
@@ -345,10 +351,10 @@ class xva_add_class {
 			":buynow" => number_format($_POST['add']['dutch_start'], 2, '.', ''),
 			":auction" => number_format($_POST['add']['dutch_start'], 2, '.', ''),
 			":start" => date("Y-m-d H:i:s", time()),
-			":end" =>  date("Y-m-d H:i:s", strtotime("+14 day")),
+			":end" =>  date("Y-m-d H:i:s", strtotime($category_config['auction_expire'])),
 			":auctionmin" =>  number_format($_POST['add']['dutch_min'], 2, '.', ''),
 			":auctiondutch" =>  number_format($_POST['add']['dutch_start'], 2, '.', ''),
-			":seller" => $XVwebEngine->Session->Session('Logged_User'),
+			":seller" => $XVwebEngine->Session->Session('user_name'),
 			":premium" => (isset($price_list["on_top"]) ?  1 : 0),
 			);
 			break;
@@ -361,10 +367,10 @@ class xva_add_class {
 			":buynow" => number_format($_POST['add']['buynow'], 2, '.', ''),
 			":auction" => number_format(0, 2, '.', ''),
 			":start" => date("Y-m-d H:i:s", time()),
-			":end" =>  date("Y-m-d H:i:s", strtotime("+14 day")),
+			":end" =>  date("Y-m-d H:i:s", strtotime($category_config['auction_expire'])),
 			":auctionmin" =>  number_format(0, 2, '.', ''),
 			":auctiondutch" =>  number_format(0, 2, '.', ''),
-			":seller" => $XVwebEngine->Session->Session('Logged_User'),
+			":seller" => $XVwebEngine->Session->Session('user_name'),
 			":premium" => (isset($price_list["on_top"]) ?  1 : 0),
 			);
 			break;
@@ -420,7 +426,7 @@ class xva_add_class {
 				"xvauctions_valid_form" => $XVwebEngine->Session->Session('xvauctions_valid_form'),
 				"xvauctions_add_fields" => $XVwebEngine->Session->Session('xvauctions_add_fields'),
 				"xvauctions_price_list" => $XVwebEngine->Session->Session('xvauctions_price_list'), // ZAMIENIC TO NA PREFIX !!!wszystko po xvauctions_*
-				"Logged_User" => $XVwebEngine->Session->Session('Logged_User'),
+				"user_name" => $XVwebEngine->Session->Session('user_name'),
 			);
 			foreach($session_save as $session_v){
 				if(is_array($session_v)){
@@ -437,10 +443,10 @@ class xva_add_class {
 			
 		include_once(ROOT_DIR.'plugins/xvauctions/libs/class.xvpayments.php');
 		foreach($price_list as $key=>$price){
-			xvp()->add_transaction(xvp()->InitClass($XVwebEngine,"xvpayments"),  $XVwebEngine->Session->Session('Logged_User'), -($price['cost']*100), "auction_".$key, $price['caption'], array(), "ad-".$key.'-'.$auction_id ,$auction_id);
+			xvp()->add_transaction(xvp()->load_class($XVwebEngine,"xvpayments"),  $XVwebEngine->Session->Session('user_name'), -($price['cost']*100), "auction_".$key, $price['caption'], array(), "ad-".$key.'-'.$auction_id ,$auction_id);
 		}
 		
-		$XVwebEngine->Session->Session('xv_payments_amount', $XVwebEngine->InitClass("xvpayments")->get_user_amount($XVwebEngine->Session->Session('Logged_User')));
+		$XVwebEngine->Session->Session('xv_payments_amount', $XVwebEngine->load_class("xvpayments")->get_user_amount($XVwebEngine->Session->Session('user_name')));
 		
 			header('Location: '.$URLS['Auction'].'/'.$auction_id.'/');
 			exit;
@@ -461,7 +467,7 @@ class xva_add_class {
 		extract($GLOBALS);
 
 		$session_restore = xvp()->get_session($XVauctions, (int) $_GET['id']);
-		if(is_null($session_restore) || empty($session_restore) || $session_restore['Logged_User'] != $XVwebEngine->Session->Session('Logged_User')){
+		if(is_null($session_restore) || empty($session_restore) || $session_restore['user_name'] != $XVwebEngine->Session->Session('user_name')){
 			header("location: ".$URLS['Script'].'Page/xvAuctions/Session_not_found/');
 			exit;
 		}		
@@ -476,7 +482,7 @@ class xva_add_class {
 		extract($GLOBALS);
 
 		$session_restore = xvp()->get_session($XVauctions, (int) $_GET['id']);
-		if(is_null($session_restore) || empty($session_restore) || $session_restore['Logged_User'] != $XVwebEngine->Session->Session('Logged_User')){
+		if(is_null($session_restore) || empty($session_restore) || $session_restore['user_name'] != $XVwebEngine->Session->Session('user_name')){
 			header("location: ".$URLS['Script'].'Page/xvAuctions/Session_not_found/');
 			exit;
 		}		
@@ -509,7 +515,7 @@ class xva_add_class {
 		exit;
 	}
 }
-$Smarty->display('xvauctions_theme/add_show.tpl');
+$Smarty->display('xvauctions/add_show.tpl');
 
 
 ?>

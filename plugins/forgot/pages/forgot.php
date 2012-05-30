@@ -12,7 +12,7 @@ if(isset($_POST['xv_forgot']) && $forgot_config->forgot_enabled){
 		$Smarty->assign('forgot_error', true);
 		$Smarty->assign('forgot_error_msg', "invalid_sid");
 	}else{
-		if($forgot_config->captcha_protection === false || ($forgot_config->captcha_protection === true && $_POST['xv_captcha'] == $XVwebEngine->Session->Session('Captcha_code')) ){
+		if($forgot_config->captcha_protection === false || ($forgot_config->captcha_protection === true && $_POST['xv_captcha'] == $XVwebEngine->Session->Session('captcha_key')) ){
 
 
 			$user_data =  xvp()->get_user($users_class, $_POST['xv_forgot']['nick']);

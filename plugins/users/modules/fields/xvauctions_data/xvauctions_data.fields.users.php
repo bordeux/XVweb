@@ -8,7 +8,7 @@ class xv_users_fields_xvauctions_data extends xv_users_fields {
 	public function field(){
 		global $LocationXVWeb, $XVwebEngine, $URLS, $user_data, $user_class;
 		
-		if($user_data->User != $XVwebEngine->Session->Session('Logged_User') && !xv_perm("AdminPanel"))
+		if($user_data->User != $XVwebEngine->Session->Session('user_name') && !xv_perm("AdminPanel"))
 			return '';
 			
 			
@@ -30,8 +30,8 @@ class xv_users_fields_xvauctions_data extends xv_users_fields {
 	include_once(ROOT_DIR.'core/libraries/formgenerator/formgenerator.php');
 	include_once(ROOT_DIR.'core/libraries/formgenerator/validators.php');
 	include_once(ROOT_DIR.'plugins/xvauctions/libs/class.xvauctions.php');
-	$XVauctions = &$XVwebEngine->InitClass("xvauctions");
-	$user_data_xva  = xvp()->get_user_data($XVauctions, $XVwebEngine->Session->Session('Logged_User') );
+	$XVauctions = &$XVwebEngine->load_class("xvauctions");
+	$user_data_xva  = xvp()->get_user_data($XVauctions, $XVwebEngine->Session->Session('user_name') );
 
 	$form=new Form();        
 	$form->set("name", "form_ia");
@@ -68,7 +68,7 @@ class xv_users_fields_xvauctions_data extends xv_users_fields {
 	$address_form = $form->display("Zmień dane", "ia_submit", false);
 	$result =(xvp()->getData($form));
 	if($result){
-		$saved = xvp()->save_user_data($XVauctions, $XVwebEngine->Session->Session('Logged_User'), $result );
+		$saved = xvp()->save_user_data($XVauctions, $XVwebEngine->Session->Session('user_name'), $result );
 	}
 		$result = '';
 		$result .=

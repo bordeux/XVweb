@@ -62,7 +62,7 @@ class xv_payments_method_platnoscionline extends xv_payments_method {
 					exit("user does't exist");
 				}
 				
-				xvp()->add_transaction(xvp()->InitClass($this->Data['XVweb'], "xvpayments"), $user_info['User'], ($_POST["amount"]*$config_provision), "przelewyonline", "Wpłata poprzez przelewy-online.pl" , $_POST, "przelew-".$_POST['tr_id']);
+				xvp()->add_transaction(xvp()->load_class($this->Data['XVweb'], "xvpayments"), $user_info['User'], ($_POST["amount"]*$config_provision), "przelewyonline", "Wpłata poprzez przelewy-online.pl" , $_POST, "przelew-".$_POST['tr_id']);
 			
 				}
 
@@ -78,7 +78,7 @@ class xv_payments_method_platnoscionline extends xv_payments_method {
 	$config_key = $this->config->key;
 
 	if(isset($_POST['amount'])){
-		$user_info = $this->Data['XVweb']->DataBase->pquery('SELECT {Users:*} FROM {Users} WHERE {Users:ID} = '.$this->Data['XVweb']->Session->Session("Logged_ID").' LIMIT 1')->fetch(PDO::FETCH_ASSOC);
+		$user_info = $this->Data['XVweb']->DataBase->pquery('SELECT {Users:*} FROM {Users} WHERE {Users:ID} = '.$this->Data['XVweb']->Session->Session("user_ID").' LIMIT 1')->fetch(PDO::FETCH_ASSOC);
 			if(empty($user_info)){
 				exit("Ty nie istniejsz w naszej bazie? Skontaktuj się jak najszybciej z adminem, podaj mu te dane: ". __FILE__ .' oraz id lini '.__LINE__);
 			}

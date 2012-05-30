@@ -47,7 +47,7 @@ class xvauction_fields_wysiwyg extends xvauction_fields {
 					$GLOBALS['Smarty']->assign('xvauctions_wysiwyg_AddShowTemplates', $field['FieldOptions']['show_templates']);
 					$GLOBALS['Smarty']->assign('xvauctions_wysiwyg_name', "add[".$field['Name']."]");
 					$GLOBALS['Smarty']->assign('xvauctions_wysiwyg_text', $_POST['add'][$field['Name']]);
-					$Result .= $GLOBALS['Smarty']->fetch('xvauctions_theme/html5wysiwygeditor.tpl');
+					$Result .= $GLOBALS['Smarty']->fetch('xvauctions/html5wysiwygeditor.tpl');
 					$GLOBALS['Smarty']->assign('xvauctions_wysiwyg_name', null);
 					$GLOBALS['Smarty']->assign('xvauctions_wysiwyg_text', null);
 					
@@ -76,6 +76,8 @@ class xvauction_fields_wysiwyg extends xvauction_fields {
 		include_once(ROOT_DIR.'plugins/xvauctions/libs/htmlpurifier/HTMLPurifier.auto.php');
 		$config = HTMLPurifier_Config::createDefault();
 		$config->set('Attr.EnableID', true);
+		$config->set('HTML.Doctype', 'XHTML 1.0 Transitional');
+		$config->set('HTML.TidyLevel', 'heavy');
 		$config->set('Core.Encoding', 'UTF-8');
 		$config->set('Attr.IDPrefix', 'auction_');
 		$purifier = new HTMLPurifier($config);

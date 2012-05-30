@@ -1,7 +1,7 @@
 <?php
 header("Cache-Control: no-cache, must-revalidate");
 xv_load_lang('edit');
-include_once($XVwebDir.'libraries'.DIRECTORY_SEPARATOR.'phpQuery'.DIRECTORY_SEPARATOR.'phpQuery.php');
+include_once(ROOT_DIR.'core/libraries'.DIRECTORY_SEPARATOR.'phpQuery'.DIRECTORY_SEPARATOR.'phpQuery.php');
 
 	$Smarty->assign('WriteUrlArticle', true);
 		if(!(xv_perm('WriteArticle'))){ // Brak dostepu
@@ -63,7 +63,7 @@ $XPathSimple = phpQuery::newDocument(file_get_contents(Cache_dir.'dth_'.$_GET['c
 $FileDoned = array();
 foreach($XPathSimple['img'] as $element){
 	$FileID = uniqid();
-	$FileLoc = $RootDir.'tmp/'.$FileID.'.png';
+	$FileLoc = ROOT_DIR.'tmp/'.$FileID.'.png';
 	$FileContent =  file_get_contents(pq($element)->attr("src"));
 	$FileMD5 = md5($FileContent); 
 	if(!isset($FileDoned[$FileMD5])){

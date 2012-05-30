@@ -94,7 +94,7 @@
 					height:64px;
 				}
 <?php
-foreach (glob(realpath($GLOBALS['RootDir']."/admin/data/themes/".$GLOBALS['xv_theme_name']."/img/fileicons/").'/*.png') as $filename) {
+foreach (glob(realpath(ROOT_DIR."/admin/data/themes/".$GLOBALS['xv_theme_name']."/img/fileicons/").'/*.png') as $filename) {
 	$FileBaseName = basename($filename);
 	$FileExec = explode("-", pathinfo($FileBaseName, PATHINFO_FILENAME));
 	foreach($FileExec as $extt){

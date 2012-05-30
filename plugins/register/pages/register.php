@@ -10,7 +10,7 @@ if(isset($_POST['xv_register']) && $register_config->register_enabled){
 		$Smarty->assign('register_error', true);
 		$Smarty->assign('register_error_msg', "invalid_sid");
 	}else{
-		if($register_config->captcha_protection === false || ($register_config->captcha_protection === true && $_POST['xv_captcha'] == $XVwebEngine->Session->Session('Captcha_code')) ){
+		if($register_config->captcha_protection === false || ($register_config->captcha_protection === true && $_POST['xv_captcha'] == $XVwebEngine->Session->Session('captcha_key')) ){
 			$random_key = uniqid().rand(100, 999);
 			
 			$password_hash = xvp()->hash_password($users_class, $_POST['xv_register']['password']);

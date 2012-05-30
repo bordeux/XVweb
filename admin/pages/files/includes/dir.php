@@ -1,5 +1,5 @@
 <?php
-				 $root = $GLOBALS['RootDir'];
+				 $root = ROOT_DIR;
 				 $_GET['dir'] = preg_replace('/\w+\/\.\.\//', '', $_GET['dir']);
 				$_GET['dir'] = urldecode($_GET['dir']);
 

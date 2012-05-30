@@ -1,0 +1,164 @@
+.xv-message-wrapper{
+	width: 95%;
+	margin:auto;
+	min-height: 500px;
+}
+
+.xv-message-list {
+	float:left;
+	width: 20%;
+	min-height: 500px;
+	border-right: 1px solid #C6CCD1;
+	background: #F8F8F8;
+}
+.xv-message-list > a {
+	display: block;
+	text-decoration: none;
+	border-top: 1px solid #C6CCD1;
+	height: 30px;
+	font-size: 15px;
+	line-height: 30px;
+	color : #444;
+	padding-left: 15px;
+}
+.xv-message-list > a > span {
+	display: block;
+	float: right;
+	background: #EDEDED;
+	line-height: 18px;
+	text-align: center;
+	width: 20px;
+	font-size: 10px;
+	margin: 4px;
+	border: 1px solid #8C8C8C;
+	border-radius: 5px;;
+}
+.xv-message-list > .selected {
+	background: #FFF;
+	margin-right: -2px;
+}
+.xv-message-list > .selected span {
+display: none;
+}
+.xv-message-conversation {
+	float:left;
+	width: 76%;
+	min-height: 400px;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+.xv-message-conversation-header {
+	padding-left: 20px;
+	line-height: 25px;
+	font-size: 17px;
+	color: #666;
+	font-weight: bold;
+	border-bottom: 1px solid #EDEDED;
+}
+.xv-message-history {
+	max-height: 400px;
+	padding-top: 25px;
+	height: 400px;
+	overflow:hidden;
+	width: 95%;
+	float:left;
+}
+
+.xv-message-history div{
+	margin: 10px;
+	min-height: 20px; 
+	float:left;
+	clear:both;
+   padding: 10px;
+   background: #E8EBEB;
+   position: relative;
+   border-radius: 10px;
+   min-width: 130px;
+}
+.xv-message-history div.me {
+float:right;
+background :#CFFCB3;
+}
+.xv-message-history .sender:before {
+   content:"";
+   position: absolute;
+   right: 100%;
+   top: 10px;
+   width: 0;
+   height: 0;
+   border-top: 6px solid transparent;
+   border-right: 13px solid #E8EBEB;
+   border-bottom: 6px solid transparent;
+}
+.xv-message-history .me:after {
+   content:"";
+   position: absolute;
+   left: 100%;
+   top: 10px;
+   width: 0;
+   height: 0;
+   border-top: 6px solid transparent;
+   border-left: 13px solid #CFFCB3;
+   border-bottom: 6px solid transparent;
+}
+.xv-message-history .time {
+position: absolute;
+font-size: 9px;
+margin-top: -30px;
+color :#C2C2C2;
+}
+.xv-message-history div:hover .time {
+	color: #000;
+}
+.xv-message-scroll {
+	width: 10px;
+	background:#DBDDDA;
+	border-radius: 3px;
+	height: 400px;
+	float:right;
+	opacity:0;
+	-webkit-transition: opacity 0.5s ease-in-out;
+	-moz-transition: opacity 0.5s ease-in-out;
+	-o-transition: opacity 0.5s ease-in-out;
+	-ms-transition: opacity 0.5s ease-in-out;	
+	transition: opacity 0.5s ease-in-out;
+}
+.xv-message-scroll > div {
+	height: 80px;
+	width:10px;
+	margin-top:160px;
+	background: #9A9A9A;
+	border-radius: 3px;
+	cursor: n-resize;
+}
+.xv-message-scroll > div:hover {
+	background: #E8CE05;
+}
+.xv-message-conversation:hover .xv-message-scroll{
+	opacity:1;
+}
+
+.xv-no-select {
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+.xv-message-form {
+ display: block;
+ width: 90%;
+ min-height: 100%;
+ background: #F2F2F2;
+ padding: 10px;
+ border: 1px solid #CCC;
+}
+.xv-message-form textarea {
+min-width: 70%;
+border: 1px solid #899BC1;
+background :#FFF;
+}
+.xv-message-form textarea:focus {
+background :#FFF;
+}

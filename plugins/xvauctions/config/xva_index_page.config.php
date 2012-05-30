@@ -43,6 +43,7 @@ class xva_index_page_editor extends  xv_config_editor {
 				margin: 15px;
 				border:1px solid #00AFC9;
 				background:#CCF8FF;
+				width: 400px;
 			}
 		');
 		

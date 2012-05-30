@@ -79,7 +79,7 @@ class xv_payments_method_przelewy24 extends xv_payments_method{
 				}
 				
 			if($result[0] == "TRUE") {
-				xvp()->add_transaction(xvp()->InitClass($this->Data['XVweb'], "xvpayments"), $user_info['User'], $_GET['amount']*$config_provision, "przelewy24", "Wpłata poprzez przelewy24.pl" , $_POST, "p24-".$session_id);
+				xvp()->add_transaction(xvp()->load_class($this->Data['XVweb'], "xvpayments"), $user_info['User'], $_GET['amount']*$config_provision, "przelewy24", "Wpłata poprzez przelewy24.pl" , $_POST, "p24-".$session_id);
 			
 				header('Location: '.$GLOBALS['URLS']['Site'].'Page/xvAuctions/Payment_success/?type=przelewy24');
 				exit;
@@ -100,7 +100,7 @@ class xv_payments_method_przelewy24 extends xv_payments_method{
 	$config_lang = $this->config->lang;
 	$config_testmode = (int) $this->config->test_mode;
 	if(isset($_POST['amount'])){
-		$user_info = $this->Data['XVweb']->DataBase->pquery('SELECT {Users:*} FROM {Users} WHERE {Users:ID} = '.$this->Data['XVweb']->Session->Session("Logged_ID").' LIMIT 1')->fetch(PDO::FETCH_ASSOC);
+		$user_info = $this->Data['XVweb']->DataBase->pquery('SELECT {Users:*} FROM {Users} WHERE {Users:ID} = '.$this->Data['XVweb']->Session->Session("user_ID").' LIMIT 1')->fetch(PDO::FETCH_ASSOC);
 			if(empty($user_info)){
 				exit("Ty nie istniejsz w naszej bazie? Skontaktuj się jak najszybciej z adminem, podaj mu te dane: ". __FILE__ .' oraz id lini '.__LINE__);
 			}

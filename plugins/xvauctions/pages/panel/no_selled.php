@@ -8,13 +8,13 @@
 ****************   All rights reserved             *************************
 ***************************************************************************/
 
-if(!xv_perm("xva_Sell")){
+if(!xv_perm("xva_sell")){
 	header("location: ".$URLS['Script'].'Page/xvAuctions/Permission/Sell/');
 	exit;
 }
 
 if(isset($_POST['auction']) && is_array($_POST['auction']) && isset($_POST['hidde']))
-	xvp()->set_hidden_no_selled($XVauctions, $XVwebEngine->Session->Session('Logged_User'), $_POST['auction']);
+	xvp()->set_hidden_no_selled($XVauctions, $XVwebEngine->Session->Session('user_name'), $_POST['auction']);
 	
 $Smarty->assign('Title',  xv_lang("xca_no_selled"));
 
@@ -27,7 +27,7 @@ $display_options = array(
 	);
 $record_limit = 30;
 
-$no_selled_list = xvp()->get_no_selled($XVauctions, $XVwebEngine->Session->Session('Logged_User'), $display_options, (int) $_GET['page'], $record_limit);
+$no_selled_list = xvp()->get_no_selled($XVauctions, $XVwebEngine->Session->Session('user_name'), $display_options, (int) $_GET['page'], $record_limit);
 
 $_GET = array_filter($_GET);
 
@@ -37,6 +37,6 @@ $pager = pager($record_limit, (int) $no_selled_list[1],  "?".$XVwebEngine->add_g
 $Smarty->assignByRef('pager', $pager);
 $Smarty->assignByRef('no_selled_list', $no_selled_list[0] );
 
-$Smarty->display('xvauctions_theme/panel_show.tpl');
+$Smarty->display('xvauctions/panel_show.tpl');
 
 ?>

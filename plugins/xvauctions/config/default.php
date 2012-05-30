@@ -17,5 +17,6 @@ $xva_config = array (
   'auction_main_page_cost' => 1,
   'allowed_debt' => -4,
   'html_message' => '',
+  'auction_expire' => '+100 day',
 ); 
  ?>

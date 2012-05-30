@@ -40,37 +40,6 @@ class OperationXVWeb
 	}
 
 
-	public function get_size( $path )
-	{
-		$size = 0;
-		if (is_dir($path))
-		{
-			if ($dh = opendir($path))
-			{
-				while (($file = readdir($dh)) !== false)
-				{
-					if ($file != '.' && $file != '..')
-					{
-						if (is_dir($path.$file))
-						{
-							$size+= get_size($path.$file.'/');
-						}
-						else
-						{
-							$size+= filesize($path.$file);
-						}
-					}
-				}
-				closedir($dh);
-			}
-			return $size;
-		}
-		else
-		{
-			return filesize($path);
-		}
-	}
-
 
 	public function URLRepair($url) {
 		$arr = explode ('/', $url);
@@ -201,7 +170,7 @@ class OperationXVWeb
 		else
 		return array(0,0,0);
 	}
-	public function EvalHTML($Source){
+	public function eval_html($Source){
 		ob_start();
 		eval("?>" . $Source );
 		$Result = ob_get_contents();
@@ -274,6 +243,7 @@ class OperationXVWeb
 	
 	
 	public function genMenu(){
+		global $URLS;
 		if($this->Cache->exist("menu","menu"))
 			return  $this->Cache->get();
 		$MenuResult = array();
@@ -284,12 +254,12 @@ class OperationXVWeb
 				$SubMenuID = sizeof($MenuResult[$MenuName]);
 				$SubContinue = false;
 				switch($SubMenu){
-				case $SubMenuPQ->attr("loged") == "true" && !$this->Session->Session("Logged_Logged"):
+				case $SubMenuPQ->attr("loged") == "true" && !$this->Session->Session("user_logged_in"):
 					break;
 				case $SubMenuPQ->attr("rank") && !$this->permissions($SubMenuPQ->attr("rank")) :
 					break;
 				case $SubMenuPQ->attr("link") != "":
-					$MenuResult[$MenuName][$SubMenuID]['url'] = $this->Data['URLS']['Script'].$this->URLRepair($SubMenuPQ->attr("link"));
+					$MenuResult[$MenuName][$SubMenuID]['url'] = $URLS['Script'].$this->URLRepair($SubMenuPQ->attr("link"));
 				default:
 					$SubContinue = true;
 					break;
@@ -301,7 +271,7 @@ class OperationXVWeb
 					$UrlLinkPQ = pq($UrlLink);
 						$LinkID = sizeof($MenuResult[$MenuName][$SubMenuID]['links']);
 						switch($UrlLink){
-							case $UrlLinkPQ->attr("loged") == "true" && !$this->Session->Session("Logged_Logged"):
+							case $UrlLinkPQ->attr("loged") == "true" && !$this->Session->Session("user_logged_in"):
 								break;
 							case $UrlLinkPQ->attr("rank") && !$this->permissions($UrlLinkPQ->attr("rank")):
 								break;
@@ -345,24 +315,6 @@ class OperationXVWeb
 			}
 		}
 		return $base;
-	}
-
-
-	function fixFilesArray(&$files)
-	{
-		$names = array( 'name' => 1, 'type' => 1, 'tmp_name' => 1, 'error' => 1, 'size' => 1);
-
-		foreach ($files as $key => $part) {
-			// only deal with valid keys and multiple files
-			$key = (string) $key;
-			if (isset($names[$key]) && is_array($part)) {
-				foreach ($part as $position => $value) {
-					$files[$position][$key] = $value;
-				}
-				// remove old key reference
-				unset($files[$key]);
-			}
-		}
 	}
 
 

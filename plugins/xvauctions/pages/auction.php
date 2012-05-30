@@ -90,6 +90,6 @@ $Smarty->assignByRef('auction_info', $auction_info);
 $Smarty->assignByRef('auction_description', $auction_description);
 
 
-$Smarty->display('xvauctions_theme/auction_show.tpl');
+$Smarty->display('xvauctions/auction_show.tpl');
 
 ?>

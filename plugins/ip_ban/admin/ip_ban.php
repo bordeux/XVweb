@@ -153,7 +153,7 @@ class xv_admin_ip_ban_add {
 			":filter_type"=> (int) $_POST['ip_ban']['filter'],
 			":expire"=> $_POST['ip_ban']['expire'],
 			":message"=> $_POST['ip_ban']['message'],
-			":by"=> $XVweb->Session->Session("Logged_User"),
+			":by"=> $XVweb->Session->Session("user_name"),
 		));
 		$delete_sessions = $XVweb->DataBase->prepare('DELETE FROM {Sessions} WHERE {Sessions:IP} '.((int) $_POST['ip_ban']['filter'] ? 'LIKE' :  'NOT LIKE').' :data');
 		$delete_sessions->execute(array(

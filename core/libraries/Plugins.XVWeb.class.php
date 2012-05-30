@@ -56,16 +56,6 @@ class Plugins
 		foreach($Prefix as $url)
 		$this->Date['Serialize']['Prefix'][strtolower($url->getAttribute("prefix"))] = $url->getAttribute("include");
 		/*Prefix*/
-		/*Prefix*/
-			$Prefix = $this->Date['xpath']->query('/plugins/plugin/config/admin/prefix');
-			foreach($Prefix as $url)
-			$this->Date['Serialize']['AdminPrefix'][strtolower($url->getAttribute("prefix"))] = $url->getAttribute("include");
-		/*Prefix*/
-		/*Buttons*/
-		$buttons = $this->Date['xpath']->query('/plugins/plugin/config/button');
-		foreach($buttons as $button)
-		$this->Date['Serialize']['buttons'] .= $button->nodeValue;
-		/*Buttons*/
 		/*EngineVars*/
 		$EngineVars = $this->Date['xpath']->query('/plugins/plugin/config/vars');
 		foreach($EngineVars as $EngineVar){
@@ -116,12 +106,6 @@ class Plugins
 	public function &prefix($val){
 		return $this->Date['Serialize']['Prefix'][strtolower($val)];
 	}
-	public function &AdminPrefix($val){
-		return $this->Date['Serialize']['AdminPrefix'][strtolower($val)];
-	}
-	public function &buttons(){
-		return $this->Date['Serialize']['buttons'];
-	}
 	public function &enginevars(){
 		return $this->Date['Serialize']['EngineVars'];
 	}
@@ -144,35 +128,7 @@ class Plugins
 		return $this->Date['xpath'];
 	}
 	
-	public function Widget($doc){
-		$this->DOM($doc);
-		$this->xpath(true);
-		$ResultArray = array();
-		foreach (($this->xpath()->query('config/window')) as $item) 
-		$ResultArray['WindowStyle'] = $item->getAttribute("style");
-		foreach (($this->xpath()->query('config/name')) as $item) 
-		$ResultArray['name'] = array('lang'=>$item->getAttribute("lang"), 'value'=>$item->nodeValue);
-		foreach (($this->xpath()->query('config/width')) as $item) 
-		$ResultArray['width'] = $item->nodeValue;
-		foreach (($this->xpath()->query('content')) as $item) 
-		$ResultArray['content'] = array('lang'=>$item->getAttribute("lang"), 'value'=>$item->nodeValue);
-		echo $this->xpath()->query('config/window')->lenght;
 
-		$LoadJS = $this->xpath()->query('config/loadjs');
-		foreach($LoadJS as $JSUrl)
-		$ResultArray["JSLoad"][] = $JSUrl->nodeValue;
-		
-		$LoadJS = $this->xpath()->query('config/loadjs');
-		foreach($LoadJS as $JSUrl)
-		$ResultArray["JSLoad"][] = $JSUrl->nodeValue;
-		
-		$LoadCSS = $this->xpath()->query('config/loadcss');
-		foreach($LoadCSS as $CSSUrl)
-		$ResultArray["CSSLoad"][] = $CSSUrl->nodeValue;
-		$this->Date['xpath'] = null;
-
-		return $ResultArray;
-	}
 	
 }
 ?>

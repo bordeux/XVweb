@@ -23,9 +23,9 @@ if(!isValidURL(pq($element)->html()) && !isset($_GET['digg'])){
 }
 
 if(empty($_GET) or isset($_GET['frame'])){
-	if(!file_exists($RootDir.'themes/'.$xv_theme_name."/digg.tpl")) {	
-		$Smarty->template_dir = $RootDir.'plugins/digg/theme/';
-		$CompileDir = $RootDir.'tmp'.DIRECTORY_SEPARATOR.'DiggPlugin'.DIRECTORY_SEPARATOR;
+	if(!file_exists(ROOT_DIR.'themes/'.$xv_theme_name."/digg.tpl")) {	
+		$Smarty->template_dir = ROOT_DIR.'plugins/digg/theme/';
+		$CompileDir = ROOT_DIR.'tmp'.DIRECTORY_SEPARATOR.'DiggPlugin'.DIRECTORY_SEPARATOR;
 		if(!is_dir($CompileDir))
 		mkdir($CompileDir);
 		$Smarty->compile_dir  = $CompileDir; unset($CompileDir);

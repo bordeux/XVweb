@@ -192,8 +192,12 @@ $select_methods = explode("\n", $field['FieldOptions']['methods']);
 		
 		foreach($_GET[$field['Name']] as $key=>$val){
 			if(isset($select_methods[$key]) && $val == "true"){
+			$tmp_array = $_GET[$field['Name']];
+			unset($tmp_array[$key]);
 				$result[] = 	array(
-					"link"=>"test",
+					"link"=>$this->XVweb->add_get_var(array(
+							$field['Name'] => $tmp_array,
+					), true),
 					"caption" => $select_methods[$key]
 				);
 			}

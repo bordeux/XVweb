@@ -19,7 +19,7 @@ $admin_menu['articles'] = array(
 		"submenu" =>
 			array(
 				array ("name"=> "List articles", "href"=>'Administration/Articles/'),
-				array ("name"=> "Comments", "href"=>'Administration/Articles/Comments/'),
+			//	array ("name"=> "Comments", "href"=>'Administration/Articles/Comments/'),
 			)
 	);
 

@@ -8,7 +8,7 @@ class xv_users_fields_password  extends xv_users_fields {
 	public function field(){
 		global $LocationXVWeb, $XVwebEngine, $URLS, $user_data, $user_class;
 		
-		if($user_data->User != $XVwebEngine->Session->Session('Logged_User') && !xv_perm("AdminPanel"))
+		if($user_data->User != $XVwebEngine->Session->Session('user_name') && !xv_perm("AdminPanel"))
 			return '';
 			
 			
