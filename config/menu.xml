@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?><menu>
+    <main>
+        <submenu title="Strona główna" link="/"/>
+        <submenu title="Komputery" link="auctions/Motoryzacja/"/>
+        <submenu title="Motoryzacja" link="auctions/Motoryzacja/"/>
+        <submenu title="Nieruchomości" link="auctions/Nieruchomosci/"/>
+        <submenu title="Telefony i akcesoria" link="auctions/Telefony_i_Akcesoria/"/>
+    </main>
+    <footer>
+        <submenu title="Serwis">
+            <url link="/">Strona główna</url>
+            <url link="News/">Aktualności</url>
+            <url link="XVweb/">XVweb</url>
+            <url link="Users/">Użytkownicy</url>
+            <url link="Regulamin/">Regulamin</url>
+            <url link="Contact/">Kontakt</url>
+        </submenu>
+    </footer>
+</menu>

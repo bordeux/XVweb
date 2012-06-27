@@ -7,83 +7,15 @@
 		<description>System for XVweb</description>
 	</info>
 	<config>
-		<prefix prefix="search" include="pages/search.php"/>
-		<prefix prefix="write" include="pages/write.php"/>
 		<prefix prefix="/" include="index.php"/>
 		<prefix prefix="" include="index.php"/>
-		<prefix prefix="file" include="pages/file.php"/>
 		<prefix prefix="administration" include="plugins/system/admin.php"/>
-		<prefix prefix="receiver" include="pages/receiver.php"/>
+
 	</config>
 	<ranks>
 		<rank>
-			<name>ViewArticle</name>
-			<description>User can read articles</description>
-		</rank>
-		<rank>
-			<name>EditArticle</name>
-			<description>User can edit own article</description>
-		</rank>
-		<rank>
-			<name>CreateAlias</name>
-			<description>User can create alias for article</description>
-		</rank>
-		<rank>
-			<name>DeleteArticle</name>
-			<description>User can delete article (admin)</description>
-		</rank>
-		<rank>
-			<name>DeleteVersion</name>
-			<description>User can delete article versions (admin)</description>
-		</rank>
-		<rank>
-			<name>Amendments</name>
-			<description>User can create amendments for articles (admin)</description>
-		</rank>
-		<rank>
-			<name>BlockArticles</name>
-			<description>User can blocking article (admin)</description>
-		</rank>
-		<rank>
-			<name>WriteArticle</name>
-			<description>User can write articles</description>
-		</rank>
-		<rank>
-			<name>DeleteFile</name>
-			<description>User can delete own file</description>
-		</rank>		
-		<rank>
-			<name>DownloadFile</name>
-			<description>User can download files</description>
-		</rank>			
-		<rank>
-			<name>DeleteOtherFile</name>
-			<description>User can delete files (admin)</description>
-		</rank>	
-		<rank>
 			<name>AdminPanel</name>
 			<description>User can enter to adminpanel (ONLY admin)</description>
-		</rank>	
-		<rank>
-			<name>MoveArticle</name>
-			<description>User can move articles (admin)</description>
 		</rank>		
-		<rank>
-			<name>AutoAccept</name>
-			<description>AutoAccept articles (admin or moderator)</description>
-		</rank>	
-		<rank>
-			<name>AcceptArticles</name>
-			<description>User can accept articles (admin or moderator)</description>
-		</rank>		
-		<rank>
-			<name>EditOwnArticle</name>
-			<description>User can edit own article</description>
-		</rank>		
-		<rank>
-			<name>AddFile</name>
-			<description>User can upload file</description>
-		</rank>	
-
 	</ranks>
 </plugin>

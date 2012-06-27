@@ -1,0 +1,28 @@
+<plugin>
+	<info>
+		<name>Texts Module</name>
+		<version>1.0</version>
+		<author>Krzysztof Bednarczyk</author>
+		<url>http://www.bordeux.net</url>
+		<description>Texts module</description>
+	</info>
+	<config>
+		<prefix prefix="texts" include="plugins/texts/texts.php"/>
+		<prefix prefix="edit" include="plugins/texts/edit.php"/>
+		<prefix prefix="write" include="plugins/texts/write.php"/>
+	</config>
+	<ranks>
+		<rank>
+			<name>texts_create_page</name>
+			<description>User can create new pages</description>
+		</rank>		
+		<rank>
+			<name>texts_block_page</name>
+			<description>User can create new pages</description>
+		</rank>	
+		<rank>
+			<name>texts_edit_page</name>
+			<description>User can edit new pages</description>
+		</rank>
+	</ranks>
+</plugin>

@@ -154,6 +154,54 @@ class xvpayments {
 
 		return array($sql_query->fetchAll(PDO::FETCH_ASSOC), $this->Data['XVweb']->DataBase->pquery('SELECT FOUND_ROWS() AS `Count`;')->fetch(PDO::FETCH_OBJ)->Count );
 	}
+	/**
+	 * Usuwanie płatności z bazy danych
+	 * @param $id INT - ID płatności
+	 * @return boolean - wynik
+	 */
+	public function delete_payment($id){
+				$delete_payment = $this->Data['XVweb']->DataBase->prepare("DELETE FROM {Payments} WHERE {Payments:ID} = :id LIMIT 1;");
+				$delete_payment->execute(array(
+					":id" => $id
+				));
+			return true;
+	}
+	/**
+	 * Pobieranie szczegółów co do płatności
+	 * @param $id INT - ID płatności
+	 * @return ARRAY - wynik
+	 */
+	public function get_payment_details($id){
+				$details_payment = $this->Data['XVweb']->DataBase->prepare("SELECT {Payments:*} FROM {Payments} WHERE {Payments:ID} = :id LIMIT 1;");
+				$details_payment->execute(array(
+					":id" => $id
+				));
+				$details_payment = $details_payment->fetch(PDO::FETCH_ASSOC);
+				if(empty($details_payment))
+					return false;
+					
+			$details_payment["Info"] = unserialize($details_payment["Info"]);
+		return $details_payment;	
+	}
+	
+	public function edit_payment($id, $to_edit){
+		if(empty($to_edit))
+			return true;
+		
+		$to_update = array();
+		$exec_array[":id"] = $id;
+		foreach($to_edit as $key=>$val){
+			$uniq_id = ":t".uniqid();
+			$to_update[] = ' {Payments:'.$key.'} = '.$uniq_id.' ';
+			$exec_array[$uniq_id] = $val;
+		}
+	
+		$sql_query = 'UPDATE {Payments} SET '.implode(",", $to_update).' WHERE {Payments:ID} = :id LIMIT 1;';
+		$edit_payment = $this->Data['XVweb']->DataBase->prepare($sql_query);
+		$edit_payment->execute($exec_array);
+		return true;
+	}
+	
 }
 
 ?>

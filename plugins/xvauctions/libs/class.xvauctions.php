@@ -1207,7 +1207,7 @@ LIMIT '.$formLimit.','.$PageLimit.'
 			if(substr($key, 0, 8) == "account_"){
 				$key = htmlspecialchars($key, ENT_QUOTES);
 				$sql_fields[] = " {AuctionUsers:".substr($key, 8)."}";
-				$sql_values[] = htmlspecialchars($this->Data['XVweb']->DataBase->quote($val), ENT_QUOTES);
+				$sql_values[] = $this->Data['XVweb']->DataBase->quote(htmlspecialchars($val, ENT_QUOTES));
 			}
 		}
 		if(empty($sql_fields) || empty($sql_values) || empty($user))
@@ -1218,11 +1218,13 @@ LIMIT '.$formLimit.','.$PageLimit.'
 		
 		$sql_fields[] = " {AuctionUsers:User}";
 		$sql_values[] = $this->Data['XVweb']->DataBase->quote($user);
-		
-		$user_info =	$this->Data['XVweb']->DataBase->prepare('INSERT INTO {AuctionUsers} 
+		$sql_query = 'INSERT INTO {AuctionUsers} 
 			('.implode(", ", $sql_fields).')
-			VALUES ('.implode(", ", $sql_values).')
-			')->execute();
+			VALUES ( '.implode(", ", $sql_values).' )
+			';
+		$user_info =	$this->Data['XVweb']->DataBase->prepare($sql_query);
+		$user_info->execute();
+			
 			
 	return $this->Data['XVweb']->DataBase->lastInsertId();;
 	
@@ -1408,7 +1410,11 @@ LIMIT '.$formLimit.','.$PageLimit.'
 		');
 	return true;
 	}
-	
+	/**
+	 * Czyszczenie danych aukcji - z AuctionAuctions oraz AuctionSessions
+	 * @param $auction_id INT - ID aukcji. Domyślnie false, co oznacza update wszystkich aukcji.
+	 * @return TRUE
+	 */
 	public function clear_auction_data($auction_id){
 		$delete_auction = $this->Data['XVweb']->DataBase->prepare('DELETE FROM {AuctionAuctions} WHERE {AuctionAuctions:ID} = :id LIMIT 1 ;');
 		$delete_auction->execute(array(
@@ -1420,6 +1426,34 @@ LIMIT '.$formLimit.','.$PageLimit.'
 			":id" => $auction_id
 		));
 	return true;
+	}
+	
+	/**
+	 * Pobieranie statystyk dla użytkownika
+	 * @param $user String - nazwa użytkownika
+	 * @return ARRAY
+	 */
+	public function get_user_stats($user){
+		$stats_query = $this->Data['XVweb']->DataBase->prepare('SELECT
+			(SELECT COUNT(*) FROM  {AuctionOpinions} WHERE {AuctionOpinions:Seller} = :user AND {AuctionOpinions:Type} = :positive ) AS positive,
+			(SELECT COUNT(*) FROM  {AuctionOpinions} WHERE {AuctionOpinions:Seller} = :user AND {AuctionOpinions:Type} = :neutral ) AS neutral,
+			(SELECT COUNT(*) FROM  {AuctionOpinions} WHERE {AuctionOpinions:Seller} = :user AND {AuctionOpinions:Type} = :negative ) AS negative,
+			(SELECT COUNT(*) FROM  {AuctionOpinions} WHERE {AuctionOpinions:Seller} = :user ) AS `all`
+ 		');
+		$stats_query->execute(array(
+			":user" => $user,
+			":positive" => "positive",
+			":neutral" => "neutral",
+			":negative" => "negative",
+		));
+		$stats_data  = $stats_query->fetch(PDO::FETCH_ASSOC);
+		$only_good = $stats_data['all']-$stats_data['neutral'];
+		if($only_good){
+			$stats_data['percent'] = round((($only_good-$stats_data['negative'])/$only_good)*100);
+		}else{
+			$stats_data['percent'] = 0;
+		}
+		return $stats_data;
 	}
 
 }

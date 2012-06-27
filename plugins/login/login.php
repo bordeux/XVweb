@@ -32,7 +32,7 @@ if(isset($_POST['xv_login'])){
 					"pass_hash"=>$password_hash_2,
 				));
 				$encrypted = base64_encode(mcrypt_encrypt(MCRYPT_RIJNDAEL_256, md5($key), $data_login, MCRYPT_MODE_CBC, md5(md5($key))));
-				@setcookie('xv_login_remember', $encrypted, time()+$login_config->login_cookie_time, "/");
+				@setcookie('xv_login_remember', $encrypted, (time()+$login_config->login_cookie_time), "/", '', false, true);
 			}
 				$Smarty->assign('Session', $XVwebEngine->Session->Session());
 				

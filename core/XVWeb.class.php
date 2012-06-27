@@ -124,10 +124,6 @@ class XVWeb extends OperationXVWeb
 	}
 	
 	/************************************************************************************************/
-	function LoadException() {
-		include_once(dirname(__FILE__).DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'Exception.XVWeb.class.php');
-	}
-	/************************************************************************************************/
 	function IncludeParseHTML(){
 		if(empty($this->ParserMyBBcode)){
 			include_once(dirname(__FILE__).DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'parser.MyHTML.XVweb.class.php');

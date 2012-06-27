@@ -63,7 +63,7 @@ $user_data = xvp()->get_user($user_class, $UserFromUrl);
 			}
 	}
 	
-	$selected_big_widgets = array("xvauctions_comments", "modifications", "files");
+	$selected_big_widgets = array("xvauctions_comments");
 	foreach($selected_big_widgets  as $big_widget){
 		if(isset($widget_class[$big_widget]) && method_exists($widget_class[$big_widget], 'widget')){
 			$widgets_html[] = xvp()->widget($widget_class[$big_widget]);

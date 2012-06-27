@@ -492,7 +492,7 @@ footer {
 		border-bottom: 1px solid #d33939;
 	}
 }
-.SuccessTip , .success {
+.success {
 	background: #56ff56 url(../img/isuccess.png) center no-repeat;
 	background-position: 15px 50%;
 	text-align: left;
@@ -512,41 +512,6 @@ footer {
 }
 
 
-.TableCell
-{
-background:#e5f1f4;
-height:30px;
-}
-.TableCellWhite
-{
-background:#FFF;
-}
-.TableHeaderCell{
-color:#FFF;
-font-weight:bold;
-background:#328aa4 url(../img/tr_back.gif) repeat-x;
-height:20px;
-}
-.TableHeaderCell a{
-color:#FFF;
-}
-.TableHeaderCell a:hover{
-	color:#FFF;
-	text-decoration: underline;
-}
-
-.tablediv {
-	display:  table;
-}
-.celldiv {
-	float:left;
-	display:  table-cell;
-	width:150px;
-}
-.rowdiv  {
-	display:  table-row;
-}
-
 
 .seperate {
 	background: url(../img/seperate.gif) no-repeat;
@@ -555,10 +520,6 @@ color:#FFF;
 }
 
 
-#xvlogin-openid-input-id{
-	background: url(../img/openid.png?noinclude=true) 3px 3px no-repeat; 
-	padding-left: 21px;
-}
 .xvlogin-with-ext {
 	position:absolute;
 	top: 5px;
@@ -573,24 +534,7 @@ div#EditPanel{
 text-align:center;
 }
 
-.DivisionsColumn {
-float:left;
-width:50%;
-font-family : Arial, Helvetica, sans-serif;
-font-size : 11px;
-	li {
-		margin-left:10px;
-		list-style-type: square;
-			ul li{
-				padding-left:15px;
-				list-style-type: none;
-				}
-		}
-	span {
-		font-weight:bold;
-		font-size:13px;
-		}
-}
+
 
 #RCenter {
 	margin-top:50px;
@@ -718,22 +662,6 @@ font-size : 11px;
 			font-style: normal;
 			}	
 }
-	
-	
-/* iPhone like select and checkbox */
-.cb-enable, .cb-disable, .cb-enable span, .cb-disable span { background: url(../img/switch.gif?noinclude=true) repeat-x; display: block; float: left; }
-	.cb-enable span, .cb-disable span { line-height: 30px; display: block; background-repeat: no-repeat; font-weight: bold; }
-	.cb-enable span { background-position: left -90px; padding: 0 10px; }
-	.cb-disable span { background-position: right -180px;padding: 0 10px; }
-	.cb-disable.selected { background-position: 0 -30px; }
-	.cb-disable.selected span { background-position: right -210px; color: #fff; }
-	.cb-enable.selected { background-position: 0 -60px; }
-	.cb-enable.selected span { background-position: left -150px; color: #fff; }
-	.iswitch  { margin:auto;  width:200px;}
-	.iswitch label { cursor: pointer; }
-	.iswitch input { display: none; }
-	
-/* iPhone like select and checkbox */
 
 
 

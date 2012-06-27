@@ -67,8 +67,7 @@ foreach($fields as $field){
 		}
 	}
 }
-
-
+$auction_seller_stats =   xvp()->get_user_stats($XVauctions, $auction_info['Seller']);
 $category_tree = xvp()->get_category_tree($XVauctions, $auction_info['Category']);
 $category_info = end($category_tree);
 $auction_category = $auction_info['Category'];
@@ -76,6 +75,7 @@ $xva_config = $category_info['Options'];
 
 $Smarty->assignByRef('xva_config', $xva_config);
 $Smarty->assignByRef('auction_details', $auction_details);
+$Smarty->assignByRef('auction_seller_stats', $auction_seller_stats);
 $Smarty->assignByRef('auction_offers', $auction_offers);
 $Smarty->assignByRef('auction_selled', $auction_selled);
 $Smarty->assignByRef('auction_footer', $auction_footer);

@@ -1,0 +1,16 @@
+.xv-texts-content {
+	font-size: 18px;
+	font-family: Georgia;
+	line-height: 1.625;
+	padding-bottom: 30px;
+	color: #333;
+	margin: auto;
+	width: 900px;
+}
+.xv-texts-content h1{
+	font-size: 42px;
+	line-height: 52px;
+	margin: 0 0 15px;
+	color: #25282A;
+	font-weight: normal;
+}

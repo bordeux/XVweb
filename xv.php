@@ -38,7 +38,7 @@ if (!file_exists(ROOT_DIR.'config/db_config.config')){
 	header('Location: install/');
 	exit();
 }
-include_once(getcwd().DIRECTORY_SEPARATOR.'pages'.DIRECTORY_SEPARATOR.'config.php');
+include_once(getcwd().DIRECTORY_SEPARATOR.'config.php');
 
 function xv_caught_errors() {
 	global $XVwebEngine;
@@ -165,14 +165,15 @@ $Smarty->assign('AvantsURL', $URLS['Avats']);
 $Smarty->assign('JSVars', (array('SIDUser'=>$XVwebEngine->Session->get_sid(), 'rootDir'=>$URLS['Site'])	));
 xv_trigger("xvweb.smarty.loaded");
 
-$Prefix =$XVwebEngine->Plugins()->Menager()->prefix($URLS['Prefix']);
+$xv_prefix_file = $XVwebEngine->Plugins()->Menager()->prefix($URLS['Prefix']);
 
 xv_trigger("xvweb.preload_module");
 
-if($Prefix){
-	require($Prefix);
+if($xv_prefix_file){
+	require($xv_prefix_file);
 }else{
-	require("pages/articles.php");
+	header("location: ".$URLS['Script'].'Page/System/404/');
+	exit;
 }
 
 xv_trigger("xvweb.end");

@@ -1,0 +1,119 @@
+<?xml version="1.0"?>
+<plugins><plugin><config>
+		<prefix prefix="login" include="plugins/login/login.php"/>
+		<prefix prefix="logout" include="plugins/login/logout.php"/>
+	</config></plugin><plugin><load>
+		<event name="xvweb.start">
+			<script language="PHP">
+			  <![CDATA[
+			global $XVwebEngine;
+				if($XVwebEngine->Session->Session('user_logged_in') !== true && isset($_COOKIE['xv_login_remember'])){
+					include(ROOT_DIR.'/plugins/login/login.trigger.php');
+				}
+				]]>
+			</script>
+		</event>
+	</load></plugin><plugin><load>
+		<event name="login.start">
+			<script language="PHP">
+			  <![CDATA[
+					xvp()->load_plugin('xvauctions', 'xvauctions_login');
+				]]>
+			</script>
+		</event>		
+		<event name="xvweb.smarty.loaded">
+			<script language="PHP">
+			  <![CDATA[
+					global $Smarty, $URLS;
+					$Smarty->assign('xv_panel_links', '<a href="'.$URLS['Script'].'auction_panel/">Panel aukcyjny</a> | ');
+				]]>
+			</script>
+		</event>
+	</load></plugin><plugin><config>
+		<prefix prefix="auctions" include="plugins/xvauctions/xvauctions.php"/>
+		<prefix prefix="show_auction" include="plugins/xvauctions/xvauctions.php"/>
+		<prefix prefix="auction_add" include="plugins/xvauctions/xvauctions.php"/>
+		<prefix prefix="auction" include="plugins/xvauctions/xvauctions.php"/>
+		<prefix prefix="buy" include="plugins/xvauctions/xvauctions.php"/>
+		<prefix prefix="auction_panel" include="plugins/xvauctions/xvauctions.php"/>
+		<prefix prefix="auction_index" include="plugins/xvauctions/xvauctions.php"/>
+	</config></plugin><plugin><load>
+    <event name="xvweb.end">
+      <script language="PHP">
+	  <![CDATA[
+	  if(!function_exists("DebugFoo")){
+			function DebugFoo(){
+			global $Debug;
+			 preg_match("/(\d)+/",ini_get('memory_limit'),$matches);
+				$DebugInfo = array("MemUsage"=>memory_get_usage(), "MemPeakUsage"=>memory_get_peak_usage(), "MemLimit"=>$matches[0],  "IncludedFiles"=>get_included_files(), "GeneratedTime" => 0, "FunctionsCount"=>0,"ZendVer"=>zend_version(), "PHPVer" => phpversion(), "Debug"=>$Debug, "SQL"=> $GLOBALS["XVwebEngine"]->DataBase->query);
+
+					$DebugInfo['GeneratedTime'] = microtime_float() - $GLOBALS['XVwebStart'];
+				if (function_exists('xdebug_get_function_count')) 
+					$DebugInfo['FunctionsCount'] = xdebug_get_function_count();
+					
+				echo '<script type="text/javascript">var DebugConsole = '.json_encode($DebugInfo).';</script>';
+			}
+			register_shutdown_function('DebugFoo');
+		
+	}
+]]>
+	  </script>
+    </event>
+    <event name="xvweb.preload_module">
+      <script language="PHP">
+	<![CDATA[
+		global $URLS;
+	xv_append_js($URLS['Site']."/plugins/xdebug/debug.js");
+	]]>	
+	</script>
+    </event>
+  </load></plugin><plugin><config>
+		<prefix prefix="users" include="plugins/users/users.php"/>
+	</config></plugin><plugin><config>
+		<prefix prefix="/" include="index.php"/>
+		<prefix prefix="" include="index.php"/>
+		<prefix prefix="administration" include="plugins/system/admin.php"/>
+
+	</config></plugin><plugin><config>
+			<prefix prefix="messages" include="plugins/messages/messages.php"/>
+	</config></plugin><plugin><config>
+		<prefix prefix="register" include="plugins/register/register.php"/>
+		<prefix prefix="activate" include="plugins/register/register.php"/>
+	</config></plugin><plugin><config>
+		<prefix prefix="forgot" include="plugins/forgot/forgot.php"/>
+	</config></plugin><plugin><config>
+	</config></plugin><plugin><load>
+		<event name="xvweb.smarty.loaded">
+			<script language="PHP">
+			  <![CDATA[
+			  global $XVwebEngine, $Smarty;
+				if($XVwebEngine->Session->Session('xv_check_ban') !== true)
+					include(ROOT_DIR.'/plugins/ip_ban/ip_ban.trigger.php');
+				]]>
+			</script>
+		</event>
+	</load></plugin><plugin><config>	
+		<prefix prefix="cron" include="plugins/cron/cron.php"/>	
+	</config></plugin><plugin><config>	
+		<prefix prefix="api" include="plugins/api/api.php"/>	
+	</config></plugin><plugin><config>
+	</config></plugin><plugin><load>
+	</load></plugin><plugin><config>
+		<prefix prefix="robots.txt" include="plugins/robots/robots.php"/>
+	</config></plugin><plugin><load>
+	</load></plugin><plugin><config>
+		<prefix prefix="page" include="plugins/page/page.php"/>
+	</config></plugin><plugin><load>
+	</load></plugin><plugin><config>
+		<prefix prefix="captcha" include="plugins/captcha/captcha.php"/>
+	</config></plugin><plugin><config>
+		<prefix prefix="pages" include="plugins/pages/pages.php"/>
+	</config></plugin><plugin><load>
+	</load></plugin><plugin><config>
+		<prefix prefix="embed" include="plugins/video/index.php"/>
+		<prefix prefix="video_plugin" include="plugins/video/convert.php"/>
+	</config></plugin><plugin><config>
+		<prefix prefix="texts" include="plugins/texts/texts.php"/>
+		<prefix prefix="edit" include="plugins/texts/edit.php"/>
+		<prefix prefix="write" include="plugins/texts/write.php"/>
+	</config></plugin></plugins>

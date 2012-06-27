@@ -1,0 +1,134 @@
+.xvauction-main {
+width: 100%;
+margin:auto;
+}
+.xvauction-add {
+float:left;
+width: 75%;
+}
+.xauction-add-tabs {
+font-size:10px;
+}
+.xauction-left-nav {
+float:left;
+width: 20%;
+-webkit-border-top-right-radius: 20px;
+-webkit-border-bottom-right-radius: 20px;
+-moz-border-radius-topright: 20px;
+-moz-border-radius-bottomright: 20px;
+border-top-right-radius: 20px;
+border-bottom-right-radius: 20px;
+background: #DBDBDB;
+margin-right: 10px;
+}
+.xauction-left-nav a{
+font-size:18px;
+font-weight:bold;
+min-height: 35px;
+border-bottom: 2px solid #E8E8E8;
+display:block;
+text-decoration:none;
+color: #61767C;
+padding-left: 10px;
+padding-top: 10px;
+}
+.xauction-left-nav a:hover{
+background: #F6FCB8;
+}
+
+.xauction-left-nav a.selected {
+background: #C4C4C4;
+}
+
+
+
+.xvauction-description {
+margin: 10px;
+margin-right: 20px;
+}
+.xvauction-description-caption {
+border: 1px solid #a8a8a8;
+-webkit-border-top-right-radius: 30px;
+-moz-border-radius-topright: 30px;
+border-top-right-radius: 30px;
+background: url(../img/bg-description.png);
+color: #000;
+height: 20px;
+padding-left: 10px;
+font-weight:bold;
+font-size: 15px;
+}
+.xvauction-description-content{
+border: 1px solid #a8a8a8;
+border-top: none;
+min-height: 400px;
+}
+
+
+
+/* AUCTION START */
+.xvauction-header {
+height: 50px;
+margin-left: 22%;
+}
+.xvauction-header-thumbnail {
+width: 64px;
+height:48px;
+position: absolute;
+margin-left: 20px;
+background: #FFF;
+border: 1px solid #bbbbbb;
+}
+.xvauction-header-thumbnail img{
+width: 64px;
+height:48px;
+}
+.xvauction-header-title {
+padding-top: 1px;
+}
+
+.xvauction-header-title  h1{
+background: url(../img/bg-title.png);
+display:block;
+height: 22px;
+padding-top: 3px;
+line-height: 16px;
+font-size:15px;
+font-weight:bold;
+padding-left: 100px;
+margin-left: 10px;
+margin-right: 20px;
+-webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+border-radius: 5px;
+border: 1px solid #a8a8a8;
+}
+.xvauction-header-title  h1 span{
+font-size: 10px;
+font-weight:normal;
+padding-left: 15px;
+color: #818181;
+}
+.xvauction-header-title  h1 span:hover{
+color: #3a3a3a;
+}
+.xvauction-price-list {
+	float:left; 
+	width: 600px; 
+	padding-left: 30px; 
+	padding-top: 15px;
+}
+.xvauction-price-list thead {
+font-weight: bold;
+}
+.xvauction-price-list tfoot tr {
+border-top: 1px solid #9E9E9E;
+}
+.xvauction-price-list tfoot tr  td:first-of-type{
+text-align: right; 
+padding-right: 20px; 
+font-weight: bold;
+}
+.xvauction-price-list tbody tr  td:first-of-type{
+width: 300px;
+}

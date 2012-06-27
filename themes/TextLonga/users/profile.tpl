@@ -19,13 +19,13 @@
 			<li class="ui-state-default ui-corner-top ui-state-hover ui-button-text-icon-primary ui-state-hover ui-state-active">
 				<a href="{$URLS.Script}Users/{$profile->User|escape:'url'}" title="{$language.Profile}"  id="btViewProfile" style="padding-left:20px;"> <span class="ui-icon ui-icon-person" style="margin-left:-16px;"></span> {$language.Profile}</a>
 			</li>
-			{if "EditOtherProfil"|perm or ( "EditProfil"|perm and $profile->User eq $LogedUser)}
+			{if $profile->User eq $LogedUser}
 				<li class="ui-state-default ui-corner-top ui-state-hover ui-button-text-icon-primary ui-state-hover">
 					<a href="{$URLS.Script}Users/{$profile->User|escape:'url'}/edit/" id="btEditProfile" style="padding-left:20px;"> <span class="ui-icon ui-icon-pencil" style="margin-left:-16px;"></span>{$language.EditProfile}</a>
 				</li>
 			{/if}
 			<li class="ui-state-default ui-corner-top ui-state-hover ui-button-text-icon-primary ui-state-hover">
-					<a href="{$URLS.Script}Messages/Write/?To={$profile->User|escape:'url'}" title="{$language.Write}" style="padding-left:20px;"><span class="ui-icon ui-icon-mail-closed" style="margin-left:-16px;"></span> {$language.Write}...</a>
+					<a href="{$URLS.Script}Messages/{$profile->User|escape:'url'}/" title="{$language.Write}" style="padding-left:20px;"><span class="ui-icon ui-icon-mail-closed" style="margin-left:-16px;"></span> {$language.Write}...</a>
 			</li>
 		</ul>
 	</div>

@@ -133,16 +133,107 @@ class xv_api_xvauctions {
 		}
 		return array("list"=>$result, "count_all"=>$auctions_list[1]);
 	}
+
+	
 	/**
-	 * List of category: category_list, by LIKE %pattern%
-	 * Usage : get_auctions("BASE64URL")
+	 * Get auction information
+	 * Usage : get_auction(4440404)
 	 * 
-	 * @param string $b64_url
+	 * @param int $id
 	 * @return array
 	 */	
-	function get_auctions_b64($b64_url){
-		return $this->get_auctions(base64_decode($b64_url));
+	function get_auction($id){
+		global $XVwebEngine, $URLS;
+			include_once(ROOT_DIR.'plugins/xvauctions/libs/class.xvauctions.php');
+			$XVauctions = &$XVwebEngine->load_class("xvauctions");
+			$auction_data = xvp()->get_auction($XVauctions, $id, true);
+			if(empty($auction_data))
+				return array();
+			$auction_info = array(
+				"id" => $auction_data['ID'],
+				"category" => $auction_data['Category'],
+				"enabled" => $auction_data['Enabled'],
+				"views" => $auction_data['Views'],
+				"type" => $auction_data['Type'],
+				"thumbnail" =>$auction_data['Thumbnail'],
+				"start" => $auction_data['Start'],
+				"end" => $auction_data['End'],
+				"premium" => $auction_data['Premium'],
+				"seller" => $auction_data['Seller'],
+				"pieces" => $auction_data['Pieces'],
+			);
+			return $auction_info;
+	}	
+	
+	/**
+	 * Get auction information
+	 * Usage : get_auction(4440404)
+	 * 
+	 * @param int $id
+	 * @return array
+	 */	
+	function get_auction_full($id){
+		global $XVwebEngine, $URLS;
+			include_once(ROOT_DIR.'plugins/xvauctions/libs/class.xvauctions.php');
+			$XVauctions = &$XVwebEngine->load_class("xvauctions");
+			$auction_data = xvp()->get_auction($XVauctions, $id, true);
+			if(empty($auction_data))
+				return array();
+			$auction_info = array(
+				"id" => $auction_data['ID'],
+				"category" => $auction_data['Category'],
+				"enabled" => $auction_data['Enabled'],
+				"views" => $auction_data['Views'],
+				"type" => $auction_data['Type'],
+				"thumbnail" =>$auction_data['Thumbnail'],
+				"start" => $auction_data['Start'],
+				"end" => $auction_data['End'],
+				"premium" => $auction_data['Premium'],
+				"seller" => $auction_data['Seller'],
+				"pieces" => $auction_data['Pieces'],
+			);
+			$fields = xvp()->get_fields($XVauctions, $auction_data['Category']);
+			if(!isset($fields_values))
+				$fields_values = xvp()->get_fields_values($XVauctions, $auction_data['ID']);
+			$fields_classes = array();
+			$auction_details = array();
+			$auction_footer = array();
+			foreach($fields as $field){
+				$class_field_name = $field['Class'];
+				$field_name = $field['Name'];
+				include_once(ROOT_DIR.'plugins/xvauctions/fields/fields.php');
+				include_once(ROOT_DIR.'plugins/xvauctions/fields/'.substr($class_field_name, 17).'.fields.php');
+				if (class_exists($class_field_name)) {
+					$fields_classes[$class_field_name] = new $class_field_name($XVwebEngine);
+					$detail = $fields_classes[$class_field_name]->detail($field, $fields_values[$field['ID']], $auction_data['ID']);
+					$footer = $fields_classes[$class_field_name]->footer($field, $fields_values[$field['ID']], $auction_data['ID']);
+					if(is_array($detail)){
+						$auction_details[$field['Name']] = $detail;
+					}		
+					if(!is_null($footer)){
+						$auction_footer[$field['Name']] = $footer;
+					}
+				}
+			}
+			$auction_info['details'] = $auction_details;
+			$auction_info['footer'] = $auction_footer;
+			$auction_info['description'] = xvp()->get_auction_description($XVauctions, $auction_data['ID'], "description");
+			return $auction_info;
 	}
+	/**
+	 * Get stats for user
+	 * Usage : get_user_stats("user")
+	 * 
+	 * @param string $user
+	 * @return array
+	 */	
+	function get_user_stats($user){
+		global $XVwebEngine, $URLS;
+			include_once(ROOT_DIR.'plugins/xvauctions/libs/class.xvauctions.php');
+			$XVauctions = &$XVwebEngine->load_class("xvauctions");
+		return xvp()->get_user_stats($XVauctions, $user);
+	}
+	
     public function __wakeup(){
        
     }

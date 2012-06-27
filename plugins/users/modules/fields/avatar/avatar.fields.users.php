@@ -70,7 +70,9 @@ class xv_users_fields_avatar  extends xv_users_fields {
 			$resize_image->save($avants_dir.$user_data->User.'_32.jpg', IMAGETYPE_JPEG);
 			$resize_image->resize(16,16);
 			$resize_image->save($avants_dir.$user_data->User.'_16.jpg', IMAGETYPE_JPEG);
-			
+			xvp()->user_edit($user_class, $user_data->User, array(
+				"Avant"=> 1
+			));
 				$result .=  "<div class='success'>".xv_lang("avatar_saved")."</div>";
 			}else{
 				$result .= "<div class='error'>".xv_lang("invalid_sid")."</div>";

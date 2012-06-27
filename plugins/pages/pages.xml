@@ -1,0 +1,16 @@
+<plugin>
+	<info>
+		<name>Pages - Article module</name>
+		<version>1.0</version>
+		<author>Krzysztof Bednarczyk</author>
+		<url>http://www.bordeux.net</url>
+		<description>Pages module</description>
+	</info>
+	<config>
+		<prefix prefix="pages" include="plugins/pages/pages.php" />
+	</config>
+	<load>
+	</load>
+	<ranks>
+	</ranks>
+</plugin>

@@ -4,6 +4,7 @@
 (function(a,b){var c="hidden",d='<textarea style="position:absolute; top:-9999px; left:-9999px; right:auto; bottom:auto; box-sizing:content-box; word-wrap:break-word; height:0 !important; min-height:0 !important; overflow:hidden">',e=["fontFamily","fontSize","fontWeight","fontStyle","letterSpacing","textTransform","wordSpacing"],f="oninput",g="onpropertychange",h=a(d)[0];h.setAttribute(f,"return"),a.isFunction(h[f])||g in h?a.fn.autosize=function(b){return this.each(function(){function p(){var a,b;m||(m=!0,j.value=h.value,j.style.overflowY=h.style.overflowY,j.style.width=i.css("width"),j.scrollTop=0,j.scrollTop=9e4,a=j.scrollTop,b=c,a>l?(a=l,b="scroll"):a<k&&(a=k),h.style.overflowY=b,h.style.height=h.style.minHeight=h.style.maxHeight=a+o+"px",setTimeout(function(){m=!1},1))}var h=this,i=a(h).css({overflow:c,overflowY:c,wordWrap:"break-word"}),j=a(d).addClass(b||"autosizejs")[0],k=i.height(),l=parseInt(i.css("maxHeight"),10),m,n=e.length,o=i.css("box-sizing")==="border-box"?i.outerHeight()-i.height():0;l=l&&l>0?l:9e4;while(n--)j.style[e[n]]=i.css(e[n]);a("body").append(j),g in h?f in h?h[f]=h.onkeyup=p:h[g]=p:h[f]=p,a(window).resize(p),i.bind("autosize",p),p()})}:a.fn.autosize=function(){return this}})(jQuery);
 
 var xv_message = {
+	is_activate : false,
 	send : function(){
 		var message_to_send = $('.xv-message-textarea').val();
 		var message_reciver = $('.xv-message-conversation-header a').text();
@@ -28,6 +29,10 @@ var xv_message = {
 			
 		$.post(URLS['Script']+'api/messages/messages/json/', { 'get_messages': [message_reciver, message_last_time]}, function(data){
 			$.each(data.get_messages.result, function(key, val){
+			
+			if(xv_message.is_activate == false && val['Me'] == "0"){
+				xv_message.play_sound();
+			};
 				$(".xv-message-history").append('<div class="'+(val.Me == "1" ? "me": "sender")+'">'+
 						"<span class='time' >"+val['Date']+"</span>"+
 						val.Message+
@@ -79,4 +84,14 @@ $(function(){
 	setInterval(function(){
 		xv_message.refresh_messages();
 	},1000);
+	
+	var isActive;
+	window.onfocus = function () { 
+		xv_message.is_activate = true; 
+	}; 
+
+	window.onblur = function () { 
+	  xv_message.is_activate = false; 
+	}; 
+
 });

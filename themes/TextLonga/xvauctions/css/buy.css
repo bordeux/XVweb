@@ -1,0 +1,122 @@
+.xdebug-var-dump{
+background : #C2C2C2;
+}
+.xvauction-main {
+width: 100%;
+margin:auto;
+}
+
+
+.item-buynow {
+color: #E15B00;
+font-size: 13px;
+font-weight: bold;
+padding-left: 43px;
+background : url(../img/buynow.png) no-repeat left center;
+}
+.auction-time-a, .auction-time-b, .auction-time-c, .auction-time-ca{
+color: #ED0000;
+font-size: 15px;
+}
+.auction-time-d, .auction-time-e {
+color : #F56C6C;
+}
+.auction-time-f, .auction-time-g{
+
+}
+.auction-time-h, .auction-time-i , .auction-time-j{
+
+}
+
+
+.buy-items {
+	width: 70%; 
+	margin:auto;
+
+		 a:link {
+			color:#d42945;
+			text-decoration:none;
+			border-bottom:1px dotted #ffbac8;
+			}	
+		 a:visited {
+			color:#d42945;
+			border-bottom:none;
+			text-decoration:none;
+			}		
+		 a:hover, a:focus {
+			color:#f03b58;
+			border-bottom:1px solid #f03b58;
+			text-decoration:none;
+			}
+		 a, a:link, a:visited {
+				border:none;
+			}						
+
+		table {
+			width:90%;
+			border-top:1px solid #e5eff8;
+			border-right:1px solid #e5eff8;
+			margin:1em auto;
+				border-collapse:collapse;
+			}
+		caption , .xv-table-pager {
+			color: #9ba9b4;
+			font-size:.94em;
+				letter-spacing:.1em;
+				margin:1em 0 0 0;
+				padding:0;
+				caption-side:top;
+				text-align:center;
+			}	
+		tr:nth-child(odd) td	{
+			background:#f7fbff;
+			}
+			
+		 tr:nth-child(odd) .column1	{
+			background:#f4f9fe;
+			}
+		 tr:hover	{
+				background:#E9FFE3;
+			}
+		.column1	{
+			background:#f9fcfe;
+			}
+		td {
+			color:#678197;
+			border-bottom:1px solid #e5eff8;
+			border-left:1px solid #e5eff8;
+			padding:.3em 1em;
+			text-align:center;
+			vertical-align:middle
+			}				
+		th {
+			font-weight:normal;
+			color: #678197;
+			text-align:left;
+			border-bottom: 1px solid #e5eff8;
+			border-left:1px solid #e5eff8;
+			padding:.3em 1em;
+			}							
+		 thead th {
+			background:#f4f9fe;
+			text-align:center;
+			font:bold 1.2em/2em "Century Gothic","Trebuchet MS",Arial,Helvetica,sans-serif;
+			color:#66a3d3;
+		
+			}	
+		tfoot th {
+			text-align:center;
+			background:#f4f9fe;
+			}	
+		tfoot th strong {
+			font:bold 1.2em "Century Gothic","Trebuchet MS",Arial,Helvetica,sans-serif;
+			margin:.5em .5em .5em 0;
+			color:#66a3d3;
+				}		
+		tfoot th em {
+			color:#f03b58;
+			font-weight: bold;
+			font-size: 1.1em;
+			font-style: normal;
+			}	
+}

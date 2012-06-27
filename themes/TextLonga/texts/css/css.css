@@ -1,0 +1,107 @@
+.xv-text-wrapper h2{
+font-size: 20px;
+margin: 10px;
+margin-left:0;
+}
+.xv-texts-category-list {
+	background: #EDEDED;
+}
+.xv-texts-category-list a{
+	display:block;
+	text-decoration: none;
+	color : #363636;
+	min-height: 30px;
+	font-size: 15px;
+	font-weight: bold;
+	line-height: 30px;
+	padding-left: 35px;
+	background: url(../img/dir.png) 5px center no-repeat;
+}
+.xv-texts-category-list a:nth-child(odd){
+	background-color: #F5F5F5;
+}
+.xv-texts-category-list a:hover {
+background-color : #FCDF9A;
+}
+.xv-text-result {
+text-align:center;
+margin: 20px;
+}
+
+.xv-texts-category-form {
+text-align:center;
+width: 200px;
+margin: auto;
+}
+.xv-text-selected-category {
+font-weight: bold;
+}
+
+.xv-texts-editors-list {
+	text-align:center;
+}
+.xv-texts-editors-list a {
+	display: table;
+	float: left;
+	margin: 10px;
+	border: 1px solid #BFBFBF;
+	background: #EDEBEC;
+	border-radius: 10px;
+	text-align: center;
+	text-decoration: none;
+	color : #363636;
+}
+.xv-texts-editors-list a:hover {
+	background: #FFC17A;
+	border-color: #CC6D00;
+}
+.xv-texts-editors-list a > div {
+	display: table-cell; vertical-align: middle;
+	width: 220px;
+	height: 150px;
+}
+.xv-texts-title-form , .xv-texts-changes-form{
+	padding: 50px;
+	margin:auto;
+	display:block;
+	border: 1px solid #BFBFBF;
+	border-radius: 10px;
+	background:#EDEBEC;
+	text-align:center;
+	font-size: 15px;
+	
+}
+.xv-texts-title-form input[type="text"], .xv-texts-changes-form input[type="text"] {
+	width: 400px;
+	font-size:15px;
+	height: 30px;
+}
+.xv-texts-title-form .xv-texts-next, .xv-texts-changes-form .xv-texts-next{
+	margin: 30px;
+}
+.xv-texts-editor {
+	width: 99%;
+}
+.xv-texts-editor .xv-texts-next, .xv-texts-select-version .xv-texts-next {
+	text-align:center;
+	margin: 30px;
+}
+.xv-texts-preview {
+	width: 100%;
+}
+.xv-texts-preview-form {
+	padding: 30px;
+	margin:auto;
+	display:block;
+	border: 1px solid #BFBFBF;
+	border-radius: 10px;
+	background:#EDEBEC;
+	text-align:center;
+	font-size: 15px;
+}
+.xv-texts-preview-form input{
+	padding: 10px;
+	width: 100px;
+	height: 40px;
+}
+

@@ -1,6 +1,4 @@
 <!-- Content -->
- <div id="Content">
-<div id="ContentDiv">
 <div class="xv-text-wrapper">
 {if $register_success}
 	<div class="success">{"register_success_message"|xv_lang}</div>
@@ -58,10 +56,7 @@
 		
 
 <!-- TEXT -->
-<div style="clear:both;"></div>
-</div>
 
-</div>
 <div style="clear:both;"></div>
 <script type="text/javascript" src="{$URLS.Theme}register/js/jquery.pwdstr-1.0.source.js" charset="UTF-8"> </script>
 <script type="text/javascript" src="{$URLS.Theme}register/js/register.js" charset="UTF-8"> </script>

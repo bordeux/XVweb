@@ -18,9 +18,9 @@ class xvauction_fields_wysiwyg extends xvauction_fields {
 	}
 	function options(){
 		$array = array(
-			"caption" => "Opis",
-			"input_desc" => "Tutaj mozesz uzywac tagow html",
-			"error" => "Zle dane podales!",
+			"caption" => "Descripion",
+			"input_desc" => "Here you can use HTML tags",
+			"error" => "Wrong data!",
 			"show_templates" => "1",
 		);
 		return ($array);
@@ -80,6 +80,9 @@ class xvauction_fields_wysiwyg extends xvauction_fields {
 		$config->set('HTML.TidyLevel', 'heavy');
 		$config->set('Core.Encoding', 'UTF-8');
 		$config->set('Attr.IDPrefix', 'auction_');
+		$config->set('HTML.TargetBlank', true);
+		$config->set('HTML.SafeIframe', true);
+		$config->set('URI.SafeIframeRegexp','%^(http|https|ftp)://(www\.|)(youtube.com/embed/|player.vimeo.com/video/|dailymotion.com/embed/)%');
 		$purifier = new HTMLPurifier($config);
 		return $purifier->purify($html);
 	}
