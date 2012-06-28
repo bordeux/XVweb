@@ -351,30 +351,77 @@ class xv_admin_users_list {
 			$this->URL = "Users/Get/".$user_from_url.'/';
 			$this->id = "xv-users-get-".$user_from_url;
 			$this->title = "User edit: ".$user_from_url;
+					$groups_list = $XVweb->DataBase->pquery('SELECT {Groups:Name} AS `Name` FROM {Groups} GROUP BY {Groups:Name};')->fetchAll(PDO::FETCH_ASSOC);
+					$user_info = $XVweb->DataBase->pquery('SELECT {Users:*} FROM {Users} WHERE {Users:User} = '.$XVweb->DataBase->quote($user_from_url).' LIMIT 1;')->fetch(PDO::FETCH_ASSOC);
+			if(empty($user_info)){
+				$this->content = "<div class='error'>User not found!</div>";
+				return true;
+			}
+				
 			$this->content = '
-				<div class="success">ToDo</div>
+				<div class="xv-users-edit-result"></div>
 				<fieldset>
 					<legend>Change password</legend>
-					<form method="post" action="?">
+					<form method="post" action="'.$GLOBALS['URLS']['Script'].'Administration/Get/Users/save/" class="xv-form" data-xv-result=".xv-users-edit-result">
 						<input type="hidden" name="user" value="'.$user_from_url.'" />
-						<input type="text" value="" placeholder="New password..." />
+						<input type="text" name="new_password" value="" placeholder="New password..." />
 						<input type="submit" value="Change password" />
 					</form>
 				</fieldset>		
 				<fieldset>
 					<legend>Change activation key</legend>
 					IF you want disable this account, please fill this value other than "1"
-					<form method="post" action="?">
+					<form method="post" action="'.$GLOBALS['URLS']['Script'].'Administration/Get/Users/save/" class="xv-form" data-xv-result=".xv-users-edit-result">
 						<input type="hidden" name="user" value="'.$user_from_url.'" />
-						<input type="text" value="" placeholder="New key..." />
+						<input type="text"  name="reg_code" value="'.$user_info['RegisterCode'].'" placeholder="New key..." />
 						<input type="submit" value="Change key" />
+					</form>
+				</fieldset>			
+				<fieldset>
+					<legend>Change group</legend>
+					
+					<form method="post" action="'.$GLOBALS['URLS']['Script'].'Administration/Get/Users/save/" class="xv-form" data-xv-result=".xv-users-edit-result">
+						<input type="hidden" name="user" value="'.$user_from_url.'" />
+						<select name="group" style="min-width: 150px;">';
+							
+						foreach($groups_list as $group){
+							
+							$this->content .= "<option ".($user_info['Group'] == $group['Name'] ? 'selected="selected"': '')." value='".$group['Name']."'>".$group['Name']."</option>";
+						}
+						$this->content .= '</select>
+						<input type="submit" value="Change user group" />
 					</form>
 				</fieldset>
 			';
 			$this->icon = $GLOBALS['URLS']['Site'].'plugins/users/admin/icons/user.png';
 		}
 	}
+	class xv_admin_users_save{
+		public function __construct(&$XVweb){
+			if(!isset($_POST['user'])){
+				exit("<div class='error'>No user field in post data! </div>");
+			}
+			include_once(ROOT_DIR.'plugins/users/libs/users.class.php');
+			$xv_users = $XVweb->load_class("xv_users");
+		
+			$to_update = array();
+			if(isset($_POST['new_password'])){
+				$xv_users->user_edit_password($_POST['user'], $_POST['new_password']);
+			}	
+			if(isset($_POST['group'])){
+				$to_update['Group'] = $_POST['group'];
+			}		
+			if(isset($_POST['group'])){
+				$to_update['Group'] = $_POST['group'];
+			}
+			if(!empty($to_update)){
+				$xv_users->user_edit($_POST['user'], $to_update);
+			}
+			
+			exit("<div class='success'>Saved! </div>");
+		}
 	
+	}
 	//Groups_Save
 	$CommandSecond = strtolower($XVwebEngine->GetFromURL($PathInfo, 4));
 	if (class_exists('xv_admin_users_'.$CommandSecond)) {

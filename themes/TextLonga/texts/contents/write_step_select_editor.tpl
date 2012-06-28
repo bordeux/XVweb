@@ -1,6 +1,6 @@
 <!-- Content -->
 <div class="xv-text-wrapper xv-texts-select-editor">
-	<h2>Wybierz edytor tekstu: </h2>
+	<h2>{'txts_select_editor'|xv_lang}: </h2>
 	
 	<div class="xv-texts-editors-list">
 		{foreach from=$xv_texts_buttons item=xv_texts_button}

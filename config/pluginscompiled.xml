@@ -116,4 +116,15 @@
 		<prefix prefix="texts" include="plugins/texts/texts.php"/>
 		<prefix prefix="edit" include="plugins/texts/edit.php"/>
 		<prefix prefix="write" include="plugins/texts/write.php"/>
-	</config></plugin></plugins>
+		<prefix prefix="history" include="plugins/texts/history.php"/>
+	</config></plugin><plugin><load>
+		<event name="xvweb.404">
+			<script language="PHP">
+			  <![CDATA[
+				global $xv_redirect_404,$xv_include_404;
+					$xv_redirect_404 = false;
+					$xv_include_404 = (ROOT_DIR.'plugins/texts/texts.php');
+				]]>
+			</script>
+		</event>
+	</load></plugin></plugins>

@@ -7,7 +7,7 @@
 			</div>
 			
 			<div class="xv-texts-next">
-				<input type="submit" value="Dalej" />
+				<input type="submit" value="{'txts_next'|xv_lang}" />
 			</div>
 	</form>
 

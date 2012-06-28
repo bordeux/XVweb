@@ -10,6 +10,7 @@
 		<prefix prefix="texts" include="plugins/texts/texts.php"/>
 		<prefix prefix="edit" include="plugins/texts/edit.php"/>
 		<prefix prefix="write" include="plugins/texts/write.php"/>
+		<prefix prefix="history" include="plugins/texts/history.php"/>
 	</config>
 	<ranks>
 		<rank>
@@ -23,6 +24,25 @@
 		<rank>
 			<name>texts_edit_page</name>
 			<description>User can edit new pages</description>
+		</rank>		
+		<rank>
+			<name>texts_view_page</name>
+			<description>User can edit new pages</description>
+		</rank>		
+		<rank>
+			<name>texts_set_version</name>
+			<description>User can set version of page</description>
 		</rank>
 	</ranks>
+	<load>
+		<event name="xvweb.404">
+			<script language="PHP">
+			  <![CDATA[
+				global $xv_redirect_404,$xv_include_404;
+					$xv_redirect_404 = false;
+					$xv_include_404 = (ROOT_DIR.'plugins/texts/texts.php');
+				]]>
+			</script>
+		</event>
+	</load>
 </plugin>

@@ -13,7 +13,7 @@ try {
     $dt2 = new DateTime($now);
 }
 catch(Exception $e) {
-    return "error : bad date";
+    return "Error: bad date. You need run in your server DateTime class in php.ini. More info: ".$e->getMessage();
 }
 
       $seconds = $dt->getTimestamp()-$dt2->getTimestamp();

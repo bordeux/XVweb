@@ -18,10 +18,10 @@ class xv_api_login{
 	 * @return boolean
 	 */	
 	function login($username, $api_key){
-		global $users_class;
+		global $users_class, $XVwebEngine;
 		$login_user_result =  xvp()->user_login($users_class, $username, $password_hash);
 		if($login_user_result){
-			$this->XVweb->Session->Session('user_api', true);
+			$XVwebEngine->Session->Session('user_api', true);
 		}
 		
 		return false;

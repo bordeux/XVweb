@@ -14,3 +14,18 @@
 	color: #25282A;
 	font-weight: normal;
 }
+.xv-texts-content h1 {font-size: 2em; margin: .67em 0;}
+.xv-texts-content h2 {font-size: 1.5em; margin: .83em 0;}
+.xv-texts-content h3 {font-size: 1.17em; margin: 1em 0;}
+.xv-texts-content h4 {font-size: 1em; margin: 1.33em 0;}
+.xv-texts-content h5 {font-size: .83em; line-height: 1.17em; margin: 1.67em 0;}
+.xv-texts-content h6 {font-size: .67em; margin: 2.33em 0;}
+.xv-texts-content h1, .xv-texts-content h2, .xv-texts-content h3, .xv-texts-content h4, .xv-texts-content h5,  .xv-texts-content h6 {font-weight: bolder;}
+
+.xv-texts-content pre {
+	width: 100%;
+	background: #E3E3E3;
+	border: 1px solid #D1D1D1;
+	padding: 10px;
+
+}

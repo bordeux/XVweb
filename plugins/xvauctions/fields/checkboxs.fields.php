@@ -150,15 +150,17 @@ $select_methods = explode("\n", $field['FieldOptions']['methods']);
 				return false;
 				
 			if($val == "true"){
-				$field_selected++;
+				$filed_selected++;
 			}
 		
 		}
+		
 		$field['FieldOptions']['max_select'] = (int) $field['FieldOptions']['max_select'];
 		$field['FieldOptions']['min_select'] = (int) $field['FieldOptions']['min_select'];
 		
 		if($field['FieldOptions']['min_select'] > $filed_selected)
 			return false;
+		
 		if($field['FieldOptions']['max_select'] && $field['FieldOptions']['max_select'] < $filed_selected)
 			return false;
 			

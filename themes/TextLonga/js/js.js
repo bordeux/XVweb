@@ -202,54 +202,8 @@ $(function () {
 					break;
 				};
 			});
-		var IDCheckbox = 0;
-		$(".xv-checkbox").each(function () { // kurwa chujstwo jebane nie chce za chuja dzialac!
-				tHandle = this;
-				$(tHandle).attr("id", "xv-checkbox-" + IDCheckbox); // tutaj bugg!
-				IDCheckbox += 1;
-				$(tHandle).after(function () {
-						var ToResult = $("<div>").attr("class", "iswitch").append(
-								$("<label>").attr({
-										"for" : $(tHandle).attr("id"),
-										"class" : "cb-enable"
-									}).html("<span>" + Language.Yes + "</span>")).append(
-								$("<label>").attr({
-										"for" : $(tHandle).attr("id"),
-										"class" : "cb-disable"
-									}).html("<span>" + Language.No + "</span>"));
-						if ($(tHandle).is(':checked')) {
-							$(ToResult).find('.cb-enable').addClass("selected");
-						} else {
-							$(ToResult).find('.cb-disable').addClass("selected");
-						}
-						$(tHandle).hide();
-						return ToResult;
-					});
-			});
 		
-		$(".cb-enable, .cb-disable").click(function () {
-				ChHantle = $("#" + $(this).attr("for"));
-				
-				if ($(this).is('.cb-enable')) {
-					if(ChHantle.is(":checked")){
-						$(this).parent().find(".selected").removeClass("selected");
-						$(this).addClass("selected");
-						return false	
-					}else{
-							$(this).parent().find(".selected").removeClass("selected");
-							$(this).addClass("selected");
-					}
-				} else {
-					if(!ChHantle.is(":checked")){
-						return false;
-					}else{
-							$(this).parent().find(".selected").removeClass("selected");
-							$(this).addClass("selected");
-					}
-				}
-				
-				return true;
-			});
+
 		$('.xv-form').live("submit", function () {
 				var TFHandle = this;
 				$.ajax({
@@ -274,14 +228,7 @@ $(function () {
 						});
 				return false;
 			});
-		//xv-logout
-		
-		spamBotSecruity = function () {
-			$(".xv-comment-spambot-field").val($(".xv-comment-spambot-key").first().text());
-			$(document.body).unbind('click', spamBotSecruity);
-			$(".xv-comment-spambot").hide();
-		};
-		$(document.body).bind('click', spamBotSecruity);
+
 		
 		$(document.body).ajaxError(function (event, request, settings) {
 		if(request.status == 200)

@@ -106,11 +106,11 @@ class XVWeb extends OperationXVWeb
 	/************************************************************************************************/
 	public function connect_db() {
 		try {
-			$this->DataBase = new xvDB($this);
+			$this->DataBase = new xv_db($this);
 			$this->DataBase->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			$this->DataBase->setAttribute(PDO::ATTR_PERSISTENT, true);
 			$this->DataBase->setAttribute(PDO::MYSQL_ATTR_DIRECT_QUERY, 1);
-			$this->DataBase->setAttribute( PDO::ATTR_STATEMENT_CLASS, array( 'xvDB_statement', array(&$this->DataBase, &$this)) );
+			$this->DataBase->setAttribute( PDO::ATTR_STATEMENT_CLASS, array( 'xv_db_statement', array(&$this->DataBase, &$this)) );
 			$this->DataBase->exec("SET NAMES 'utf8' COLLATE 'utf8_bin'");
 		} catch (PDOException $e) {
 			$this->ErrorClass($e);
@@ -383,7 +383,7 @@ class XVWeb extends OperationXVWeb
 		$ip = $this->IP;
 		try {
 		
-			if(isset($this->DataBase) && !empty($this->DataBase) && get_class($this->DataBase) == "xvDB"){
+			if(isset($this->DataBase) && !empty($this->DataBase) && get_class($this->DataBase) == "xv_db"){
 			$LogSQL = $this->DataBase->prepare('INSERT INTO {Logs}  ( {Logs:Date} , {Logs:Type} , {Logs:User} , {Logs:Text} , {Logs:IP} ) VALUES ( NOW() , :TypeExecute , :UserExecute , :TextExecute , :IPExecute ) ;');
 			$LogSQL->PDOException();
 			$LogSQL->execute(

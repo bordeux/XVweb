@@ -127,7 +127,7 @@ class HTMLPurifier_LanguageFactory
      * @param $code string language code
      */
     public function getFallbackFor($code) {
-        $this->xv_load_language($code);
+        $this->loadLanguage($code);
         return $this->cache[$code]['fallback'];
     }
 
@@ -135,7 +135,7 @@ class HTMLPurifier_LanguageFactory
      * Loads language into the cache, handles message file and fallbacks
      * @param $code string language code
      */
-    public function xv_load_language($code) {
+    public function loadLanguage($code) {
         static $languages_seen = array(); // recursion guard
 
         // abort if we've already loaded it
@@ -169,7 +169,7 @@ class HTMLPurifier_LanguageFactory
             $language_seen[$code] = true;
 
             // load the fallback recursively
-            $this->xv_load_language($fallback);
+            $this->loadLanguage($fallback);
             $fallback_cache = $this->cache[$fallback];
 
             // merge fallback with current language

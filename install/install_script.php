@@ -83,6 +83,7 @@ $instalator_class->log("Start moving config files to root dir");
 foreach(glob(dirname(__FILE__).'/files_to_root/*') as $filename){
 	@rename($filename, dirname(__FILE__).'/../'.basename($filename));
 }
+
 $instalator_class->log("End moving config files");
 
 $instalator_class->log("Start edit config file");
@@ -98,5 +99,6 @@ $instalator_class->log("End edit config file");
 
 $instalator_class->log("Installing done! Now you can restore your admin password with http://yourdomain.com/Forgot/. 
 User: admin
+Pass: admin
 Email: ".$_POST['mail']);
 $instalator_class->log("Thank you!");

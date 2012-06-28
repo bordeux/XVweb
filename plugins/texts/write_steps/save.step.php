@@ -37,6 +37,6 @@ $XVwebEngine->Session->Session('xv_texts_content', '');
 $XVwebEngine->Session->Session('xv_texts_category', '');
 $XVwebEngine->Session->Session('xv_texts_title', '');
 
-
-exit("tutaj przekierowanie jebnąć :)");
+header('Location: '.$URLS['Script'].substr($xv_texts_path, 1));
+exit;
 ?>

@@ -14,14 +14,7 @@ $admin_menu['system'] = array(
 			)
 	);
 	
-$admin_menu['articles'] = array(
-		"name" => "Articles",
-		"submenu" =>
-			array(
-				array ("name"=> "List articles", "href"=>'Administration/Articles/'),
-			//	array ("name"=> "Comments", "href"=>'Administration/Articles/Comments/'),
-			)
-	);
+
 
 $admin_menu['menu'] = array(
 		"name" => "Menu",
@@ -47,4 +40,11 @@ $admin_menu['logs'] = array(
 				array ("name"=> "System Logs", "href"=>'Administration/Logs/'),
 			)
 	);
+if(!isset($admin_menu['media'])){
+	$admin_menu['media'] = array(
+			"name" => "Media"
+		);
+}
+$admin_menu['media']['submenu'][] = array ("name"=> "FTP online", "href"=>'Administration/Files/');
+
 ?>

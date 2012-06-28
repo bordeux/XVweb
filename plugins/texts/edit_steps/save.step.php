@@ -27,16 +27,15 @@ if($XVwebEngine->Session->Session('xv_texts_page') == ''){
 	exit;
 }
 
-xvp()->add_new_page($xv_texts, $XVwebEngine->Session->Session('user_name'), $xv_texts_path, $xv_texts_title, $XVwebEngine->Session->Session('xv_texts_content'));
+
 xvp()->add_new_version($xv_texts, $XVwebEngine->Session->Session('user_name'), $XVwebEngine->Session->Session('xv_texts_page'), $XVwebEngine->Session->Session('xv_texts_content'), $XVwebEngine->Session->Session('xv_texts_changes'));
 
+header('Location: '.$URLS['Script'].substr($XVwebEngine->Session->Session('xv_texts_page'), 1));
 $XVwebEngine->Session->Session('xv_texts_content', '');
 $XVwebEngine->Session->Session('xv_texts_changes', '');
 $XVwebEngine->Session->Session('xv_texts_category', '');
 $XVwebEngine->Session->Session('xv_texts_title', '');
 $XVwebEngine->Session->Session('xv_texts_page', '');
 $XVwebEngine->Session->Session('xv_texts_version', '');
-
-
-exit("tutaj przekierowanie jebnąć :)");
+exit;
 ?>

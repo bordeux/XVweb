@@ -1,7 +1,5 @@
 {if $xvauctions_mode == "descriptions"}
 {$JSLoad[26]="`$URLS.Theme`js/jqueryui.js"}
-{$JSLoad[27]="`$URLS.Site`admin/data/themes/default/js/h5w/h5w/h5w.min.js"}
-{$CCSLoad[26]="`$URLS.Site`admin/data/themes/default/js/h5w/h5w/h5w.css"}
 
 {$CCSLoad[22]="`$URLS.Theme`xvauctions/css/add_descriptions.css"}
 {$JSLoad[22]="`$URLS.Theme`xvauctions/js/add_descriptions_contents.js"}

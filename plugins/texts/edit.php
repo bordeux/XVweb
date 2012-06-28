@@ -24,6 +24,7 @@ if(!xv_perm("texts_edit_page")){
 	header("location: ".$URLS['Script'].'Page/System/Permissions/texts_edit_page/');
 	exit;
 }
+xv_load_lang('texts');
 include_once(dirname(__FILE__)."/libs/texts.class.php");
 $xv_texts = &$XVwebEngine->load_class("xv_texts");
 $xv_step = strtolower($XVwebEngine->GetFromURL($PathInfo, 2));

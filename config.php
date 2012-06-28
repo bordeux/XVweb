@@ -22,7 +22,6 @@ DEFINE('XVweb_DisplayErrors', true, true);
 DEFINE('MD5Key', 'PDjh6ljRaURd8Vr7HpjLpG7UabAzjb8Q', true); 
 DEFINE('HASH_SALT', 'nh`m46ORJBolcwD>eKyVgXMAMAuIkRbMexaqA.MZnZZdYbqirnRf', true); 
 $UploadDir = ROOT_DIR.'files'.DIRECTORY_SEPARATOR;
-//$URLS['Avants']    = 'http://'.$_SERVER['HTTP_HOST'].'.nyud.net/files/avants/';
-//$URLS['ThemeCatalog'] = 'http://'.$_SERVER['HTTP_HOST'].'.nyud.net/themes/'
-//$URLS['JSCatalog'] = 'http://'.$_SERVER['HTTP_HOST'].'.nyud.net/themes/';
+date_default_timezone_set('Europe/Warsaw');
+
 ?>

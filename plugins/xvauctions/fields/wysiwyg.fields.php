@@ -40,17 +40,20 @@ class xvauction_fields_wysiwyg extends xvauction_fields {
 	}
 	
 	function add_form($field, $fail=false){
+	global $URLS;
+	xv_append_js($URLS['Site'].'plugins/xvauctions/tinymce/jscripts/tiny_mce/jquery.tinymce.js', "tinymce");
+	xv_append_js($URLS['Site'].'plugins/xvauctions/tinymce/tinymce.js', "tinymce_js");
+	
 	$Result =	'<div class="xvauction-add-item'.($fail ? ' xvauction-add-item-error' : '' ).'">
 					<b>'.$field['FieldOptions']['caption'].' </b>
-					<hr />';
+					<hr />
+					<div class="xvauction-templates">
+						<a href="#" class="xvauction-templates-show">Show free templates</a>
+					</div>
+';
 					
-					$GLOBALS['Smarty']->assign('xvauctions_wysiwyg_AddShowTemplates', $field['FieldOptions']['show_templates']);
-					$GLOBALS['Smarty']->assign('xvauctions_wysiwyg_name', "add[".$field['Name']."]");
-					$GLOBALS['Smarty']->assign('xvauctions_wysiwyg_text', $_POST['add'][$field['Name']]);
-					$Result .= $GLOBALS['Smarty']->fetch('xvauctions/html5wysiwygeditor.tpl');
-					$GLOBALS['Smarty']->assign('xvauctions_wysiwyg_name', null);
-					$GLOBALS['Smarty']->assign('xvauctions_wysiwyg_text', null);
-					
+					$Result .= "<textarea name='add[".$field['Name']."]'  style='width: 100%; min-height: 500px;' class='tinymce'>".htmlspecialchars($_POST['add'][$field['Name']])."</textarea>";
+
 				$Result .=	($field['FieldOptions']['input_desc'] == "" ? "" : '<div class="xvauction-add-input-desc">'.$field['FieldOptions']['input_desc'].'</div>' ).'
 					'.($fail ? '<div class="xvauction-add-input-error">'.$field['FieldOptions']['error'].'</div>'  : '' ).'
 					<div class="clear"></div>
@@ -61,6 +64,7 @@ class xvauction_fields_wysiwyg extends xvauction_fields {
 		return true;
 	}
 	public function convert_html($html){
+		global $URLS;
 		/*
 	$config = HTMLPurifier_Config::createDefault();
 	$config->set('Core.Encoding', 'UTF-8');
@@ -82,6 +86,8 @@ class xvauction_fields_wysiwyg extends xvauction_fields {
 		$config->set('Attr.IDPrefix', 'auction_');
 		$config->set('HTML.TargetBlank', true);
 		$config->set('HTML.SafeIframe', true);
+		$config->set('URI.MakeAbsolute', true);
+		$config->set('URI.Base', $URLS['Site']);
 		$config->set('URI.SafeIframeRegexp','%^(http|https|ftp)://(www\.|)(youtube.com/embed/|player.vimeo.com/video/|dailymotion.com/embed/)%');
 		$purifier = new HTMLPurifier($config);
 		return $purifier->purify($html);

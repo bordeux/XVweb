@@ -168,12 +168,18 @@ xv_trigger("xvweb.smarty.loaded");
 $xv_prefix_file = $XVwebEngine->Plugins()->Menager()->prefix($URLS['Prefix']);
 
 xv_trigger("xvweb.preload_module");
-
+$xv_redirect_404 = true;
 if($xv_prefix_file){
 	require($xv_prefix_file);
 }else{
-	header("location: ".$URLS['Script'].'Page/System/404/');
-	exit;
+	xv_trigger("xvweb.404");
+	if($xv_redirect_404 === false && isset($xv_include_404)){
+		include($xv_include_404);
+	}
+	if($xv_redirect_404){
+		header("location: ".$URLS['Script'].'Page/System/404/'.substr($URLS['Path'],1));
+		exit;
+	}
 }
 
 xv_trigger("xvweb.end");

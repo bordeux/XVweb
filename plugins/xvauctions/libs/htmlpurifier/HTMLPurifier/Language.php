@@ -57,7 +57,7 @@ class HTMLPurifier_Language
     public function load() {
         if ($this->_loaded) return;
         $factory = HTMLPurifier_LanguageFactory::instance();
-        $factory->xv_load_language($this->code);
+        $factory->loadLanguage($this->code);
         foreach ($factory->keys as $key) {
             $this->$key = $factory->cache[$this->code][$key];
         }

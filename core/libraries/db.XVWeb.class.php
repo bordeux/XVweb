@@ -3,7 +3,7 @@ if (!class_exists('db_config')) {
 	class db_config extends  xv_config {};
 }
 
-class xvDB extends PDO
+class xv_db extends PDO
 {
 	public $query = array();
 	public $Data = array();
@@ -99,7 +99,7 @@ class xvDB extends PDO
 }
 
 
-class xvDB_statement extends PDOStatement
+class xv_db_statement extends PDOStatement
 {
    protected $pdo;
    var $Data = array();

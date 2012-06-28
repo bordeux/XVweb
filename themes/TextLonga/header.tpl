@@ -11,6 +11,7 @@
 -->                                                        					
     <title>{$xv_title|default:$SiteTopic} :: {$xv_main_config->site_name} :.</title>
 	<meta http-equiv="X-UA-Compatible" content="chrome=1">
+	<meta charset="utf-8">
 	<link rel="shortcut icon" href="{$URLS.Site}favicon.ico" type="image/x-icon" />
     <link rel="alternate" type="application/rss+xml" title="RSS" href="{$URLS.Script}RSS/{if $ReadArticleIndexOut.URL}?rss={$ReadArticleIndexOut.URL|escape:'url'}{/if}" />
 	{if !"Adv"|xv_perm}{include  file='adv.tpl'}{/if}

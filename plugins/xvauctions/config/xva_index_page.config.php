@@ -42,7 +42,7 @@ class xva_index_page_editor extends  xv_config_editor {
 			.xv-config-editor-categories-tbl {
 				margin: 15px;
 				border:1px solid #00AFC9;
-				background:#CCF8FF;
+				background: rgba(204, 248, 255, 0.6);
 				width: 400px;
 			}
 		');
