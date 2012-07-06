@@ -42,7 +42,7 @@ class xva_przelewy24_config_editor extends  xv_config_editor {
 
 				),
 				"field_data" => array(
-					"type" => "number"
+					"type" => "text"
 				)
 			),
 			"lang" => array(

@@ -51,8 +51,8 @@
 				<tbody> 
 				{foreach from=$payments_list item=payment}
 					<tr>
-						<td class="items-id"><a href="{$URLS.AuctionPanel}/payment_details/{$payment.ID}/">{$payment.ID}</a></td>
-						<td class="items-title"><a href="{$URLS.AuctionPanel}/payment_details/{$payment.ID}/">{$payment.Title}</a></td>
+						<td class="items-id"><a >{$payment.ID}</a></td>
+						<td class="items-title"><a >{$payment.Title}</a></td>
 						<td class="items-cost">{if $payment.Amount > 0}<span style="font-weight:bold; color:#3f7f00;">{$payment.DecAmount|number_format:2:'.':' '}  {"xca_coin_type"|xv_lang}</span>{else}<span style="font-weight:bold; color:#bf0000;">{$payment.DecAmount|number_format:2:'.':' '}  {"xca_coin_type"|xv_lang}</span>{/if}</td>
 						<td class="items-date">{$payment.Date}</td>
 						<td class="items-auction">{if $payment.Auction|is_null}----{else}<a href="{$URLS.Auction}/{$payment.Auction}/">{$payment.Auction}</a>{/if}</td>

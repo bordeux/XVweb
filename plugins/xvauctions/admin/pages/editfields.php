@@ -159,7 +159,7 @@ class xv_admin_xvauctions_editfields{
 					<input type='hidden' value='".htmlspecialchars($XVweb->Session->get_sid())."' name='xv-sid' />
 					<input type='hidden' value='".htmlspecialchars($_GET['cat'])."' name='newfield[category]' />
 						<div>
-							<label for='auction-newfield-name'>Field name (ascii chart): </label><input type='text' name='newfield[name]' id='auction-newfield-name' />
+							<label for='auction-newfield-name'>Field name (ascii chart) [<a href='http://xvauctions.pl/wiki/Category:Fields' target='blank'>?</a>]: </label><input type='text' name='newfield[name]' id='auction-newfield-name' />
 						</div>
 						<div>
 							<label for='auction-newfield-type'>Field type: </label>
