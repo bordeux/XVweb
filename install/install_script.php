@@ -38,7 +38,6 @@ if(!filter_var($_POST['mail'], FILTER_VALIDATE_EMAIL)){
 			$instalator_class->end();
 }
 	$required_ext = array(
-			"tidy",
 			"pdo",
 			"dom",
 			"pdo_mysql",
