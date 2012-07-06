@@ -97,6 +97,9 @@ $instalator_class->log("End edit config file");
 
 
 $instalator_class->log("Installing done! Now you can restore your admin password with http://yourdomain.com/Forgot/. 
+---------------------------
+PLEASE MOVE FROM /install/files_to_root/* to ROOT DIR !!!!!!!!!!!!!!
+---------------------------
 User: admin
 Pass: admin
 Email: ".$_POST['mail']);
