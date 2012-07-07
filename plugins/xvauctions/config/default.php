@@ -1,13 +1,4 @@
 <?php 
-/***************************************************************************
-****************   xvAuctions Project              *************************
-****************   LICENSE IS HERE                 *************************
-****************   http://xvauctions.bordeux.net/  *************************
-****************   THIS IS NON-FREE aplication!    *************************
-****************   Author  : Krzysztof Bednarczyk  *************************
-****************   All rights reserved             *************************
-***************************************************************************/
-
 $xva_config = array (
   'confirm_buy' => 1,
   'auction_add_cost' => 0,
@@ -17,6 +8,6 @@ $xva_config = array (
   'auction_main_page_cost' => 1,
   'allowed_debt' => -4,
   'html_message' => '',
-  'auction_expire' => '+100 day',
+  'auction_expire' => '+30 day',
 ); 
  ?>
