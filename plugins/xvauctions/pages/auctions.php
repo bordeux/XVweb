@@ -31,6 +31,7 @@ if(empty($category_tree)){
 	$auction_category = $auction_info['Category'];
 	$xva_config = $auction_info['Options'];
 }
+xv_set_title($auction_info['Title']);
 
 $Smarty->assignByRef('xva_config', $xva_config);
 $fields = xvp()->get_fields($XVauctions, $auction_category);
