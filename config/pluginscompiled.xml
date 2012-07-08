@@ -94,8 +94,6 @@
 		</event>
 	</load></plugin><plugin><config>	
 		<prefix prefix="cron" include="plugins/cron/cron.php"/>	
-	</config></plugin><plugin><config>	
-		<prefix prefix="api" include="plugins/api/api.php"/>	
 	</config></plugin><plugin><config>
 	</config></plugin><plugin><load>
 	</load></plugin><plugin><config>
@@ -127,4 +125,6 @@
 				]]>
 			</script>
 		</event>
-	</load></plugin></plugins>
+	</load></plugin><plugin><config>	
+		<prefix prefix="api" include="plugins/api/api.php"/>	
+	</config></plugin></plugins>

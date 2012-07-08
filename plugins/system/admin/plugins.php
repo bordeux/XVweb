@@ -26,6 +26,11 @@ class xv_admin_plugins {
 		public function __construct(&$XVweb){
 		$this->Data['XVweb'] = &$XVweb;
 		
+		if(!xv_perm("xv_plugins_edit")){
+			$this->content = '<div class="error">You need xv_plugins_edit flag to access here</div>';
+			return true;
+		}
+		
 		$plugins_status = $this->get_plugins_status();
 		$this->content = "
 		<script type='text/javascript' src='{$GLOBALS['URLS']['Theme']}js/jquery.tzCheckbox/jquery.tzCheckbox.js' charset='UTF-8'> </script> 
@@ -189,6 +194,14 @@ class xv_admin_plugins {
 				"msg"=> "<div class='failed'>Error: Wrong SID key</div>"
 			)));
 		}
+		
+		if(!xv_perm("xv_plugins_edit")){
+			exit(json_encode( array(
+				"result" => true,
+				"msg"=> "<div class='failed'>You need xv_plugins_edit flag to access here </div>"
+			)));
+		}
+		
 		$_GET['plugin'] = trim($_GET['plugin']);
 		$plugins_config = new xv_plugins_config();
 		
@@ -230,6 +243,9 @@ class xv_admin_plugins {
 			if($XVweb->Session->get_sid() != ifsetor($_GET['xv-sid'], "")){
 				exit("<div class='error'>Error: Wrong SID</div>");
 			}
+			if(!xv_perm("xv_plugins_edit")){
+				exit("<div class='error'>You need xv_plugins_edit flag to access here</div>");
+			}
 			$zip = new ZipArchive;
 			if ($zip->open($_FILES['upload']['tmp_name'][0]) === TRUE) {
 				$zip->extractTo(ROOT_DIR);
@@ -245,6 +261,9 @@ class xv_admin_plugins {
 		public function __construct(&$XVweb){
 			if($XVweb->Session->get_sid() != ifsetor($_GET['xv-sid'], "")){
 				exit("<div class='error'>Error: Wrong SID</div>");
+			}
+			if(!xv_perm("xv_plugins_edit")){
+				exit("<div class='error'>You need xv_plugins_edit flag to access here</div>");
 			}
 				$uniq_id = uniqid();
 				$fp = fopen (ROOT_DIR.'tmp/'.$uniq_id.'.tmp', 'w+');//This is the file where we save the information

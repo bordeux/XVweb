@@ -1,29 +1,16 @@
 <?php
 $admin_menu['main'] = array(
-		"name" => "Strona główna",
+		"name" => "Main page",
 		"href" => $URLS['Site']
 	);
 	
 $admin_menu['system'] = array(
-		"name" => "System",
-		"submenu" =>
-			array(
-				array ("name"=> "Language", "href"=>'Administration/Lang/'),
-				array ("name"=> "Cache", "href"=>'Administration/Cache/'),
-				array ("name"=> "Plugins", "href"=>'Administration/Plugins/'),
-			)
+		"name" => "System"
 	);
 	
 
 
-$admin_menu['menu'] = array(
-		"name" => "Menu",
-		"submenu" =>
-			array(
-				array ("name"=> "Visual editor", "href"=>'Administration/Menu/Visual/'),
-				array ("name"=> "Text editor", "href"=>'Administration/Menu/Text/'),
-			)
-	);
+
 
 $admin_menu['options'] = array(
 		"name" => "Options",
@@ -33,18 +20,8 @@ $admin_menu['options'] = array(
 				array ("name"=> "Widgets", "href"=>'Administration/Widgets/'),
 			)
 	);
-$admin_menu['logs'] = array(
-		"name" => "Logs",
-		"submenu" =>
-			array(
-				array ("name"=> "System Logs", "href"=>'Administration/Logs/'),
-			)
-	);
-if(!isset($admin_menu['media'])){
-	$admin_menu['media'] = array(
-			"name" => "Media"
-		);
-}
-$admin_menu['media']['submenu'][] = array ("name"=> "FTP online", "href"=>'Administration/Files/');
+
+
+
 
 ?>

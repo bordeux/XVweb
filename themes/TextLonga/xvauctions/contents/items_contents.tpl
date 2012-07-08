@@ -87,15 +87,15 @@
 			<li class="ui-state-default ui-corner-top ui-state-hover ui-button-text-icon-primary {if $smarty.get.auction_type == '' ||  $smarty.get.auction_type == 'all'}ui-state-active{/if}">
 				<a href="?{add_get_var value="auction_type="}" title='{"xca_all1"|xv_lang}' style="padding-left:20px;"> <span class="ui-icon ui-icon-script" style="margin-left:-16px;"></span>{"xca_all1"|xv_lang}</a>
 			</li>
-			<li class="ui-state-default ui-corner-top ui-state-hover ui-button-text-icon-primary {if $smarty.get.auction_type == 'buynow'}ui-state-active{/if}">
+			{if $xva_config.buynow_enabled}<li class="ui-state-default ui-corner-top ui-state-hover ui-button-text-icon-primary {if $smarty.get.auction_type == 'buynow'}ui-state-active{/if}">
 				<a href="?{add_get_var value="auction_type=buynow"}" title="{"xca_only_buy_now"|xv_lang}" style="padding-left:20px;"> <span class="ui-icon ui-icon-script" style="margin-left:-16px;"></span>{"xca_only_buy_now"|xv_lang}</a>
-			</li>	
-			<li class="ui-state-default ui-corner-top ui-state-hover ui-button-text-icon-primary {if $smarty.get.auction_type == 'auction'}ui-state-active{/if}">
+			</li>{/if}
+			{if $xva_config.auction_enabled}<li class="ui-state-default ui-corner-top ui-state-hover ui-button-text-icon-primary {if $smarty.get.auction_type == 'auction'}ui-state-active{/if}">
 				<a  href="?{add_get_var value="auction_type=auction"}" title="{"xca_only_auctions"|xv_lang}" style="padding-left:20px;"> <span class="ui-icon ui-icon-script" style="margin-left:-16px;"></span>{"xca_only_auctions"|xv_lang}</a>
-			</li>
-			<li class="ui-state-default ui-corner-top ui-state-hover ui-button-text-icon-primary {if $smarty.get.auction_type == 'dutch'}ui-state-active{/if}">
+			</li>{/if}
+			{if $xva_config.dutch_enabled}<li class="ui-state-default ui-corner-top ui-state-hover ui-button-text-icon-primary {if $smarty.get.auction_type == 'dutch'}ui-state-active{/if}">
 				<a  href="?{add_get_var value="auction_type=dutch"}" title="{"xca_only_dutch_auctions"|xv_lang}" style="padding-left:20px;"> <span class="ui-icon ui-icon-script" style="margin-left:-16px;"></span>{"xca_only_dutch_auctions"|xv_lang}</a>
-			</li>
+			</li>{/if}
 			{if "AdminPanel"|perm}
 			<li class="ui-state-default ui-corner-top ui-state-hover" style="float:right;">
 				<a href="{$URLS.Script}Administration/XVauctions/Categories/?cat={$auctions_category|escape:'url'}" style="padding:0px" target="_blank"><span class="ui-button  ui-icon ui-icon-wrench " title="{'xca_edit_category'|xv_lang}"></span></a>

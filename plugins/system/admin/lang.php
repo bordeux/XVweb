@@ -30,7 +30,11 @@ if(!isset($XVwebEngine)){
 			$this->title =  "Lang Editor";
 			$this->icon = $GLOBALS['URLS']['Site'].'admin/data/icons/lang.png';
 			
-
+			if(!xv_perm("xv_lang_edit")){
+				$this->content =  "<div class='error'>You need xv_lang_edit flag in your permissions</div>";
+				return true;
+			}
+				
 	include_once(ROOT_DIR.'core/libraries/formgenerator/formgenerator.php');
 		$LangFiles = array();
 		function all_files($dir){
@@ -81,10 +85,13 @@ if(!isset($XVwebEngine)){
 		}
 	}
 	
-		class xv_admin_lang_load{
+	class xv_admin_lang_load{
 		var $Date;
 		public function __construct(&$XVweb){
-		
+			if(!xv_perm("xv_lang_edit")){
+				echo "<div class='error'>You need xv_lang_edit flag in your permissions</div>";
+				return true;
+			}
 		$LangList = array();
 		if(isset($_GET['langfile'])){
 			$LangList = $this->ReadLang($_GET['langfile']);
@@ -105,7 +112,7 @@ if(!isset($XVwebEngine)){
 			$form->JSprotection(uniqid());
 			$form->set("submitMessage", "");
 			foreach($LangList as $key=>$val)
-				$form->addField("text", "language[".$key."]",$key, false, $val);
+				$form->addField("textarea", "language[".$key."]",$key, false, $val);
 				
 			$form->addField("textarea", "newlang","Dodaj nowe KEY=VAL", false);
 			$form->addField("hidden", "xv-sid",false, false, htmlspecialchars($XVweb->Session->get_sid()));

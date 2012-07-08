@@ -18,6 +18,11 @@ if(!isset($XVwebEngine)){
 	header("location: http://".$_SERVER['HTTP_HOST']."/");
 	exit;
 }
+if(!xv_perm("xv_menu_edit")){
+	header("location: http://".$_SERVER['HTTP_HOST']."/");
+	exit;
+}
+
 	class xv_admin_menu_save{
 		var $Date;
 		public function __construct(&$XVweb){

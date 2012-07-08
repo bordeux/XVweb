@@ -28,7 +28,10 @@ if(!isset($XVwebEngine)){
 		var $Date;
 		//var $contentAddClass = " xv-terminal";
 		public function __construct(&$XVweb){
-		
+		if(!xv_perm("xv_clear_cache")){
+			$this->content = '<div class="error">You need xv_clear_cache flag in your permissions</div>';
+				return true;
+		}
 		
 		$CacheInfo = $this->dirSize(Cache_dir);
 		$this->content = '
@@ -80,7 +83,9 @@ if(!isset($XVwebEngine)){
 	
 		class xv_admin_cache_clear{
 			public function __construct(&$XVweb){
-			
+			if(!xv_perm("xv_clear_cache")){
+				return true;
+			}
 			
 				$Result['Started'] = true;
 				$Result['Smarty'] = (bool) !$GLOBALS['Smarty']->clearAllCache();

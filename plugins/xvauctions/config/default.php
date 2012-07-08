@@ -9,5 +9,8 @@ $xva_config = array (
   'allowed_debt' => -4,
   'html_message' => '',
   'auction_expire' => '+30 day',
+  'buynow_enabled' => 1,
+  'auction_enabled' => 1,
+  'dutch_enabled' => 1,
 ); 
  ?>

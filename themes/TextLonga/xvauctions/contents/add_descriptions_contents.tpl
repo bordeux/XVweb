@@ -35,7 +35,7 @@
 				
 				
 				<div class="xvauction-add-item">
-					<input type="submit" name="check" value="{'xca_auction_preview'|xv_lang}" />
+					<input type="submit" name="check" value="{'xca_auction_preview'|xv_lang} ({'xca_next'|xv_lang})" />
 					<input type="submit" name="save" value="{'xca_save'|xv_lang}" />
 				</div>
 				

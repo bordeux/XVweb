@@ -36,6 +36,13 @@ class xv_admin_system_config {
 		$this->id = "xva-system-config-".$config_name;
 		$this->icon = $GLOBALS['URLS']['Site'].'admin/data/xvauctions/icons/auction.png';
 		
+		if(!xv_perm("xv_edit_configs")){
+			$this->content = '<div class="error">You need xv_edit_configs flag in your permissions</div>';
+			return true;
+		}
+		
+		
+		
 		if(empty($config_name)){
 		$this->title = "Config editor";
 		$this->content = '';

@@ -27,7 +27,7 @@ class xv_admin_xvauctions_auction{
 
 		$this->title = "Edit Auction ID: ".$auction_id;
 		$this->content = '<div class="xva-auction-edit-result">
-		<table style="width: 100%;">
+		<table style="width: 100%;" class="xv-auction-edit-panel">
 			<tr>
 				<td style="width: 60%">'.$this->edit_auction($XVweb, $auction_id).'</td>
 				<td>
@@ -48,11 +48,23 @@ class xv_admin_xvauctions_auction{
 		}
 	}
 	
-	public function delete_auction(&$XVweb){
+	public function delete_auction(&$XVweb, $auction_id){
 	global $URLS,$xva_wiki_page;
+		if(ifsetor($_GET['mode'], '') == "delete"){
+			include_once(ROOT_DIR.'/plugins/xvauctions/libs/class.xvauctions.php');
+			$XVauctions = &$XVweb->load_class("xvauctions");
+			$result = xvp()->delete_auction_data($XVauctions, $auction_id);
+			if($result){
+				$result = '<div class="success">Auction deleted</div>';
+			}else{
+				$result = '<div class="error">Error: I cant delete this auction</div>';
+			}
+			echo $result;
+			exit;
+		}
 		return '<fieldset>
 						<legend>Delete from database [<a href="'.$xva_wiki_page.'Delete_from_database" target="_blank">?</a>]</legend>
-						<form action="'.$URLS['Script'].'Administration/Get/XVauctions/Auction/'.$auction_id.'/?mode=delete" method="post" class="xv-form" data-xv-result=".xva-auction-edit-result">
+						<form action="'.$URLS['Script'].'Administration/Get/XVauctions/Auction/'.$auction_id.'/?mode=delete" method="post" class="xv-form" data-xv-result=".xv-auction-edit-panel">
 							<input type="hidden" value="'.htmlspecialchars($XVweb->Session->get_sid()).'" name="xv-sid" />
 							<input type="submit" value="Delete from database" />
 						</form>

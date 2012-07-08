@@ -66,16 +66,19 @@ try {
 $instalator_class->log("Connected to MySQL server");
 
 $instalator_class->log("Start import db file");
-$db_file_content = file_get_contents(dirname(__FILE__).'/db/db.sql');
-$db_file_content = str_replace(array('`xv_', "xvwebcms@bordeux.net") ,array('`'.$_POST['db_prefix'], $_POST['mail']), $db_file_content);
 
-try {
-	$dbh->exec($db_file_content);
-	unset($db_file_content);
-} catch (PDOException $e) {
-	$instalator_class->log("I cant import db file. Error message: ".($e->getMessage()));
-	$instalator_class->end();
+foreach(glob(dirname(__FILE__).'/db/*.sql') as $filename){
+	$db_file_content = file_get_contents($filename);
+	$db_file_content = str_replace(array('`xv_', "xvwebcms@bordeux.net") ,array('`'.$_POST['db_prefix'], $_POST['mail']), $db_file_content);
+	try {
+		$dbh->exec($db_file_content);
+	} catch (PDOException $e) {
+		$instalator_class->log("I cant import db file. Error message: ".($e->getMessage()));
+		$instalator_class->end();
+	}
 }
+
+
 $instalator_class->log("DB file imported!");
 $instalator_class->log("Start moving config files to root dir");
 

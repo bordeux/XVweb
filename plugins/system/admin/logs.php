@@ -29,6 +29,11 @@ if(!isset($XVwebEngine)){
 		//var $contentAddClass = " xv-terminal";
 		public function __construct(&$XVweb){
 		$this->URL = "Logs/".(empty($_SERVER['QUERY_STRING']) ? "" : "?".$_SERVER['QUERY_STRING']);
+		
+		if(!xv_perm("xv_view_logs")){
+			$this->content = '<div class="error">You need xv_view_logs flag in your permissions</div>'; 
+			return true;
+		}
 			$RecordsLimit=30;
 			$ActualPage = (int) ifsetor($_GET['Page'], 0);
 			$LogList = $this->GetLog($XVweb, $ActualPage,$RecordsLimit, (isset($_GET['LogSelect']) ? $_GET['LogSelect'] : null), $_GET);

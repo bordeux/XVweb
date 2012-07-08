@@ -15,7 +15,35 @@
 	<ranks>
 		<rank>
 			<name>AdminPanel</name>
-			<description>User can enter to adminpanel (ONLY admin)</description>
+			<description>User can enter to adminpanel (moderator,admin)</description>
+		</rank>		
+		<rank>
+			<name>xv_edit_configs</name>
+			<description>User can edit configs (admin)</description>
+		</rank>		
+		<rank>
+			<name>xv_clear_cache</name>
+			<description>User can clear cache(admin, moderator)</description>
+		</rank>		
+		<rank>
+			<name>xv_lang_edit</name>
+			<description>User can lang edit(admin, moderator)</description>
+		</rank>		
+		<rank>
+			<name>xv_plugins_edit</name>
+			<description>User can add and disable, enable plugin (admin)</description>
+		</rank>	
+		<rank>
+			<name>xv_ftp_online</name>
+			<description>User can edit files on server (admin only!)</description>
+		</rank>		
+		<rank>
+			<name>xv_view_logs</name>
+			<description>User can view logs (admin, moderator)</description>
+		</rank>		
+		<rank>
+			<name>xv_menu_edit</name>
+			<description>User can edit menu (admin)</description>
 		</rank>		
 	</ranks>
 </plugin>

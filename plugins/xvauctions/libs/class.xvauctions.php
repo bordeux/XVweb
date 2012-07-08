@@ -1349,6 +1349,16 @@ LIMIT '.$formLimit.','.$PageLimit.'
 		return true;
 	}
 	
+	public function delete_auction_data($auction_id){
+	
+		 $this->Data['XVweb']->DataBase->pquery("DELETE FROM {AuctionAuctions} WHERE  {AuctionAuctions:ID} = '".$auction_id."'; ");
+		 $this->Data['XVweb']->DataBase->pquery("DELETE FROM {AuctionValues} WHERE  {AuctionValues:Auction} = '".$auction_id."'; ");
+		 $this->Data['XVweb']->DataBase->pquery("DELETE FROM {AuctionTexts} WHERE  {AuctionTexts:Auction} = '".$auction_id."'; ");
+		 $this->Data['XVweb']->DataBase->pquery("DELETE FROM {AuctionArchive} WHERE  {AuctionArchive:ID} = '".$auction_id."'; ");
+		 $this->Data['XVweb']->DataBase->pquery("DELETE FROM {AuctionGallery} WHERE  {AuctionGallery:Auction} = '".$auction_id."'; ");
+		return true;
+	}
+	
 	/**
 	 * Pobiera aukcje z archiwum
 	 * @param $auction_id INT - ID aukcji
