@@ -1,10 +1,5 @@
 <!-- Content -->
  <div id="Content">
- {if $Advertisement}
-	<div class="reklamo" id="RTop">
-		{$smarty.capture.ADVHeight}
-	</div>
-{/if}
 	<div class="xvauction-main" >
 	
 	<div class="category_parents_tree">
@@ -42,6 +37,10 @@
 								{$auction_info.Auction|number_format:2:'.':' '} {"xca_coin_type"|xv_lang} 
 							{elseif $auction_info.Type == "dutch"}
 								{$auction_info.BuyNow|number_format:2:'.':' '} {"xca_coin_type"|xv_lang}
+							{elseif $auction_info.Type == "advert"}
+								{$auction_info.BuyNow|number_format:2:'.':' '} {"xca_coin_type"|xv_lang}
+							{elseif $auction_info.Type == "errand"}
+								{"xca_cheapest_offer"|xv_lang} : {$auction_info.BuyNow|number_format:2:'.':' '} {"xca_coin_type"|xv_lang}
 							{else}
 								<span class="item-buynow">{$auction_info.BuyNow|number_format:2:'.':' '} {"xca_coin_type"|xv_lang}</span> <br /> 
 								{"xca_auction"|xv_lang} <span class="item-auction">{$auction_info.Auction} {"xca_coin_type"|xv_lang}</span>
@@ -56,9 +55,13 @@
 					{elseif $auction_info.Type== "auction"}
 						{"xca_normal_auction"|xv_lang}
 					{elseif $auction_info.Type == "both"}
-						Aukcja + <span class="item-buynow">{"xca_buynow"|xv_lang}</span>
+						{"xca_auction"|xv_lang} + <span class="item-buynow">{"xca_buynow"|xv_lang}</span>
+					{elseif $auction_info.Type == "advert"}
+						<span class="item-advert">{"xca_avert"|xv_lang}</span> 
 					{elseif $auction_info.Type == "dutch"}
 						{"xca_dutch_auction"|xv_lang}
+					{elseif $auction_info.Type == "errand"}
+						{"xca_errand"|xv_lang}
 					{/if}
 					</td>
 				</tr>
@@ -108,6 +111,7 @@
 			<div class="xvauction-info-right-caption">{"xca_bid"|xv_lang}</div>
 			<div class="xvauction-info-right-content">
 			{if $auction_info.Enabled}
+							
 							{if $auction_info.Type == "buynow"}
 	
 								<form action="{$URLS.AuctionBuy}/{$auction_info.ID}/" method="post" style="text-align:center;">
@@ -120,6 +124,8 @@
 									<div><input type="image" src="{$URLS.Theme}xvauctions/img/buy_now_big.png" style="width: 70px; height: 25px; background: none; border: none; " alt="{'xca_buynow'|xv_lang}"></div>
 								</form>
 				
+							{elseif $auction_info.Type == "advert"}
+								<div style="text-align:center; margin: 10px;"><span class="item-advert">{"xca_avert"|xv_lang}</span> </div>
 							{elseif $auction_info.Type == "auction"}
 								
 								<form action="{$URLS.AuctionBuy}/{$auction_info.ID}/" method="post" style="text-align:center;">
@@ -131,7 +137,17 @@
 										{literal}<div><input type="text" name="offer" pattern="((([0-9]){0,10})|(([0-9]){0,10}(\.)([0-9]){2}))" /></div>{/literal}
 									<input type="submit" value="{'xca_bid'|xv_lang}" />
 								</form>
+						{elseif $auction_info.Type == "errand"}
 								
+								<form action="{$URLS.AuctionBuy}/{$auction_info.ID}/" method="post" style="text-align:center;">
+								<input type="hidden" name="xv-sid" value="{$JSVars.SIDUser}" />
+								<input type="hidden" name="confirm_buy" value="{if $xva_config.confirm_buy}0{else}1{/if}" />
+								<input type="hidden" name="type" value="errand" />
+								<input type="hidden" name="auction" value="{$auction_info.ID}" />
+									<div>{"xca_your_offer_errand"|xv_lang}</div>
+										{literal}<div><input type="text" name="offer" pattern="((([0-9]){0,10})|(([0-9]){0,10}(\.)([0-9]){2}))" /></div>{/literal}
+									<input type="submit" value="{'xca_make_offer'|xv_lang}" />
+								</form>							
 							{elseif $auction_info.Type == "dutch"}
 								<form action="{$URLS.AuctionBuy}/{$auction_info.ID}/" method="post" style="text-align:center;">
 								<input type="hidden" name="xv-sid" value="{$JSVars.SIDUser}" />
@@ -172,35 +188,22 @@
 				{/if}
 			
 			</div>
-		<div style="text-align:right;"><a href="42">{"xca_report_violations"|xv_lang}</a></div>
+		<!--<div style="text-align:right;"><a href="42">{"xca_report_violations"|xv_lang}</a></div>-->
 		<div style="clear:both"></div>
 <!-- SHARER --->
 {literal}
 			<div class="xvauction-share">
 				<div>
-					<div class="g-plusone"></div>
-					<script type="text/javascript">
-					  (function() {
-						var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-						po.src = 'https://apis.google.com/js/plusone.js';
-						var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-					  })();
-					</script>
-				</div>
-				<div>
-					<div class="fb-like" data-send="true" data-layout="button_count" data-width="30" data-show-faces="false"></div>
-					<div id="fb-root"></div>
-					<script>(function(d, s, id) {
-					  var js, fjs = d.getElementsByTagName(s)[0];
-					  if (d.getElementById(id)) return;
-					  js = d.createElement(s); js.id = id;
-					  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=145934665421004";
-					  fjs.parentNode.insertBefore(js, fjs);
-					}(document, 'script', 'facebook-jssdk'));</script>
-				</div>
-				<div>
-					<a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
-					<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+					<!-- AddThis Button BEGIN -->
+					<div class="addthis_toolbox addthis_default_style ">
+					<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+					<a class="addthis_button_tweet"></a>
+					<a class="addthis_button_pinterest_pinit"></a>
+					<a class="addthis_counter addthis_pill_style"></a>
+					</div>
+					<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+					<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4ffd817a58723c90"></script>
+					<!-- AddThis Button END -->
 				</div>
 			</div>
 {/literal}
@@ -246,7 +249,7 @@
 				</div>
 				
 		</div>
-	
+		{if $auction_info.Type != "advert"}
 		<div class="xvauction-offers" id="offers">
 				<div class="xvauction-offers-caption">{"xca_offers"|xv_lang}</div>
 				<div class="xvauction-offers-content">
@@ -264,7 +267,13 @@
 				<tbody> 
 				{foreach from=$auction_offers item=offer}
 					<tr>
-						<td>{$offer.User|substr:"0":"1"}...{$offer.User|substr:"-1"} (42%)</td>
+						<td>
+						{if "xva_view_buyers"|xv_perm || ($auction_info.Seller == $Session.user_name)}
+							<a href="{$URLS.Script}Users/{$offer.User|escape:'url'}/" id="UserNick">{$offer.User}</a>
+						{else}
+							{$offer.User|substr:"0":"1"}...{$offer.User|substr:"-1"} (42%)
+						{/if}
+						</td>
 						<td>{$offer.Pieces}</td>
 						<td>{$offer.Cost} {"xca_coin_type"|xv_lang}</td>
 						<td>{$offer.Date}</td>
@@ -279,6 +288,7 @@
 				</div>
 				
 		</div>
+		{/if}
 		<div style="text-align:right; margin-right: 20px;"><b>{"xca_views"|xv_lang}: {$auction_info.Views}</b></div>
 	</div>
 

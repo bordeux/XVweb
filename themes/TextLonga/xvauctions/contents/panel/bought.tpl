@@ -56,7 +56,7 @@
 
 						<th class="items-checkbox"><input type="checkbox" name="select_all" value="true" class="select_all" data-selector='input[name="auction[]"]' /></th>
 						<th class="items-thumbnail"></th>
-						<th class="items-title"><a href='?{add_get_var value="sortby=title&sort=$SmartySort"}'>{$SmartyChar} {"xca_description"|xv_lang}</a></th>
+						<th class="items-title"><a href='?{add_get_var value="sortby=title&sort=$SmartySort"}'>{$SmartyChar} {"xca_auction_title"|xv_lang}</a></th>
 						<th class="items-cost"><a href='?{add_get_var value="sortby=cost&sort=$SmartySort"}'>{$SmartyChar} {"xca_cost"|xv_lang}</a></th>
 						<th class="items-pieces"><a href='?{add_get_var value="sortby=pieces&sort=$SmartySort"}'>{$SmartyChar} {"xca_pieces"|xv_lang}</a></th>
 						<th class="items-date"><a href='?{add_get_var value="sortby=date&sort=$SmartySort"}'>{$SmartyChar} {"xca_date"|xv_lang}</a></th>
@@ -96,6 +96,7 @@
 						<td class="items-options">
 							{if $auction.Paid == 0}<a href="{$URLS.AuctionPanel}/payment_pay/{$auction.ID}/">{"xca_pay"|xv_lang}</a>{else}✓ {"xca_paid"|xv_lang}{/if} <br />
 							<a href="{$URLS.AuctionPanel}/get_address/{$auction.Seller}/">{"xca_contractor_data"|xv_lang}</a> <br />
+							<a href="{$URLS.AuctionPanel}/get_message/{$auction.Auction}/" target="blank">{"xca_message_from_seller"|xv_lang}</a> <br />
 							{if $auction.CommentedBuyer == 0}<a href="{$URLS.AuctionPanel}/comment_add/{$auction.ID}/">{"xca_comment_add"|xv_lang}</a> {else}✓ {"xca_comment_inserted2"|xv_lang}{/if}<br />
 						</td>
 					</tr>

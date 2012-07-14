@@ -9,9 +9,11 @@
 ***************************************************************************/
 
 //class main_config extends xv_config {}
-
 class main_config_editor extends  xv_config_editor {
 	public function init_fields(){
+	include(ROOT_DIR.'core/libraries/arrays/timezones.php');
+
+
 		return array(	
 			"site_name" => array(
 				"caption" => "Site name",
@@ -34,6 +36,19 @@ class main_config_editor extends  xv_config_editor {
 				),
 				"field_data" => array(
 					"type" => "number"
+				)
+			),	
+					
+			"timezone" => array(
+				"caption" => "Timezone",
+				"desc" => "Select your timezone",
+				"type" => "select",
+				"options" => $_timezones,
+				"save" => array(
+
+				),
+				"field_data" => array(
+				
 				)
 			),	
 			

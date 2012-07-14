@@ -80,5 +80,6 @@
 				$(this).remove();
 			})
 			return false;
-		})
+		});
+
 	});

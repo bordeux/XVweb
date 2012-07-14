@@ -188,6 +188,14 @@ class xvauction_fields {
 	public function session($field, $auction_id = null){
 		return null;
 	}
+	public function get_price(){
+		/*return array(
+			"key"=>"key",
+			"caption" => "caption",
+			"cost" => 1.00
+		)*/
+		return null;
+	}
 }
 
 ?>

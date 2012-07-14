@@ -78,20 +78,36 @@ $display_options = array(
 	);
 	
 $record_limit = 30;
-	if(isset($_GET['auction_type'])&& strlen($_GET['auction_type']) != 0  && $_GET['auction_type'] != "all" ){
+	if(isset($_GET['auction_type']) && !empty($_GET['auction_type'])  && $_GET['auction_type'] != "all" ){
 		$display_options['type'] = $_GET['auction_type'];
-		$auction_type_c = "";
 		
-		if($_GET['auction_type']== "dutch")
-			$auction_type_c =  xv_lang("xca_dutch_auction1");
-		elseif($_GET['auction_type']== "auction")	
-			$auction_type_c = xv_lang("xca_action1");	
-		elseif($_GET['auction_type']== "buynow")	
-			$auction_type_c = xv_lang("xca_buynow");
-		$search_filters_remove[] = array(
-				"link"=> xvp()->add_get_var($XVwebEngine, array("auction_type" => ""), true),
-				"caption"=> xv_lang("xca_auction_type")." : ".$auction_type_c
-			);
+		if(!is_array($_GET['auction_type'])){
+			$_GET['auction_type'] = array($_GET['auction_type']);
+		}
+		
+			foreach($_GET['auction_type'] as $xva_a_key=>$xva_a_type){
+				$auction_type_c = "";
+				$tmp_get_data = $_GET['auction_type'];
+				unset($tmp_get_data[$xva_a_key]);
+				
+				if($xva_a_type== "dutch")
+					$auction_type_c =  xv_lang("xca_dutch_auction1");
+				elseif($xva_a_type== "auction")	
+					$auction_type_c = xv_lang("xca_action1");	
+				elseif($xva_a_type== "buynow")	
+					$auction_type_c = xv_lang("xca_buynow");		
+				elseif($xva_a_type== "advert")	
+					$auction_type_c = xv_lang("xca_avert");			
+				elseif($xva_a_type== "errand")	
+					$auction_type_c = xv_lang("xca_errand");
+					
+				$search_filters_remove[] = array(
+						"link"=> xvp()->add_get_var($XVwebEngine, array("auction_type" => $tmp_get_data), true),
+						"caption"=> xv_lang("xca_auction_type")." : ".$auction_type_c
+					);
+			}
+		
+		
 	}
 	if(isset($_GET['auction_seller'])&& strlen($_GET['auction_seller']) != 0){
 		$display_options['seller'] = $_GET['auction_seller'];

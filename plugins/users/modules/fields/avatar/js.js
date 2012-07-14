@@ -45,7 +45,8 @@ $(function(){
 						$('#xv-user-avatar-orginal-img').Jcrop({
 							onChange : updatePreview,
 							onSelect : updatePreview,
-							aspectRatio : 1
+							aspectRatio : 1,
+							setSelect: [0,0, 50,50]
 						});
 						
 

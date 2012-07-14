@@ -72,11 +72,11 @@
 					{/if}
 					</div>
 					</div>
-					<div class="search">
+					<!--<div class="search">
 					 <form action="{$URLS.Script}Search/" method="get" name="SearchForm" id="SearchForm">
 						<input type="search" results="5" name="Search" placeholder="{$language.Search}..." />
 					  </form>
-					</div>
+					</div>-->
 				<div class="clear"></div>
 			</div>
 			{include file="menu.tpl" inline}

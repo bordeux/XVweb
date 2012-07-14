@@ -95,6 +95,9 @@
 			</li>{/if}
 			{if $xva_config.dutch_enabled}<li class="ui-state-default ui-corner-top ui-state-hover ui-button-text-icon-primary {if $smarty.get.auction_type == 'dutch'}ui-state-active{/if}">
 				<a  href="?{add_get_var value="auction_type=dutch"}" title="{"xca_only_dutch_auctions"|xv_lang}" style="padding-left:20px;"> <span class="ui-icon ui-icon-script" style="margin-left:-16px;"></span>{"xca_only_dutch_auctions"|xv_lang}</a>
+			</li>{/if}	
+			{if $xva_config.advert_enabled}<li class="ui-state-default ui-corner-top ui-state-hover ui-button-text-icon-primary {if $smarty.get.auction_type == 'advert'}ui-state-active{/if}">
+				<a  href="?{add_get_var value="auction_type=advert"}" title="{"xca_only_adverts"|xv_lang}" style="padding-left:20px;"> <span class="ui-icon ui-icon-script" style="margin-left:-16px;"></span>{"xca_only_adverts"|xv_lang}</a>
 			</li>{/if}
 			{if "AdminPanel"|perm}
 			<li class="ui-state-default ui-corner-top ui-state-hover" style="float:right;">
@@ -131,7 +134,7 @@
 					<tr>
 
 						<th class="items-thumbnail"></th>
-						<th class="items-title"><a href='?{add_get_var value="sortby=title&sort=$SmartySort"}'>{$SmartyChar} {"xca_description"|xv_lang}</a></th>
+						<th class="items-title"><a href='?{add_get_var value="sortby=title&sort=$SmartySort"}'>{$SmartyChar} {"xca_auction_title"|xv_lang}</a></th>
 						<th class="items-cost"><a href='?{add_get_var value="sortby=cost&sort=$SmartySort"}'>{$SmartyChar} {"xca_cost"|xv_lang}</a></th>
 						<th class="items-offers"><a href='?{add_get_var value="sortby=offers&sort=$SmartySort"}'>{$SmartyChar} {"xca_offer"|xv_lang}</a></th>
 						<th class="items-timeout"><a href='?{add_get_var value="sortby=end&sort=$SmartySort"}'>{$SmartyChar} {"xca_to_end"|xv_lang}</a></th>
@@ -158,6 +161,14 @@
 								<span class="item-buynow">{$auction.BuyNow|number_format:2:'.':' '} {"xca_coin_type"|xv_lang}</span>
 							{elseif $auction.Type == "auction"}
 								<span class="item-auction">{$auction.Auction|number_format:2:'.':' '} {"xca_coin_type"|xv_lang}</span>
+							{elseif $auction.Type == "advert"}
+								<span class="item-advert">{"xca_avert"|xv_lang}</span> 
+								<br /> 
+								{$auction.BuyNow|number_format:2:'.':' '} {"xca_coin_type"|xv_lang}
+							{elseif $auction.Type == "errand"}
+								<span class="item-errand">{"xca_errand"|xv_lang}</span> 
+								<br /> 
+								{$auction.BuyNow|number_format:2:'.':' '} {"xca_coin_type"|xv_lang}
 							{elseif $auction.Type == "dutch"}
 								<span class="item-buynow item-dutch-cost">{$auction.BuyNow|number_format:2:'.':' '} {"xca_coin_type"|xv_lang}</span> <br />  <span class="item-auction">{$auction.AuctionMin|number_format:2:'.':' '} {"xca_coin_type"|xv_lang}</span>
 							{else}

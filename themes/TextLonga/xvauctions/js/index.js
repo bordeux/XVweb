@@ -1,3 +1,15 @@
+function xva_number_format(nStr)
+{
+  nStr += '';
+  x = nStr.split('.');
+  x1 = x[0];
+  x2 = x.length > 1 ? '.' + x[1] : '';
+  var rgx = /(\d+)(\d{3})/;
+  while (rgx.test(x1)) {
+    x1 = x1.replace(rgx, '$1' + ' ' + '$2');
+  }
+  return x1 + x2;
+};
 $(function(){
 	$(".xvauction-index .xvauction-index-category").click(function(){
 		if($(this).is(".xvauction-index-selected")){
@@ -25,15 +37,15 @@ $(function(){
 			$theme_set.css("background-image", 'url('+val.Thumbnail2+')')
 			$theme_set.attr("href", URLS['Script']+"auction/"+val.ID+'/');
 			$theme_set.css("opacity", "0");
-			if(val.Type == "buynow"){
+			if(val.Type == "buynow" || val.Type == "advert"){
 				$theme_set.find(".xvauction-index-cost-auction").remove();
-				$theme_set.find(".xvauction-index-cost-bnow").text(val.Cost);
-			}else if(val.Type == "auction"){
+				$theme_set.find(".xvauction-index-cost-bnow").text(xva_number_format(val.Cost));
+			}else if(val.Type == "auction"|| val.Type == "errand"){
 				$theme_set.find(".xvauction-index-cost-bnow").remove();
-				$theme_set.find(".xvauction-index-cost-auction").text(val.Cost);
+				$theme_set.find(".xvauction-index-cost-auction").text(xva_number_format(val.Cost));
 			}else if(val.Type == "both"){
-				$theme_set.find(".xvauction-index-cost-bnow").text(val.Cost);
-				$theme_set.find(".xvauction-index-cost-auction").text(val.Cost2);
+				$theme_set.find(".xvauction-index-cost-bnow").text(xva_number_format(val.Cost));
+				$theme_set.find(".xvauction-index-cost-auction").text(xva_number_format(val.Cost2));
 			}
 				$theme_set.appendTo(".xvauction-index");
 				$theme_set.fadeTo('slow', 1);

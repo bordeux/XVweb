@@ -28,6 +28,9 @@ class xvauction_fields_gallery extends xvauction_fields {
 			"drag_here" => "Drag your images here",
 			"delete" => "Delete",
 			"preview" => "Preview",
+			"free_photos" => 2,
+			"photo_cost" => 0.20,
+			"price_caption" => "Cost of images"
 		);
 		
 		return ($array);
@@ -39,16 +42,17 @@ class xvauction_fields_gallery extends xvauction_fields {
 	global $URLS, $XVwebEngine;
 	$gallery = $XVwebEngine->Session->Session('xvauctions_gallery');
 	
-	xv_append_js($URLS['Site'].'admin/data/themes/default/js/html5_uploader.jquery.js');
+	xv_append_js($URLS['Site'].'plugins/xvauctions/data/js/html5_uploader.jquery.js');
 	xv_append_js($URLS['Site'].'plugins/xvauctions/data/js/gallery_uploader.js');
 	xv_append_header("
 	<style type='text/css' media='all'>
 		.xva-gallery-drop {
-			font-size: 30px;
+			font-size: 25px;
 			font-weight:bold;
 			text-align:center;
 			height: 120px;
-			line-height: 110px;
+			line-height: 30px;
+			padding-top: 40px;
 			background: #DFF2BF;
 			border-radius: 10px;
 			border: 2px dashed #4F8A10;
@@ -308,6 +312,24 @@ class xvauction_fields_gallery extends xvauction_fields {
 	}
 	public function session($field, $auction_id = null){
 		return array("xvauctions_gallery");
+	}
+	public function get_price($field){
+	global $XVwebEngine;
+		$gallery = $XVwebEngine->Session->Session('xvauctions_gallery');
+		
+		if(is_array($gallery[$field['Name']])){
+			$images_count = sizeof($gallery[$field['Name']]);
+			$images_to_pay = ($images_count) - ((int)$field['FieldOptions']['free_photos']);
+		
+			if($images_to_pay>0){
+				return array(
+					"key"=>$field['Name'],
+					"caption" => $field['FieldOptions']['price_caption'],
+					"cost" =>$field['FieldOptions']['photo_cost']*$images_to_pay
+				);
+			}
+		}
+		return null;
 	}
 
 }

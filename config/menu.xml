@@ -11,9 +11,8 @@
             <url link="/">Strona główna</url>
             <url link="News/">Aktualności</url>
             <url link="XVweb/">XVweb</url>
-            <url link="Users/">Użytkownicy</url>
             <url link="Regulamin/">Regulamin</url>
-            <url link="Contact/">Kontakt</url>
+            <url link="Kontakt/">Kontakt</url>
         </submenu>
     </footer>
 </menu>

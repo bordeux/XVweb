@@ -48,7 +48,7 @@ class xvauction_fields_wysiwyg extends xvauction_fields {
 					<b>'.$field['FieldOptions']['caption'].' </b>
 					<hr />
 					<div class="xvauction-templates">
-						<a href="#" class="xvauction-templates-show">Show free templates</a>
+						<a href="#" class="xvauction-templates-show">'.xv_lang("xca_templates").'</a>
 					</div>
 ';
 					

@@ -95,7 +95,7 @@ class xvpayments {
 	 */
 	public function update_session($user){
 			$user_amount = $this->get_user_amount($user);
-		return $this->Data['XVweb']->Session->update_user_session($user, "xv_payments_method_amount", $user_amount);
+		return $this->Data['XVweb']->Session->update_user_session($user, "xv_payments_amount", $user_amount);
 	}
 	/**
 	 * Pobierane listy płatności użytkownika

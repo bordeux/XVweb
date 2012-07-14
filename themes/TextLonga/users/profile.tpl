@@ -46,7 +46,7 @@
 		{$profile->User}
 	</div>	
 	<div class="xv-user-register-date">
-		Dołączył <time title="{$profile->Creation}" datetime="{$profile->Creation|date_format:'Y-m-d'}T{$profile->Creation|date_format:'H:i:s'}TZD" pubdate="">3 mies.</time> temu
+		{"joined"|xv_lang} <time title="{$profile->Creation}" datetime="{$profile->Creation|date_format:'Y-m-d'}T{$profile->Creation|date_format:'H:i:s'}TZD" pubdate="">{$profile->Creation}</time>
 	</div>
 	
 	<div class="xv-user-seperate"></div>

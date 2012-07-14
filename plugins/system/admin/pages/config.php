@@ -34,7 +34,7 @@ class xv_admin_system_config {
 		$this->content = '';
 		$this->URL = "System/Config/".$config_name.'/';
 		$this->id = "xva-system-config-".$config_name;
-		$this->icon = $GLOBALS['URLS']['Site'].'admin/data/xvauctions/icons/auction.png';
+		$this->icon = $GLOBALS['URLS']['Site'].'admin/data/icons/config.png';
 		
 		if(!xv_perm("xv_edit_configs")){
 			$this->content = '<div class="error">You need xv_edit_configs flag in your permissions</div>';
@@ -48,7 +48,7 @@ class xv_admin_system_config {
 		$this->content = '';
 		$this->URL = "System/Config/";
 		$this->id = "xva-system-config";
-		$this->icon = $GLOBALS['URLS']['Site'].'admin/data/xvauctions/icons/auction.png';
+		$this->icon = $GLOBALS['URLS']['Site'].'admin/data/icons/config.png';
 		$this->content .= '
 <style type="text/css" media="all">
 .xv-config-url-item {

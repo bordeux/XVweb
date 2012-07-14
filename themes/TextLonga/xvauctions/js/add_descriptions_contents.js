@@ -7,7 +7,14 @@ var ItemTypeAuction = function(name, hide){
 		$("input[name='add["+name+"]']").parents(".xvauction-add-item").show("slow")
 	}
 };
+//$.each(allowed_auctions, function(key, val))
+//alert(allowed_auctions['0'] == true);
 
+$("select[name='add[type]'] option").each(function(key){
+	if(allowed_auctions[key] != true){
+		$(this).remove();
+	}
+});
 var refreshTypeAuction = function(){
 		var AuctionType = parseInt($("select[name='add[type]']").val());
 		ItemTypeAuction("buynow" ,true);
@@ -31,12 +38,18 @@ var refreshTypeAuction = function(){
 			case 3: // aukcja holenderska
 				ItemTypeAuction("dutch_start" ,false);
 				ItemTypeAuction("dutch_min" ,false);
+			  break;		
+			case 4: // og³oszenie
+				ItemTypeAuction("buynow" ,false);
+			  break;	
+			case 5: // zlecenie
+				ItemTypeAuction("auction_start" ,false);
 			  break;
 			};
 	};
 	
-$("select[name='add[type]']").change(refreshTypeAuction);
-refreshTypeAuction();
+$("select[name='add[type]']").change(refreshTypeAuction).change();
+
 
 
 });

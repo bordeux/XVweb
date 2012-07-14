@@ -308,11 +308,21 @@ class xvauctions {
 			}
 		}
 		if(isset($display_options['type'])){
-			if($display_options['type'] =="buynow")
-			$WhereSQL .= 'AND ({AuctionAuctions:Type} = :a_type OR {AuctionAuctions:Type} = "both") ';
-			else
-			$WhereSQL .= 'AND {AuctionAuctions:Type} = :a_type ';
-			$execute_parms[':a_type'] = $display_options['type'];
+			if(is_array($display_options['type'])){
+				foreach($display_options['type'] as &$val){
+					if($val == "buynow")
+						$val = "both";
+					$val = $this->Data['XVweb']->DataBase->quote($val);
+				}
+				$WhereSQL .= 'AND ({AuctionAuctions:Type} IN ('.implode( ",", $display_options['type']).')) ';
+			}else{
+				if($display_options['type'] =="buynow"){
+					$WhereSQL .= 'AND ({AuctionAuctions:Type} = :a_type OR {AuctionAuctions:Type} = "both") ';
+				}else{
+					$WhereSQL .= 'AND {AuctionAuctions:Type} = :a_type ';
+				}
+				$execute_parms[':a_type'] = $display_options['type'];
+			}
 		}
 		if(isset($display_options['seller'])){
 			$WhereSQL .= 'AND {AuctionAuctions:Seller} = :a_seller ';
@@ -1464,6 +1474,27 @@ LIMIT '.$formLimit.','.$PageLimit.'
 			$stats_data['percent'] = 0;
 		}
 		return $stats_data;
+	}
+	/**
+	 * Sprawdzanie, czy użytkownik ma dostęp do pobrania wiadomości od użytkownika - tylko gdy wygrał aukcje
+	 * @param $user STRING - nazwa użytkownika
+	 * @param $auction_id INT - id aukcji
+	 * @return BOOLEAN
+	 */
+	public function check_perm_to_get_message($user, $auction_id){
+		$check_status = $this->Data['XVweb']->DataBase->prepare("SELECT {AuctionBought:ID} AS ID FROM {AuctionBought} WHERE
+			{AuctionBought:User} = :user	AND {AuctionBought:Auction} = :auction_id 
+			LIMIT 1;");
+		$check_status->execute(array(
+			":auction_id" =>$auction_id,
+			":user" =>$user
+		));
+		$check_status = $check_status->fetch();
+
+		if(isset($check_status['ID']))
+			return true;
+			
+		return false;
 	}
 
 }

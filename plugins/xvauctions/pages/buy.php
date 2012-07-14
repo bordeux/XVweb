@@ -108,6 +108,39 @@ if(in_array($auction_info['Type'], array("buynow", "both", "dutch")) && ifsetor(
 		$Smarty->assign('buy_done', true);
 	}
 
+}elseif(in_array($auction_info['Type'], array("errand")) && ifsetor($_POST['type'], '') == "errand"){
+
+	$Smarty->assign('buy_type', "errand");
+
+	$to_pay = floatval(number_format(floatval($_POST['offer']), 2, '.', ''));
+	$buy_pieces = 1;
+	$actual_cost = floatval($auction_info['Auction']);
+	$update_auction = false;
+	if($actual_cost > $to_pay){
+		$update_auction = true;
+	}
+
+	if(isset($_POST['confirm_buy']) && $_POST['confirm_buy'] == "1"){
+		if(!xv_perm("xva_buy")){
+			header("location: ".$URLS['Script'].'Page/xvAuctions/Permission/Buy/');
+			exit;
+		}
+		$auction_offers = xvp()->get_offers($XVauctions, $auction_info['ID']);
+		$count_auctions = count($auction_offers);
+		xvp()->create_offer($XVauctions, $auction_info['ID'], $XVwebEngine->Session->Session('user_name'), "errand" , $to_pay, $buy_pieces);
+		$to_update = array(
+			"AuctionsCount" => $count_auctions+1,
+		);
+		if($update_auction){
+			$to_update['Auction'] = $to_pay;
+			$to_update["BuyNow"] = $to_pay;
+			
+		}
+		
+		xvp()->edit_auction($XVauctions, $auction_info['ID'], $to_update);
+		$Smarty->assign('buy_done', true);
+	}
+
 }else{
 	$buy_pieces = 1;
 	exit("error");

@@ -77,7 +77,7 @@ if(strtolower($Command) == "get"){
 	$admin_page_file_name =  $admin_page .'.php';
 	$admin_page_file =  ADMIN_ROOT_DIR.'pages'.DIRECTORY_SEPARATOR.$admin_page.DIRECTORY_SEPARATOR.$admin_page_file_name;
 
-	foreach (glob('{admin/pages/*/'.$admin_page_file_name.',plugins/*/admin/'.$admin_page_file_name.'}', GLOB_BRACE) as $filename) {
+	foreach (glob('plugins/*/admin/'.$admin_page_file_name, GLOB_BRACE) as $filename) {
 		$admin_page_file = $filename;
 	}
 	

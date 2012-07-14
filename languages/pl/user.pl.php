@@ -15,6 +15,7 @@ $Language['email_changed'] = 'Email został poprawnie zmieniony';
 $Language['invalid_email'] = 'Podałeś nieporawny adres email';
 $Language['current_email'] = 'Aktualny email';
 $Language['avatar_saved'] = 'Avatar został pomyślnie zapisany';
+$Language['joined'] = 'Dołączył';
 
 
 $Language['VorName'] = 'Nazwisko';

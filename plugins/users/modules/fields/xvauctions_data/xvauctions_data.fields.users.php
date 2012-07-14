@@ -24,6 +24,10 @@ class xv_users_fields_xvauctions_data extends xv_users_fields {
 				border-radius: 10px;
 				padding-left: 50px;
 			}
+			.xv-user-xvauctions-content .form-row label {
+				float:left;
+				width: 150px;
+			}
 
 		</style>");
 	include_once(ROOT_DIR.'core/libraries/arrays/countries.php');

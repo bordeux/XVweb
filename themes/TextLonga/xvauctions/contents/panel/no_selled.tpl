@@ -44,7 +44,7 @@
 
 						<th class="items-checkbox"><input type="checkbox" name="select_all" value="true" class="select_all" data-selector='input[name="auction[]"]' /></th>
 						<th class="items-thumbnail"></th>
-						<th class="items-title"><a href='?{add_get_var value="sortby=title&sort=$SmartySort"}'>{$SmartyChar} {"xca_description"|xv_lang}</a></th>
+						<th class="items-title"><a href='?{add_get_var value="sortby=title&sort=$SmartySort"}'>{$SmartyChar} {"xca_auction_title"|xv_lang}</a></th>
 						<th class="items-cost"><a href='?{add_get_var value="sortby=cost&sort=$SmartySort"}'>{$SmartyChar} {"xca_cost"|xv_lang}</a></th>
 						<th class="items-pieces"><a href='?{add_get_var value="sortby=start&sort=$SmartySort"}'>{$SmartyChar} {"xca_start"|xv_lang}</a></th>
 						<th class="items-timeout"><a href='?{add_get_var value="sortby=end&sort=$SmartySort"}'>{$SmartyChar}  {"xca_end"|xv_lang}</a></th>

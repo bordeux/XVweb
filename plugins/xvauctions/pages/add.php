@@ -127,11 +127,26 @@ class xva_add_class {
 		} // tutaj sprawdz
 		$user_amount = (int) $XVwebEngine->Session->Session('xv_payments_amount');
 		if($user_amount < $tmpvar['Options']['allowed_debt']*100){
-		echo $XVwebEngine->Session->Session('xv_payments_amount');
-		exit("toDo");
+		//echo $XVwebEngine->Session->Session('xv_payments_amount');
+		//exit("toDo");
 			header("location: ".$URLS['Script'].'Page/xvAuctions/Buy_credit/');
 			exit;
 		}
+		
+		$allowed_auctions = array(
+			0 => ($tmpvar['Options']['buynow_enabled'] ? true : false),//kup teraz
+			1 => ($tmpvar['Options']['auction_enabled'] ? true : false),//aukcja
+			2 => ($tmpvar['Options']['buynow_auction_enabled'] ? true : false),// aukcja+kup teraz
+			3 => ($tmpvar['Options']['dutch_enabled'] ? true : false),//aukcja holenderska
+			4 => ($tmpvar['Options']['advert_enabled'] ? true : false),//og³oszenie
+			5 => ($tmpvar['Options']['errand_enabled'] ? true : false),//zlecenie
+		
+		);
+		xv_append_header("
+			<script>
+				var allowed_auctions = ".json_encode($allowed_auctions).";
+			</script>
+		");
 		unset($tmpvar);
 		
 		
@@ -147,6 +162,7 @@ class xva_add_class {
 			exit;
 		}
 		$valid_forms = true;
+		$price_list = array();
 		foreach($fields as $field){
 			$class_field_name = $field['Class'];
 			$field_name = $field['Name'];
@@ -163,6 +179,10 @@ class xva_add_class {
 					}
 				}
 				$form_add_result = $fields_classes[$class_field_name]->add_form($field, ($check_inputs ? !$valided : false));
+				$form_add_price = $fields_classes[$class_field_name]->get_price($field);
+				if(!empty($form_add_price)){
+					$price_list[] = $form_add_price;
+				}
 				if($edit_mode == true)
 					$fields_classes[$class_field_name]->edit_trigger($field, $edit_auction_id, $auction_info);
 					
@@ -178,6 +198,7 @@ class xva_add_class {
 		if($check_inputs && $valid_forms){
 			$XVwebEngine->Session->Session('xvauctions_add_fields', $_POST['add']);
 			$XVwebEngine->Session->Session('xvauctions_valid_form', true);
+			$XVwebEngine->Session->Session('xvauctions_fields_price_list', $price_list);
 			header('Location: ?step=preview');
 			exit;
 			
@@ -238,6 +259,17 @@ class xva_add_class {
 				"cost" => $category_info['Options']['auction_main_page_cost'], 
 			);
 		}
+		$price_field_list = $XVwebEngine->Session->Session('xvauctions_fields_price_list');
+		
+		if(is_array($price_field_list)){
+			foreach($price_field_list as $price){
+				$price_list[$price['key']] = array(
+					"caption" => $price['caption'],
+					"cost" => $price['cost'], 
+				);
+			}
+		
+		}
 		$price_sum = 0;
 		foreach($price_list as $key)
 			$price_sum += $key['cost'];
@@ -273,6 +305,7 @@ class xva_add_class {
 		$XVwebEngine->Session->Session('xvauctions_valid_form', false);
 		$XVwebEngine->Session->Session('xvauctions_add_fields', array());
 		$XVwebEngine->Session->Session('xvauctions_edit_mode', false);
+		$XVwebEngine->Session->Session('xvauctions_fields_price_list', array());
 		if($redirect){
 			header('Location: ?step=category');
 			exit;
@@ -303,14 +336,26 @@ class xva_add_class {
 		$category_info = end($category_tree);
 		$category_config = $category_info['Options'];
 		
+		$allowed_auctions = array(
+			0 => ($category_config['buynow_enabled'] ? true : false),//kup teraz
+			1 => ($category_config['auction_enabled'] ? true : false),//aukcja
+			2 => ($category_config['buynow_auction_enabled'] ? true : false),// aukcja+kup teraz
+			3 => ($category_config['dutch_enabled'] ? true : false),//aukcja holenderska
+			4 => ($category_config['advert_enabled'] ? true : false),//og³oszenie
+			5 => ($category_config['errand_enabled'] ? true : false),//zlecenie
+		);
+		
+		
 		include_once(ROOT_DIR.'plugins/xvauctions/fields/fields.php');
 		foreach (glob(ROOT_DIR.'plugins/xvauctions/fields/*.fields.php') as $filename) {
 			include_once($filename);
 		}
 		$XVwebEngine->DataBase->beginTransaction(); // start transaction
-
+		if(!isset($allowed_auctions[$_POST['add']['type']]) || $allowed_auctions[$_POST['add']['type']] == false){
+			exit("Hack not allowed :) ");
+		}
 		switch (((int) $_POST['add']['type'])) {
-		case 1:
+		case 1: //aukcja
 			$create_array = array(
 			":category" => $add_category,
 			":pieces" => (int) trim($_POST['add']['pieces']),
@@ -326,7 +371,7 @@ class xva_add_class {
 			":premium" => (isset($price_list["on_top"]) ?  1 : 0),
 			);
 			break;
-		case 2:
+		case 2: // kup teraz + aukcja
 			$create_array = array(
 			":category" => $add_category,
 			":title" => trim($_POST['add']['title']),
@@ -342,7 +387,7 @@ class xva_add_class {
 			":premium" => (isset($price_list["on_top"]) ?  1 : 0),
 			);
 			break;
-		case 3:
+		case 3: //aukcja holdenderska
 			$create_array = array(
 			":category" => $add_category,
 			":title" => trim($_POST['add']['title']),
@@ -358,6 +403,39 @@ class xva_add_class {
 			":premium" => (isset($price_list["on_top"]) ?  1 : 0),
 			);
 			break;
+		case 4: //og³oszenie
+			$create_array = array(
+			":category" => $add_category,
+			":title" => trim($_POST['add']['title']),
+			":pieces" => (int) trim($_POST['add']['pieces']),
+			":type" => "advert",
+			":buynow" => number_format($_POST['add']['buynow'], 2, '.', ''),
+			":auction" => number_format(0, 2, '.', ''),
+			":start" => date("Y-m-d H:i:s", time()),
+			":end" =>  date("Y-m-d H:i:s", strtotime($category_config['auction_expire'])),
+			":auctionmin" =>  number_format(0, 2, '.', ''),
+			":auctiondutch" =>  number_format(0, 2, '.', ''),
+			":seller" => $XVwebEngine->Session->Session('user_name'),
+			":premium" => (isset($price_list["on_top"]) ?  1 : 0),
+			);
+			break;
+		case 5: //zlecenie
+			$create_array = array(
+			":category" => $add_category,
+			":pieces" => (int) trim($_POST['add']['pieces']),
+			":title" => trim($_POST['add']['title']),
+			":type" => "errand",
+			":buynow" => number_format($_POST['add']['auction_start'], 2, '.', ''),
+			":auction" => number_format($_POST['add']['auction_start'], 2, '.', ''),
+			":start" => date("Y-m-d H:i:s", time()),
+			":end" =>  date("Y-m-d H:i:s", strtotime($category_config['auction_expire'])),
+			":auctionmin" =>  number_format(0, 2, '.', ''),
+			":auctiondutch" =>  number_format(0, 2, '.', ''),
+			":seller" => $XVwebEngine->Session->Session('user_name'),
+			":premium" => (isset($price_list["on_top"]) ?  1 : 0),
+			);
+			break;
+			
 		default:
 			$create_array = array(
 			":category" => $add_category,

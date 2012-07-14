@@ -56,7 +56,12 @@
 		<rank>
 			<name>xva_payments</name>
 			<description>User have access to payments</description>
+		</rank>		
+		<rank>
+			<name>xva_view_buyers</name>
+			<description>User have access view buyers in auction</description>
 		</rank>
+		
 
 	</ranks>
 </plugin>

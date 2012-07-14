@@ -10,7 +10,10 @@ $xva_config = array (
   'html_message' => '',
   'auction_expire' => '+30 day',
   'buynow_enabled' => 1,
+  'buynow_auction_enabled' => 1,
   'auction_enabled' => 1,
   'dutch_enabled' => 1,
+  'advert_enabled' => 1,
+  'errand_enabled' => 1,
 ); 
  ?>
