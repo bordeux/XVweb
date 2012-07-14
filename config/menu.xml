@@ -9,9 +9,9 @@
     <footer>
         <submenu title="Serwis">
             <url link="/">Strona główna</url>
-            <url link="News/">Aktualności</url>
-            <url link="XVweb/">XVweb</url>
-            <url link="Regulamin/">Regulamin</url>
+            <url link="Simple/">Simple</url>
+            <url link="Simple2/">Simple2</url>
+            <url link="Simple3/">Simple3</url>
             <url link="Kontakt/">Kontakt</url>
         </submenu>
     </footer>
