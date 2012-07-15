@@ -10,6 +10,8 @@ class xv_messages {
 	}
 	
 	public function send_message($user, $receiver, $message){
+		if($user == $receiver)
+			return false;
 		$message_add = $this->XVweb->DataBase->prepare("INSERT INTO {Messages} ({Messages:User}, {Messages:Receiver}, {Messages:Text}, {Messages:Date} ) VALUES (:user, :receiver, :message,  NOW());");
 		$message_add->execute(array(
 			":user"=> 		$user,

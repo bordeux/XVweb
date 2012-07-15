@@ -44,7 +44,7 @@ function xv_caught_errors() {
 	global $XVwebEngine;
 	$ignore_errors = array(8, 2, 2048);
 	if(is_null($e = error_get_last()) === false && !in_array($e['type'], $ignore_errors))
-	$XVwebEngine->Log("system_error", array("informations"=>$e, "_SERVER"=>$_SERVER));
+	$XVwebEngine->Log("system.error", array("informations"=>$e, "_SERVER"=>$_SERVER));
 }
 register_shutdown_function('xv_caught_errors');
 

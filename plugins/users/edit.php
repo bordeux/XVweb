@@ -49,7 +49,7 @@ xv_trigger("users.profile.edit.start");
 			}
 	}
 	
-	$selected_big_fields = array("password", "email", "avatar", "xvauctions_data");
+	$selected_big_fields = array("password", "email", "avatar", "xvauctions_data", "about");
 	foreach($selected_big_fields  as $big_field){
 		if(isset($field_class[$big_field]) && method_exists($field_class[$big_field], 'field')){
 			$fields_html[] = xvp()->field($field_class[$big_field]);

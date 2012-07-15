@@ -31,8 +31,17 @@ $user_data = xvp()->get_user($user_class, $UserFromUrl);
 	}
 
 
-	if(!empty($Command) && strtolower($Command) == "edit"){
-		include(dirname(__FILE__).'/edit.php');
+	if(!empty($Command)){
+		$command_user = strtolower($Command);
+		switch ($command_user) {
+			case "about":
+				include(dirname(__FILE__).'/about.php');
+				break;
+			case "edit":
+				include(dirname(__FILE__).'/edit.php');
+				break;
+		}
+
 		goto end;
 	}
 

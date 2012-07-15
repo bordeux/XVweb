@@ -80,14 +80,14 @@ $display_options = array(
 $record_limit = 30;
 	if(isset($_GET['auction_type']) && !empty($_GET['auction_type'])  && $_GET['auction_type'] != "all" ){
 		$display_options['type'] = $_GET['auction_type'];
-		
-		if(!is_array($_GET['auction_type'])){
-			$_GET['auction_type'] = array($_GET['auction_type']);
+		$xva_auction_type = $_GET['auction_type'];
+		if(!is_array($xva_auction_type)){
+			$xva_auction_type = array($xva_auction_type);
 		}
 		
-			foreach($_GET['auction_type'] as $xva_a_key=>$xva_a_type){
+			foreach($xva_auction_type as $xva_a_key=>$xva_a_type){
 				$auction_type_c = "";
-				$tmp_get_data = $_GET['auction_type'];
+				$tmp_get_data = $xva_auction_type;
 				unset($tmp_get_data[$xva_a_key]);
 				
 				if($xva_a_type== "dutch")

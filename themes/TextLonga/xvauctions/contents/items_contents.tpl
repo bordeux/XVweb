@@ -98,7 +98,11 @@
 			</li>{/if}	
 			{if $xva_config.advert_enabled}<li class="ui-state-default ui-corner-top ui-state-hover ui-button-text-icon-primary {if $smarty.get.auction_type == 'advert'}ui-state-active{/if}">
 				<a  href="?{add_get_var value="auction_type=advert"}" title="{"xca_only_adverts"|xv_lang}" style="padding-left:20px;"> <span class="ui-icon ui-icon-script" style="margin-left:-16px;"></span>{"xca_only_adverts"|xv_lang}</a>
+			</li>{/if}			
+			{if $xva_config.errand_enabled}<li class="ui-state-default ui-corner-top ui-state-hover ui-button-text-icon-primary {if $smarty.get.auction_type == 'errand'}ui-state-active{/if}">
+				<a  href="?{add_get_var value="auction_type=errand"}" title="{"xca_only_errands"|xv_lang}" style="padding-left:20px;"> <span class="ui-icon ui-icon-script" style="margin-left:-16px;"></span>{"xca_only_errands"|xv_lang}</a>
 			</li>{/if}
+			
 			{if "AdminPanel"|perm}
 			<li class="ui-state-default ui-corner-top ui-state-hover" style="float:right;">
 				<a href="{$URLS.Script}Administration/XVauctions/Categories/?cat={$auctions_category|escape:'url'}" style="padding:0px" target="_blank"><span class="ui-button  ui-icon ui-icon-wrench " title="{'xca_edit_category'|xv_lang}"></span></a>

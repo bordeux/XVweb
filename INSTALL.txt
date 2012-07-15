@@ -1,0 +1,4 @@
+1. Create your database
+2. Upload db.sql to your database
+3. Edit /config/db_config.config file
+4. In this file set database name, database password, database host

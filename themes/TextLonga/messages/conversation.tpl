@@ -10,7 +10,7 @@
 		
 		<div class="xv-message-conversation">
 			<div class="xv-message-conversation-header">
-				Rozmowa z <a href="{$URLS.Script}Users/{$xv_receiver}/">{$xv_receiver}</a> (Online 2 godziny temu)
+				Rozmowa z <a href="{$URLS.Script}Users/{$xv_receiver}/">{$xv_receiver}</a>
 			</div>
 			<div class="xv-message-history">
 				{foreach from=$xv_messages_list item=message_data}

@@ -8,6 +8,8 @@ $Language['repeat_password'] = 'Powtórz hasło';
 $Language['invalid_password'] = 'Podałeś nieprawidłowe hasło';
 $Language['password_not_equal'] = 'Źle przepisałeś hasło';
 $Language['password_too_short'] = 'Nowe hasło jest za krótkie';
+$Language['about_me'] = 'O mnie';
+$Language['i_sell'] = 'Sprzedaję';
 
 
 $Language['new_email'] = 'Nowy email';

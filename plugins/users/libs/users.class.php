@@ -150,6 +150,27 @@ class xv_users {
 				
 		return $permissions;
 	}
+	public function get_user_about($user){
+		$get_about = $this->XVweb->DataBase->prepare('SELECT {UsersAbout:Text} AS `Text`  FROM  {UsersAbout} WHERE {UsersAbout:User} = :user ;');
+		$get_about->execute(array(
+				":user" => $user
+			));
+		$get_about = $get_about->fetch(PDO::FETCH_ASSOC);
+		
+		if(empty($get_about))
+			return "";
+		return $get_about['Text'];
+	}	
+	public function set_user_about($user, $html){
+		$add_about = $this->XVweb->DataBase->prepare('INSERT INTO {UsersAbout} ({UsersAbout:User}, {UsersAbout:Text}) VALUES (:user, :html) ON DUPLICATE KEY UPDATE {UsersAbout:Text} = :html
+		;');
+		$add_about->execute(array(
+				":user" => $user,
+				":html" => $html
+			));
+		return true;
+	
+	}
 	
 }
 

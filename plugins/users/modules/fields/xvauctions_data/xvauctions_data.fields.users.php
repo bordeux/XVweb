@@ -46,8 +46,15 @@ class xv_users_fields_xvauctions_data extends xv_users_fields {
 	$form->set("action", '?save=true&amp;xvauction_data=true#xvauction-user-data');
 	$form->set("method", "post");
 	$form->set("submitMessage", "Dane zostały zmienione");
+	
 
-	$form->addField("text", "account_Corporation" , "Firma ", false , ifsetor($user_data_xva['Corporation'], ''));
+	$form->addField("select", "account_Firm" , "Firma ", true, ifsetor($user_data_xva['Firm'], ''), (array(
+		"Tak"=>"yes",
+		"Nie" => "no"
+	)));
+
+	
+	$form->addField("text", "account_Corporation" , "Nazwa firmy ", false , ifsetor($user_data_xva['Corporation'], ''));
 	$form->validator("account_Corporation", "regExpValidator", "/^(.){0,50}$/", "Nazwa firmy za krótka");
 
 	$form->addField("text", "account_Name" , "Imię", true, ifsetor($user_data_xva['Name'], '') );
@@ -68,6 +75,11 @@ class xv_users_fields_xvauctions_data extends xv_users_fields {
 	$form->addField("text", "account_State" , "Stan/Województwo", true , ifsetor($user_data_xva['State'], ''));
 	$form->validator("account_State", "regExpValidator", "/^(.){2,50}$/", "Nazwa stanu/województwa za krótka");
 	$form->addField("select", "account_Country", "Kraj", true, ifsetor($user_data_xva['Country'], ''), array_flip($_countries));
+	
+	$form->addField("select", "account_Catalog" , "Pokaż w katalogu ", true, ifsetor($user_data_xva['Catalog'], ''), (array(
+		"Tak"=>"yes",
+		"Nie" => "no"
+	)));
 	$form->JSprotection(uniqid());
 	$address_form = $form->display("Zmień dane", "ia_submit", false);
 	$result =(xvp()->getData($form));
