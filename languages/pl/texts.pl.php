@@ -20,4 +20,6 @@ $Language['txts_change'] = 'Zmień';
 $Language['txts_select_source'] = 'Wybierz wersję źródłową';
 $Language['txts_select_editor'] = 'Wybierz edytor tekstu';
 $Language['txts_expected_url'] = 'Spodziewany URL';
+$Language['txts_page_title'] = 'Tytuł strony';
+$Language['txts_wrong_title'] = 'Nieprawidłowy tytuł strony';
 ?>

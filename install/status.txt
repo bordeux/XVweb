@@ -1,8 +1,0 @@
------------------END------------------
----------------------------------------
-I cant connect to MySQL server. Error message: SQLSTATE[28000] [1045] Access denied for user ''@'localhost' (using password: NO)
----------------------------------------
-Trying to login into MySQL server
----------------------------------------
-----------------START------------------
----------------------------------------

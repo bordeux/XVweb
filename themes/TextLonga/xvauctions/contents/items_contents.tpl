@@ -162,9 +162,9 @@
 						</td>
 						<td class="items-cost">
 							{if $auction.Type == "buynow"}
-								<span class="item-buynow">{$auction.BuyNow|number_format:2:'.':' '} {"xca_coin_type"|xv_lang}</span>
+								<span class="item-buynow"><wbr />{$auction.BuyNow|number_format:2:'.':' '} {"xca_coin_type"|xv_lang}</span>
 							{elseif $auction.Type == "auction"}
-								<span class="item-auction">{$auction.Auction|number_format:2:'.':' '} {"xca_coin_type"|xv_lang}</span>
+								<span class="item-auction"><wbr />{$auction.Auction|number_format:2:'.':' '} {"xca_coin_type"|xv_lang}</span>
 							{elseif $auction.Type == "advert"}
 								<span class="item-advert">{"xca_avert"|xv_lang}</span> 
 								<br /> 

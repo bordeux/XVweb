@@ -7,11 +7,10 @@
 ****************   Author  : Krzysztof Bednarczyk  *************************
 ****************   All rights reserved             *************************
 ***************************************************************************/
-
-//xv_load_lang('msg_xvauctions');
-xv_set_title("Nieprawid³owy tytu³");
+xv_load_lang('texts');
+xv_set_title(xv_lang("txts_wrong_title"));
 xv_set_content("
-	<div class='error'>Nieprawid³owy tytu³</div>
+	<div class='error'>".xv_lang("txts_wrong_title")."</div>
 ");
 
 ?>

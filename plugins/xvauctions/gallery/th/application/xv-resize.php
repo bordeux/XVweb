@@ -12,7 +12,7 @@ if (strpos($xvConfig['allowed'], strtolower($infoFile['extension'])) === false) 
 }
 
 
-function mkdir_recursive($pathname, $mode = "0777"){
+function mkdir_recursive($pathname, $mode = 0755){
 	is_dir(dirname($pathname)) || mkdir_recursive(dirname($pathname), $mode);
 	return is_dir($pathname) || @mkdir($pathname, $mode);
 }
