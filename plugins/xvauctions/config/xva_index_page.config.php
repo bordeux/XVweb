@@ -17,10 +17,25 @@ class xva_index_page_editor extends  xv_config_editor {
 				"caption" => "Categories",
 				"desc" => "Add cats to main page",
 				"type" => "categories"
+			),
+			"template" => 	array(
+				"caption" => "Template",
+				"desc" => "Select your index page template",
+				"type" => "select",
+				"options" => array(
+					"top" => "top",
+					"right" => "right"
+				),
+				"save" => array(
+
+				),
+				"field_data" => array(
+				
+				)
 			)
 		);
 	}
-	
+
 	public function element_categories($val,$key, $data){
 		$item_theme = new xv_config_editor_theme;
 		if(isset($this->valid_errors[$key]))

@@ -1,12 +1,12 @@
 {if $xvauctions_mode == "descriptions"}
 {$JSLoad[26]="`$URLS.Theme`js/jqueryui.js"}
-
 {$CCSLoad[22]="`$URLS.Theme`xvauctions/css/add_descriptions.css"}
 {$JSLoad[22]="`$URLS.Theme`xvauctions/js/add_descriptions_contents.js"}
 {include file="header.tpl" inline}
 {include file="xvauctions/contents/add_descriptions_contents.tpl" inline}
 {include file="footer.tpl" inline}
 {elseif $xvauctions_mode == "preview"}
+{$CCSLoad[23]="`$URLS.Theme`xvauctions/css/desc.css"}
 {$CCSLoad[22]="`$URLS.Theme`xvauctions/css/add_preview.css"}
 {$JSLoad[22]="`$URLS.Theme`xvauctions/js/add_preview_contents.js"}
 {include file="header.tpl" inline}

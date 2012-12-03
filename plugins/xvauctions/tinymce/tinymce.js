@@ -3,8 +3,8 @@ $().ready(function() {
 			// Location of TinyMCE script
 			
 			script_url : URLS['Site']+'/plugins/xvauctions/tinymce/jscripts/tiny_mce/tiny_mce.js',
-			//content_css : URLS['Theme']+"texts/css/texts.css",
-			//body_class : "xv-xvauction-content",
+			content_css : URLS['Theme']+"xvauctions/css/desc.css",
+			body_class : "xvauction-description-text",
 			// General options
 			theme : "advanced",
 			plugins : "autolink,lists,pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template,advlist",

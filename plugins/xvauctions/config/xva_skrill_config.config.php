@@ -18,18 +18,20 @@ class xva_skrill_config_editor extends  xv_config_editor {
 				"desc" => "Enable this method?",
 				"type" => "boolean",
 			),	
-		"email" => array(
+			"email" => array(
 				"caption" => "Email",
 				"desc" => "Your email",
+				"type" => "text",
 				"field_data" => array(
-					"type" => "email"
+					"type" => "email",
 				)
 			),			
 		"secret_word" => array(
 				"caption" => "Secret word",
 				"desc" => "Your secred word",
+				"type" => "text",
 				"field_data" => array(
-					"type" => "email"
+					"type" => "text"
 				)
 			),		
 			"lang" => array(

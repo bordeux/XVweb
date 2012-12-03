@@ -41,7 +41,7 @@
 	<div style="clear:both"></div>
 		<div class="xvauction-description">
 				<div class="xvauction-description-caption">{"xca_description"|xv_lang}</div>
-				<div class="xvauction-description-content">
+				<div class="xvauction-description-content xvauction-description-text">
 				<!-- AUCTION CONTENT -->
 						{$smarty.post.add.description}
 				

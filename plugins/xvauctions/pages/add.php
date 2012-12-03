@@ -305,6 +305,7 @@ class xva_add_class {
 		$XVwebEngine->Session->Session('xvauctions_valid_form', false);
 		$XVwebEngine->Session->Session('xvauctions_add_fields', array());
 		$XVwebEngine->Session->Session('xvauctions_edit_mode', false);
+		$XVwebEngine->Session->Session('xvauctions_gallery', array());
 		$XVwebEngine->Session->Session('xvauctions_fields_price_list', array());
 		if($redirect){
 			header('Location: ?step=category');
@@ -354,6 +355,13 @@ class xva_add_class {
 		if(!isset($allowed_auctions[$_POST['add']['type']]) || $allowed_auctions[$_POST['add']['type']] == false){
 			exit("Hack not allowed :) ");
 		}
+		
+		
+		$_POST['add']['auction_start'] = floatval($_POST['add']['auction_start']);
+		$_POST['add']['auction_min'] = floatval($_POST['add']['auction_min']);
+		$_POST['add']['dutch_start'] = floatval($_POST['add']['dutch_start']);
+		$_POST['add']['buynow'] = floatval($_POST['add']['buynow']);
+		
 		switch (((int) $_POST['add']['type'])) {
 		case 1: //aukcja
 			$create_array = array(
@@ -490,7 +498,7 @@ class xva_add_class {
 				
 				$AddResult = $fields_classes[$class_field_name]->insert($field, $auction_id);
 				
-				$session_save = $fields_classes[$class_field_name]->session($field, $auction_id);
+				$session_save[] = $fields_classes[$class_field_name]->session($field, $auction_id);
 
 				if(!$AddResult){
 					$add_result = false;
@@ -502,6 +510,7 @@ class xva_add_class {
 			$session_to_save = array(
 				"xvauctions_add_category" => $XVwebEngine->Session->Session('xvauctions_add_category'),
 				"xvauctions_valid_form" => $XVwebEngine->Session->Session('xvauctions_valid_form'),
+				"xvauctions_gallery" => $XVwebEngine->Session->Session('xvauctions_gallery'),
 				"xvauctions_add_fields" => $XVwebEngine->Session->Session('xvauctions_add_fields'),
 				"xvauctions_price_list" => $XVwebEngine->Session->Session('xvauctions_price_list'), // ZAMIENIC TO NA PREFIX !!!wszystko po xvauctions_*
 				"user_name" => $XVwebEngine->Session->Session('user_name'),
@@ -520,8 +529,10 @@ class xva_add_class {
 			xvp()->xvauctin_step_clear($add_class, false);
 			
 		include_once(ROOT_DIR.'plugins/xvauctions/libs/class.xvpayments.php');
-		foreach($price_list as $key=>$price){
-			xvp()->add_transaction(xvp()->load_class($XVwebEngine,"xvpayments"),  $XVwebEngine->Session->Session('user_name'), -($price['cost']*100), "auction_".$key, $price['caption'], array(), "ad-".$key.'-'.$auction_id ,$auction_id);
+		if(is_array($price_list)){
+			foreach($price_list as $key=>$price){
+				xvp()->add_transaction(xvp()->load_class($XVwebEngine,"xvpayments"),  $XVwebEngine->Session->Session('user_name'), -($price['cost']*100), "auction_".$key, $price['caption'], array(), "ad-".$key.'-'.$auction_id ,$auction_id);
+			}
 		}
 		
 		$XVwebEngine->Session->Session('xv_payments_amount', $XVwebEngine->load_class("xvpayments")->get_user_amount($XVwebEngine->Session->Session('user_name')));
@@ -563,10 +574,11 @@ class xva_add_class {
 		if(is_null($session_restore) || empty($session_restore) || $session_restore['user_name'] != $XVwebEngine->Session->Session('user_name')){
 			header("location: ".$URLS['Script'].'Page/xvAuctions/Session_not_found/');
 			exit;
-		}		
-		$XVwebEngine->Session->Session('xvauctions_add_category', $session_restore['xvauctions_add_category']);
-		$XVwebEngine->Session->Session('xvauctions_valid_form', $session_restore['xvauctions_valid_form']);
-		$XVwebEngine->Session->Session('xvauctions_add_fields', $session_restore['xvauctions_add_fields']);
+		}
+		
+		foreach($session_restore as $key => $val){
+			$XVwebEngine->Session->Session($key, $val);
+		}
 		$XVwebEngine->Session->Session('xvauctions_edit_mode', $_GET['id']);
 		header('Location: ?step=descriptions');
 		exit;	

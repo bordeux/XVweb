@@ -63,7 +63,7 @@ class xv_admin_xvauctions_payments {
 							<td><a href="'.$URLS['Script'].'Administration/XVauctions/Payments/'.$payment_item['ID'].'/" class="xv-get-window" >'.$payment_item['Title'].'</a></td>
 							<td>'.number_format(($payment_item['Amount']/100), 2, '.', ' ').'</td>
 							<td>'.$payment_item['Type'].'</td>
-							<td><a href="'.$URLS['Script'].'Administration/Users/Get/'.$payment_item['User'].'/" class="xv-get-window" >'.$payment_item['User'].'</a></td>
+							<td><a href="'.$URLS['Script'].'Administration/Users/Get/'.$payment_item['User'].'/" class="xv-get-window" >'.$payment_item['User'].'</a> <a href="'.$URLS['Script'].'Administration/XVauctions/Wallet/'.$payment_item['User'].'/" class="xv-get-window" >[edit wallet]</a></td>
 							<td>'.$payment_item['UniqID'].'</td>
 						</tr>';
 				}

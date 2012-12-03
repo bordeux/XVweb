@@ -219,6 +219,11 @@ class xvauction_fields_gallery extends xvauction_fields {
 			foreach($gallery[$field['Name']] as $key=>$val){
 				if($_GET['delete'] == $val['file_new_name']){
 					@unlink(ROOT_DIR.$val['location']);
+					$delete_query = $this->XVweb->DataBase->prepare('DELETE FROM {AuctionGallery} WHERE {AuctionGallery:Field} = :field AND {AuctionGallery:FileNewName} = :file');
+					$delete_query->execute(array(
+						":file" => $val['file_new_name'],
+						":field" =>  $field['ID'],
+					));
 					unset($gallery[$field['Name']][$key]);
 					echo "ok";
 				}
@@ -304,7 +309,7 @@ class xvauction_fields_gallery extends xvauction_fields {
 		foreach($gallery_files as $file){
 			 $file_url = $URLS['Site'].'plugins/xvauctions/gallery/'.$field['Name'].'/'.$file['FileNewName'];
 			 $file_th_url = $URLS['Site'].'plugins/xvauctions/gallery/th/base64/height/100/'.base64_encode($file_url).'.jpg';
-			$result .= "<a href='{$file_url}' rel='lightbox-photos' target='_blank'><img src='{$file_th_url}' alt='co jest?' /></a>";
+			$result .= "<a href='{$file_url}' rel='lightbox-photos' target='_blank'><img src='{$file_th_url}' alt='Auction Image' /></a>";
 		}
 		
 			$result .='</div>'; 

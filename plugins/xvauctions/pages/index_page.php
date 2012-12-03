@@ -14,13 +14,15 @@ $categories = xvp()->get_categories($XVauctions, $auction_category, array());
 class xva_index_page extends xv_config{
 	public function init_fields(){
 		return array(
-			"categories" => array()
+			"categories" => array(),
+			"template" => "right"
 		);
 	}
 }
 $xva_index_page_config = new xva_index_page();
 
 $Smarty->assignByRef('xva_index_page_categories', $xva_index_page_config->categories);
+$Smarty->assignByRef('xva_index_template', $xva_index_page_config->template);
 $Smarty->assignByRef('auctions_categories', $categories);
 $Smarty->display('xvauctions/auction_index_show.tpl');
 

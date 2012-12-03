@@ -37,7 +37,7 @@ $(function(){
 			$theme_set.css("background-image", 'url('+val.Thumbnail2+')')
 			$theme_set.attr("href", URLS['Script']+"auction/"+val.ID+'/');
 			$theme_set.css("opacity", "0");
-			if(val.Type == "buynow" || val.Type == "advert"){
+			if(val.Type == "buynow" || val.Type == "advert" || val.Type == "dutch"){
 				$theme_set.find(".xvauction-index-cost-auction").remove();
 				$theme_set.find(".xvauction-index-cost-bnow").text(xva_number_format(val.Cost));
 			}else if(val.Type == "auction"|| val.Type == "errand"){

@@ -5,7 +5,7 @@
 
 <div class="xv-text-wrapper">
 <!-- TEXT -->
-	<div class="xv-user-about">
+	<div class="xv-user-about xv-texts-content">
 		{$xv_user_about}
 	</div>
 <!-- TEXT -->

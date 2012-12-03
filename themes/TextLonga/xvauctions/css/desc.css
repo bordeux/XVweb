@@ -1,0 +1,28 @@
+.xvauction-description-text {}
+
+.xvauction-description-text h1{
+	font-size: 42px;
+	line-height: 52px;
+	margin: 0 0 15px;
+
+	font-weight: normal;
+}
+.xvauction-description-text h1 {font-size: 2em; margin: .67em 0;}
+.xvauction-description-text h2 {font-size: 1.5em; margin: .83em 0;}
+.xvauction-description-text h3 {font-size: 1.17em; margin: 1em 0;}
+.xvauction-description-text h4 {font-size: 1em; margin: 1.33em 0;}
+.xvauction-description-text h5 {font-size: .83em; line-height: 1.17em; margin: 1.67em 0;}
+.xvauction-description-text h6 {font-size: .67em; margin: 2.33em 0;}
+.xvauction-description-text h1, .xvauction-description-text h2, .xvauction-description-text h3, .xvauction-description-text h4, .xvauction-description-text h5,  .xvauction-description-text h6 {font-weight: bolder;}
+
+.xvauction-description-text pre {
+	width: 100%;
+	background: #E3E3E3;
+	border: 1px solid #D1D1D1;
+	padding: 10px;
+
+}
+.xvauction-description-text ul, ol {
+	margin-left: 30px;
+	list-style-type:disc;
+}
